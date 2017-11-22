@@ -18,7 +18,7 @@ timezone: Asia/Shanghai
 
 # 博客地址
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://huajingzeng.com
+url: https://huajingzeng.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
