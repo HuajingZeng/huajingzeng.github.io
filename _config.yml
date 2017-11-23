@@ -4,11 +4,11 @@
 
 # 网站
 # 博客标题
-title: 曾华经的博客
+title: 曾华经
 # 博客副标题
-subtitle: 每天进步一点
+subtitle: iOS Programmer
 # 博客简介
-description: 我是一名程序员，目前主要从事iOS开发
+description: 
 # 博客作者
 author: 曾华经
 # 博客语言
@@ -78,7 +78,7 @@ pagination_dir: page
 # 主题
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: xups
 
 # 部署
 ## Docs: https://hexo.io/docs/deployment.html
