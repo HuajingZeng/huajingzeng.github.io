@@ -6,7 +6,7 @@ tags:
 categories:
     - 程序人生
 thumbnail: /img/thumbnail/1.jpg
-blogexcerpt: 首次创建自己的博客
+blogexcerpt: 
 ---
 
 # 你好，欢迎来到我的个人技术博客。

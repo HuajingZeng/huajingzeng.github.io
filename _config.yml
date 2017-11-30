@@ -59,9 +59,16 @@ index_generator:
   order_by: -date
   
 # 分类和标签
+#    - 编程基础
+#    - 拓展进阶
+#    - 开发工具
+#    - 源码解析
+#    - 项目实战
+#    - 程序人生
 default_category: uncategorized
 category_map:
 tag_map:
+
 
 # 日期/时间格式
 ## Hexo uses Moment.js to parse and display date
