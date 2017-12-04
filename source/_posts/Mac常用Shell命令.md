@@ -23,7 +23,7 @@ blogexcerpt:
 | --- | --- | --- | --- | --- |
 | cat | concatenate | 连接文件并打印到标准输出设备上（Command Line Tools当前窗口） | cat [-benstuv] file ... | **-b**：[--number-nonblank]对非空输出行编号<br>**\-e**：[--show-ends]在每行完毕处显现$<br>**-n**：[--number]对输出的一切行编号<br>**-s**：[--squeeze-blank]连续多行空行当做一行空行输出<br>**-t**：[--show-tabs]将制表符显现为\^I<br>**-u**：（被忽略）<br>**-v**：[--show-nonprinting]除了LFD和TAB之外，使用\^和M-符号打印非打印字符<br>**file**：要连接的文件或路径 |
 | cd | change directory | 改变当前目录 | cd [-LP] dir | **-L**：如果要切换的目标目录是一个符号连接，直接切换到符号连接的目录，而非符号连接所指向的目标目录<br>**-P**：如果要切换到的目标目录是一个符号连接，直接切换到符号连接指向的目标目录<br>**dir**：要切换的目标目录 |
-| chmod | change mode | 变更文件或目录的权限 | chmod [-fhv] [-R [-HLP]] [-a+a=a [i] [#[n]]] mode|entry file ... | **-f**：[--quiet或--silent]不能改变文件模式时，不通知文件的用户 |
+| chmod | change mode | 变更文件或目录的权限 | chmod [-fhv] [-R [-HLP]] [-a+a=a [i] [#[n]]] mode\|entry file ... | **-f**：[--quiet或--silent]不能改变文件模式时，不通知文件的用户 |
 | rm | remove | 删除一个文件或者目录 | rm [-fi] [-dPRrvW] file ... | **-f**：[--force]强制删除，忽略不存在的文件，不提示确认<br>**-i**：[--interactive]在删除前需要确认<br>**-d**：[--directory]删除可能仍有数据的目录（只限超级用户）<br>**-P**：<br>**-R/-r**：[--recursive]递归删除目录及其内容<br>**-v**：[--verbose]详细显示进行的步骤<br>**-W**：<br>**file**：要删除的文件或目录 |
 | mv | move | 为文件或目录改名、或将文件或目录移入其它位置 | mv [-fin] [-v] source target<br>mv [-fin] [-v] source ... directory | **-f**：[--force]若目标文件已存在，不询问直接覆盖<br>**-i**：[--interactive]若目标文件已存在，覆盖之前先询问<br>**-n**：（默认缺省）不覆盖任何已存在的文件<br>**-v**：[--verbose]显示命令执行的信息<br>**source**：原文件/原目录<br>**target**：新文件<br>**directory**：目标目录 |
 | cmp | compare | 比较两个文件是否有差异 | cmp [-clsv] [-i <起始字符索引>] fileName1 fileName2 | -c 除了标明差异处的十进制字码之外，一并显示该字符所对应字符<br>-l 标示出所有不一样的地方<br>-s 不显示错误信息<br>-v 显示版本信息<br>-i <起始字符索引> 指定比较的起始字符索引位置 |
