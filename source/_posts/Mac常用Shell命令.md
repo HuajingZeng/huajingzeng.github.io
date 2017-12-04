@@ -1,12 +1,13 @@
 ---
 title: Mac常用Shell命令
-categories:
-	- 编程基础
-	- 开发工具
-author:
+date: 2017-11-30 10:59:23
+author: 曾华经
 tags:
 	- Mac
 	- Shell
+categories:
+	- 编程基础
+	- 开发工具
 thumbnail: 
 blogexcerpt: 
 ---
