@@ -65,11 +65,11 @@ weibo_show:
 # 是否开启评论
 #----------------------------
 comment:
-  enable: false
-  owner: jangdelong
-  repo: blog_comments
-  client_id: b08ed25e52c57993e69c
-  client_secret: 1cb9545488f0380904b87350e7c5a270ae03bab7
+  enable: true
+  owner: HuajingZeng
+  repo: huajingzeng.github.io_comments
+  client_id: 7ae3915c563a60d41451
+  client_secret: 2abefe41031e15eabf12a828f30fd380487fb738
 
 #----------------------------
 # 是否开启云标签
