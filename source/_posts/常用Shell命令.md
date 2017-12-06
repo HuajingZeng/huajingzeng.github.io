@@ -14,7 +14,7 @@ blogexcerpt:
 
 &emsp;&emsp;本人当前开发基本都是用苹果电脑（Mac），开发过程中难免要与命令行工具（Command Line Tools）打交道，因此掌握一些基本的Shell命令是必须的。
 
-**PS：不同的Shell具备不同的功能，流行的Shell有：bash、csh、ksh、sh、tcsh、zsh等。可以进入/bin目录查看，以sh结尾的可执行文件即Shell脚本解析程序。本人Mac系统默认使用/bin/bash，bash也是目前大多数Linux系统默认使用的Shell，因此以下命令及参数均以bash为准。关于Shell，以后有机会再写一篇文章进行详细的介绍。**
+&emsp;&emsp;不同的Shell具备不同的功能，流行的Shell有：bash、csh、ksh、sh、tcsh、zsh等。可以进入/bin目录查看，以sh结尾的可执行文件即Shell脚本解析程序。本人Mac系统默认使用/bin/bash，bash也是目前大多数Linux系统默认使用的Shell，因此以下命令及参数均以bash为准。
 
 <!--more-->
 
@@ -40,48 +40,53 @@ Concatenate and print (display) the content of files
 ### 语法
 显示文件内容
 ```
-cat [OPTION] FILE...
+cat [-benstuv] file...
+
+/*
+先输出第一个文件的内容，当输入EOF（ctrl+D）时才会继续输出下一个文件的内容
+当最后一个文件输出完毕，再次输入EOF时退出输出
+*/
+cat [-benstuv] file0 [- fileX]...
 ```
 通过键盘为文件输入新的内容（输入的内容会覆盖原来的内容）
 ```
-cat [OPTION] > OUT_FILE
+cat [-benstuv] > out_file
 ```
 将几个文件的内容合并后输出到文件
 ```
-cat [OPTION] FILE... > OUT_FILE
+cat [-benstuv] file... > out_file
 ```
 ### 参数说明
-- **OPTION**：选项
-    - **-b**：[--number-nonblank]对非空输出行编号
-    - **-e**：[--show-ends]在每行结尾打印输出$
-    - **-n**：[--number]对输出的一切行编号
-    - **-s**：[--squeeze-blank]连续多行空行当做一行空行输出
-    - **-t**：[--show-tabs]将制表符打印输出为\^I
-    - **-u**：（被忽略）
-    - **-v**：[--show-nonprinting]除了LFD和TAB之外，使用\^和M-符号输出非打印字符
-- **FILE**：要链接的文件
-- **OUT_FILE**：要输出的文件或设备
+- **-b**：[--number-nonblank]对非空输出行编号
+- **-e**：[--show-ends]在每行结尾打印输出$
+- **-n**：[--number]对输出的一切行编号
+- **-s**：[--squeeze-blank]连续多行空行当做一行空行输出
+- **-t**：[--show-tabs]将制表符打印输出为\^I
+- **-u**：禁用输出缓存
+- **-v**：[--show-nonprinting]除了LFD和TAB之外，使用\^和M-符号输出非打印字符
+- **file**：要连接的文件
+- **out_file**：要输出的文件或设备
 
 ### 示例
-把text1的文档内容加上行号后输出到当前命令行工具窗口
+把test.txt的文档内容加上行号后输出到当前命令行工具窗口
 ```
-cat -n text1
+cat -n test.txt
 ```
-把text1和text2 的文档内容加上行号（空白行不加）之后将内容附加到text3文档里
+把test1.txt和test2.txt的文档内容加上行号（空白行不加）之后将内容附加到test3.txt文档里
 ```
-cat -b text1 text2 >> text3
+cat -b test1.txt test2.txt >> test3.txt
 ```
 清空/etc/test.txt文档内容
 ```
 cat /dev/null > /etc/test.txt
 ```
-制作软盘的镜像文件
+从软盘fd0制作镜像文件test.dmg
 ```
-cat /dev/fd0 > IMG_FILE
+cat /dev/fd0 > test.dmg
 ```
-把镜像文件写到软盘
+把镜像文件test.dmg写到软盘fd0
 ```
-cat IMG_FILE > /dev/fd0
+cat test.dmg > /dev/fd0
 ```
 
 ## <a id="cd">cd</a>
@@ -91,20 +96,23 @@ Change directory
 改变当前目录
 ### 语法
 ```
-cd [OPTION] [DIR]
+cd [-L|-P] [dir]
 ```
 ### 参数说明
-- **OPTION**：选项
-    - **-L**：如果要切换的目标目录是一个符号（软）链接，直接切换到符号链接所在的目录，而非符号链接所指向的目标目录
-    - **-P**：如果要切换到的目标目录是一个符号（软）链接，直接切换到符号链接指向的目标目录
-- **DIR**：要切换的目标目录，缺省时默认为~或/，即当前用户home目录
-
+- **-L**：如果要切换的目标目录是一个符号（软）链接，直接切换到符号链接所在的目录，而非符号链接所指向的目标目录
+- **-P**：如果要切换到的目标目录是一个符号（软）链接，直接切换到符号链接指向的目标目录
+- **dir**：要切换的目标目录（目录可以省略不写，与cd ~有相同的效果）
+	- **/**：根目录
+	- **.**：当前目录
+	- **..**：上级目录
+	- **~**：当前用户在该系统的Home目录
+	
 ### 示例
 跳到/usr/bin目录
 ```
 cd /usr/bin
 ```
-跳到自己的home目录
+跳到自己的Home目录
 ```
 cd ~
 ```
@@ -120,80 +128,98 @@ Change group ownership
 变更文件或目录的所属群组
 ### 语法
 ```
-chgrp [OPTION] GROUP FILE...
+chgrp [-fhv] [-R [-H|-L|-P]] group file...
 ```
 ### 参数说明
-- **OPTION**：选项
-    - **-f**：[--quiet或--silent]若该文件权限无法被更改也不要显示错误讯息
-    - **-h**：只对于符号链接本身进行变更，而非该符号链接指向的目标目录
-    - **-v**：[--verbose]显示权限变更的详细资料
-    - **-R**：[--recursive]对当前目录下的所有文件与子目录进行相同的权限变更
-- **GROUP**：指定新的群组名或ID
-- **FILE**：要变更的文件或目录
+- **-f**：[--quiet或--silent]若该文件权限无法被更改也不要显示错误讯息
+- **-h**：只对于符号链接本身进行变更，而非该符号链接指向的目标目录
+- **-v**：[--verbose]显示权限变更的详细资料
+- **-R**：[--recursive]对当前目录下的所有文件与子目录进行相同的权限变更
+	- **-H**：如果指定了递归（-R），仅追踪遍历命令行参数中的符号链接，（对目录内的符号链接不会追踪遍历）
+	- **-L**：如果指定了递归（-R），所有的符号链接都会被追踪遍历
+	- **-P**：如果指定了递归（-R），不要追踪遍历任何符号链接，此参数默认缺省
+- **group**：指定新的群组名或ID
+- **file**：要变更的文件或目录
 
 ### 示例
-改变文件log.txt的群组属性为TEAM
+改变文件test.txt的群组属性为TestGroup
 ```
-chgrp -v TEAM log.txt
+chgrp -v TestGroup test.txt
 ```
 
 ## <a id="chmod">chmod</a>
 ### 描述
 Change access permissions
 ### 功能
-变更文件或目录的权限
+变更文件或目录的权限（只有文件拥有者或者超级管理员才能修改文件权限）
 ### 语法
 ```
-chmod [OPTION] MODE FILE...
+chmod [-fhv] [-R [-H|-L|-P]] mode file...
 
-MODE1：[[ugoa][+-=][rwx-]][,...]
-MODE2：abc
+mode1：[augo][+|-|=][rstwx-][,...]
+mode2：[????]
 ```
 ### 参数说明
-- **OPTION**：选项
-    - **-f**：[--quiet或--silent]若该文件权限无法被更改也不要显示错误讯息
-    - **-h**：只对于符号链接进行变更，而非该符号链接指向的目标目录
-    - **-v**：[--verbose]显示权限变更的详细资料
-    - **-R**：[--recursive]对当前目录下的所有文件与子目录进行相同的权限变更
-- **MODE**：权限设定字串，MODE1可
-    - **MODE1**：多条字串之间用","隔开
-        - **u**：[user]表示文件或目录的拥有者
-        - **g**：[group]表示文件或目录的所属群组
-        - **o**：[other]表示除了文件或目录的拥有者及所属群组之外的其他用户
-        - **a**：[all]即全部用户
-        - **+**：表示增加权限
-        - **-**：表示取消权限
-        - **=**：表示唯一设定权限
-        - **r**：[read]表示可读取，数字代号为4
-        - **w**：[write]表示可写入，数字代号为2
-        - **x**：[execute]表示可写入，数字代号为1
-        - **-**：不具任何权限，数字代号为0
-    - **MODE2**：
-        - **abc**：a、b、c各为一个数字，分别表示User、Group、及Other的权限r（read）、w（write）、x（execute）对应数字代号之和
-- **FILE**：要变更的文件或目录
+- **-f**：[--quiet或--silent]若该文件权限无法被更改也不要显示错误讯息
+- **-h**：只对于符号链接进行变更，而非该符号链接指向的目标目录
+- **-v**：[--verbose]显示权限变更的详细资料
+- **-R**：[--recursive]对当前目录下的所有文件与子目录进行相同的权限变更
+	- **-H**：如果指定了递归（-R），仅追踪遍历命令行参数中的符号链接，（对目录内的符号链接不会追踪遍历）
+	- **-L**：如果指定了递归（-R），所有的符号链接都会被追踪遍历
+	- **-P**：如果指定了递归（-R），不要追踪遍历任何符号链接，此参数默认缺省
+- **mode**：权限设定字符串
+	- **mode1**：符号模式，各子串之间用","隔开
+		- **a**：[all]即全部用户
+		- **u**：[user]表示文件或目录的拥有者
+		- **g**：[group]表示文件或目录的所属群组
+		- **o**：[other]表示除了文件或目录的拥有者及所属群组之外的其他用户
+		- **+**：表示增加
+		- **-**：表示取消
+		- **=**：表示设置
+		- **r**：[read]读取位，表示文件可读取，数字代号为4
+		- **s**：SUID位和SGID位，表示文件在执行时设置用户ID和群组ID
+		- **t**：粘滞位，其他用户有写权限，但只有文件拥有者才能执行删除和移动操作
+		- **w**：[write]写入位，表示文件可写入，数字代号为2
+		- **x**：[execute]执行位，表示文件可运行或搜索，数字代号为1
+		- **-**：不具任何权限，数字代号为0
+	- **mode2**：数值模式（4位8进制数），各组数值可同位相加
+    	- **4000**：等价于设置SUID位，在文件执行时设置uid为该文件拥有者的uid
+     - **2000**：等价于设置SGID位，在文件执行时设置gid为该文件群组的gid
+     - **1000**：等价于设置粘滞位
+     - **0400**：等价于u=r
+     - **0200**：等价于u=w
+     - **0100**：等价于u=x
+     - **0040**：等价于g=r
+     - **0020**：等价于g=w
+     - **0010**：等价于g=x
+     - **0004**：等价于o=r
+     - **0002**：等价于o=w
+     - **0001**：等价于o=x
+     - **0000**：等价于a=-
+- **file**：要变更的文件或目录
 
 ### 示例
-将文件file.txt设为所有人皆可读取
+将文件test.txt设为所有人皆可读取
 ```
-chmod ugo+r file.txt
-chmod a+r file1.txt
+chmod ugo+r test.txt
+chmod a+r test.txt
 ```
-将文件file1.txt与file2.txt设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入
+将文件test1.txt与test2.txt设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入
 ```
-chmod ug+w,o-w file1.txt file2.txt
+chmod ug+w,o-w test1.txt test2.txt
 ```
-将ex.py设定为只有该文件拥有者可以执行
+将test.out设定为只有该文件拥有者可以执行
 ```
-chmod u+x ex.py
+chmod u+x test.out
 ```
 将目前目录下的所有文件与子目录皆设为任何人可读取
 ```
 chmod -R a+r *
 ```
-将文件a.out设为该文件拥有者，与其所属同一个群体者可读写执行，但其他以外的人则不可仅可读取不可写入和执行
+将文件test.out设为该文件拥有者，与其所属同一个群体者可读写执行，但其他以外的人则不可仅可读取不可写入和执行
 ```
-chmod ug=rwx,o=r a.out
-chmod 774 a.out
+chmod ug=rwx,o=r test.out
+chmod 774 test.out
 ```
 
 ## <a id="chown">chown</a>
@@ -216,13 +242,13 @@ chown [OPTION] :GROUP FILE...
 - **GROUP**：指定新的所属群组的群组名或ID
 - **FILE**：要变更的文件或目录
 ### 示例
-将文件file.txt的群组设为群组TEAM
+将文件test.txt的群组设为群组TestGroup
 ```
-chown :TEAM file.txt
+chown :TestGroup test.txt
 ```
-将当前目录下的所有文件与子目录的所有者和群组皆设为用户ZHJ和群组TEAM
+将当前目录下的所有文件与子目录的所有者和群组皆设为用户TestUser和群组TestGroup
 ```
-chown -R ZHJ:TEAM *
+chown -R TestUser:TestGroup *
 ```
 
 ## <a id="cksum">cksum</a>
@@ -238,10 +264,10 @@ cksum FILE...
 - **FILE**：要检查的文件
 
 ### 示例
-计算文件abc.txt的完整性
+计算文件test.txt的完整性
 ```
-cksum testfile
-//3311261222 35 abc.txt
+cksum test.txt
+//3311261222 35 test.txt
 ```
 
 ## <a id="cmp">cmp</a>
@@ -251,16 +277,37 @@ Compare two files
 比较两个文件是否有差异
 ### 语法
 ```
-cmp [-clsv] [-i <起始字符索引>] file1 file2
+cmp [OPTION] [-i <起始位置>] FILE1 FILE2
 ```
 ### 参数说明
-- **-c**：[--print-chars]除了标明差异处的十进制字码之外，一并显示该字符所对应字符
-- **-l**：[--verbose]标示出所有不一样的地方
-- **-s**：[--quiet或--silent]不显示错误信息
-- **-v**：[--version]显示版本信息
+- **OPTION**：
+    - **-c**：[--print-chars]除了标明差异处的十进制字码之外，一并显示该字符所对应字符
+    - **-l**：[--verbose]标示出所有不一样的地方
+    - **-s**：[--quiet或--silent]不显示错误信息
+    - **-v**：[--version]显示版本信息
 - **-i <起始位置>** [--ignore-initial=<起始位置>]指定比较的起始字符位置，第一个字符索引值为0
-- **file1**：进行比较的第一个文件
-- **file2**：进行比较的第二个文件
+- **FILE1**：进行比较的第一个文件
+- **FILE2**：进行比较的第二个文件
+
+### 示例
+比较test1.txt和test2.txt。如果文件相同，则不显示消息。如果文件不同，则显示第一个不同的位置
+```
+cmp test1.txt test2.txt
+//test1.txt test2.txt differ: char 1, line 1
+```
+从第7个字符位置开始比较test1.txt和test2.txt。显示所有不同的位置及对应的字符
+```
+cmp -cl -i 6 test1.txt test2.txt
+/*
+ 1 107 G    147 g
+14 117 O    157 o
+15 120 P    160 p
+16 121 Q    161 q
+26 130 X    170 x
+27 131 Y    171 y
+28 132 Z    172 z
+*/
+```
 
 ## <a id="cp">cp</a>
 ### 描述
@@ -269,20 +316,26 @@ Copy one or more files to another location
 复制文件或目录
 ### 语法
 ```
-cp [-adfiprl] source target
-cp [-adfiprl] source ... directory
+cp [OPTION] SOURCE TARGET
+cp [OPTION] SOURCE ... DIRECTORY
 ```
 ### 参数说明
-- **-a**：[--archive]此选项通常在复制目录时使用，它保留链接、文件属性，并复制目录下的所有内容。其作用等于dpR参数组合
-- **-d**：[--no-dereference]复制时保留链接
-- **-f**：[--force]覆盖已经存在的目标文件而不给出提示
-- **-i**：[--interactive]在覆盖目标文件之前给出提示，要求用户确认是否覆盖
-- **-p**：[--preserve]除复制文件的内容外，还把修改时间和访问权限也复制到新文件中
-- **-r**：[--recursive]--recursive
-- **-l**：[--link]不复制文件，只是生成链接文件
-- **source**：原文件或目录
-- **target**：新文件
-- **directory**：目标目录
+- **OPTION**：选项
+    - **-a**：[--archive]此选项通常在复制目录时使用，它保留链接、文件属性，并复制目录下的所有内容
+    - **-i**：[--interactive]在覆盖目标文件之前给出提示，要求用户确认是否覆盖
+    - **-p**：[--preserve]除复制文件的内容外，还把修改时间和访问权限也复制到新文件中
+    - **-r**：[--recursive]若给出的源文件是一个目录文件，此时将复制该目录下所有的子目录和文件
+    - **-v**：[--verbose]显示执行过程
+    - **-X**：[--one-file-system]复制的文件或目录存放的文件系统，必须与cp指令执行时所处的文件系统相同，否则不复制，亦不处理位于其他分区的文件
+- **SOURCE**：原文件或目录
+- **TARGET**：新文件
+- **DIRECTORY**：目标目录
+
+### 示例
+将当前目录test1下的所有文件复制到新目录test2下
+```
+cp -r test1 test2
+```
 
 ## <a id="du">du</a>
 ### 描述
@@ -291,21 +344,23 @@ Estimate file space usage
 显示目录或文件的大小
 ### 语法
 ```
-du [-abcDhklmsSx] file
+du [OPTION1] [OPTION2] [OPTION3] [OPTION4] FILE
 ```
 ### 参数说明
-- **-a**：[--all]显示目录中各个文件或目录的大小
-- **-b**：[--bytes]显示目录或文件大小时，以byte为单位
-- **-c**：[--total]除了显示各个文件或目录的大小外，同时也显示所有文件和目录的总和
-- **-D**：[--dereference-args]显示指定符号链接的源文件大小
-- **-h**：[--human-readable]以KB，MB，GB为单位，提高信息的可读性
-- **-k**：[--kilobytes]以1024Bytes为单位
-- **-l**：[--count-links]重复计算硬链接的文件
-- **-m**：[--megabytes]以1MB为单位
-- **-s**：[--summarize]仅显示总计
-- **S**：[--separate-dirs]显示各个目录的大小时，并不含其子目录的大小
-- **-x**：[--one-file-xystem]以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过
-- **file**：要显示大小的文件或目录
+- **OPTION1**：选项1
+    - **-a**：[--all]显示目录中各个文件或目录的大小
+    - **-s**：[--summarize]仅显示总计
+    - **-d <DEPTH>**：DEPTH指定目录层数，超过指定层数的目录予以忽略
+- **OPTION2**：选项2
+    - **-c**：[--total]除了显示各个文件或目录的大小外，同时也显示所有文件和目录的总和
+    - **-g**：[--gigaByte]以GB为单位
+    - **-h**：[--human-readable]以KB，MB，GB为单位，提高信息的可读性
+    - **-k**：[--kilobytes]以KB为单位
+    - **-m**：[--megabytes]以MB为单位
+- **OPTION3**：选项3
+    - **S**：[--separate-dirs]显示各个目录的大小时，并不含其子目录的大小
+    - **-x**：[--one-file-xystem]以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过
+- **FILE**：要显示大小的文件或目录
 
 ## <a id="df">df</a>
 ### 描述
