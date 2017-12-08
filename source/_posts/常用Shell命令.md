@@ -21,7 +21,7 @@ blogexcerpt:
 # 汇总表
 | 分类 | 命令 |
 | --- | --- |
-| <div style="text-align:center;"><a href="#1">文件管理</a></div> | <a href="#cat">cat</a>&emsp;<a href="#cd">cd</a>&emsp;<a href="#chgrp">chgrp</a>&emsp;<a href="#chmod">chmod</a>&emsp;<a href="#chown">chown</a>&emsp;<a href="#cksum">cksum</a>&emsp;<a href="#cmp">cmp</a>&emsp;<a href="#cp">cp</a>&emsp;<a href="#du">du</a>&emsp;<a href="#df">df</a>&emsp;<a href="#fsck">fsck</a>&emsp;<a href="#fuser">fuser</a>&emsp;<a href="#ln">ln</a>&emsp;<a href="#ls">ls</a>&emsp;<a href="#lsattr">lsattr</a>&emsp;<a href="#lsof">lsof</a>&emsp;<a href="#mkdir">mkdir</a>&emsp;<a href="#mount">mount</a>&emsp;<a href="#mv">mv</a>&emsp;<a href="#pwd">pwd</a>&emsp;<a href="#rm">rm</a>&emsp;<a href="#rmdir">rmdir</a>&emsp;<a href="#split">split</a>&emsp;<a href="#touch">touch</a>&emsp;<a href="#umask">umask</a> |
+| <div style="text-align:center;"><a href="#1">文件管理</a></div> | <a href="#cat">cat</a>&emsp;<a href="#cd">cd</a>&emsp;<a href="#chgrp">chgrp</a>&emsp;<a href="#chmod">chmod</a>&emsp;<a href="#chown">chown</a>&emsp;<a href="#cksum">cksum</a>&emsp;<a href="#cmp">cmp</a>&emsp;<a href="#cp">cp</a>&emsp;<a href="#du">du</a>&emsp;<a href="#df">df</a>&emsp;<a href="#fsck">fsck</a>&emsp;<a href="#fuser">fuser</a>&emsp;<a href="#ln">ln</a>&emsp;<a href="#ls">ls</a>&emsp;<a href="#lsof">lsof</a>&emsp;<a href="#mkdir">mkdir</a>&emsp;<a href="#mount">mount</a>&emsp;<a href="#mv">mv</a>&emsp;<a href="#pwd">pwd</a>&emsp;<a href="#rm">rm</a>&emsp;<a href="#rmdir">rmdir</a>&emsp;<a href="#split">split</a>&emsp;<a href="#touch">touch</a>&emsp;<a href="#umask">umask</a> |
 | <div style="text-align:center;"><a href="#2">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;<a href="#exit">exit</a>&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
 | <div style="text-align:center;"><a href="#3">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;<a href="#su">su</a>&emsp;<a href="#sudo">sudo</a>&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;<a href="#who">who</a>&emsp;<a href="#whoami">whoami</a>&emsp;<a href="#write">write</a> |
 | <div style="text-align:center;"><a href="#4">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;<a href="#cut">cut</a>&emsp;<a href="#ed">ed</a>&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;<a href="#paste">paste</a>&emsp;<a href="#sed">sed</a>&emsp;<a href="#sort">sort</a>&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;<a href="#tr">tr</a>&emsp;<a href="#uniq">uniq</a>&emsp;<a href="#vi">vi</a>&emsp;<a href="#wc">wc</a>&emsp;<a href="#xargs">xargs</a> |
@@ -540,24 +540,59 @@ ls [-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1] [file...]
 - **-x**：同-C，按列输出，横向排序
 - **-1**：一行只输出一个文件
 
-## <a id="lsattr">lsattr</a>
-
 ## <a id="lsof">lsof</a>
+### 描述
+List open files
+### 功能
+列出当前系统打开文件的工具
+### 语法
+```
+```
+### 参数说明
+- ****：
+
+### 示例
 
 ## <a id="mkdir">mkdir</a>
 ### 描述
-Create new folder(s)
+Make directories
 ### 功能
 创建一个子目录
 ### 语法
 ```
-mkdir [-p] dir
+mkdir [-pv] [-m MODE] dir...
 ```
 ### 参数说明
 - **-p**：确保目录名称存在，不存在就建一个
+- **-v**：列出创建目录的详细说明
+- **-m**：指定MODE为创建的目录权限
 - **dir**：要创建的子目录名称
 
+### 示例
+在当前目录下创建名为test的子目录
+```
+mkdir test
+```
+在当前目录下的test1目录中创建一个名为test2的目录，如果test1目录原本不存在，则创建一个
+```
+mkdir -p test1/test2
+```
+
 ## <a id="mount">mount</a>
+### 描述
+Mount file systems
+### 功能
+挂载系统外的文件
+### 语法
+```
+mount [-adfruvw] [-t lfs | external_type]
+mount [-dfruvw] special | mount_point
+mount [-dfruvw] [-o options] [-t lfs | external_type] special mount_point
+```
+### 参数说明
+
+
+### 示例
 
 ## <a id="mv">mv</a>
 ### 描述
@@ -566,8 +601,8 @@ Move or rename files or directories
 为文件或目录改名、或将文件或目录移入其它位置
 ### 语法
 ```
-mv [-fin] [-v] source target
-mv [-fin] [-v] source ... directory
+mv [-f|-i|-n] [-v] source target
+mv [-f|-i|-n] [-v] source ... directory
 ```
 ### 参数说明
 - **-f**：[--force]若目标文件已存在，不询问直接覆盖
@@ -578,55 +613,156 @@ mv [-fin] [-v] source ... directory
 - **target**：新文件
 - **directory**：目标目录
 
+### 示例
+将文件test1更名为test2
+```
+mv test1 test2
+```
+将test1目录放入test2目录中
+```
+mv test1 test2
+```
+
 ## <a id="pwd">pwd</a>
 ### 描述
-Print Working Directory
+Return working directory name
 ### 功能
-显示当前目录的路径
+显示路径
 ### 语法
+```
+pwd [-L|-P]
+```
+### 参数说明
+- **-L**：如果环境变量包含了不包含文件名“.”或“..”的当前目录的绝对路径名，则显示环境变量的值。否则，-L与-P一样运行
+- **-P**：显示当前目录的绝对路径名
+
+### 示例
+查看当前所在目录
 ```
 pwd
 ```
-### 参数说明
-无
 
 ## <a id="rm">rm</a>
 ### 描述
-Remove files
+Remove directory entries
 ### 功能
-删除一个文件或者目录
+删除一个文件或者目录（删除目录则必须配合-R/-r选项）
 ### 语法
 ```
-rm [-fi] [-dPRrvW] file ...
+rm [-dfiPRrvW] file ...
 ```
 ### 参数说明
-- **-f**：[--force]强制删除，忽略不存在的文件，不提示确认
-- **-i**：[--interactive]在删除前需要确认
-- **-d**：[--directory]删除可能仍有数据的目录（只限超级用户）
-- **-P**：
-- **-R/-r**：[--recursive]递归删除目录及其内容
+- **-d**：尝试删除目录以及其他类型的文件
+- **-f**：[--force]强制删除文件或目录
+- **-i**：[--interactive]删除已有文件或目录之前先询问用户，该选项使-f无效
+- **-P**：在删除常规文件之前，先用字节模式0xff，然后0x00，然后再0xff重写它们
+- **-R/-r**：[--recursive]递归删除目录及其内容，该选项默认开启-d。
 - **-v**：[--verbose]详细显示进行的步骤
-- **-W**：
+- **-W**：试图恢复已删除的文件，该选项仅对文件数据区未被覆写的情况有效
 - **file**：要删除的文件或目录
+
+### 示例
+删除test.txt文件
+```
+rm test.txt
+```
 
 ## <a id="rmdir">rmdir</a>
 ### 描述
-Remove folder(s)
+Remove directories
 ### 功能
 删除空的目录
 ### 语法
 ```
-rmdir [-p] dirName
+rmdir [-p] dir
 ```
 ### 参数说明
 - **-p**：是当子目录被删除后使它也成为空目录的话，则顺便一并删除
-- **dirName**：要删除的子目录名称
+- **dir**：要删除的子目录名称
+
+### 示例
+将test目录下，名为test1的子目录删除（若删除test1后test目录变为空目录，则test也一起删除）
+```
+rmdir -p test/test1
+```
 
 ## <a id="split">split</a>
+### 描述
+Split a file into pieces
+### 功能
+将一个文件分割成数个
+### 语法
+```
+split [-a SUFFIX_LENGTH] [-b BYTE_COUNT[k|m]] [-l LINE_COUNT] [-p PATTERN] [file [name]]
+```
+### 参数说明
+- **-a**：限制文件后缀的字母个数为SUFFIX_LENGTH
+- **-b**：指定每BYTE_COUNT个字节切成一个小文件，如果指定k或m，则分割单位变为KB和MB
+- **-l**：指定每LINE_COUNT行输出为一个小文件
+- **-p**：每当遇到与正则表达式PATTERN匹配的内容时，文件就被分割。匹配的内容将作为下一个文件的起始输出内容。这个选择不能和-b或-l同时使用
+- **file**：要分割的文件
+- **name**：要输出的文件名
+
+### 示例
+文件test.txt每6行切割成一个文件
+```
+split test.txt
+```
 
 ## <a id="touch">touch</a>
+### 描述
+Change file access and modification times
+### 功能
+修改文件或者目录的时间属性，包括存取时间、修改时间等（若文件不存在，会建立一个新的文件）
+### 语法
+```
+touch [-A [-][[hh]mm]SS] [-acfhm] [-r REF_FILE] [-t [CC]YY]MMDDhhmm[.SS]] file...
+```
+### 参数说明
+- **-A**：按指定值修改文件的时间属性
+	- **-**：使调整变为负值：在原时间值上减去指定的时间
+	- **hh**：可指定00-99小时
+	- **mm**：可指定00-59分钟
+	- **SS**：可指定00-59秒
+- **-a**：更改指定的文件的访问时间。不会更改修改时间，除非也指定了-m
+- **-c**：如果文件不存在，则不要进行创建。没有写任何有关此条件的诊断消息
+- **-f**：尝试强制运行，而不管文件的读和写许可权
+- **-m**：更改文件的修改时间。不会更改访问时间，除非也指定了-a
+- **-r**：使用由REF_FILE变量指定的文件的相应时间，而不用当前时间
+- **-t**：使用指定时间而不是当前时间
+	- **CC**：指定年份的前两位数字
+	- **YY**：指定年份的后两位数字
+	- **MM**：指定一年的哪一月（从 01 到 12）
+	- **DD**：指定一月的哪一天（从 01 到 31）
+	- **hh**：指定一天中的哪一小时（从 00 到 23）
+	- **mm**：指定一小时的哪一分钟（从 00 到 59）
+	- **SS**：指定一分钟的哪一秒（从 00 到 59）
+
+### 示例
+修改文件test.txt的时间属性为当前系统时间（如果文件不存在，则会创建一个空白的test.txt文件）
+```
+touch test.txt
+```
 
 ## <a id="umask">umask</a>
+### 描述
+Users file creation mask
+### 功能
+设置限制新建文件权限的掩码
+### 语法
+```
+umask [-p] [-S] [mode]
+```
+### 参数说明
+- **-p**：输出的权限掩码可直接作为指令来执行
+- **-S**：以字符的形式来打印当前权限掩码
+- **mode**：由3个八进制的数字所组成或由符号表示的权限掩码
+
+### 示例
+当前权限掩码
+```
+umask
+```
 
 # <a id="2">程序进程<a>
 
