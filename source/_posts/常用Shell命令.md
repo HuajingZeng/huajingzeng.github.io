@@ -21,7 +21,7 @@ blogexcerpt:
 # 汇总表
 | 分类 | 命令 |
 | --- | --- |
-| <div style="text-align:center;"><a href="#1">文件管理</a></div> | <a href="#cat">cat</a>&emsp;<a href="#cd">cd</a>&emsp;<a href="#chgrp">chgrp</a>&emsp;<a href="#chmod">chmod</a>&emsp;<a href="#chown">chown</a>&emsp;<a href="#cksum">cksum</a>&emsp;<a href="#cmp">cmp</a>&emsp;<a href="#cp">cp</a>&emsp;<a href="#du">du</a>&emsp;<a href="#df">df</a>&emsp;<a href="#fsck">fsck</a>&emsp;<a href="#fuser">fuser</a>&emsp;<a href="#ln">ln</a>&emsp;<a href="#ls">ls</a>&emsp;<a href="#lsof">lsof</a>&emsp;<a href="#mkdir">mkdir</a>&emsp;<a href="#mount">mount</a>&emsp;<a href="#mv">mv</a>&emsp;<a href="#pwd">pwd</a>&emsp;<a href="#rm">rm</a>&emsp;<a href="#rmdir">rmdir</a>&emsp;<a href="#split">split</a>&emsp;<a href="#touch">touch</a>&emsp;<a href="#umask">umask</a> |
+| <div style="text-align:center;"><a href="#1">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
 | <div style="text-align:center;"><a href="#2">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;<a href="#exit">exit</a>&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
 | <div style="text-align:center;"><a href="#3">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;<a href="#su">su</a>&emsp;<a href="#sudo">sudo</a>&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;<a href="#who">who</a>&emsp;<a href="#whoami">whoami</a>&emsp;<a href="#write">write</a> |
 | <div style="text-align:center;"><a href="#4">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;<a href="#cut">cut</a>&emsp;<a href="#ed">ed</a>&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;<a href="#paste">paste</a>&emsp;<a href="#sed">sed</a>&emsp;<a href="#sort">sort</a>&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;<a href="#tr">tr</a>&emsp;<a href="#uniq">uniq</a>&emsp;<a href="#vi">vi</a>&emsp;<a href="#wc">wc</a>&emsp;<a href="#xargs">xargs</a> |
@@ -490,6 +490,44 @@ test2:
 ```
 
 ## <a id="ln">ln</a>
+### 描述
+Make links
+### 功能
+为某一个文件在另外一个位置建立一个同步的链接
+
+所谓的链接（link）可以将其视为文件的别名，而链接又可分为两种：硬链接（hard link）与软链接（symbolic link），硬链接的意思是一个文件可以有多个名称，而软链接的方式则是产生一个特殊的文件，该文件的内容是指向另一个文件的位置。硬链接是存在同一个文件系统中，而软链接却可以跨越不同的文件系统。不论是硬链接或软链接都不会将原本的文件复制一份，只会占用非常少量的磁碟空间。
+
+| 分类 | 区别 |
+| --- | --- |
+| 软链接 | 1、软链接，以路径的形式存在。类似于Windows操作系统中的快捷方式<br>2、软链接可以 跨文件系统 ，硬链接不可以<br>3、软链接可以对一个不存在的文件名进行链接<br>4、软链接可以对目录进行链接 |
+| 硬链接 | 1、硬链接，以文件副本的形式存在。但不占用实际空间<br>2、不允许给目录创建硬链接<br>3、硬链接只有在同一个文件系统中才能创建 |
+
+### 语法
+```
+ln [-Ffhinsv] source_file [target_file]
+ln [-Ffhinsv] source_file target_dir
+```
+### 参数说明
+- **-F**：[--directory]建立目录的硬连接
+- **-f**：[--force]强行建立文件或目录的链接，不论文件或目录是否存在
+- **-h**：如果目标文件或目标目录是一个符号链接，不要追踪它
+- **-i**：[--interactive]交互模式，文件存在则提示用户是否覆盖
+- **-n**：[--no-dereference]把符号链接视为一般目录
+- **-s**：[--symbolic]建立软链接（符号链接）
+- **-v**：[--verbose]显示详细的处理过程
+- **source_file**：源文件或源目录
+- **target_file**：目标文件
+- **target_dir**：目标目录
+
+### 示例
+为test.txt文件创建软链接test，如果test.txt丢失，test将失效
+```
+ln -s test.txt test
+```
+为test.txt文件创建硬链接test，test.txt与test的各项属性相同
+```
+ln test.txt test
+```
 
 ## <a id="ls">ls</a>
 ### 描述
@@ -539,6 +577,23 @@ ls [-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1] [file...]
 - **-w**：对未打印字符进行强制打印。当输出不是终端时，这是默认值
 - **-x**：同-C，按列输出，横向排序
 - **-1**：一行只输出一个文件
+### 示例
+列出根目录下的所有目录
+```
+ls /
+```
+列出当前工作目录下所有名称是s开头的文件，越新的排越后面
+```
+ls -ltr s*
+```
+将/bin目录以下所有目录及文件详细资料列出
+```
+ls -lR /bin
+```
+列出当前工作目录下所有文件及目录，目录于名称后加"/", 可执行档于名称后加"*"
+```
+ls -AF
+```
 
 ## <a id="lsof">lsof</a>
 ### 描述
@@ -547,6 +602,7 @@ List open files
 列出当前系统打开文件的工具
 ### 语法
 ```
+lsof  [ -?abChKlnNOPRtUvVX ] [ -A A ] [ -c c ] [ +c c ] [ +|-d d ] [ +|-D D ] [ +|-e s ] [ +|-E ] [ +|-f [cfgGn] ] [ -F [f] ] [ -g [s] ] [ -i [i] ] [ -k k ] [ +|-L [l] ] [ +|-m m ] [ +|-M ] [ -o [o] ] [ -p s ] [ +|-r [t[m<fmt>]] ] [ -s [p:s] ] [ -S [t] ] [ -T [t] ] [ -u s ] [ +|-w ] [ -x [fl] ] [ -z [z] ] [ -Z [Z] ] [ -- ] [names]
 ```
 ### 参数说明
 - ****：
@@ -590,9 +646,10 @@ mount [-dfruvw] special | mount_point
 mount [-dfruvw] [-o options] [-t lfs | external_type] special mount_point
 ```
 ### 参数说明
-
+- ****：
 
 ### 示例
+
 
 ## <a id="mv">mv</a>
 ### 描述
