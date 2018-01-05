@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 cd /Users/Kevin/Git/huajingzeng.github.io
-hexo s -g &
+pm2 start app.js
