@@ -23,8 +23,8 @@ blogexcerpt:
 | --- | --- |
 | <div style="text-align:center;"><a href="#1">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
 | <div style="text-align:center;"><a href="#2">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;<a href="#exit">exit</a>&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
-| <div style="text-align:center;"><a href="#3">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;<a href="#su">su</a>&emsp;<a href="#sudo">sudo</a>&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;<a href="#who">who</a>&emsp;<a href="#whoami">whoami</a>&emsp;<a href="#write">write</a> |
-| <div style="text-align:center;"><a href="#4">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;<a href="#cut">cut</a>&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;<a href="#paste">paste</a>&emsp;<a href="#sed">sed</a>&emsp;<a href="#sort">sort</a>&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;<a href="#tr">tr</a>&emsp;<a href="#uniq">uniq</a>&emsp;<a href="#vi">vi</a>&emsp;<a href="#wc">wc</a>&emsp;<a href="#xargs">xargs</a> |
+| <div style="text-align:center;"><a href="#3">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;<a href="#who">who</a>&emsp;<a href="#whoami">whoami</a>&emsp;<a href="#write">write</a> |
+| <div style="text-align:center;"><a href="#4">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;<a href="#cut">cut</a>&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;<a href="#paste">paste</a>&emsp;<a href="#sed">sed</a>&emsp;<a href="#sort">sort</a>&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;<a href="#tr">tr</a>&emsp;<a href="#uniq">uniq</a>&emsp;**<a href="#vi">vi</a>**&emsp;<a href="#wc">wc</a>&emsp;<a href="#xargs">xargs</a> |
 | <div style="text-align:center;"><a href="#5">Shell脚本</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;<a href="#echo">echo</a>&emsp;<a href="#expr">expr</a>&emsp;<a href="#false">false</a>&emsp;<a href="#printf">printf</a>&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
 | <div style="text-align:center;"><a href="#6">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;<a href="#ping">ping</a>&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
 | <div style="text-align:center;"><a href="#7">搜索查找</a></div> | <a href="#find">find</a>&emsp;<a href="#grep">grep</a>&emsp;<a href="#locate">locate</a>&emsp;<a href="#whereis">whereis</a>&emsp;<a href="#which">which</a> |
@@ -39,6 +39,7 @@ Concatenate and print files
 连接文件并打印输出到文件或标准输出设备上
 ### 语法
 显示文件内容
+
 ```
 cat [-benstuv] file...
 
@@ -48,14 +49,19 @@ cat [-benstuv] file...
 */
 cat [-benstuv] file0 [- fileX]...
 ```
+
 通过键盘为文件输入新的内容（输入的内容会覆盖原来的内容）
+
 ```
 cat [-benstuv] > out_file
 ```
+
 将几个文件的内容合并后输出到文件
+
 ```
 cat [-benstuv] file... > out_file
 ```
+
 ### 选项参数
 - **-b**：[--number-nonblank]对非空输出行编号
 - **-e**：[--show-ends]在每行结尾打印输出$
@@ -69,22 +75,31 @@ cat [-benstuv] file... > out_file
 
 ### 示例
 把test.txt的文档内容加上行号后输出到当前命令行工具窗口
+
 ```
 cat -n test.txt
 ```
+
 把test1.txt和test2.txt的文档内容加上行号（空白行不加）之后将内容附加到test3.txt文档里
+
 ```
 cat -b test1.txt test2.txt >> test3.txt
 ```
+
 清空/etc/test.txt文档内容
+
 ```
 cat /dev/null > /etc/test.txt
 ```
+
 从软盘fd0制作镜像文件test.dmg
+
 ```
 cat /dev/fd0 > test.dmg
 ```
+
 把镜像文件test.dmg写到软盘fd0
+
 ```
 cat test.dmg > /dev/fd0
 ```
@@ -95,9 +110,11 @@ Change directory
 ### 功能
 改变当前目录
 ### 语法
+
 ```
 cd [-L|-P] [dir]
 ```
+
 ### 选项参数
 - **-L**：如果要切换的目标目录是一个符号（软）链接，直接切换到符号链接所在的目录，而非符号链接所指向的目标目录
 - **-P**：如果要切换到的目标目录是一个符号（软）链接，直接切换到符号链接指向的目标目录
@@ -109,14 +126,19 @@ cd [-L|-P] [dir]
 	
 ### 示例
 跳到/usr/bin目录
+
 ```
 cd /usr/bin
 ```
+
 跳到自己的Home目录
+
 ```
 cd ~
 ```
+
 跳到当前目录的上两层
+
 ```
 cd ../..
 ```
@@ -127,9 +149,11 @@ Change group
 ### 功能
 变更文件或目录的所属群组
 ### 语法
+
 ```
 chgrp [-fhv] [-R [-H|-L|-P]] group file...
 ```
+
 ### 选项参数
 - **-f**：[--quiet或--silent]若该文件权限无法被更改也不要显示错误讯息
 - **-h**：只对于符号链接本身进行变更，而非该符号链接指向的目标目录
@@ -143,6 +167,7 @@ chgrp [-fhv] [-R [-H|-L|-P]] group file...
 
 ### 示例
 改变文件test.txt的群组属性为TestGroup
+
 ```
 chgrp -v TestGroup test.txt
 ```
@@ -153,12 +178,14 @@ Change file modes or Access Control Lists
 ### 功能
 变更文件或目录的权限（只有文件拥有者或者超级管理员才能修改文件权限）
 ### 语法
+
 ```
 chmod [-fhv] [-R [-H|-L|-P]] mode file...
 
 mode1：[augo][+|-|=][rstwx-][,...]
 mode2：[????]
 ```
+
 ### 选项参数
 - **-f**：[--quiet或--silent]若该文件权限无法被更改也不要显示错误讯息
 - **-h**：只对于符号链接进行变更，而非该符号链接指向的目标目录
@@ -200,23 +227,32 @@ mode2：[????]
 
 ### 示例
 将文件test.txt设为所有人皆可读取
+
 ```
 chmod ugo+r test.txt
 chmod a+r test.txt
 ```
+
 将文件test1.txt与test2.txt设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入
+
 ```
 chmod ug+w,o-w test1.txt test2.txt
 ```
+
 将test.out设定为只有该文件拥有者可以执行
+
 ```
 chmod u+x test.out
 ```
+
 将目前目录下的所有文件与子目录皆设为任何人可读取
+
 ```
 chmod -R a+r *
 ```
+
 将文件test.out设为该文件拥有者，与其所属同一个群体者可读写执行，但其他以外的人则不可仅可读取不可写入和执行
+
 ```
 chmod ug=rwx,o=r test.out
 chmod 774 test.out
@@ -228,10 +264,12 @@ Change file owner and group
 ### 功能
 将指定文件的拥有者改为指定的用户或组
 ### 语法
+
 ```
 chown [-fhv] [-R [-H|-L|-P]] user[:group] file...
 chown [-fhv] [-R [-H|-L|-P]] :group file... 
 ```
+
 ### 选项参数
 - **-f**：[--quiet或--silent]若该文件权限无法被更改也不要显示错误讯息
 - **-h**：只对于符号链接进行变更，而非该符号链接指向的目标目录
@@ -246,10 +284,13 @@ chown [-fhv] [-R [-H|-L|-P]] :group file...
 
 ### 示例
 将文件test.txt的群组设为群组TestGroup
+
 ```
 chown :TestGroup test.txt
 ```
+
 将当前目录下的所有文件与子目录的所有者和群组皆设为用户TestUser和群组TestGroup
+
 ```
 chown -R TestUser:TestGroup *
 ```
@@ -260,12 +301,14 @@ Display file checksums and block counts
 ### 功能
 检查文件的CRC是否正确（输出信息中，第一个字符串表示校验码，第二个字符串表示字节数）
 ### 语法
+
 ```
 cksum [-o 1|2|3] file...
 
 //等价于 cksum -o 1 file...
 sum file...
 ```
+
 ### 选项参数
 - **-o**：使用历史算法而不是默认算法
 	- **1**：BSD系统默认使用的校验算法
@@ -275,6 +318,7 @@ sum file...
 
 ### 示例
 计算文件test.txt的完整性
+
 ```
 cksum test.txt
 //3311261222 35 test.txt
@@ -286,9 +330,11 @@ Compare two files byte by byte
 ### 功能
 比较两个文件是否有差异
 ### 语法
+
 ```
 cmp [-bclv] [-n LIMIT] [-i SKIP1[:SLIP2]] file1 file2
 ```
+
 ### 选项参数
 - **-b/-c**：[--print-chars]除了标明差异处的十进制字码之外，一并显示该字符所对应字符
 - **-l**：[--verbose]标示出所有不一样的地方
@@ -302,11 +348,14 @@ cmp [-bclv] [-n LIMIT] [-i SKIP1[:SLIP2]] file1 file2
 
 ### 示例
 比较test1.txt和test2.txt。如果文件相同，则不显示消息。如果文件不同，则显示第一个不同的位置
+
 ```
 cmp test1.txt test2.txt
 //test1.txt test2.txt differ: char 1, line 1
 ```
+
 从第7个字符位置开始比较test1.txt和test2.txt。显示所有不同的位置及对应的字符
+
 ```
 cmp -cl -i 6 test1.txt test2.txt
 /*
@@ -326,10 +375,12 @@ Copy files
 ### 功能
 复制文件或目录
 ### 语法
+
 ```
 cp [-R [-H|-L|-P]] [-fi|-n] [-apvX] source target
 cp [-R [-H|-L|-P]] [-fi|-n] [-apvX] source ... directory
 ```
+
 ### 选项参数
 - **-R**：[--recursive]对当前目录下的所有文件与子目录进行复制
 	- **-H**：如果指定了递归（-R），仅追踪遍历命令行参数中的符号链接，（对目录内的符号链接不会追踪遍历）
@@ -349,6 +400,7 @@ cp [-R [-H|-L|-P]] [-fi|-n] [-apvX] source ... directory
 
 ### 示例
 将当前目录test1下的所有文件复制到新目录test2下
+
 ```
 cp -r test1 test2
 ```
@@ -359,9 +411,11 @@ Display disk usage statistics
 ### 功能
 显示目录或文件的大小
 ### 语法
+
 ```
 du [-H|-L|-P] [-a|-s|-d DEPTH] [-c] [-h|-k|-m|-g] [-x] [-I MASK] file...
 ```
+
 ### 选项参数
 - **-H**：仅追踪遍历命令行参数中的符号链接，（对目录内的符号链接不会追踪遍历）
 - **-L**：所有的符号链接都会被追踪遍历
@@ -380,14 +434,19 @@ du [-H|-L|-P] [-a|-s|-d DEPTH] [-c] [-h|-k|-m|-g] [-x] [-I MASK] file...
 
 ### 示例
 显示目录或者文件所占空间
+
 ```
 du
 ```
+
 显示指定文件所占空间
+
 ```
 du test.txt
 ```
+
 方便阅读的格式显示test目录所占空间情况
+
 ```
 du -h test
 ```
@@ -398,9 +457,11 @@ Display free disk space
 ### 功能
 检查文件系统的磁盘空间占用情况
 ### 语法
+
 ```
 df [-b|-h|-H|-k|-m|-g|-P] [-ailn] [-T TYPE] [file|fileSystem] ...
 ```
+
 ### 选项参数
 - **-b**：使用默认的512字节块。这是唯一一种能改变块大小的方法
 - **-h**：[--human-readable]以KiB，MiB，GiB为单位，提高信息的可读性
@@ -418,22 +479,31 @@ df [-b|-h|-H|-k|-m|-g|-P] [-ailn] [-T TYPE] [file|fileSystem] ...
 
 ### 示例
 显示文件系统的磁盘使用情况统计
+
 ```
 df
 ```
+
 显示磁盘使用的文件系统信息
+
 ```
 df test
 ```
+
 输出显示inode信息而非块使用量
+
 ```
 df -i
 ```
+
 显示所有的信息
+
 ```
 df -a
 ```
+
 产生可读的格式df命令的输出
+
 ```
 df -h
 ```
@@ -444,10 +514,12 @@ Filesystem consistency check and interactive repair
 ### 功能
 检查和维护不一致的文件系统
 ### 语法
+
 ```
 fsck -p [-f]
 fsck [-l MAX_PARALLEL] [-qynd]
 ```
+
 ### 选项参数
 - **-p**：同时检查所有的文件系统
 - **-f**：强制清理文件系统
@@ -459,6 +531,7 @@ fsck [-l MAX_PARALLEL] [-qynd]
 
 ### 示例
 检查所以文件系统是否正常，如果有异常便自动修复
+
 ```
 fsck -p
 ```
@@ -469,9 +542,11 @@ List process IDs of all processes that have one or more files open
 ### 功能
 由文件或设备去找出使用该文件或设备的进程ID
 ### 语法
+
 ```
 fuser [-cfu] file ...
 ```
+
 ### 选项参数
 - **-c**：包含的文件系统中关于任何打开的文件的报告
 - **-f**：仅对指定的文件进行报告
@@ -480,6 +555,7 @@ fuser [-cfu] file ...
 
 ### 示例
 显示正在使用文件test、test1、test2的进程ID及该进程的登录用户
+
 ```
 fuser -u test
 /*
@@ -503,10 +579,12 @@ Make links
 | 硬链接 | 1、存储的是文件的inode节点信息（数据在硬盘上的存储地址），查找文件以文件的inode节点为依据。类似于C语言的指针<br>2、不允许给目录创建硬链接<br>3、只有在同一个文件系统中才能创建<br>4、要把数据从硬盘删除（置为空闲）必须删除所有硬链接 |
 
 ### 语法
+
 ```
 ln [-Ffhinsv] source_file [target_file]
 ln [-Ffhinsv] source_file target_dir
 ```
+
 ### 选项参数
 - **-F**：[--directory]如果目标文件存在且是一个目录则将其移除以便能够创建链接，该选项在使用-f或-i选项时才可用，如果没指定则默认是-f。当指定-s时-F选项无效。
 - **-f**：[--force]强行建立文件或目录的链接，不论文件或目录是否存在
@@ -521,13 +599,17 @@ ln [-Ffhinsv] source_file target_dir
 
 ### 示例
 为test.txt文件创建软链接test，如果test.txt丢失，test将失效
+
 ```
 ln -s test.txt test
 ```
+
 为test.txt文件创建硬链接test，test.txt与test的各项属性相同
+
 ```
 ln test.txt test
 ```
+
 
 ## <a id="ls">ls</a>
 ### 描述
@@ -535,9 +617,11 @@ List directory contents
 ### 功能
 显示目录下的内容
 ### 语法
+
 ```
 ls [-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1] [file...]
 ```
+
 ### 选项参数
 - **-A**：显示所有文件及目录，但不列出"."（目前目录）及".."（父目录）（ls内定将文件名或目录名称开头为"."的视为隐藏档，不会列出）
 - **-B**：把文件名中不可输出的字符用反斜杠加字符编号（\XXX）的方式列出
@@ -579,18 +663,25 @@ ls [-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1] [file...]
 - **-1**：一行只输出一个文件（单列输出）
 ### 示例
 列出根目录下的所有目录
+
 ```
 ls /
 ```
+
 列出当前工作目录下所有名称是s开头的文件，越新的排越后面
+
 ```
 ls -ltr s*
 ```
+
 将/bin目录以下所有目录及文件详细资料列出
+
 ```
 ls -lR /bin
 ```
+
 列出当前工作目录下所有文件及目录，目录于名称后加"/", 可执行档于名称后加"*"
+
 ```
 ls -AF
 ```
@@ -601,9 +692,11 @@ List open files
 ### 功能
 列出当前系统打开文件的工具
 ### 语法
+
 ```
 lsof  [-?abChKlnNOPRtUvVX] [-A A] [-c c] [+c c] [+|-d d] [+|-D D] [+|-e s] [+|-E] [+|-f [cfgGn]] [-F [f]] [-g [s]] [-i [i]] [-k k] [+|-L [l]] [+|-m m] [+|-M] [-o [o]] [-p s] [+|-r [t[m<fmt>]]] [-s [p:s]] [-S [t]] [-T [t]] [-u u] [+|-w] [-x [fl]] [-z [z]] [-Z [Z]] [--] [names]
 ```
+
 ### 选项参数
 - **-?**：同-h，在遇到错误时显示简短的帮助信息
 - **-a**：
@@ -657,9 +750,11 @@ Make directories
 ### 功能
 创建一个子目录
 ### 语法
+
 ```
 mkdir [-pv] [-m MODE] dir...
 ```
+
 ### 选项参数
 - **-p**：确保目录名称存在，不存在就建一个
 - **-v**：列出创建目录的详细说明
@@ -668,10 +763,13 @@ mkdir [-pv] [-m MODE] dir...
 
 ### 示例
 在当前目录下创建名为test的子目录
+
 ```
 mkdir test
 ```
+
 在当前目录下的test1目录中创建一个名为test2的目录，如果test1目录原本不存在，则创建一个
+
 ```
 mkdir -p test1/test2
 ```
@@ -682,11 +780,13 @@ Mount file systems
 ### 功能
 挂载系统外的文件
 ### 语法
+
 ```
 mount [-adfruvw] [-t lfs|external_type]
 mount [-dfruvw] special | mount_point
 mount [-dfruvw] [-o options] [-t lfs|external_type] special mount_point
 ```
+
 ### 选项参数
 - **-a**：将/etc/fstab中定义的所有档案系统挂上
 - **-d**：
@@ -723,10 +823,12 @@ Move or rename files or directories
 ### 功能
 为文件或目录改名、或将文件或目录移入其它位置
 ### 语法
+
 ```
 mv [-f|-i|-n] [-v] source target
 mv [-f|-i|-n] [-v] source ... directory
 ```
+
 ### 选项参数
 - **-f**：[--force]若目标文件已存在，不询问直接覆盖
 - **-i**：[--interactive]若目标文件已存在，覆盖之前先询问
@@ -738,10 +840,13 @@ mv [-f|-i|-n] [-v] source ... directory
 
 ### 示例
 将文件test1更名为test2
+
 ```
 mv test1 test2
 ```
+
 将test1目录放入test2目录中
+
 ```
 mv test1 test2
 ```
@@ -752,15 +857,18 @@ Return working directory name
 ### 功能
 显示路径
 ### 语法
+
 ```
 pwd [-L|-P]
 ```
+
 ### 选项参数
 - **-L**：如果环境变量包含了不包含文件名“.”或“..”的当前目录的绝对路径名，则显示环境变量的值。否则，-L与-P一样运行
 - **-P**：显示当前目录的绝对路径名
 
 ### 示例
 查看当前所在目录
+
 ```
 pwd
 ```
@@ -771,9 +879,11 @@ Remove directory entries
 ### 功能
 删除一个文件或者目录（删除目录则必须配合-R/-r选项）
 ### 语法
+
 ```
 rm [-dfiPRrvW] file ...
 ```
+
 ### 选项参数
 - **-d**：尝试删除目录以及其他类型的文件
 - **-f**：[--force]强制删除文件或目录
@@ -786,6 +896,7 @@ rm [-dfiPRrvW] file ...
 
 ### 示例
 删除test.txt文件
+
 ```
 rm test.txt
 ```
@@ -796,15 +907,18 @@ Remove directories
 ### 功能
 删除空的目录
 ### 语法
+
 ```
 rmdir [-p] dir
 ```
+
 ### 选项参数
 - **-p**：是当子目录被删除后使它也成为空目录的话，则顺便一并删除
 - **dir**：要删除的子目录名称
 
 ### 示例
 将test目录下，名为test1的子目录删除（若删除test1后test目录变为空目录，则test也一起删除）
+
 ```
 rmdir -p test/test1
 ```
@@ -815,9 +929,11 @@ Split a file into pieces
 ### 功能
 将一个文件分割成数个
 ### 语法
+
 ```
 split [-a SUFFIX_LENGTH] [-b BYTE_COUNT[k|m]] [-l LINE_COUNT] [-p PATTERN] [file [name]]
 ```
+
 ### 选项参数
 - **-a**：限制文件后缀的字母个数为SUFFIX_LENGTH
 - **-b**：指定每BYTE_COUNT个字节切成一个小文件，如果指定k或m，则分割单位变为KB和MB
@@ -828,6 +944,7 @@ split [-a SUFFIX_LENGTH] [-b BYTE_COUNT[k|m]] [-l LINE_COUNT] [-p PATTERN] [file
 
 ### 示例
 文件test.txt每6行切割成一个文件
+
 ```
 split test.txt
 ```
@@ -838,9 +955,11 @@ Change file access and modification times
 ### 功能
 修改文件或者目录的时间属性，包括存取时间、修改时间等（若文件不存在，会建立一个新的文件）
 ### 语法
+
 ```
 touch [-A [-][[hh]mm]SS] [-acfhm] [-r REF_FILE] [-t [CC]YY]MMDDhhmm[.SS]] file...
 ```
+
 ### 选项参数
 - **-A**：按指定值修改文件的时间属性
 	- **-**：使调整变为负值：在原时间值上减去指定的时间
@@ -863,6 +982,7 @@ touch [-A [-][[hh]mm]SS] [-acfhm] [-r REF_FILE] [-t [CC]YY]MMDDhhmm[.SS]] file..
 
 ### 示例
 修改文件test.txt的时间属性为当前系统时间（如果文件不存在，则会创建一个空白的test.txt文件）
+
 ```
 touch test.txt
 ```
@@ -873,9 +993,11 @@ Users file creation mask
 ### 功能
 设置限制新建文件权限的掩码
 ### 语法
+
 ```
 umask [-p] [-S] [mode]
 ```
+
 ### 选项参数
 - **-p**：输出的权限掩码可直接作为指令来执行
 - **-S**：以字符的形式来打印当前权限掩码
@@ -883,181 +1005,14 @@ umask [-p] [-S] [mode]
 
 ### 示例
 当前权限掩码
+
 ```
 umask
 ```
 
 # <a id="2">程序进程<a>
 
-## <a id="at">at</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="bg">bg</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="chroot">chroot</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="cron">cron</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="exit">exit</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="fg">fg</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="jobs">jobs</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="kill">kill</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="killall">killall</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="nice">nice</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="pgrep">pgrep</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="pidof">pidof</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="ps">ps</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="pstree">pstree</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="sleep">sleep</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="time">time</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="top">top</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="wait">wait</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
 # <a id="3">系统环境<a>
-
-## <a id="env">env</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="finger">finger</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="id">id</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="logname">logname</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="mesg">mesg</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="passwd">passwd</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
 
 ## <a id="su">su</a>
 ### 描述
@@ -1065,9 +1020,11 @@ Substitute user identity
 ### 功能
 变更为其他使用者的身份，除root外，需要键入该使用者的密码
 ### 语法
+
 ```
 su [-lm] [user [args]]
 ```
+
 ### 选项参数
 - **-l**：同-，重新以用户user身份登录，大部份环境变量（HOME、SHELL、PATH、TERM、USER等等）都是以该使用者user为主，并且工作目录也会改变，如果没有指定user，内定是root
 - **-m**：改变身份时，不改变环境变量
@@ -1075,10 +1032,13 @@ su [-lm] [user [args]]
 - **args**：传入新的shell参数
 ### 示例
 变更帐号为root并传入-f参数给新执行的shell
+
 ```
 su root -f
 ```
+
 变更帐号为TestUser并改变工作目录至TestUser的HOME目录
+
 ```
 su - TestUser
 ```
@@ -1089,6 +1049,7 @@ Execute a command as another user
 ### 功能
 以其他身份来执行命令，预设的身份为root
 ### 语法
+
 ```
 sudo -h|-K|-k|-V
 sudo -v [-AknS] [-g group] [-h host] [-p prompt] [-u user]
@@ -1096,85 +1057,64 @@ sudo -l [-AknS] [-g group] [-h host] [-p prompt] [-U user] [-u user] [command]
 sudo [-AbEHnPS] [-C num] [-g group] [-h host] [-p prompt] [-u user] [VAR=value] [-i|-s] [command]
 sudoedit [-AknS] [-C num] [-g group] [-h host] [-p prompt] [-u user] file ...
 ```
+
 ### 选项参数
+- **-A**：
+- **-a type**：
+- **-b**：在后台执行指令
+- **-C num**：
+- **-c class**：
+- **-E**：
+- **-e**：
+- **-g group**：
+- **-H**：将环境变数中的HOME目录指定为要变更身份的使用者HOME目录（如不加-u参数就是系统管理者root）
+- **-h**：显示版本信息及命令说明
+- **-h host**：
+- **-i**：
+- **-K**：
+- **-k**：将会强迫使用者在下一次执行sudo时问密码（不论有没有超过N分钟）
+- **-l**：显示执行sudo的使用者的权限
+- **-n**：
+- **-P**：
+- **-p prompt**：可以更改问密码的提示语，其中%u会代换为使用者的帐号名称，%h会显示主机名称
+- **-r role**：
+- **-S**：
+- **-s**：执行环境变数中的SHELL所指定的shell，或是/etc/passwd里所指定的shell
+- **-t type**：
+- **-U user**：
+- **-u user**：不加此参数，代表要以root的身份执行命令，而加了此参数，可以以user的身份执行命令
+- **-V**：显示版本信息
+- **-v**：延长密码有效期限5分钟。因为sudo在第一次执行时或是在N分钟内没有执行（N预设为5）会问密码
+- **command**：要执行的命令
+- **file**：要执行的脚本文件
 
 ### 示例
+指定用户执行命令
 
-## <a id="uptime">uptime</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
+```
+sudo -u TestUser ls -l
+```
 
-## <a id="w">w</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
+以root用户身份进行编辑文本
 
-## <a id="wall">wall</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="who">who</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="whoami">whoami</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="write">write</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
+```
+sudo vi test.html
+```
 
 # <a id="4">文档编辑<a>
-
-## <a id="awk">awk</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="comm">comm</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="cut">cut</a>
-### 描述
-### 语法
-### 选项参数
-### 示例
 
 ## <a id="ed">ed</a>
 ### 描述
 Text editor
 ### 功能
 文本编辑（一次仅能编辑一行而非全屏幕）
-**PS：ed命令是通过将文本内容拷贝到buffer进行编辑的，使用起来不是很方便，推荐使用vi进行文本编辑**
 
 ### 语法
+
 ```
 ed [-s|-] [-p string] [file]
 ```
+
 ### 选项参数
 - **-s**：不执行开启文件时的检查功能
 - **-p**：指定ed在命令模式的提示字符为string
@@ -1214,6 +1154,7 @@ ed [-s|-] [-p string] [file]
 - **(1,$)W file**：将缓冲区中指定范围（默认是全部行）的内容追加到指定的文件名file（没有则使用默认文件名）的后面
 
 ### 示例
+
 ```
 //进入ed编辑器（默认进入命令模式）
 $ ed
@@ -1244,392 +1185,92 @@ q
 $
 ```
 
-## <a id="ex">ex</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="fmt">fmt</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="head">head</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="iconv">iconv</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="join">join</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="less">less</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="more">more</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="paste">paste</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="sed">sed</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="sort">sort</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="strings">strings</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="talk">talk</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="tac">tac</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="tail">tail</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="tr">tr</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="uniq">uniq</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
 ## <a id="vi">vi</a>
 ### 描述
-
+Vi IMproved, a programmers text editor
 ### 功能
+全屏幕纯文本编辑器
 ### 语法
 
 ```
-vim [options] [file ..]
-vim [options] -
-vim [options] -t tag
-vim [options] -q [errorfile]
-       ```
-### 选项参数
-### 示例
+vim [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [file ...]
+vim [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] -
+vim [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [-t tag]
+vim [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [-q errorfile]
+```
 
-## <a id="wc">wc</a>
-### 描述
-### 功能
-### 语法
 ### 选项参数
-### 示例
+- **+ [num]**：光标定位于第一个文件的第num行，如果未指定num，则定位到最后一行
+- **/patterns**：
+- **-A**：
+- **-b**：以二进制模式打开文件，用于编辑二进制文件和可执行文件
+- **-C**：
+- **-d**：以diff模式打开文件，当多个文件编辑时，显示文件差异部分
+- **-D**：
+- **-e**：
+- **-E**：
+- **-f**：
+- **-F**：
+- **-g**：
+- **-h**：
+- **-H**：
+- **-L**：
+- **-l**：使用lisp模式，打开“lisp”和“showmatch”
+- **-m**：取消写文件功能，重设“write”选项
+- **-M**：关闭修改功能
+- **-N**：
+- **-n**：
+- **-R**：以只读方式打开文件
+- **-s**：安静模式，不显示指令的任何错误信息
+- **-v**：
+- **-x**：
+- **-X**：
+- **-y**：
+- **-Z**：
+- **-c command**：在完成对第一个文件编辑任务后，执行command命令
+- **-d device**：
+- **-i viminfo**：
+- **-r file**：
+- **-s scriptin**：
+- **-T terminal**：
+- **-u vimrc**：
+- **-U gvimrc**：
+- **-w|W scriptout**：
+- **file**：要编辑的文件列表，第一个文件会被加载到缓冲区，光标将位于缓冲区的第一行上，可以使用“:next”命令跳转到其他文件
+- **-**：要编辑的文件是从标准输入读取
+- **-t tag**：要编辑的文件和初始光标位置取决于标签tag。这主要用于C程序，在这种情况下，tag可以是函数名。其效果是，包含该函数的文件成为当前文件，光标位于函数的开始位置
+- **-q errorfile**：快速修复模式。读取错误文件并显示错误
 
-## <a id="xargs">xargs</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
+### 使用说明
+vi编辑器支持编辑模式和命令模式，编辑模式下可以完成文本的编辑功能，命令模式下可以完成对文件的操作命令
+#### 工作方式
+##### 命令方式
+默认情况下在Shell提示符后输入命令vi，进入vi编辑器，并处于vi的命令方式。此时，从键盘上输入的任何字符都被作为编辑命令来解释。如果输入的字符不是vi的合法命令，则机器发出报警声，光标不移动。另外，在命令方式下输入的字符（即vi命令）并不在屏幕上显示出来
+##### 输入方式
+通过输入vi的插入命令i、附加命令a、打开命令o、替换命令s、修改命令c或取代命令r可以从命令方式进入输入方式。在输入方式下，从键盘上输入的所有字符都被插入到正在编辑的缓冲区中，被当做该文件的正文。进入输入方式后，输入的可见字符都在屏幕上显示出来，而编辑命令不再起作用，仅作为普通字母出现。  
+由输入方式回到命令方式的办法是按下Esc键。如果已在命令方式下，那么按下Esc键就会发出嘟嘟声。为了确保用户想执行的vi命令是在命令方式下输入的，不妨多按几下Esc键，听到嘟声后再输入命令。  
+##### ex转义方式
+vi和ex编辑器的功能是相同的，二者的主要区别是用户界面。在vi中，命令通常是单个字母，如a、x、r等。而在ex中，命令是以Enter键结束的命令行。vi有一个专门的转义命令，可访问很多面向行的ex命令。为使用ex转义方式，可输入一个冒号:。作为ex命令提示符，冒号出现在状态行（通常在屏幕最下一行）。按下中断键（通常是Del键），可终止正在执行的命令。多数文件管理命令都是在ex转义方式下执行的（例如，读取文件，把编辑缓冲区的内容写到文件中等）。转义命令执行后，自动回到命令方式。
+
+![	vi编辑器工作方式之间的转换](http://githubblog-1252104787.cosgz.myqcloud.com/vi%E7%BC%96%E8%BE%91%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2.jpg)
+
+#### 内置命令
+![vi键盘图](http://githubblog-1252104787.cosgz.myqcloud.com/vi%E9%94%AE%E7%9B%98%E5%9B%BE.gif)
+
 ### 示例
+编辑文件test.txt
+
+```
+vi test.txt
+```
 
 # <a id="5">Shell脚本<a>
 
-## <a id="alias">alias</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="basename">basename</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="dirname">dirname</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="echo">echo</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="expr">expr</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="false">false</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="printf">printf</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="text">text</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="true">true</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="unset">unset</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
 # <a id="6">网络通讯<a>
-
-## <a id="inetd">inetd</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="netstat">netstat</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="ping">ping</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="rlogin">rlogin</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="netcat">netcat</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="traceroute">traceroute</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
 
 # <a id="7">搜索查找<a>
 
-## <a id="find">find</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="grep">grep</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="locate">locate</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="whereis">whereis</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="which">which</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
 # <a id="8">其他<a>
-
-## <a id="apropos">apropos</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="banner">banner</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="bc">bc</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="cal">cal</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="clear">clear</a>
-### 描述
-Clear the terminal screen
-### 功能
-清除屏幕
-### 语法
-```
-clear
-```
-### 选项参数
-无
-### 示例
-无
-
-## <a id="date">date</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="dd">dd</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="file">file</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="help">help</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="info">info</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="size">size</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="lp">lp</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
 
 ## <a id="man">man</a>
 ### 描述
@@ -1637,9 +1278,11 @@ Format and display the on-line manual pages
 ### 功能
 查看命令、配置文件和编程等帮助信息
 ### 语法
+
 ```
 man [-acdfFhkKtwW] [-m system] [-p string] [-C config_file] [-M pathlist] [-P pager] [-B browser] [-H htmlpager] [-S section_list] [section] name ...
 ```
+
 ### 选项参数
 - **-a**：强制显示匹配name的所有帮助页面，而不仅仅是第一个（默认情况下，在显示第一个帮助页面后将退出）
 - **-c**：当更新页面存在时重新格式化帮助页面
@@ -1665,58 +1308,10 @@ man [-acdfFhkKtwW] [-m system] [-p string] [-C config_file] [-M pathlist] [-P pa
 
 ### 示例
 显示cd命令的帮助手册
+
 ```
 man cd
 ```
-
-## <a id="history">history</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="tee">tee</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="tput">tput</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="type">type</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="yes">yes</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="uname">uname</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
-
-## <a id="whatis">whatis</a>
-### 描述
-### 功能
-### 语法
-### 选项参数
-### 示例
 
 **PS：持续更新中……**
 
