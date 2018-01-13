@@ -2,33 +2,28 @@
 title: 常用Shell命令
 date: 2017-11-30 10:59:23
 author: 曾华经
-tags:
-	- 操作系统
-	- Shell
+tags: Shell
 categories:
 	- 编程基础
 	- 开发工具
-thumbnail: /img/thumbnail/4.jpg
+thumbnail: /img/thumbnail/2.jpg
 blogexcerpt: 
 ---
-
 &emsp;&emsp;本人当前开发基本都是用苹果电脑（Mac），开发过程中难免要与命令行工具（Command Line Tools）打交道，因此掌握一些基本的Shell命令是必须的。
-
 &emsp;&emsp;不同的Shell具备不同的功能，流行的Shell有：bash、csh、ksh、sh、tcsh、zsh等。可以进入/bin目录查看，以sh结尾的可执行文件即Shell脚本解析程序。本人Mac系统默认使用/bin/bash，bash也是目前大多数Linux系统默认使用的Shell，因此以下命令及参数均以bash为准。
-
 <!--more-->
 
 # 汇总表
 | 分类 | 命令 |
 | --- | --- |
 | <div style="text-align:center;"><a href="#1">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
-| <div style="text-align:center;"><a href="#2">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;<a href="#exit">exit</a>&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
-| <div style="text-align:center;"><a href="#3">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;<a href="#who">who</a>&emsp;<a href="#whoami">whoami</a>&emsp;<a href="#write">write</a> |
-| <div style="text-align:center;"><a href="#4">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;<a href="#cut">cut</a>&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;<a href="#paste">paste</a>&emsp;<a href="#sed">sed</a>&emsp;<a href="#sort">sort</a>&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;<a href="#tr">tr</a>&emsp;<a href="#uniq">uniq</a>&emsp;**<a href="#vi">vi</a>**&emsp;<a href="#wc">wc</a>&emsp;<a href="#xargs">xargs</a> |
-| <div style="text-align:center;"><a href="#5">Shell脚本</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;<a href="#echo">echo</a>&emsp;<a href="#expr">expr</a>&emsp;<a href="#false">false</a>&emsp;<a href="#printf">printf</a>&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
-| <div style="text-align:center;"><a href="#6">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;<a href="#ping">ping</a>&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
-| <div style="text-align:center;"><a href="#7">搜索查找</a></div> | <a href="#find">find</a>&emsp;<a href="#grep">grep</a>&emsp;<a href="#locate">locate</a>&emsp;<a href="#whereis">whereis</a>&emsp;<a href="#which">which</a> |
-| <div style="text-align:center;"><a href="#8">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;<a href="#bc">bc</a>&emsp;<a href="#cal">cal</a>&emsp;<a href="#clear">clear</a>&emsp;<a href="#date">date</a>&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;<a href="#uname">uname</a>&emsp;<a href="#whatis">whatis</a> |
+| <div style="text-align:center;"><a href="#2">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
+| <div style="text-align:center;"><a href="#3">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
+| <div style="text-align:center;"><a href="#4">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
+| <div style="text-align:center;"><a href="#5">Shell脚本</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;<a href="#expr">expr</a>&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
+| <div style="text-align:center;"><a href="#6">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
+| <div style="text-align:center;"><a href="#7">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
+| <div style="text-align:center;"><a href="#8">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;<a href="#bc">bc</a>&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
 
 # <a id="1">文件管理</a>
 
@@ -77,31 +72,31 @@ cat [-benstuv] file... > out_file
 把test.txt的文档内容加上行号后输出到当前命令行工具窗口
 
 ```
-cat -n test.txt
+$ cat -n test.txt
 ```
 
 把test1.txt和test2.txt的文档内容加上行号（空白行不加）之后将内容附加到test3.txt文档里
 
 ```
-cat -b test1.txt test2.txt >> test3.txt
+$ cat -b test1.txt test2.txt >> test3.txt
 ```
 
 清空/etc/test.txt文档内容
 
 ```
-cat /dev/null > /etc/test.txt
+$ cat /dev/null > /etc/test.txt
 ```
 
 从软盘fd0制作镜像文件test.dmg
 
 ```
-cat /dev/fd0 > test.dmg
+$ cat /dev/fd0 > test.dmg
 ```
 
 把镜像文件test.dmg写到软盘fd0
 
 ```
-cat test.dmg > /dev/fd0
+$ cat test.dmg > /dev/fd0
 ```
 
 ## <a id="cd">cd</a>
@@ -128,19 +123,19 @@ cd [-L|-P] [dir]
 跳到/usr/bin目录
 
 ```
-cd /usr/bin
+$ cd /usr/bin
 ```
 
 跳到自己的Home目录
 
 ```
-cd ~
+$ cd ~
 ```
 
 跳到当前目录的上两层
 
 ```
-cd ../..
+$ cd ../..
 ```
 
 ## <a id="chgrp">chgrp</a>
@@ -169,7 +164,7 @@ chgrp [-fhv] [-R [-H|-L|-P]] group file...
 改变文件test.txt的群组属性为TestGroup
 
 ```
-chgrp -v TestGroup test.txt
+$ chgrp -v TestGroup test.txt
 ```
 
 ## <a id="chmod">chmod</a>
@@ -229,33 +224,33 @@ mode2：[????]
 将文件test.txt设为所有人皆可读取
 
 ```
-chmod ugo+r test.txt
-chmod a+r test.txt
+$ chmod ugo+r test.txt
+$ chmod a+r test.txt
 ```
 
 将文件test1.txt与test2.txt设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入
 
 ```
-chmod ug+w,o-w test1.txt test2.txt
+$ chmod ug+w,o-w test1.txt test2.txt
 ```
 
 将test.out设定为只有该文件拥有者可以执行
 
 ```
-chmod u+x test.out
+$ chmod u+x test.out
 ```
 
 将目前目录下的所有文件与子目录皆设为任何人可读取
 
 ```
-chmod -R a+r *
+$ chmod -R a+r *
 ```
 
 将文件test.out设为该文件拥有者，与其所属同一个群体者可读写执行，但其他以外的人则不可仅可读取不可写入和执行
 
 ```
-chmod ug=rwx,o=r test.out
-chmod 774 test.out
+$ chmod ug=rwx,o=r test.out
+$ chmod 774 test.out
 ```
 
 ## <a id="chown">chown</a>
@@ -286,13 +281,13 @@ chown [-fhv] [-R [-H|-L|-P]] :group file...
 将文件test.txt的群组设为群组TestGroup
 
 ```
-chown :TestGroup test.txt
+$ chown :TestGroup test.txt
 ```
 
 将当前目录下的所有文件与子目录的所有者和群组皆设为用户TestUser和群组TestGroup
 
 ```
-chown -R TestUser:TestGroup *
+$ chown -R TestUser:TestGroup *
 ```
 
 ## <a id="cksum">cksum</a>
@@ -320,8 +315,8 @@ sum file...
 计算文件test.txt的完整性
 
 ```
-cksum test.txt
-//3311261222 35 test.txt
+$ cksum test.txt
+3311261222 35 test.txt
 ```
 
 ## <a id="cmp">cmp</a>
@@ -350,15 +345,14 @@ cmp [-bclv] [-n LIMIT] [-i SKIP1[:SLIP2]] file1 file2
 比较test1.txt和test2.txt。如果文件相同，则不显示消息。如果文件不同，则显示第一个不同的位置
 
 ```
-cmp test1.txt test2.txt
-//test1.txt test2.txt differ: char 1, line 1
+$ cmp test1.txt test2.txt
+test1.txt test2.txt differ: char 1, line 1
 ```
 
 从第7个字符位置开始比较test1.txt和test2.txt。显示所有不同的位置及对应的字符
 
 ```
-cmp -cl -i 6 test1.txt test2.txt
-/*
+$ cmp -cl -i 6 test1.txt test2.txt
  1 107 G    147 g
 14 117 O    157 o
 15 120 P    160 p
@@ -366,7 +360,6 @@ cmp -cl -i 6 test1.txt test2.txt
 26 130 X    170 x
 27 131 Y    171 y
 28 132 Z    172 z
-*/
 ```
 
 ## <a id="cp">cp</a>
@@ -402,7 +395,7 @@ cp [-R [-H|-L|-P]] [-fi|-n] [-apvX] source ... directory
 将当前目录test1下的所有文件复制到新目录test2下
 
 ```
-cp -r test1 test2
+$ cp -r test1 test2
 ```
 
 ## <a id="du">du</a>
@@ -436,19 +429,19 @@ du [-H|-L|-P] [-a|-s|-d DEPTH] [-c] [-h|-k|-m|-g] [-x] [-I MASK] file...
 显示目录或者文件所占空间
 
 ```
-du
+$ du
 ```
 
 显示指定文件所占空间
 
 ```
-du test.txt
+$ du test.txt
 ```
 
 方便阅读的格式显示test目录所占空间情况
 
 ```
-du -h test
+$ du -h test
 ```
 
 ## <a id="df">df</a>
@@ -481,31 +474,31 @@ df [-b|-h|-H|-k|-m|-g|-P] [-ailn] [-T TYPE] [file|fileSystem] ...
 显示文件系统的磁盘使用情况统计
 
 ```
-df
+$ df
 ```
 
 显示磁盘使用的文件系统信息
 
 ```
-df test
+$ df test
 ```
 
 输出显示inode信息而非块使用量
 
 ```
-df -i
+$ df -i
 ```
 
 显示所有的信息
 
 ```
-df -a
+$ df -a
 ```
 
 产生可读的格式df命令的输出
 
 ```
-df -h
+$ df -h
 ```
 
 ## <a id="fsck">fsck</a>
@@ -557,12 +550,10 @@ fuser [-cfu] file ...
 显示正在使用文件test、test1、test2的进程ID及该进程的登录用户
 
 ```
-fuser -u test
-/*
+$ fuser -u test
 test: 593(Kevin)
 test1: 
 test2:
-*/
 ```
 
 ## <a id="ln">ln</a>
@@ -601,13 +592,13 @@ ln [-Ffhinsv] source_file target_dir
 为test.txt文件创建软链接test，如果test.txt丢失，test将失效
 
 ```
-ln -s test.txt test
+$ ln -s test.txt test
 ```
 
 为test.txt文件创建硬链接test，test.txt与test的各项属性相同
 
 ```
-ln test.txt test
+$ ln test.txt test
 ```
 
 
@@ -665,84 +656,26 @@ ls [-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1] [file...]
 列出根目录下的所有目录
 
 ```
-ls /
+$ ls /
 ```
 
 列出当前工作目录下所有名称是s开头的文件，越新的排越后面
 
 ```
-ls -ltr s*
+$ ls -ltr s*
 ```
 
 将/bin目录以下所有目录及文件详细资料列出
 
 ```
-ls -lR /bin
+$ ls -lR /bin
 ```
 
 列出当前工作目录下所有文件及目录，目录于名称后加"/", 可执行档于名称后加"*"
 
 ```
-ls -AF
+$ ls -AF
 ```
-
-## <a id="lsof">lsof</a>
-### 描述
-List open files
-### 功能
-列出当前系统打开文件的工具
-### 语法
-
-```
-lsof  [-?abChKlnNOPRtUvVX] [-A A] [-c c] [+c c] [+|-d d] [+|-D D] [+|-e s] [+|-E] [+|-f [cfgGn]] [-F [f]] [-g [s]] [-i [i]] [-k k] [+|-L [l]] [+|-m m] [+|-M] [-o [o]] [-p s] [+|-r [t[m<fmt>]]] [-s [p:s]] [-S [t]] [-T [t]] [-u u] [+|-w] [-x [fl]] [-z [z]] [-Z [Z]] [--] [names]
-```
-
-### 选项参数
-- **-?**：同-h，在遇到错误时显示简短的帮助信息
-- **-a**：
-- **-b**：
-- **-C**：
-- **-h**：同-?
-- **-K**：
-- **-l**：
-- **-n**：
-- **-N**：
-- **-O**：
-- **-P**：
-- **-R**：
-- **-t**：
-- **-U**：
-- **-v**：
-- **-V**：
-- **-X**：
-- **-A**：
-- **-c**：
-- **+|-d**：
-- **+|-D**：
-- **+|-e**：
-- **+|-f**：
-- **-F**：
-- **-g**：
-- **-i**：
-- **-k**：
-- **+|-L**：
-- **+|-m**：
-- **+|-M**：
-- **-o**：
-- **-p**：
-- **+|-r**：
-- **-s**：
-- **-S**：
-- **-T**：
-- **-u**：
-- **+|-w**：
-- **-x**：
-- **-z**：
-- **-Z**：
-- **--**：
-- **names**：指定文件
-
-### 示例
 
 ## <a id="mkdir">mkdir</a>
 ### 描述
@@ -765,57 +698,14 @@ mkdir [-pv] [-m MODE] dir...
 在当前目录下创建名为test的子目录
 
 ```
-mkdir test
+$ mkdir test
 ```
 
 在当前目录下的test1目录中创建一个名为test2的目录，如果test1目录原本不存在，则创建一个
 
 ```
-mkdir -p test1/test2
+$ mkdir -p test1/test2
 ```
-
-## <a id="mount">mount</a>
-### 描述
-Mount file systems
-### 功能
-挂载系统外的文件
-### 语法
-
-```
-mount [-adfruvw] [-t lfs|external_type]
-mount [-dfruvw] special | mount_point
-mount [-dfruvw] [-o options] [-t lfs|external_type] special mount_point
-```
-
-### 选项参数
-- **-a**：将/etc/fstab中定义的所有档案系统挂上
-- **-d**：
-- **-f**：在试图将文件系统挂载状态从读写降级为只读时强制撤销写访问
-- **-r**：将文件系统加载为只读模式
-- **-u**：
-- **-v**：输出指令执行的详细信息
-- **-w**：将文件系统加载为可读写模式
-- **-t**：
-- **-o**：
-	- **async**：
-	- **force**：
-	- **noasync**：
-	- **noauto**：
-	- **nodev**：
-	- **noexec**：
-	- **noowners**：
-	- **nosuid**：
-	- **rdonly**：
-	- **sync**：
-	- **update**：
-	- **union**：
-	- **noatime**：
-	- **nobrowse**：
-- **special**：
-- **mount_point**：
-
-### 示例
-
 
 ## <a id="mv">mv</a>
 ### 描述
@@ -842,13 +732,13 @@ mv [-f|-i|-n] [-v] source ... directory
 将文件test1更名为test2
 
 ```
-mv test1 test2
+$ mv test1 test2
 ```
 
 将test1目录放入test2目录中
 
 ```
-mv test1 test2
+$ mv test1 test2
 ```
 
 ## <a id="pwd">pwd</a>
@@ -870,7 +760,7 @@ pwd [-L|-P]
 查看当前所在目录
 
 ```
-pwd
+$ pwd
 ```
 
 ## <a id="rm">rm</a>
@@ -898,7 +788,7 @@ rm [-dfiPRrvW] file ...
 删除test.txt文件
 
 ```
-rm test.txt
+$ rm test.txt
 ```
 
 ## <a id="rmdir">rmdir</a>
@@ -920,7 +810,7 @@ rmdir [-p] dir
 将test目录下，名为test1的子目录删除（若删除test1后test目录变为空目录，则test也一起删除）
 
 ```
-rmdir -p test/test1
+$ rmdir -p test/test1
 ```
 
 ## <a id="split">split</a>
@@ -946,7 +836,7 @@ split [-a SUFFIX_LENGTH] [-b BYTE_COUNT[k|m]] [-l LINE_COUNT] [-p PATTERN] [file
 文件test.txt每6行切割成一个文件
 
 ```
-split test.txt
+$ split test.txt
 ```
 
 ## <a id="touch">touch</a>
@@ -984,7 +874,7 @@ touch [-A [-][[hh]mm]SS] [-acfhm] [-r REF_FILE] [-t [CC]YY]MMDDhhmm[.SS]] file..
 修改文件test.txt的时间属性为当前系统时间（如果文件不存在，则会创建一个空白的test.txt文件）
 
 ```
-touch test.txt
+$ touch test.txt
 ```
 
 ## <a id="umask">umask</a>
@@ -1007,12 +897,32 @@ umask [-p] [-S] [mode]
 当前权限掩码
 
 ```
-umask
+$ umask
 ```
 
-# <a id="2">程序进程<a>
+# <a id="2">程序进程</a>
+## <a id="exit">exit</a>
+### 描述
+Exit the shell
+### 功能
+退出目前的shell
+### 语法
 
-# <a id="3">系统环境<a>
+```
+exit [n]
+```
+
+### 选项参数
+- **n**：以数值n为返回值（状态）退出shell。如果省略n，退出状态是执行的最后一个命令的状态
+
+### 示例
+退出终端
+
+```
+exit
+```
+
+# <a id="3">系统环境</a>
 
 ## <a id="su">su</a>
 ### 描述
@@ -1034,13 +944,13 @@ su [-lm] [user [args]]
 变更帐号为root并传入-f参数给新执行的shell
 
 ```
-su root -f
+$ su root -f
 ```
 
 变更帐号为TestUser并改变工作目录至TestUser的HOME目录
 
 ```
-su - TestUser
+$ su - TestUser
 ```
 
 ## <a id="sudo">sudo</a>
@@ -1092,16 +1002,72 @@ sudoedit [-AknS] [-C num] [-g group] [-h host] [-p prompt] [-u user] file ...
 指定用户执行命令
 
 ```
-sudo -u TestUser ls -l
+$ sudo -u TestUser ls -l
 ```
 
 以root用户身份进行编辑文本
 
 ```
-sudo vi test.html
+$ sudo vi test.html
 ```
 
-# <a id="4">文档编辑<a>
+## <a id="who">who</a>
+### 描述
+Display who is logged in
+### 功能
+显示目前登录系统的用户信息
+### 语法
+
+```
+who [-abdHmqrsTu] [file]
+```
+
+### 选项参数
+- **-a**：等价于-bdlprTtu
+- **-b**：上次系统启动时间
+- **-d**：打印死进程
+- **-H**：显示标题
+- **-m**：只打印当前终端的信息
+- **-q**：快速模式，只列出当前登录的用户的名称和数量。使用此选项时，所有其他选项都将被忽略
+- **-r**：打印当前的运行级别
+- **-s**：使用简短的格式来显示
+- **-T**：在用户名后打印字符：如果终端是可写的，则加上“+”；如果不可写，则加上“-”；如果遇到错误，则加上“？”
+- **-u**：打印每个用户的空闲时间，以及相关的进程ID
+- **file**：默认情况下，who命令从文件/var/run/utmpx提取信息，可以指定另一个文件
+
+### 示例
+显示当前登录系统的用户（显示标题栏）
+
+```
+$ who -H
+USER     LINE     WHEN         
+Kevin    console  Jan 10 07:29 
+Kevin    ttys035  Jan 10 10:31 
+Kevin    ttys036  Jan 10 10:45 
+```
+
+## <a id="whoami">whoami</a>
+### 描述
+Display effective user id
+### 功能
+显示当前用户名称
+### 语法
+
+```
+whoami
+```
+
+### 选项参数
+无
+### 示例
+显示用户名
+
+```
+$ whoami
+Kevin
+```
+
+# <a id="4">文档编辑</a>
 
 ## <a id="ed">ed</a>
 ### 描述
@@ -1185,6 +1151,57 @@ q
 $
 ```
 
+## <a id="sort">sort</a>
+### 描述
+Sort or merge records (lines) of text and binary files
+### 功能
+将文本文件进行排序，并将排序结果标准输出
+### 语法
+
+```
+sort [-bcCdfghiRMmnrsuVz] [-k field1[,field2]] [-S memsize] [-T dir] [-t char] [-o output] [file ...]
+```
+
+### 选项参数
+- **-b**：忽略每行前面开始出的空格字符
+- **-c**：检查单个输入文件是否已排序。如果文件没有排序，将生成相应的错误消息，并返回1，否则返回0
+- **-C**：同-c，不输出任何内容
+- **-d**：排序时，除了英文字母、数字及空格字符外，忽略其他的字符
+- **-f**：排序时，将小写字母视为大写字母
+- **-g**：按一般数值排序。与-n相反，此选项可处理一般浮点数，但性能会下降
+- **-h**：按数值排序，但使用人性化的单位后缀显示（k或K，以及M、G、T、P、E、Z、Y等）
+- **-i**：排序时，除了040至176之间的ASCII字符外，忽略其他的字符（忽略非打印字符）
+- **-R**：按随机顺序排序
+- **-M**：将前面3个字母依照月份的缩写进行排序
+- **-m**：将几个排序好的文件进行合并（输入文件被假定为已排序的）。如果没有排序，输出顺序是未定义的
+- **-n**：依照数值的大小排序
+- **-r**：以相反的顺序来排序
+- **-s**：稳定排序
+- **-u**：禁止所有具有与已处理过的key相等的行。如果使用-c或-C，排序检查没有重复键的行
+- **-V**：按版本号排序
+- **-z**：使用NUL作为记录分隔符。默认情况下，文件中的记录应该由换行符分隔。使用此选项时，空字符"\0"作为记录分隔符
+- **-k field1[,field2]**：定义一个受限制的排序关键字，起始位置field1，和结束位置field2(可选)
+- **-S memsize**：指定内容缓冲区的最大大小为memsize。可以使用单位有"%"，"B"，"K"，"M"，"G"，"T"，"P"，"E"，"Z"，"Y"。如果未指定大小，则默认使用内存的90%。如果文件太大，无法装入内存缓冲区，则使用临时磁盘文件执行排序
+- **-T dir**：在目录dir中存储临时文件。默认路径是环境变量TMPDIR或/var/tmp（当TMPDIR未定义时）
+- **-t char**：
+- **-o output**：将输出打印到输出文件output，而不是标准输出
+- **file**：
+
+### 示例
+以默认的方式对文件的行进行排序
+
+```
+$ cat test.txt
+test  
+Hello  
+Shell 
+$ sort test.txt
+$ cat test.txt
+Hello  
+Shell
+test
+```
+
 ## <a id="vi">vi</a>
 ### 描述
 Vi IMproved, a programmers text editor
@@ -1193,10 +1210,10 @@ Vi IMproved, a programmers text editor
 ### 语法
 
 ```
-vim [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [file ...]
-vim [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] -
-vim [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [-t tag]
-vim [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [-q errorfile]
+vi [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [file ...]
+vi [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] -
+vi [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [-t tag]
+vi [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [-q errorfile]
 ```
 
 ### 选项参数
@@ -1261,16 +1278,671 @@ vi和ex编辑器的功能是相同的，二者的主要区别是用户界面。�
 编辑文件test.txt
 
 ```
-vi test.txt
+$ vi test.txt
 ```
 
-# <a id="5">Shell脚本<a>
+## <a id="wc">wc</a>
+### 描述
+Word, line, character, and byte count
+### 功能
+计算字数
+### 语法
 
-# <a id="6">网络通讯<a>
+```
+wc [-clmw] [file ...]
+```
 
-# <a id="7">搜索查找<a>
+### 选项参数
+- **-c**：显示字节数，使用此选项时-m无效
+- **-l**：显示行数
+- **-m**：显示字数
+- **-w**：显示单词数
+- **file**：要计算字数的文件
 
-# <a id="8">其他<a>
+### 示例
+统计text文件的字数
+```
+$ cat test
+test
+文件
+$ wc test
+1       2      11 test
+```
+
+# <a id="5">Shell脚本</a>
+## <a id="echo">echo</a>
+### 描述
+Write arguments to the standard output
+### 功能
+在shell中输出指定的字符串（建议使用printf）
+### 语法
+
+```
+echo [-n] [string ...]
+```
+
+### 选项参数
+- **-n**：不打印换行字符
+- **string**：要输出的字符串
+
+### 示例
+echo命令打印文字“test”
+
+```
+echo "test"
+```
+
+## <a id="printf">printf</a>
+### 描述
+Formatted output
+### 功能
+格式化并输出结果到标准输出
+### 语法
+
+```
+printf format [arguments ...]
+```
+
+### 选项参数
+- **format**：指定数据输出时的格式
+- **arguments**：指定要输出的数据
+
+### 使用说明
+#### 格式替代符
+
+|替代符|说明|
+| :---: | --- |
+|%b|相对应的参数被视为含有要被处理的转义序列之字符串|
+|%c|ASCII字符。显示相对应参数的第一个字符|
+|%d, %i|十进制整数|
+|%e, %E|浮点数，以指数形式“-x.xxx+-xx”表示|
+|%f, %F|浮点数，以小数形式“-x.xxxxx”表示|
+|%g|%e或%f转换，看哪一个较短，则删除结尾的零|
+|%G|%E或%F转换，看哪一个较短，则删除结尾的零|
+|%o|不带正负号的八进制值|
+|%s|字符串|
+|%u|不带正负号的十进制值|
+|%x|不带正负号的十六进制值，使用a至f表示10至15|
+|%X|不带正负号的十六进制值，使用A至F表示10至15|
+|%%|字面意义的%|
+
+#### 转义序列
+
+|序列|说明|
+| :---: | --- |
+|\a|警告字符，通常为ASCII的BEL字符|
+|\b|后退|
+|\c|抑制（不显示）输出结果中任何结尾的换行字符（只在%b格式指示符控制下的参数字符串中有效），而且，任何留在参数里的字符、任何接下来的参数以及任何留在格式字符串中的字符，都被忽略|
+|\f|换页|
+|\n|换行|
+|\r|回车|
+|\t|水平制表符|
+|\v|垂直制表符|
+|\\\\\\|字面意义的\\|
+|\ddd|表示1到3位数八进制值的字符，仅在格式字符串中有效|
+|\0ddd|表示1到3位的八进制值字符|
+
+### 示例
+打印字符串
+
+```
+$ printf "String:<%s>\n" "A\nB"
+String:<A\nB>
+
+$ printf "String:<%b>\n" "A\nB"
+String:<A
+B>
+
+$ printf "String AB \a"
+String AB $
+```
+
+# <a id="6">网络通讯</a>
+## <a id="ping">ping</a>
+### 描述
+Send ICMP ECHO_REQUEST packets to network hosts
+### 功能
+测试主机之间网络的连通性（使用ICMP传输协议，发出要求回应的信息，若远端主机的网络功能没有问题，就会回应该信息，因而得知该主机运作正常）
+### 语法
+
+```
+ping [-AaCDdfnoQqRrv] [-b boundif] [-c count] [-G sweepmaxsize] [-g sweepminsize] [-h sweepincrsize] [-i wait] [-k trafficclass] [-K netservicetype] [-l preload] [-M mask|time] [-m ttl] [-P policy] [-p pattern] [-S src_addr] [-s packetsize] [-t timeout] [-W waittime] [-z tos] [--apple-connect] [--apple-time] host
+ping [-AaDdfLnoQqRrv] [-b boundif] [-c count] [-I iface] [-i wait] [-k trafficclass] [-K netservicetype] [-l preload] [-M mask|time] [-m ttl] [-P policy] [-p pattern] [-S src_addr] [-s packetsize] [-T ttl] [-t timeout] [-W waittime] [-z tos] [--apple-connect] [--apple-time] mcast-group
+```
+
+### 选项参数
+- **-A**：当没有接收到数据包且在下一个数据包传输之前输出一个bell字符（ASCII 0x07）。由于传输的往返时间可能大于两次传输的间隔时间，因此只有当未接收的数据包的最大值增加时才会在丢包时输出bell字符
+- **-a**：当接收到任意数据包时输出一个bell字符（ASCII 0x07），当指定其他选项时该选项被忽略
+- **-b boundif**：将套接字绑定到接口boundif发送。此选项是苹果添加的
+- **-C**：禁止套接字使用蜂窝网络接口。此选项是苹果添加的
+- **-c count**：当发送或接收到指定个数（count）的数据包时停止。若未指定，ping将一直工作到中断。如果该选项与ping扫描一起指定，每个扫描包含数量为count的包
+- **-D**：设置“不分片”（Don't Fragment）位
+- **-d**：使用Socket的SO_DEBUG功能
+- **-f**：极限检测。以最快的速度或每秒一百万次输出数据包。每发送一个ECHO_REQUEST以“.”间隔打印，每接收到一个ECHO_REPLY以空格间隔打印。此选项可快速显示数据包丢失数，但只有超级用户可以使用。这在网络上可能非常困难，应该谨慎使用
+- **-G sweepmaxsize**：指定发送ping扫描时的最大ICMP数据大小为sweepmaxsize。此选项是ping扫描所必需的
+- **-g sweepminsize**：指定开始发送ping扫描时的ICMP数据大小为sweepmaxsize。默认值是0
+- **-h sweepincrsize**：指定每次扫描后ICMP数据的增量大小为sweepmaxsize字节。默认值是1
+- **-I iface**：指定iface为多点传输的接口。此标志仅适用于ping目标是一个多站点地址时
+- **-i wait**：指定收发信息的间隔时间wait。默认是在每个数据包之间等待一秒钟。等待时间可能是小数点，但只有超级用户可以指定小于0.1秒的值。此选项与-f选项不兼容
+- **-k trafficclass**：指定用于发送ICMP数据包的传输类型。支持的类型有BK_SYS、BK、BE、RD、OAM、AV、RV、VI、VO和CTL等。默认情况下ping使用CTL。此选项是苹果添加的
+- **-K netservicetype**：指定用于发送ICMP数据包的网络服务类型。支持的类型有BK_SYS、BK、BE、RV、AV、RD、OAM、VI、SIG和VO等。注意，这覆盖了默认的传输类型（-k仍然可以在-K之后使用）。此选项是苹果添加的
+- **-L**：禁止多点传输回路。此标志仅适用于ping目标是一个多站点地址时
+- **-l preload**：如果指定了preload，ping在进入正常模式之前会可能快地发送许多包。只有超级用户可以使用此选项
+- **-M mask|time**：使用ICMP_MASKREQ或ICMP_TSTAMP代替ICMP_ECHO。指定mask时打印远程机器的子网掩码，设置net.inet.icmp.maskrepl MIB变量使ICMP_MASKREPLY生效。指定time时打印产生、接收和传输的时间戳
+- **-m ttl**：为传输包设置时间ttl（IP Time To Live）。如果没有指定，内核默认使用net.inet.ip.ttl MIB变量的值
+- **-n**：只输出数值。将不会尝试查找主机地址的符号名称
+- **-o**：接收一个响应包后成功退出
+- **-P policy**：为ping会话指定IPsec策略
+- **-p pattern**：设置填满数据包的范本样式
+- **-Q**：省略错误的输出。不要显示响应消息中的ICMP错误信息，默认情况下-v显示所有的错误信息
+- **-q**：简略输出。不显示指令执行过程，开头和结尾的相关信息除外
+- **-R**：记录路由过程。在ECHO_REQUEST中包含RECORD_ROUTE选项，并打印响应数据的路由缓存。注意，IP表头只允许存储9个路由表，traceroute命令能够用来确定把数据包带到特定目的地的最佳路由路径。如果有很多路由路径返回，如因非法伪造数据包，ping命令将打印路由表，然后将路由路径截断到最短。许多主机忽略或抛弃RECORD_ROUTE选项
+- **-r**：忽略普通的Routing Table，直接将数据包送到远端主机上。如果主机不在直接连接的网络上，则返回错误。此选项可用于通过没有路由的接口对本地主机进行ping
+- **-S src_addr**：
+- **-s packetsize**：设置数据包的大小
+- **-T ttl**：设置存活数值TTL的大小。此标志仅适用于ping目标是一个多站点地址时
+- **-t timeout**：指定timeout秒为超时时间
+- **-v**：详细显示指令的执行过程
+- **-W waittime**：设置等待响应的时间为waittime毫秒。如果响应延迟到达，则该数据包不会打印为已响应，而是在计算统计数据时被视为已响应
+- **-z tos**：使用指定的服务类型
+- **--apple-connect**：将套接字连接到目标地址。此选项是苹果添加的
+- **--apple-time**：打印接收到的包的时间。此选项是苹果添加的
+- **host**：指定主机名称或IP地址
+- **mcast-group**：指定主机群组名称或IP地址
+
+### 示例
+检测是否与主机连通，并指定多个参数
+
+```
+/*
+-c 3 接收包的次数3次
+-i 5 发送周期为5秒  
+-s 1024 设置发送包的大小为1024字节
+-t 255 设置TTL值为255秒
+*/*
+$ ping -c 3 -i 5 -s 1024 -t 255 192.168.1.1
+PING 192.168.1.1 (192.168.1.1): 1024 data bytes
+1032 bytes from 192.168.1.1: icmp_seq=0 ttl=255 time=1.779 ms
+1032 bytes from 192.168.1.1: icmp_seq=1 ttl=255 time=1.624 ms
+1032 bytes from 192.168.1.1: icmp_seq=2 ttl=255 time=1.544 ms
+
+--- 192.168.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 1.544/1.649/1.779/0.098 ms
+```
+
+
+# <a id="7">搜索查找</a>
+## <a id="find">find</a>
+### 描述
+Walk a file hierarchy
+### 功能
+在指定目录下查找文件
+### 语法
+
+```
+find [-H|-L|-P] [-EXdsx] [-f fpath] path ... [expression]
+find [-H|-L|-P] [-EXdsx] -f fpath [path ...] [expression]
+```
+
+### 选项参数
+- **-E**：解析紧随-regex和-iregex之后字符串作为附加的正则表达式，
+- **-H**：在命令行中指定的每个符号链接返回的文件信息和文件类型是链接引用的文件，而不是链接本身。如果引用文件不存在，则文件信息和类型将用于链接本身。命令行上所有符号链接的文件信息是链接本身的文件信息
+- **-L**：每个符号链接返回的文件信息和文件类型是链接引用的文件，而不是链接本身。如果引用文件不存在，则文件信息和类型将用于链接本身
+- **-P**：每个符号链接返回的文件信息和文件类型是链接本身。这是默认值
+- **-X**：执行安全查找。如果文件名包含任何xargs的限制字符，则会输出标准错误信息，文件被跳过。限制字符为单引号“'”、双引号“"”、反斜线“\”、空格“ ”、制表符“\t”、换行符“\n”等
+- **-d**：执行深度优先遍历，即先进入目录进行查找，再查找目录自身（默认情况下是先查找目录自身而不是目录中的内容）
+- **-f fpath**：指定查找遍历的文件层次结构。文件层次结构也可以指定为紧跟在选项后面的操作
+- **-s**：按字典顺序遍历文件的层次结构
+- **-x**：防止进入与初始文件所在设备编号不同的目录查找
+- **path**：查找文件的起始目录（在命令列上第一个“-( )”或“!()”之前的部份为path，之后的是 expression。如果path是空字串则使用目前路径，如果expression是空字串则使用-print为预设expression）
+- **expression**：操作表达式
+	- **-Bmin n**：在过去n分钟内被创建的文件
+	- **-Bnewer file**：等价于-newerBm
+	- **-Btime n[smhdw]**：在过去n个单位（默认单位d）内被创建的文件		- **s**：秒
+		- **m**：分钟（60秒）
+		- **h**：小时（60分钟）
+		- **d**：天（24小时）
+		- **w**：周（7天） 
+	- **-acl**：可使用扩展的ACLs属性配合其他方式查找文件
+	- **-amin n**：在过去n分钟内被读取过的文件
+	- **-anewer file**：比文件file更晚被读取过的文件
+	- **-atime n[smhdw]**：在过去n个单位（默认单位d）内被读取过的文件
+		- **s**：秒
+		- **m**：分钟（60秒）
+		- **h**：小时（60分钟）
+		- **d**：天（24小时）
+		- **w**：周（7天）
+	- **-cmin n**：在过去n分钟内变更过的文件
+	- **-cnewer file**：比文件file更晚变更过的文件
+	- **-ctime n[smhdw]**：在过去n个单位（默认单位d）内变更过的文件
+		- **s**：秒
+		- **m**：分钟（60秒）
+		- **h**：小时（60分钟）
+		- **d**：天（24小时）
+		- **w**：周（7天）
+	- **-d**：等价于depth
+	- **-delete**：删除已找到的文件或目录
+	- **-depth**：从指定目录下最深层的子目录开始查找
+	- **-depth n**：从指定目录下第n层的子目录范围内开始查找
+	- **-empty**：寻找文件大小为0 Byte的文件，或目录下没有任何子目录或文件的空目录
+	- **-exec utility [argument ...] ;**：当find的返回值为true时就以argument作为参数执行utility命令
+	- **-exec utility [argument ...] {} +**：同-exec，{}会被替换为find查找到的文件名
+	- **-execdir utility [argument ...] ;**：同-exec，不同的是-execdir是在查找到的文件的当前目录下执行utility命令
+	- **-execdir utility [argument ...] {} +**：同-execdir，{}会被替换为find查找到的文件名
+	- **-flags [-|+]flags,notflags**：标志位为flags的文件，notflags为无标注位的文件
+	- **-false**：find命令返回值设为false
+	- **-fstype type**：文件系统为type的文件。lsvfs命令可以用来找出系统上可用的文件系统类型。此外，还有两个伪类型“local”和“rdonly”。前者与实际安装在查找执行系统的任何文件系统相匹配，后者与挂载的只读文件系统匹配。
+	- **-gid n**：群组ID为n的文件
+	- **-group gname**：群组名为gname的文件
+	- **-ignore_readdir_race**：
+	- **-ilname pattern**：同-lname（忽略大小写）
+	- **-iname pattern**：同-name（忽略大小写）
+	- **-inum n**：inode为n的文件
+	- **-iregex pattern**：匹配正则表达式pattern的文件（忽略大小写）
+	- **-iwholename pattern**：同-wholename pattern（忽略大小写）
+	- **-links n**：有n个链接的文件
+	- **-lname pattern**：匹配正则表达式pattern的符号链接
+	- **-ls**：当find的返回值为true时就将文件或目录名称列出到标准输出
+	- **-maxdepth n**：设置最大目录层级n
+	- **-mindepth n**：设置最小目录层级n
+	- **-mmin n**：在过去n分钟内被修改过的文件
+	- **-mnewer file**：比文件file更晚被修改过的文件
+	- **-mount**：在同一个文件系统下
+	- **-mtime n[smhdw]**：在过去n个单位（默认单位d）内被修改过的文件
+	- **-name pattern**：文件名为name的文件
+	- **-newer file**：比文件file更晚被修改过的文件
+	- **-newerXY file**：比文件file更晚被访问过的文件
+	- **-nogroup**：不属于本地主机群组的文件
+	- **-noignore_readdir_race**：用于GNU查找兼容性，此选项被忽略
+	- **-noleaf**：用于GNU查找兼容性，它禁用了一个与查找无关的优化，此选项被忽略
+	- **-nouser**：不属于本地主机用户的文件
+	- **-ok utility [argument ...] ;**：同-exec，但在执行utility命令前会先询问用户
+	- **-okdir utility [argument ...] ;**：同-execdir，但在执行utility命令前会先询问用户
+	- **-path pattern**：路径匹配pattern的文件
+	- **-perm [-|+]mode**：符合指定权限mode的文件
+	- **-print**：当find的返回值为true时就将文件列出到标准输出，格式为每行一个名称，每个名称前皆有“./”字符串
+	- **-print0**：同-print，格式为全部的名称皆在同一行
+	- **-prune**：不要向下查找，总是返回ture。如果指定-d选项，则此表达式无效
+	- **-regex pattern**：匹配正则表达式pattern的文件
+	- **-samefile name**：硬链接名称为name的文件。如果指定-L选项，则同时查找符号链接为name的文件
+	- **-size n[ckMGTP]**：文件大小为n个单位（默认单位）的文件
+		- **c**：字符（1 bytes）
+		- **k**：kB（1024 bytes）
+		- **M**：MB（1024 kB）
+		- **G**：GB（1024 MB）
+		- **T**：TB（1024 GB）
+		- **P**：PB（1024 TB）
+	- **-true**：find命令的返回值设置为true
+	- **-type t**：文件类型为t的文件
+		- **b**：块设备
+		- **c**：字符设备
+		- **d**：目录（文件夹）
+		- **f**：普通文件
+		- **l**：符号链接
+		- **p**：FIFO（输入输出）
+		- **s**：套接字
+	- **-uid n**：用户ID为n的文件
+	- **-user uname**：用户名为uname的文件
+	- **-wholename pattern**：同-path，用于GNU查找的兼容性
+	- **-xattr**：有扩展名的文件
+	- **-xattrname name**：扩展名是name的文件
+	
+### 使用说明
+
+#### 操作表达式的使用
+| expression | 说明 |
+| :---: | --- |
+|**(** expression **)**|分隔符|
+|**!** expression<br>**-not** expression|逻辑非运算|
+|expression **-and** expression<br>expression expression|逻辑与运算|
+|expression **-or** expression|逻辑或运算|
+
+### 示例
+在当前目录及子目录下查找所有以.txt和.pdf结尾的文件
+
+```
+//等价于 find . -name "*.txt" -o -name "*.pdf"
+$ find . \( -name "*.txt" -o -name "*.pdf" \)
+```
+
+找出/home下不是以.txt结尾的文件
+
+```
+$ find /home ! -name "*.txt"
+```
+
+找出当前目录下文件类型为符号链接的文件
+
+```
+$ find . -type l
+```
+
+搜索出深度距离当前目录至少2个子目录的所有文件
+
+```
+$ find . -mindepth 2 -type f
+```
+
+搜索恰好在七天前被访问过的所有文件
+
+```
+$ find . -type f -atime 7
+```
+
+搜索大于10KB的文件
+
+```
+$ find . -type f -size +10k
+```
+
+删除当前目录下所有.txt文件
+
+```
+$ find . -type f -name "*.txt" -delete
+```
+
+找出当前目录下权限不是644的php文件
+
+```
+$ find . -type f -name "*.php" ! -perm 644
+```
+
+找出当前目录下所有root的文件，并把所有权更改为用户TestUser
+
+```
+$ find .-type f -user root -exec chown TestUser {} \;
+```
+
+查找当前目录或者子目录下所有.txt文件，但是跳过子目录sk
+
+```
+$ find . -path "./sk" -prune -o -name "*.txt" -print
+```
+
+列出所有长度为零的文件
+
+```
+$ find . -empty
+```
+
+## <a id="grep">grep</a>
+### 描述
+File pattern searcher
+### 功能
+使用正则表达式搜索文本，并把匹配的行打印出来
+### 语法
+
+```
+grep [-abcdDEFGHhIiJLlmnOopqRSsUVvwxZ] [-A num] [-B num] [-C[num]] [-e pattern] [-f file] [--binary-files=value] [--color[=when]] [--context[=num]] [--label] [--line-buffered] [--null] [pattern] [file ...]
+```
+
+### 选项参数
+- **-A num**：同时输出匹配内容之后的num行内容
+- **-a**：不要忽略二进制数据，将所有文件视为ASCII文本
+- **-B num**：同时输出匹配内容之前的num行内容
+- **-b**：输出匹配内容的第一个字符的偏移量（单位为字节）
+- **-C[num]**：同时输出匹配内容之前和之后的num行内容（num的默认值是2）
+- **-c**：只输出选定行数而不是文本内容
+- **-D action**：为设备、FIFO或套接字指定操作action。默认值是read，表示按照正常文件读取。如果设置为skip，则跳过这些设备、FIFO或套接字
+- **-d action**：为目录指定操作action。默认值是read，表示按照正常文件读取。如果设置为skip，则跳过目录。如果设置为recurse，则递归读取，此时等价于-R和-r选项
+- **-E**：转为以egrep命令执行
+- **-e pattern**：使用pattern匹配文本内容，匹配内容将作为输入行
+- **-F**：转为以fgrep命令执行
+- **-f file**：从file文件读取匹配表达式。文件中的空行表示匹配所有输入行，换行符不作为匹配内容。当file文件为空时，不匹配任何内容
+- **-G**：普同匹配模式
+- **-H**：在输出每个匹配内容之前打印文件名
+- **-h**：在输出每个匹配内容之前不打印文件名
+- **-I**：忽略二进制文件。等价于--binary-file=without-match选项
+- **-i**：匹配时不区分大小写。默认情况下，搜索是大小写敏感的
+- **-J**：使用bzip解压缩file文件后再执行匹配
+- **-L**：只输出文件内容不匹配的文件名
+- **-l**：只输出文件内容匹配的文件名
+- **-m num**：在匹配num次后停止读取
+- **-n**：在输出的每行前面打印该内容在文件中的行号。每个文件的行号从1开始。如果指定-c、-L、-l或者-q则此选项无效
+- **-O**：如果指定-R选项，则只有当符号链接在command line中列出时才进行追踪。默认情况下不追踪符号链接
+- **-o**：只打印输出匹配行中的匹配内容
+- **-p**：如果指定-R选项，则不追踪任何符号链接（这是默认选项）
+- **-q**：快速模式。不显示任何信息
+- **-R**：递归搜索子目录
+- **-r**：同-R
+- **-S**：如果指定-R选项，则追踪所有的符号链接。默认情况下不追踪符号链接
+- **-s**：静音模式。不显示错误信息
+- **-U**：搜索二进制文件，但不打印他们
+- **-V**：显示版本信息
+- **-v**：反转查找（检索不匹配内容）
+- **-w**：只显示全部字都匹配的内容
+- **-x**：只显示全部行都匹配的内容
+- **-y**：等价于-i，已作废
+- **-Z**：转为以zgrep命令执行
+- **-z**：转为以zgrep命令执行
+- **--colour=[when]**：使用存储在环境变量GREP_COLOR中的颜色标记匹配的内容，when有以下可选值
+	- **never**：从不
+	- **always**：总是
+	- **auto**：自动
+- **--binary-files=value**：搜索和打印二进制文件，value有以下可选值
+	- **binary**：只搜索二进制文件但不打印输出（默认值）
+	- **without-match**：不要搜索二进制文件
+	- **text**：将所有文件视为文本
+- **--context[=num]**：输出前面num行和最后的num行（num默认值为2）
+- **--line-buffered**：强制输出为行缓冲。默认情况下，当标准输出为终端时，输出是行缓冲的，否则块将被缓冲
+- **--null**：在文件名之后打印一个零字节
+- **pattern**：用来匹配的正则表达式
+- **file**：要执行匹配的文件
+
+### 示例
+在当前目录中，查找前缀有test字样的文件中包含test字符串的文件，并打印出该字符串的行
+
+```
+$ grep test test*
+test.txt:This a shell test
+test1.txt:This is a shell test
+test2.txt:test
+```
+
+以递归的方式查找当前目录及其子目录（如果存在子目录的话）下所有文件中包含字符串"test"的文件，并打印出该字符串所在行的内容
+
+```
+$ grep -r test1 . 
+./test/test.txt:This a shell test
+./test/test1.txt:This is a shell test
+./test/test2.txt:test
+```
+
+查找文件名中包含test的文件中不包含test的行
+
+```
+$ grep -v test *test*
+test1.txt:ABCDEFG
+test1.txt:HIJKLMN
+test1.txt:OPQRST
+test1.txt:UVWXYZ
+test2.txt:abcdefg
+test2.txt:hijklmn
+test2.txt:opqrst
+test2.txt:uvwxyz
+```
+
+## <a id="whereis">whereis</a>
+### 描述
+Locate programs
+### 功能
+定位指令的二进制程序、源代码文件和man手册页等相关文件的路径
+### 语法
+
+```
+whereis [program ...]
+```
+
+### 选项参数
+- **program**：要查找的程序
+
+### 示例
+查看指令"bash"的位置
+
+```
+$ whereis bash 
+/bin/bash
+```
+
+## <a id="which">which</a>
+### 描述
+Locate a program file in the user's path
+### 功能
+在环境变量PATH设置的目录里查找符合条件的程序
+### 语法
+
+```
+which [-as] program ...
+```
+
+### 选项参数
+- **-a**：列出所有找到的路径（默认情况下只打印第一个）
+- **-s**：无任何输出。当所有的文件都找到时返回0，否则返回1
+- **program**：要查找的程序
+
+### 示例
+查找显示命令pwd的路径
+
+```
+$ which pwd 
+/bin/pwd
+```
+
+# <a id="8">其他</a>
+## <a id="clear">claer</a>
+### 描述
+Clear the terminal screen
+### 功能
+清除当前屏幕终端上的任何信息
+### 语法
+
+```
+clear
+```
+
+### 选项参数
+无
+### 示例
+清屏
+```
+$ clear
+```
+
+## <a id="date">date</a>
+### 描述
+Display or set date and time
+### 功能
+显示或设置系统时间与日期
+### 语法
+
+```
+date [-jRu] [-r seconds|filename] [-v [+|-]val[ymwdHMS]] ... [+output_fmt]
+date [-jnu] [[[mm]dd]HH]MM[[cc]yy][.ss]
+date [-jnRu] -f input_fmt new_date [+output_fmt]
+date [-d dst] [-t minutes_west]
+```
+
+### 选项参数
+- **-d dst**：为夏时制设置内核的值。如果dst是非零值，则以后调用gettimeofday函数会返回一个非零值tz_dsttime
+- **-f input\_fmt new\_date**：使用input\_fmt为格式字符串（默认使用的格式是[[[mm]dd]HH]MM[[cc]yy][.ss] ）解析new\_date
+	- **cc**：世纪，19或20
+	- **yy**：年，00~99（89->1989，06->2006）
+	- **mm**：月，1~12
+	- **dd**：日，1~31
+	- **HH**：时，0~23
+	- **MM**：分，0~59
+	- **ss**：秒，0~59
+- **-j**：不要尝试设定日期，此时可以使用+选项来将一种日期格式（input\_fmt或默认格式）转换为另一种日期格式（output\_fmt）
+- **-n**：默认选项。如果正在运行定时任务，则date命令会设置本地组中所有设备的时间。-n选项会抑制此行为，并导致只在当前机器上设置时间
+- **-R**：使用RFC 2822日期和时间输出格式。当LC_TIME变量设置为C时，这相当于使用“%a, %d %b %Y %T %z”作为输出格式
+- **-r seconds**：以seconds为时间戳（以00:00:00 UTC, January 1, 1970为基准开始计算）打印日期和时间
+- **-r filename**：打印文件filename最后一次修改的日期和时间
+- **-t minutes_west**：设置系统的GMT（格林尼治时间）
+- **-u**：显示或设置UTC（协调世界时，又称世界统一时间、世界标准时间、国际协调时间）
+- **-v [+|-]val[ymwdHMS]**：根据val调整当前日期和时间并显示（仅显示而不做设定）。如果val指定符号“+”或“-”，则向前或向后调整时间，否则就以val为值设置。
+	- **y**：指定设置年，80~38或1980~2038
+	- **m**：指定设置月，1~12
+	- **w**：指定设置星期，0~6（Sun~Sat）
+	- **d**：指定设置日，1~31
+	- **H**：指定设置小时，0~23
+	- **M**：指定设置分钟，0~59
+	- **S**：指定设置秒，0~59
+
+### 使用说明
+#### 时间格式
+
+|格式符|说明|
+| :---: | --- |
+|%|印出%|
+|%n|下一行|
+|%t|跳格|
+|%H|小时（00~23）|
+|%I|小时（01~12）|
+|%k|小时（0~23）|
+|%l|小时（1~12）|
+|%M|分钟（00~59）|
+|%p|显示本地AM或PM|
+|%r|直接显示时间（12小时制，格式为 hh:mm:ss [AP]M）|
+|%s|从1970年1月1日 00:00:00 UTC到目前为止的秒数|
+|%S|秒（00~61）|
+|%T|直接显示时间（24小时制）|
+|%X|相当于%H:%M:%S|
+|%Z|显示时区|
+
+#### 日期格式
+
+|格式符|说明|
+| :---: | --- |
+|%a|星期几（Sun~Sat）|
+|%A|星期几（Sunday~Saturday）|
+|%b|月份（Jan~Dec）|
+|%B|月份（January~December）|
+|%c|直接显示日期与时间|
+|%d|日（01~31）|
+|%D|直接显示日期（mm/dd/yy）|
+|%h|同%b|
+|%j|一年中的第几天（001~366）|
+|%m|月份（01~12）|
+|%U|一年中的第几周（00~53）（以Sunday为一周的第一天的情形）|
+|%w|一周中的第几天（0~6）|
+|%W|一年中的第几周（00~53）（以Monday为一周的第一天的情形）|
+|%x|直接显示日期（mm/dd/yy）|
+|%y|年份的最后两位数字（00.99）|
+|%Y|完整年份（0000~9999）|
+
+### 示例
+显示当前时间
+```
+$ date
+三 5月 12 14:08:12 CST 2010
+
+$ date '+%c' 
+2010年05月12日 星期三 14时09分02秒
+
+//显示完整的时间
+$ date '+%D' 
+05/12/10
+
+//显示数字日期，年份两位数表示
+$ date '+%x' 
+2010年05月12日
+
+//显示日期，年份用四位数表示
+$ date '+%T' 
+14:09:31
+
+//显示24小时的格式
+$ date '+%X' 
+14时09分39秒
+```
+
+按自己的格式输出
+
+```
+$ date '+usr_time: $1:%M %P -hey'
+usr_time: $1:16 下午 -hey
+```
 
 ## <a id="man">man</a>
 ### 描述
@@ -1310,8 +1982,60 @@ man [-acdfFhkKtwW] [-m system] [-p string] [-C config_file] [-M pathlist] [-P pa
 显示cd命令的帮助手册
 
 ```
-man cd
+$ man cd
 ```
+
+## <a id="uname">uname</a>
+### 描述
+Print operating system name
+### 功能
+打印当前系统相关信息
+### 语法
+
+```
+uname [-amnprsv]
+```
+
+### 选项参数
+- **-a**：显示全部的信息，等价于-mnrsv
+- **-m**：显示硬件名称
+- **-n**：显示在网络上的主机名称
+- **-p**：输出处理器类型或"unknown"
+- **-r**：显示操作系统的发行编号
+- **-s**：显示操作系统名称（默认缺省）
+- **-v**：显示操作系统的版本
+
+### 示例
+显示操作系统的全部信息
+
+```
+$ uname
+Darwin mini.local 17.3.0 Darwin Kernel Version 17.3.0: Thu Nov  9 18:09:22 PST 2017; root:xnu-4570.31.3~1/RELEASE_X86_64 x86_64
+```
+
+## <a id="whatis">whatis</a>
+### 描述
+Search the whatis database for complete words
+### 功能
+查询命令执行什么功能，并将查询结果打印到终端上
+### 语法
+
+```
+whatis keyword ...
+```
+
+### 选项参数
+- **keyword**：要查询的关键词
+
+### 示例
+查询cp命令的功能
+
+```
+$ whatis cp
+gcp(1), cp(1)            - copy files and directories
+cp(1)                    - copy files
+```
+
 
 **PS：持续更新中……**
 
