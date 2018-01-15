@@ -1,6 +1,7 @@
 ---
 title: Shell脚本编程
 date: 2017-11-25 09:24:43
+update: 2017-11-25 09:24:43
 author: 曾华经
 tags: 
 	- Shell
@@ -40,3 +41,5 @@ blogexcerpt:
 # 5、环境
 
 # 6、交互
+
+**欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**

@@ -1,6 +1,7 @@
 ---
 title: 常用Shell命令
 date: 2017-11-30 10:59:23
+update: 2018-1-15 17:22:00
 author: 曾华经
 tags: Shell
 categories:
@@ -14,13 +15,13 @@ blogexcerpt:
 <!--more-->
 
 # 汇总表
-| 分类 | 命令 |
+|<div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;分类&emsp;<div>| 命令 |
 | --- | --- |
 | <div style="text-align:center;"><a href="#1">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
 | <div style="text-align:center;"><a href="#2">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
 | <div style="text-align:center;"><a href="#3">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
 | <div style="text-align:center;"><a href="#4">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
-| <div style="text-align:center;"><a href="#5">Shell脚本</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;<a href="#expr">expr</a>&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
+| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;<a href="#expr">expr</a>&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
 | <div style="text-align:center;"><a href="#6">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
 | <div style="text-align:center;"><a href="#7">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
 | <div style="text-align:center;"><a href="#8">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;<a href="#bc">bc</a>&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
@@ -1068,6 +1069,45 @@ Kevin
 ```
 
 # <a id="4">文档编辑</a>
+## <a id="cut">cut</a>
+Cut out selected portions of each line of a file
+## 功能
+提取文件中每行的指定部分或字段
+## 语法
+
+```
+cut -b list [-n] [file ...]
+cut -c list [file ...]
+cut -f list [-d delim] [-s] [file ...]
+```
+
+## 选项参数
+- **-b list**：以字节为单位进行分割，list指定截取的字节位置（list可以用逗号“,”分隔指定多个位置或用连接符“-”指定连续的范围。要指定到行尾，可以留空连接符后面的数字）
+- **-c list**：以字符为单位进行分割，list指定截取的字符位置（list可以用逗号“,”分隔指定多个位置或用连接符“-”指定连续的范围。要指定到行尾，可以留空连接符后面的数字）
+- **-d delim**：使用delim作为分隔符。默认分隔符为制表符
+- **-f list**：与-d一起使用，list指定显示分割后的区域位置（list可以用逗号“,”分隔指定多个位置或用连接符“-”指定连续的范围。要指定到行尾，可以留空连接符后面的数字）
+- **-n**：与-b选项一起使用，不分割多字节字符（如果字符的最后一个字节落在由-b标志的list 参数指示的范围之内，该字符将被写出）
+- **-s**：禁止没有字段分隔符的行。除非指定，否则没有分隔符的行将被忽略
+- **file**：要处理的文件
+
+## 示例
+提取test.txt文件中每一行的第3个字节
+
+```
+$ cut -b 3 test.txt
+```
+
+打印test.txt文件中每行的第1个到第8个字符以及第18个字符之后的全部字符
+
+```
+$ cut -c 1-8,18- test.txt
+```
+
+显示当前计算机系统中所有用户名和其对应的HOME目录（即以“:”分割/etc/passwd文件中的每行并提取第1和第6个字段）
+
+```
+$ cut -d: -f1,6 /etc/passwd
+```
 
 ## <a id="ed">ed</a>
 ### 描述
@@ -1151,6 +1191,221 @@ q
 $
 ```
 
+## <a id="paste">paste</a>
+### 描述
+Merge corresponding or subsequent lines of files
+### 功能
+将多个文件按照对应的行进行合并
+### 语法
+
+```
+paste [-s] [-d list] file ...
+```
+
+### 选项参数
+- **-d list**：使用一个或多个指定的字符来分隔输出行（默认使用制表符）。list中可以指定多个字符，第一个字符用于分隔第一个文件和第二个文件，第二个字符用于分隔第二个文件和第三个文件，以此类推。list是可以循环使用的，即如果文件数量多于list中列出的字符，则重新回到list的开头使用第一个字符
+- **-s**：将指定单一文件的所有行进行连接。默认使用制表符分隔，除非使用-d选项指定分隔符
+- **file**：要合并行内容的文件（file可以使用符号“-”表示从标准输入中获取内容）
+
+### 示例
+将文件test.txt、test1.txt、test2.txt进行合并
+
+```
+$ paste test.txt test1.txt test2.txt
+```
+
+将文件test.txt中的行合并为一行输出
+
+```
+$ paste -s test.txt
+```
+
+## <a id="sed">sed</a>
+### 描述
+Stream editor
+### 功能
+流编辑器（将指定命令应用在输入的每一行上，并将结果写入到标准输出）
+### 语法
+
+```
+sed [-Ealn] command [file ...]
+sed [-Ealn] [[-e command]...] [-f command_file] [-i extension] [file ...]
+```
+
+### 选项参数
+- **-E**：使用扩展的正则表达式
+- **-a**：延迟打开文件直到使用w命令
+- **-e command**：使用command作为处理文本内容的操作（-e选项允许在同一行里执行多条命令）
+- **-f command_file**：使用command_file文件中的内容作为处理文本内容的操作
+- **-i extension**：以extension为扩展名备份文件。如果extension的长度为0，则不做备份（不推荐使用长度为0的扩展名，因为在磁盘空间用尽等情况下，部分内容可能会有损坏的风险）
+- **-l**：缓冲输出行
+- **-n**：仅输出处理后的结果（默认sed将输入的每一行都写入到标准输出中，不管其内容是否发生变化。-n选项一般和p命令搭配使用，p命令可以打印出符合指定范围或模式的所有行）
+- **command**：处理文本的操作。如果没有指定，则使用标准输入
+- **file**：待处理的文件
+
+### 使用说明
+#### 内置命令
+- **a\\**：在当前行下面插入文本
+- **i\\**：在当前行上面插入文本
+- **c\\**：把选定的行改为新的文本
+- **d**：删除选择的行
+- **D**：删除模板块的第一行
+- **s**：替换指定字符
+- **h**：拷贝模板块的内容到内存中的缓冲区
+- **H**：追加模板块的内容到内存中的缓冲区
+- **g**：获得内存缓冲区的内容，并替代当前模板块中的文本
+- **G**：获得内存缓冲区的内容，并追加到当前模板块文本的后面
+- **l**：列表不能打印字符的清单
+- **n**：读取下一个输入行，用下一个命令处理新的行而不是用第一个命令
+- **N**：追加下一个输入行到模板块后面并在二者间嵌入一个新行，改变当前行号码
+- **p**：打印模板块的行
+- **P**：打印模板块的第一行
+- **q**：退出sed
+- **b lable**：分支到脚本中带有标记的地方，如果分支不存在则分支到脚本的末尾
+- **r file**：从file中读行
+- **t lable**：if分支，从最后一行开始，条件一旦满足或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾
+- **T label**：错误分支，从最后一行开始，一旦发生错误或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾
+- **w file**：写并追加模板块到file末尾
+- **W file**：写并追加模板块的第一行到file末尾
+- **!**：表示后面的命令对所有没有被选定的行发生作用
+- **=**：打印当前行号码
+- **#**：把注释扩展到下一个换行符以前
+
+#### 替换标记
+- **g**：表示行内全面替换
+- **p**：表示打印行
+- **w**：表示把行写入一个文件
+- **x**：表示互换模板块中的文本和缓冲区中的文本
+- **y**：表示把一个字符翻译为另外的字符（但是不用于正则表达式）
+- **\1**：子串匹配标记
+- **&**：已匹配字符串标记
+
+#### 元字符集（详见：[神兵利器之正则表达式](http://www.huajingzeng.com/post/神兵利器之正则表达式/)）
+- **^**：匹配行开始
+- **$**：匹配行结束
+- **.**：匹配一个非换行符的任意字符
+- **\***：匹配0个或多个字符
+- **[]**：匹配一个指定范围内的字符
+- **[\^]**：匹配一个不在指定范围内的字符
+- **\\(..\\)**：匹配子串，保存匹配的字符
+- **&**：保存搜索字符用来替换其他字符
+- **\\<**：匹配单词的开始
+- **\\>**：匹配单词的结束
+- **x\\{m\\}**：重复字符x，m次
+- **x\\{m,\\}**：重复字符x，至少m次
+- **x\\{m,n\\}**：重复字符x，至少m次，不多于n次
+
+### 示例
+匹配file文件中每一行的第一个book替换为books
+
+```
+$ sed -i 's/book/books/g' file
+```
+
+将file文件中第3处匹配book的地方开始，替换为books
+
+```
+$ sed 's/book/books/3g' file
+```
+
+删除文件的第2行到末尾所有行
+
+```
+$ sed '2,$d' file
+```
+
+所有以192.168.0.1开头的行都会被替换成它自已加localhost
+
+```
+$ sed 's/^192.168.0.1/&localhost/' file
+192.168.0.1localhost
+```
+
+将digit num替换为num
+
+```
+$ echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
+```
+
+替换test变量指定的内容（hello）替换为HELLO
+
+```
+$ test=hello
+$ echo hello WORLD | sed "s/$test/HELLO"
+HELLO WORLD
+```
+
+打印从第5行开始到第一个包含以test开始的行之间的所有行
+
+```
+$ sed -n '5,/^test/p' file
+```
+
+先删除第1行到第5行的内容，然后将test替换为check
+
+```
+$ sed -e '1,5d' -e 's/test/check/' file
+```
+
+file里的内容被读进来，显示在与test匹配的行后面，如果匹配多行，则file的内容将显示在所有匹配行的下面
+
+```
+$ sed '/test/r file' filename
+```
+
+在example中所有包含test的行都被写入file里
+
+```
+$ sed -n '/test/w file' example
+```
+
+在文件第2行之后插入this is a test line
+
+```
+$ sed -i '2a\this is a test line' file
+```
+
+将this is a test line追加到以test开头的行前面
+
+```
+$ sed '/^test/i\this is a test line' file
+```
+
+如果test被匹配，则移动到匹配行的下一行，替换这一行的aa，变为bb，并打印该行，然后继续
+
+```
+$ sed '/test/{ n; s/aa/bb/; }' file
+```
+
+把1~10行内所有abcde转变为大写（注意，正则表达式元字符不能使用这个命令）
+
+```
+$ sed '1,10y/abcde/ABCDE/' file
+```
+
+打印完第10行后，退出sed
+
+```
+$ sed '10q' file
+```
+
+把包含test与check的行互换
+
+```
+$ sed -e '/test/h' -e '/check/x' file
+```
+
+打印奇数行或偶数行
+
+```
+//奇数行
+$ sed -n '1~2p' test.txt
+
+//偶数行
+$ sed -n '2~2p' test.txt
+```
+
+
 ## <a id="sort">sort</a>
 ### 描述
 Sort or merge records (lines) of text and binary files
@@ -1200,6 +1455,136 @@ $ cat test.txt
 Hello  
 Shell
 test
+```
+
+## <a id="tr">tr</a>
+### 描述
+Translate characters
+### 功能
+转换或删除文件中的字符
+### 语法
+
+```
+tr [-Ccsu] string1 string2
+tr [-Ccu] -d string1
+tr [-Ccu] -s string1
+tr [-Ccu] -ds string1 string2
+```
+
+### 选项参数
+- **-C**：反选设定字符。也就是符合string1的部份不做处理，不符合的剩余部份才进行转换
+- **-c**：同-C
+- **-d**：删除所有属于第一字符集string1的字符
+- **-s**：缩减连续重复的字符成指定的单个字符
+- **-u**：立即输出不做缓存
+- **string1**：指定要转换或删除的原字符集
+- **string2**：定要转换成的目标字符集（如果string1比string2长，则string2的最后一个字符被重复使用）
+
+### 使用说明
+#### 字符集合的范围
+- **\\NNN**：NNN是字符的八进制值，如制表符的八进制表示为“\11”
+- **\\a**：响铃
+- **\\b**：退格符
+- **\\f**：走行换页
+- **\\n**：新行
+- **\\r**：回车
+- **\\t**：tab键
+- **\\v**：水平制表符
+- **char1-char2**：字符范围从char1到char2的指定，范围的指定以ASCII码的次序为基础，只能由小到大，不能由大到小
+- **[char\*]**：这是string2专用的设定，功能是重复指定的字符到与string1相同长度为止
+- **[char*repeat]**：这也是string2专用的设定，功能是重复指定的字符到设定的repeat次数为止(repeat的数字采8进位制计算，以0为开始)
+- **[:alnum:]**：所有字母字符与数字
+- **[:alpha:]**：所有字母字符
+- **[:blank:]**：所有水平空格
+- **[:cntrl:]**：所有控制字符
+- **[:digit:]**：所有数字
+- **[:graph:]**：所有可打印的字符(不包含空格符)
+- **[:lower:]**：所有小写字母
+- **[:print:]**：所有可打印的字符(包含空格符)
+- **[:punct:]**：所有标点字符
+- **[:space:]**：所有水平与垂直空格符
+- **[:upper:]**：所有大写字母
+- **[:xdigit:]**：所有 16 进位制的数字
+- **[=char=]**：所有符合指定的字符(等号里的char，代表你可自订的字符)
+
+### 示例
+将输入字符由大写转换为小写
+
+```
+$ tr 'A-Z' 'a-z' < file
+```
+
+删除数字字符
+
+```
+$ tr -d '0-9' < file
+```
+
+制表符转换为空格
+
+```
+$ tr '\t' ' ' < file
+```
+
+将重复出现的“s”字符替换为“s*”
+
+```
+$ tr -s 's*' < file
+```
+
+将小写字符替换成大写字符
+
+```
+$ tr '[:lower:]' '[:upper:]'
+```
+
+## <a id="uniq">uniq</a>
+### 描述
+Report or filter out repeated lines in a file
+### 功能
+检查及删除文本文件中重复出现的行列
+### 语法
+
+```
+uniq [-c | -d | -u] [-i] [-f num] [-s chars] [input_file [output_file]]
+```
+
+### 选项参数
+- **-c**：在每列旁边显示该行重复出现的次数
+- **-d**：仅显示重复出现的行列
+- **-f num**：忽略每个文件的第num个区域
+- **-s chars**：忽略每个输入行的第一个字符串chars
+- **-u**：仅显示出现一次的行列
+- **-i**：不区分大小写
+- **input_file**：指定要去除的重复行文件。如果不指定此项，则从标准输入读取数据
+- **output_file**：指定要去除重复行后的内容要写入的输出文件。如果不指定此选项，则将内容显示到标准输出设备（显示终端）
+
+### 示例
+删除重复行
+
+```
+$ uniq test.txt
+$ sort test.txt | uniq
+$ sort -u test.txt
+```
+
+只显示单一行
+
+```
+$ uniq -u test.txt
+$ sort test.txt | uniq -u
+```
+
+统计各行在文件中出现的次数
+
+```
+$ sort test.txt | uniq -c
+```
+
+在文件中找出重复的行
+
+```
+$ sort test.txt | uniq -d
 ```
 
 ## <a id="vi">vi</a>
@@ -2039,3 +2424,4 @@ cp(1)                    - copy files
 
 **PS：持续更新中……**
 
+**欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
