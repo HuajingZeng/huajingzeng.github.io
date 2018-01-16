@@ -33,11 +33,11 @@
                 <%- post.blogexcerpt || post.excerpt || post.content %>
             <% } %>
             <p class="more">
-                <a href="<%- url_for(post.permalink) %>">阅读剩下更多</a>
+                <a href="<%- url_for('/post/'+post.title) %>">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="<%- post.photos[0] %>">
-            <a href="<%= post.permalink %>" title="<%= post.title %>">
+            <a href="<%= '/post/'+post.title %>" title="<%= post.title %>">
                 <% if (post.thumbnail) { %>
                     <!--
                     <%- image_tag(post.thumbnail, { class: "thumbnail" }) %>
