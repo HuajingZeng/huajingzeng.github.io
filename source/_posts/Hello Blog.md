@@ -8,6 +8,7 @@ categories:
     - 程序人生
 thumbnail: /img/thumbnail/0.jpg
 blogexcerpt: 
+toc:
 ---
 
 # 你好，欢迎来到我的个人技术博客。

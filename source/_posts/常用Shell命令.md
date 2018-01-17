@@ -9,6 +9,7 @@ categories:
 	- 开发工具
 thumbnail: /img/thumbnail/2.jpg
 blogexcerpt: 
+toc: true
 ---
 &emsp;&emsp;本人当前开发基本都是用苹果电脑（Mac），开发过程中难免要与命令行工具（Command Line Tools）打交道，因此掌握一些基本的Shell命令是必须的。
 &emsp;&emsp;不同的Shell具备不同的功能，流行的Shell有：bash、csh、ksh、sh、tcsh、zsh等。可以进入/bin目录查看，以sh结尾的可执行文件即Shell脚本解析程序。本人Mac系统默认使用/bin/bash，bash也是目前大多数Linux系统默认使用的Shell。
@@ -17,16 +18,16 @@ blogexcerpt:
 # 汇总表
 |<div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;分类&emsp;<div>| 命令 |
 | --- | --- |
-| <div style="text-align:center;"><a href="#1">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
-| <div style="text-align:center;"><a href="#2">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
-| <div style="text-align:center;"><a href="#3">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
-| <div style="text-align:center;"><a href="#4">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
+| <div style="text-align:center;"><a href="#文件管理">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
+| <div style="text-align:center;"><a href="#程序进程">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
+| <div style="text-align:center;"><a href="#系统环境">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
+| <div style="text-align:center;"><a href="#文档编辑">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
 | <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;<a href="#expr">expr</a>&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
-| <div style="text-align:center;"><a href="#6">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
-| <div style="text-align:center;"><a href="#7">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
-| <div style="text-align:center;"><a href="#8">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;<a href="#bc">bc</a>&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
+| <div style="text-align:center;"><a href="#网络通讯">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
+| <div style="text-align:center;"><a href="#搜索查找">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
+| <div style="text-align:center;"><a href="#其他">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;<a href="#bc">bc</a>&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
 
-# <a id="1">文件管理</a>
+# <a id="文件管理">文件管理</a>
 
 ## <a id="cat">cat</a>
 ### 描述
@@ -901,7 +902,7 @@ umask [-p] [-S] [mode]
 $ umask
 ```
 
-# <a id="2">程序进程</a>
+# <a id="程序进程">程序进程</a>
 ## <a id="exit">exit</a>
 ### 描述
 Exit the shell
@@ -923,7 +924,7 @@ exit [n]
 exit
 ```
 
-# <a id="3">系统环境</a>
+# <a id="系统环境">系统环境</a>
 
 ## <a id="su">su</a>
 ### 描述
@@ -1068,7 +1069,7 @@ $ whoami
 Kevin
 ```
 
-# <a id="4">文档编辑</a>
+# <a id="文档编辑">文档编辑</a>
 ## <a id="cut">cut</a>
 Cut out selected portions of each line of a file
 ## 功能
@@ -1694,7 +1695,7 @@ $ wc test
 1       2      11 test
 ```
 
-# <a id="5">Shell脚本</a>
+# <a id="Shell脚本">Shell脚本</a>
 ## <a id="echo">echo</a>
 ### 描述
 Write arguments to the standard output
@@ -1782,7 +1783,7 @@ $ printf "String AB \a"
 String AB $
 ```
 
-# <a id="6">网络通讯</a>
+# <a id="网络通讯">网络通讯</a>
 ## <a id="ping">ping</a>
 ### 描述
 Send ICMP ECHO_REQUEST packets to network hosts
@@ -1857,7 +1858,7 @@ round-trip min/avg/max/stddev = 1.544/1.649/1.779/0.098 ms
 ```
 
 
-# <a id="7">搜索查找</a>
+# <a id="搜索查找">搜索查找</a>
 ## <a id="find">find</a>
 ### 描述
 Walk a file hierarchy
@@ -2194,7 +2195,7 @@ $ which pwd
 /bin/pwd
 ```
 
-# <a id="8">其他</a>
+# <a id="其他">其他</a>
 ## <a id="clear">claer</a>
 ### 描述
 Clear the terminal screen
