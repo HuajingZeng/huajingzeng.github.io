@@ -21,11 +21,11 @@ toc: true
 | <div style="text-align:center;"><a href="#文件管理">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
 | <div style="text-align:center;"><a href="#程序进程">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
 | <div style="text-align:center;"><a href="#系统环境">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
-| <div style="text-align:center;"><a href="#文档编辑">文档编辑</a></div> | <a href="#awk">awk</a>&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
-| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;<a href="#expr">expr</a>&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
+| <div style="text-align:center;"><a href="#文档编辑">文档编辑</a></div> | **<a href="#awk">awk</a>**&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
+| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
 | <div style="text-align:center;"><a href="#网络通讯">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
 | <div style="text-align:center;"><a href="#搜索查找">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
-| <div style="text-align:center;"><a href="#其他">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;<a href="#bc">bc</a>&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
+| <div style="text-align:center;"><a href="#其他">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;**<a href="#bc">bc</a>**&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
 
 # <a id="文件管理">文件管理</a>
 
@@ -1070,11 +1070,51 @@ Kevin
 ```
 
 # <a id="文档编辑">文档编辑</a>
+## <a id="awk">awk</a>
+### 描述
+Pattern-directed scanning and processing language
+### 功能
+对文本和数据进行处理
+### 语法
+
+```
+awk [-F fs] [-v var=value] ['prog'|-f progfile] [file ...]
+```
+
+### 选项参数
+- **-F fs**：指定输入文件折分隔符，fs是一个字符串或者是一个正则表达式
+- **-v var=value**：赋值一个用户定义变量，将外部变量传递给awk
+- **prog**：要执行的awk命令
+- **-f progfile**：从脚本文件中读取awk命令
+- **file**：要处理的文本或数据文件
+
+### 附加说明
+awk脚本是由模式和操作组成的。
+
+#### 模式
+模式可以是以下任意一个：
+
+- /正则表达式/：使用通配符的扩展集。
+- 关系表达式：使用运算符进行操作，可以是字符串或数字的比较测试。
+- 模式匹配表达式：用运算符~（匹配）和~!（不匹配）。
+- BEGIN语句块、pattern语句块、END语句块：参见awk的工作原理
+
+#### 操作
+操作由一个或多个命令、函数、表达式组成，之间由换行符或分号隔开，并位于大括号内，主要部分是：
+
+- 变量或数组赋值
+- 输出命令
+- 内置函数
+- 控制流语句
+
+### 示例
+
 ## <a id="cut">cut</a>
+### 描述
 Cut out selected portions of each line of a file
-## 功能
+### 功能
 提取文件中每行的指定部分或字段
-## 语法
+### 语法
 
 ```
 cut -b list [-n] [file ...]
@@ -1082,7 +1122,7 @@ cut -c list [file ...]
 cut -f list [-d delim] [-s] [file ...]
 ```
 
-## 选项参数
+### 选项参数
 - **-b list**：以字节为单位进行分割，list指定截取的字节位置（list可以用逗号“,”分隔指定多个位置或用连接符“-”指定连续的范围。要指定到行尾，可以留空连接符后面的数字）
 - **-c list**：以字符为单位进行分割，list指定截取的字符位置（list可以用逗号“,”分隔指定多个位置或用连接符“-”指定连续的范围。要指定到行尾，可以留空连接符后面的数字）
 - **-d delim**：使用delim作为分隔符。默认分隔符为制表符
@@ -1091,7 +1131,7 @@ cut -f list [-d delim] [-s] [file ...]
 - **-s**：禁止没有字段分隔符的行。除非指定，否则没有分隔符的行将被忽略
 - **file**：要处理的文件
 
-## 示例
+### 示例
 提取test.txt文件中每一行的第3个字节
 
 ```
@@ -1718,6 +1758,41 @@ echo命令打印文字“test”
 echo "test"
 ```
 
+## <a id="expr">expr</a>
+### 描述
+Evaluate expression
+### 功能
+对表达式进行求值
+### 语法
+
+```
+expr expression
+```
+
+### 选项参数
+- **expression**：要求值的表达式
+
+### 附加说明
+|运算表达式|说明|
+|:---:|---|
+|expr1 &#124; expr2|或运算|
+|expr1 & expr2|与运算|
+|expr1 {=，>，>=，<，<=，!=} expr2|比较运算|
+|expr1 {+，-} expr2|加减运算|
+|expr1 {*，/，%} expr2|乘除求模运算|
+|expr1 : expr2|匹配运算（使用expr2作为正则表达式匹配expr1中的字符，默认返回匹配的字符数）|
+
+- 用空格隔开每个项
+- 用\放在Shell特定的字符前面
+- 对包含空格和其他特殊字符的字符串要用引号括起来
+
+### 示例
+
+```
+$ result=`expr 2 + 3`
+$ result=$(expr $result + 5)
+```
+
 ## <a id="printf">printf</a>
 ### 描述
 Formatted output
@@ -2196,6 +2271,82 @@ $ which pwd
 ```
 
 # <a id="其他">其他</a>
+## <a id="bc">bc</a>
+### 描述
+An arbitrary precision calculator language
+### 功能
+进行任意精度的计算
+### 语法
+
+```
+bc [-hilwsqv] [long-options] [file ...]
+```
+
+### 选项参数
+- **-h**：显示帮助信息
+- **-i**：强制进入交互式模式
+- **-l**：定义使用的标准数学库
+- **-w**：对POSIX bc的扩展给出警告信息
+- **-s**：使用标准的POSIX bc语言
+- **-q**：不打印正常的GNU bc环境信息
+- **-v**：显示版本信息
+- **long-options**：
+- **file**：指定包含计算任务的文件
+
+### 附加说明
+
+#### 特殊表达式
+
+|表达式|说明|
+|:---:|---|
+|length(expression)|长度函数，其值是表达式中有效位数的个数|
+|read()|读取函数，它将从标准输入中读取一个数字，而不管该函数在何处出现|
+|scale(expression)|刻度函数，其值是表达式中小数点后的位数|
+|sqrt(expression)|平方根函数，其值是表达式的平方根（如果表达式为负数，则生成运行时错误）|
+
+#### 数学库
+|函数|说明|
+|:---:|---|
+|s(x)|正弦函数，相当于C语言的sin()，x为弧度|
+|c(x)|余弦函数，相当于C语言的cos()，x为弧度|
+|a(x)|反正切函数，相当于C语言的atan()，x为弧度|
+|l(x)|自然对数函数，相当于C语言的ln()|
+|e(x)|指数函数，e的x次方|
+|j(n,x)|贝塞尔函数，x的n阶|
+
+### 示例
+执行浮点运算
+
+```
+$ echo "1.212*3" | bc
+3.636
+```
+
+设定小数精度
+
+```
+$ echo "scale=2;3/8" | bc
+0.37
+```
+
+进制转换
+
+```
+$ abc=192
+$ echo "obase=2;$abc" | bc
+11000000
+$abc=11000000
+$ echo "obase=10;ibase=2;$abc" | bc
+```
+
+计算平方和平方根
+
+```
+$ echo "10^10" | bc
+10000000000
+$ echo "sqrt(100)" | bc
+10
+```
 ## <a id="clear">claer</a>
 ### 描述
 Clear the terminal screen
