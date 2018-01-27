@@ -22,7 +22,7 @@ toc: true
 | <div style="text-align:center;"><a href="#程序进程">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
 | <div style="text-align:center;"><a href="#系统环境">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
 | <div style="text-align:center;"><a href="#文档编辑">文档编辑</a></div> | **<a href="#awk">awk</a>**&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
-| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;<a href="#text">text</a>&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
+| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;**<a href="#shift">shift</a>**&emsp;**<a href="#test">test</a>**&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
 | <div style="text-align:center;"><a href="#网络通讯">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
 | <div style="text-align:center;"><a href="#搜索查找">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
 | <div style="text-align:center;"><a href="#其他">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;**<a href="#bc">bc</a>**&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
@@ -37,7 +37,7 @@ Concatenate and print files
 ### 语法
 显示文件内容
 
-```
+```sh
 cat [-benstuv] file...
 
 /*
@@ -49,13 +49,13 @@ cat [-benstuv] file0 [- fileX]...
 
 通过键盘为文件输入新的内容（输入的内容会覆盖原来的内容）
 
-```
+```sh
 cat [-benstuv] > out_file
 ```
 
 将几个文件的内容合并后输出到文件
 
-```
+```sh
 cat [-benstuv] file... > out_file
 ```
 
@@ -73,31 +73,31 @@ cat [-benstuv] file... > out_file
 ### 示例
 把test.txt的文档内容加上行号后输出到当前命令行工具窗口
 
-```
+```sh
 $ cat -n test.txt
 ```
 
 把test1.txt和test2.txt的文档内容加上行号（空白行不加）之后将内容附加到test3.txt文档里
 
-```
+```sh
 $ cat -b test1.txt test2.txt >> test3.txt
 ```
 
 清空/etc/test.txt文档内容
 
-```
+```sh
 $ cat /dev/null > /etc/test.txt
 ```
 
 从软盘fd0制作镜像文件test.dmg
 
-```
+```sh
 $ cat /dev/fd0 > test.dmg
 ```
 
 把镜像文件test.dmg写到软盘fd0
 
-```
+```sh
 $ cat test.dmg > /dev/fd0
 ```
 
@@ -108,7 +108,7 @@ Change directory
 改变当前目录
 ### 语法
 
-```
+```sh
 cd [-L|-P] [dir]
 ```
 
@@ -124,19 +124,19 @@ cd [-L|-P] [dir]
 ### 示例
 跳到/usr/bin目录
 
-```
+```sh
 $ cd /usr/bin
 ```
 
 跳到自己的Home目录
 
-```
+```sh
 $ cd ~
 ```
 
 跳到当前目录的上两层
 
-```
+```sh
 $ cd ../..
 ```
 
@@ -147,7 +147,7 @@ Change group
 变更文件或目录的所属群组
 ### 语法
 
-```
+```sh
 chgrp [-fhv] [-R [-H|-L|-P]] group file...
 ```
 
@@ -165,7 +165,7 @@ chgrp [-fhv] [-R [-H|-L|-P]] group file...
 ### 示例
 改变文件test.txt的群组属性为TestGroup
 
-```
+```sh
 $ chgrp -v TestGroup test.txt
 ```
 
@@ -176,7 +176,7 @@ Change file modes or Access Control Lists
 变更文件或目录的权限（只有文件拥有者或者超级管理员才能修改文件权限）
 ### 语法
 
-```
+```sh
 chmod [-fhv] [-R [-H|-L|-P]] mode file...
 
 mode1：[augo][+|-|=][rstwx-][,...]
@@ -225,32 +225,32 @@ mode2：[????]
 ### 示例
 将文件test.txt设为所有人皆可读取
 
-```
+```sh
 $ chmod ugo+r test.txt
 $ chmod a+r test.txt
 ```
 
 将文件test1.txt与test2.txt设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入
 
-```
+```sh
 $ chmod ug+w,o-w test1.txt test2.txt
 ```
 
 将test.out设定为只有该文件拥有者可以执行
 
-```
+```sh
 $ chmod u+x test.out
 ```
 
 将目前目录下的所有文件与子目录皆设为任何人可读取
 
-```
+```sh
 $ chmod -R a+r *
 ```
 
 将文件test.out设为该文件拥有者，与其所属同一个群体者可读写执行，但其他以外的人则不可仅可读取不可写入和执行
 
-```
+```sh
 $ chmod ug=rwx,o=r test.out
 $ chmod 774 test.out
 ```
@@ -262,7 +262,7 @@ Change file owner and group
 将指定文件的拥有者改为指定的用户或组
 ### 语法
 
-```
+```sh
 chown [-fhv] [-R [-H|-L|-P]] user[:group] file...
 chown [-fhv] [-R [-H|-L|-P]] :group file... 
 ```
@@ -282,13 +282,13 @@ chown [-fhv] [-R [-H|-L|-P]] :group file...
 ### 示例
 将文件test.txt的群组设为群组TestGroup
 
-```
+```sh
 $ chown :TestGroup test.txt
 ```
 
 将当前目录下的所有文件与子目录的所有者和群组皆设为用户TestUser和群组TestGroup
 
-```
+```sh
 $ chown -R TestUser:TestGroup *
 ```
 
@@ -299,7 +299,7 @@ Display file checksums and block counts
 检查文件的CRC是否正确（输出信息中，第一个字符串表示校验码，第二个字符串表示字节数）
 ### 语法
 
-```
+```sh
 cksum [-o 1|2|3] file...
 
 //等价于 cksum -o 1 file...
@@ -316,7 +316,7 @@ sum file...
 ### 示例
 计算文件test.txt的完整性
 
-```
+```sh
 $ cksum test.txt
 3311261222 35 test.txt
 ```
@@ -328,7 +328,7 @@ Compare two files byte by byte
 比较两个文件是否有差异
 ### 语法
 
-```
+```sh
 cmp [-bclv] [-n LIMIT] [-i SKIP1[:SLIP2]] file1 file2
 ```
 
@@ -346,14 +346,14 @@ cmp [-bclv] [-n LIMIT] [-i SKIP1[:SLIP2]] file1 file2
 ### 示例
 比较test1.txt和test2.txt。如果文件相同，则不显示消息。如果文件不同，则显示第一个不同的位置
 
-```
+```sh
 $ cmp test1.txt test2.txt
 test1.txt test2.txt differ: char 1, line 1
 ```
 
 从第7个字符位置开始比较test1.txt和test2.txt。显示所有不同的位置及对应的字符
 
-```
+```sh
 $ cmp -cl -i 6 test1.txt test2.txt
  1 107 G    147 g
 14 117 O    157 o
@@ -371,7 +371,7 @@ Copy files
 复制文件或目录
 ### 语法
 
-```
+```sh
 cp [-R [-H|-L|-P]] [-fi|-n] [-apvX] source target
 cp [-R [-H|-L|-P]] [-fi|-n] [-apvX] source ... directory
 ```
@@ -396,7 +396,7 @@ cp [-R [-H|-L|-P]] [-fi|-n] [-apvX] source ... directory
 ### 示例
 将当前目录test1下的所有文件复制到新目录test2下
 
-```
+```sh
 $ cp -r test1 test2
 ```
 
@@ -407,7 +407,7 @@ Display disk usage statistics
 显示目录或文件的大小
 ### 语法
 
-```
+```sh
 du [-H|-L|-P] [-a|-s|-d DEPTH] [-c] [-h|-k|-m|-g] [-x] [-I MASK] file...
 ```
 
@@ -430,19 +430,19 @@ du [-H|-L|-P] [-a|-s|-d DEPTH] [-c] [-h|-k|-m|-g] [-x] [-I MASK] file...
 ### 示例
 显示目录或者文件所占空间
 
-```
+```sh
 $ du
 ```
 
 显示指定文件所占空间
 
-```
+```sh
 $ du test.txt
 ```
 
 方便阅读的格式显示test目录所占空间情况
 
-```
+```sh
 $ du -h test
 ```
 
@@ -453,7 +453,7 @@ Display free disk space
 检查文件系统的磁盘空间占用情况
 ### 语法
 
-```
+```sh
 df [-b|-h|-H|-k|-m|-g|-P] [-ailn] [-T TYPE] [file|fileSystem] ...
 ```
 
@@ -475,19 +475,19 @@ df [-b|-h|-H|-k|-m|-g|-P] [-ailn] [-T TYPE] [file|fileSystem] ...
 ### 示例
 显示文件系统的磁盘使用情况统计
 
-```
+```sh
 $ df
 ```
 
 显示磁盘使用的文件系统信息
 
-```
+```sh
 $ df test
 ```
 
 输出显示inode信息而非块使用量
 
-```
+```sh
 $ df -i
 ```
 
@@ -499,7 +499,7 @@ $ df -a
 
 产生可读的格式df命令的输出
 
-```
+```sh
 $ df -h
 ```
 
@@ -510,7 +510,7 @@ Filesystem consistency check and interactive repair
 检查和维护不一致的文件系统
 ### 语法
 
-```
+```sh
 fsck -p [-f]
 fsck [-l MAX_PARALLEL] [-qynd]
 ```
@@ -527,7 +527,7 @@ fsck [-l MAX_PARALLEL] [-qynd]
 ### 示例
 检查所以文件系统是否正常，如果有异常便自动修复
 
-```
+```sh
 fsck -p
 ```
 
@@ -538,7 +538,7 @@ List process IDs of all processes that have one or more files open
 由文件或设备去找出使用该文件或设备的进程ID
 ### 语法
 
-```
+```sh
 fuser [-cfu] file ...
 ```
 
@@ -551,7 +551,7 @@ fuser [-cfu] file ...
 ### 示例
 显示正在使用文件test、test1、test2的进程ID及该进程的登录用户
 
-```
+```sh
 $ fuser -u test
 test: 593(Kevin)
 test1: 
@@ -573,7 +573,7 @@ Make links
 
 ### 语法
 
-```
+```sh
 ln [-Ffhinsv] source_file [target_file]
 ln [-Ffhinsv] source_file target_dir
 ```
@@ -593,13 +593,13 @@ ln [-Ffhinsv] source_file target_dir
 ### 示例
 为test.txt文件创建软链接test，如果test.txt丢失，test将失效
 
-```
+```sh
 $ ln -s test.txt test
 ```
 
 为test.txt文件创建硬链接test，test.txt与test的各项属性相同
 
-```
+```sh
 $ ln test.txt test
 ```
 
@@ -611,7 +611,7 @@ List directory contents
 显示目录下的内容
 ### 语法
 
-```
+```sh
 ls [-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1] [file...]
 ```
 
@@ -657,25 +657,25 @@ ls [-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1] [file...]
 ### 示例
 列出根目录下的所有目录
 
-```
+```sh
 $ ls /
 ```
 
 列出当前工作目录下所有名称是s开头的文件，越新的排越后面
 
-```
+```sh
 $ ls -ltr s*
 ```
 
 将/bin目录以下所有目录及文件详细资料列出
 
-```
+```sh
 $ ls -lR /bin
 ```
 
 列出当前工作目录下所有文件及目录，目录于名称后加"/", 可执行档于名称后加"*"
 
-```
+```sh
 $ ls -AF
 ```
 
@@ -686,7 +686,7 @@ Make directories
 创建一个子目录
 ### 语法
 
-```
+```sh
 mkdir [-pv] [-m MODE] dir...
 ```
 
@@ -699,13 +699,13 @@ mkdir [-pv] [-m MODE] dir...
 ### 示例
 在当前目录下创建名为test的子目录
 
-```
+```sh
 $ mkdir test
 ```
 
 在当前目录下的test1目录中创建一个名为test2的目录，如果test1目录原本不存在，则创建一个
 
-```
+```sh
 $ mkdir -p test1/test2
 ```
 
@@ -716,7 +716,7 @@ Move or rename files or directories
 为文件或目录改名、或将文件或目录移入其它位置
 ### 语法
 
-```
+```sh
 mv [-f|-i|-n] [-v] source target
 mv [-f|-i|-n] [-v] source ... directory
 ```
@@ -733,13 +733,13 @@ mv [-f|-i|-n] [-v] source ... directory
 ### 示例
 将文件test1更名为test2
 
-```
+```sh
 $ mv test1 test2
 ```
 
 将test1目录放入test2目录中
 
-```
+```sh
 $ mv test1 test2
 ```
 
@@ -750,7 +750,7 @@ Return working directory name
 显示路径
 ### 语法
 
-```
+```sh
 pwd [-L|-P]
 ```
 
@@ -761,7 +761,7 @@ pwd [-L|-P]
 ### 示例
 查看当前所在目录
 
-```
+```sh
 $ pwd
 ```
 
@@ -772,7 +772,7 @@ Remove directory entries
 删除一个文件或者目录（删除目录则必须配合-R/-r选项）
 ### 语法
 
-```
+```sh
 rm [-dfiPRrvW] file ...
 ```
 
@@ -789,7 +789,7 @@ rm [-dfiPRrvW] file ...
 ### 示例
 删除test.txt文件
 
-```
+```sh
 $ rm test.txt
 ```
 
@@ -800,7 +800,7 @@ Remove directories
 删除空的目录
 ### 语法
 
-```
+```sh
 rmdir [-p] dir
 ```
 
@@ -811,7 +811,7 @@ rmdir [-p] dir
 ### 示例
 将test目录下，名为test1的子目录删除（若删除test1后test目录变为空目录，则test也一起删除）
 
-```
+```sh
 $ rmdir -p test/test1
 ```
 
@@ -822,7 +822,7 @@ Split a file into pieces
 将一个文件分割成数个
 ### 语法
 
-```
+```sh
 split [-a SUFFIX_LENGTH] [-b BYTE_COUNT[k|m]] [-l LINE_COUNT] [-p PATTERN] [file [name]]
 ```
 
@@ -837,7 +837,7 @@ split [-a SUFFIX_LENGTH] [-b BYTE_COUNT[k|m]] [-l LINE_COUNT] [-p PATTERN] [file
 ### 示例
 文件test.txt每6行切割成一个文件
 
-```
+```sh
 $ split test.txt
 ```
 
@@ -848,7 +848,7 @@ Change file access and modification times
 修改文件或者目录的时间属性，包括存取时间、修改时间等（若文件不存在，会建立一个新的文件）
 ### 语法
 
-```
+```sh
 touch [-A [-][[hh]mm]SS] [-acfhm] [-r REF_FILE] [-t [CC]YY]MMDDhhmm[.SS]] file...
 ```
 
@@ -875,7 +875,7 @@ touch [-A [-][[hh]mm]SS] [-acfhm] [-r REF_FILE] [-t [CC]YY]MMDDhhmm[.SS]] file..
 ### 示例
 修改文件test.txt的时间属性为当前系统时间（如果文件不存在，则会创建一个空白的test.txt文件）
 
-```
+```sh
 $ touch test.txt
 ```
 
@@ -886,7 +886,7 @@ Users file creation mask
 设置限制新建文件权限的掩码
 ### 语法
 
-```
+```sh
 umask [-p] [-S] [mode]
 ```
 
@@ -898,7 +898,7 @@ umask [-p] [-S] [mode]
 ### 示例
 当前权限掩码
 
-```
+```sh
 $ umask
 ```
 
@@ -910,7 +910,7 @@ Exit the shell
 退出目前的shell
 ### 语法
 
-```
+```sh
 exit [n]
 ```
 
@@ -920,7 +920,7 @@ exit [n]
 ### 示例
 退出终端
 
-```
+```sh
 exit
 ```
 
@@ -933,7 +933,7 @@ Substitute user identity
 变更为其他使用者的身份，除root外，需要键入该使用者的密码
 ### 语法
 
-```
+```sh
 su [-lm] [user [args]]
 ```
 
@@ -945,13 +945,13 @@ su [-lm] [user [args]]
 ### 示例
 变更帐号为root并传入-f参数给新执行的shell
 
-```
+```sh
 $ su root -f
 ```
 
 变更帐号为TestUser并改变工作目录至TestUser的HOME目录
 
-```
+```sh
 $ su - TestUser
 ```
 
@@ -962,7 +962,7 @@ Execute a command as another user
 以其他身份来执行命令，预设的身份为root
 ### 语法
 
-```
+```sh
 sudo -h|-K|-k|-V
 sudo -v [-AknS] [-g group] [-h host] [-p prompt] [-u user]
 sudo -l [-AknS] [-g group] [-h host] [-p prompt] [-U user] [-u user] [command]
@@ -1003,13 +1003,13 @@ sudoedit [-AknS] [-C num] [-g group] [-h host] [-p prompt] [-u user] file ...
 ### 示例
 指定用户执行命令
 
-```
+```sh
 $ sudo -u TestUser ls -l
 ```
 
 以root用户身份进行编辑文本
 
-```
+```sh
 $ sudo vi test.html
 ```
 
@@ -1020,7 +1020,7 @@ Display who is logged in
 显示目前登录系统的用户信息
 ### 语法
 
-```
+```sh
 who [-abdHmqrsTu] [file]
 ```
 
@@ -1040,7 +1040,7 @@ who [-abdHmqrsTu] [file]
 ### 示例
 显示当前登录系统的用户（显示标题栏）
 
-```
+```sh
 $ who -H
 USER     LINE     WHEN         
 Kevin    console  Jan 10 07:29 
@@ -1055,7 +1055,7 @@ Display effective user id
 显示当前用户名称
 ### 语法
 
-```
+```sh
 whoami
 ```
 
@@ -1064,7 +1064,7 @@ whoami
 ### 示例
 显示用户名
 
-```
+```sh
 $ whoami
 Kevin
 ```
@@ -1077,7 +1077,7 @@ Pattern-directed scanning and processing language
 对文本和数据进行处理
 ### 语法
 
-```
+```sh
 awk [-F fs] [-v var=value] ['prog'|-f progfile] [file ...]
 ```
 
@@ -1116,7 +1116,7 @@ Cut out selected portions of each line of a file
 提取文件中每行的指定部分或字段
 ### 语法
 
-```
+```sh
 cut -b list [-n] [file ...]
 cut -c list [file ...]
 cut -f list [-d delim] [-s] [file ...]
@@ -1134,19 +1134,19 @@ cut -f list [-d delim] [-s] [file ...]
 ### 示例
 提取test.txt文件中每一行的第3个字节
 
-```
+```sh
 $ cut -b 3 test.txt
 ```
 
 打印test.txt文件中每行的第1个到第8个字符以及第18个字符之后的全部字符
 
-```
+```sh
 $ cut -c 1-8,18- test.txt
 ```
 
 显示当前计算机系统中所有用户名和其对应的HOME目录（即以“:”分割/etc/passwd文件中的每行并提取第1和第6个字段）
 
-```
+```sh
 $ cut -d: -f1,6 /etc/passwd
 ```
 
@@ -1158,7 +1158,7 @@ Text editor
 
 ### 语法
 
-```
+```sh
 ed [-s|-] [-p string] [file]
 ```
 
@@ -1202,7 +1202,7 @@ ed [-s|-] [-p string] [file]
 
 ### 示例
 
-```
+```sh
 //进入ed编辑器（默认进入命令模式）
 $ ed
 //切换到文本输入模式
@@ -1239,7 +1239,7 @@ Merge corresponding or subsequent lines of files
 将多个文件按照对应的行进行合并
 ### 语法
 
-```
+```sh
 paste [-s] [-d list] file ...
 ```
 
@@ -1251,13 +1251,13 @@ paste [-s] [-d list] file ...
 ### 示例
 将文件test.txt、test1.txt、test2.txt进行合并
 
-```
+```sh
 $ paste test.txt test1.txt test2.txt
 ```
 
 将文件test.txt中的行合并为一行输出
 
-```
+```sh
 $ paste -s test.txt
 ```
 
@@ -1268,7 +1268,7 @@ Stream editor
 流编辑器（将指定命令应用在输入的每一行上，并将结果写入到标准输出）
 ### 语法
 
-```
+```sh
 sed [-Ealn] command [file ...]
 sed [-Ealn] [[-e command]...] [-f command_file] [-i extension] [file ...]
 ```
@@ -1339,38 +1339,38 @@ sed [-Ealn] [[-e command]...] [-f command_file] [-i extension] [file ...]
 ### 示例
 匹配file文件中每一行的第一个book替换为books
 
-```
+```sh
 $ sed -i 's/book/books/g' file
 ```
 
 将file文件中第3处匹配book的地方开始，替换为books
 
-```
+```sh
 $ sed 's/book/books/3g' file
 ```
 
 删除文件的第2行到末尾所有行
 
-```
+```sh
 $ sed '2,$d' file
 ```
 
 所有以192.168.0.1开头的行都会被替换成它自已加localhost
 
-```
+```sh
 $ sed 's/^192.168.0.1/&localhost/' file
 192.168.0.1localhost
 ```
 
 将digit num替换为num
 
-```
+```sh
 $ echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
 ```
 
 替换test变量指定的内容（hello）替换为HELLO
 
-```
+```sh
 $ test=hello
 $ echo hello WORLD | sed "s/$test/HELLO"
 HELLO WORLD
@@ -1378,67 +1378,67 @@ HELLO WORLD
 
 打印从第5行开始到第一个包含以test开始的行之间的所有行
 
-```
+```sh
 $ sed -n '5,/^test/p' file
 ```
 
 先删除第1行到第5行的内容，然后将test替换为check
 
-```
+```sh
 $ sed -e '1,5d' -e 's/test/check/' file
 ```
 
 file里的内容被读进来，显示在与test匹配的行后面，如果匹配多行，则file的内容将显示在所有匹配行的下面
 
-```
+```sh
 $ sed '/test/r file' filename
 ```
 
 在example中所有包含test的行都被写入file里
 
-```
+```sh
 $ sed -n '/test/w file' example
 ```
 
 在文件第2行之后插入this is a test line
 
-```
+```sh
 $ sed -i '2a\this is a test line' file
 ```
 
 将this is a test line追加到以test开头的行前面
 
-```
+```sh
 $ sed '/^test/i\this is a test line' file
 ```
 
 如果test被匹配，则移动到匹配行的下一行，替换这一行的aa，变为bb，并打印该行，然后继续
 
-```
+```sh
 $ sed '/test/{ n; s/aa/bb/; }' file
 ```
 
 把1~10行内所有abcde转变为大写（注意，正则表达式元字符不能使用这个命令）
 
-```
+```sh
 $ sed '1,10y/abcde/ABCDE/' file
 ```
 
 打印完第10行后，退出sed
 
-```
+```sh
 $ sed '10q' file
 ```
 
 把包含test与check的行互换
 
-```
+```sh
 $ sed -e '/test/h' -e '/check/x' file
 ```
 
 打印奇数行或偶数行
 
-```
+```sh
 //奇数行
 $ sed -n '1~2p' test.txt
 
@@ -1454,7 +1454,7 @@ Sort or merge records (lines) of text and binary files
 将文本文件进行排序，并将排序结果标准输出（默认按字母顺序升序排序，特殊字符按其编码排序）
 ### 语法
 
-```
+```sh
 sort [-bcCdfghiRMmnrsuVz] [-k field1[,field2]] [-S memsize] [-T dir] [-t char] [-o output] [file ...]
 ```
 
@@ -1486,7 +1486,7 @@ sort [-bcCdfghiRMmnrsuVz] [-k field1[,field2]] [-S memsize] [-T dir] [-t char] [
 ### 示例
 以默认的方式对文件的行进行排序
 
-```
+```sh
 $ cat test.txt
 test  
 Hello  
@@ -1505,7 +1505,7 @@ Translate characters
 转换或删除文件中的字符（只能处理单个字符，如果要处理多个字符，请使用sed）
 ### 语法
 
-```
+```sh
 tr [-Ccsu] string1 string2
 tr [-Ccu] -d string1
 tr [-Ccu] -s string1
@@ -1551,31 +1551,31 @@ tr [-Ccu] -ds string1 string2
 ### 示例
 将输入字符由大写转换为小写
 
-```
+```sh
 $ tr 'A-Z' 'a-z' < file
 ```
 
 删除数字字符
 
-```
+```sh
 $ tr -d '0-9' < file
 ```
 
 制表符转换为空格
 
-```
+```sh
 $ tr '\t' ' ' < file
 ```
 
 将重复出现的“s”字符替换为“s*”
 
-```
+```sh
 $ tr -s 's*' < file
 ```
 
 将小写字符替换成大写字符
 
-```
+```sh
 $ tr '[:lower:]' '[:upper:]'
 ```
 
@@ -1586,7 +1586,7 @@ Report or filter out repeated lines in a file
 查找或删除文件中的重复行（这里说的重复指的是连续出现的行）
 ### 语法
 
-```
+```sh
 uniq [-c | -d | -u] [-i] [-f num] [-s chars] [input_file [output_file]]
 ```
 
@@ -1603,7 +1603,7 @@ uniq [-c | -d | -u] [-i] [-f num] [-s chars] [input_file [output_file]]
 ### 示例
 删除重复行
 
-```
+```sh
 $ uniq test.txt
 $ sort test.txt | uniq
 $ sort -u test.txt
@@ -1611,20 +1611,20 @@ $ sort -u test.txt
 
 只显示单一行
 
-```
+```sh
 $ uniq -u test.txt
 $ sort test.txt | uniq -u
 ```
 
 统计各行在文件中出现的次数
 
-```
+```sh
 $ sort test.txt | uniq -c
 ```
 
 在文件中找出重复的行
 
-```
+```sh
 $ sort test.txt | uniq -d
 ```
 
@@ -1635,7 +1635,7 @@ Vi IMproved, a programmers text editor
 全屏幕纯文本编辑器
 ### 语法
 
-```
+```sh
 vi [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [file ...]
 vi [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] -
 vi [+num] [/patterns] [-AbCdDeEfFghHLlmMNnRsvxXyZ] [-c command] [-d device] [-i viminfo] [-r file] [-s scriptin] [-T terminal] [-u vimrc] [-U gvimrc] [-w|W scriptout] [-t tag]
@@ -1703,7 +1703,7 @@ vi和ex编辑器的功能是相同的，二者的主要区别是用户界面。�
 ### 示例
 编辑文件test.txt
 
-```
+```sh
 $ vi test.txt
 ```
 
@@ -1714,7 +1714,7 @@ Word, line, character, and byte count
 计算字数
 ### 语法
 
-```
+```sh
 wc [-clmw] [file ...]
 ```
 
@@ -1727,7 +1727,7 @@ wc [-clmw] [file ...]
 
 ### 示例
 统计text文件的字数
-```
+```sh
 $ cat test
 test
 文件
@@ -1743,7 +1743,7 @@ Write arguments to the standard output
 在shell中输出指定的字符串（建议使用printf）
 ### 语法
 
-```
+```sh
 echo [-n] [string ...]
 ```
 
@@ -1754,7 +1754,7 @@ echo [-n] [string ...]
 ### 示例
 echo命令打印文字“test”
 
-```
+```sh
 echo "test"
 ```
 
@@ -1765,7 +1765,7 @@ Evaluate expression
 对表达式进行求值
 ### 语法
 
-```
+```sh
 expr expression
 ```
 
@@ -1788,7 +1788,7 @@ expr expression
 
 ### 示例
 
-```
+```sh
 $ result=`expr 2 + 3`
 $ result=$(expr $result + 5)
 ```
@@ -1800,7 +1800,7 @@ Formatted output
 格式化并输出结果到标准输出
 ### 语法
 
-```
+```sh
 printf format [arguments ...]
 ```
 
@@ -1846,7 +1846,7 @@ printf format [arguments ...]
 ### 示例
 打印字符串
 
-```
+```sh
 $ printf "String:<%s>\n" "A\nB"
 String:<A\nB>
 
@@ -1858,6 +1858,150 @@ $ printf "String AB \a"
 String AB $
 ```
 
+## <a id="shift">shift</a>
+### 描述
+Shift position parameter to the left
+### 功能
+向左移动位置参数
+### 语法
+
+```sh
+shift [n]
+```
+
+### 选项参数
+- **n**：指定向左移动的n个位置，此时保存在${m}中的内容会分配给${m-n}。如果没有指定n，默认为1（如果在没有位置参数可移动的情况下，使用shift会发生错误）
+
+### 示例
+
+```sh
+$cat tshift
+echo $# $*
+shift
+echo $# $*
+shift
+echo $# $*
+shift
+echo $# $*
+shift
+echo $# $*
+shift
+echo $# $*
+$ ./tshift a b c d e
+5 a b c d e
+4 b c d e
+3 c d e
+2 d e
+1 e
+0
+```
+
+## <a id="test"> test </a>
+### 描述
+Condition evaluation utility
+### 功能
+测试条件表达式
+### 语法
+
+```sh
+test expression
+```
+
+### 选项参数
+- **expression**：条件表达式。可使用操作符“!”、“-a”、“-o”和“()”将多个expression进行组合
+
+### 使用说明
+#### 数值测试
+- **n1 -eq n2**：数值n1等于n2，则为真
+- **n1 -ne n2**：数值n1不等于n2，则为真
+- **n1 -gt n2**：数值n1大于n2，则为真
+- **n1 -ge n2**：数值n1大于等于n2，则为真
+- **n1 -lt n2**：数值n1小于n2，则为真
+- **n1 -le n2**：数值n1小于等于n2，则为真
+
+#### 字符串测试
+- **-n string**：字符串string长度不为0，则为真
+- **-z string**：字符串string长度为0，则为真
+- **string**：字符串string不为空字符串，则为真
+- **s1 = s2**：字符串s1和s2相同，则为真
+- **s1 != s2**：字符串s1和s2不相同，则为真
+- **s1 < s2**：字符串s1等价的字符二进制值小于s2，则为真
+- **s1 > s2**：字符串s1等价的字符二进制值大于s2，则为真
+
+#### 文件测试
+- **-b file**：如果文件file为一个块特殊文件，则为真
+- **-c file**：如果文件file为一个字符特殊文件，则为真
+- **-d file**：如果文件file为一个目录，则为真
+- **-e file**：如果文件file存在，则为真
+- **-f file**：如果文件file为一个普通文件，则为真
+- **-g file**：如果设置了文件file的SGID位，则为真
+- **-h file**：如果文件file存在，并且是符号链接，则为真
+- **-k file**：如果设置了文件file的粘着位，则为真
+- **-p file**：如果文件file为一个命名管道，则为真
+- **-r file**：如果文件file可读，则为真
+- **-s file**：如果文件file的长度不为零，则为真
+- **-t file_discriptor**：如果文件描述符file_discriptor所指向的文件在终端中被打开，则为真
+- **-u file**：如果设置了文件file的SUID位，则为真
+- **-w file**：如果文件file可写，则为真
+- **-x file**：如果文件file可执行，则为真
+- **-L file**：如果文件file存在，并且是符号链接，则为真
+- **-O file**：如果文件file存在并且归该用户所有，则为真
+- **-G file**：如果文件file存在且归该组所有，则为真
+- **-S file**：如果文件file为一个套接字特殊文件，则为真
+- **file1 -nt file2**：如果文件file1存在且比file2更新，则为真
+- **file1 -ot file2**：如果文件file1存在且比file2更旧，则为真
+- **file1 -ef file2**：如果文件file1存在且和file2指向同一个文件，则为真
+
+**注意：如果file是符号链接，除非指定-h或-L，否则test命令会追踪到其链接的文件并使用它代替原file进行条件表达式的测试**
+
+### 示例
+判断数值num1和num2是否相等
+
+```sh
+$ cat testNum
+num1=100
+num2=100
+if test $[num1] -eq $[num2]
+then
+    echo '两个数相等！'
+else
+    echo '两个数不相等！'
+fi
+$ ./testNum
+两个数相等！
+```
+
+判断字符串str1和str2是否相同
+
+```sh
+$ cat testString
+str1="Kevin"
+str2="Zeng"
+if test $num1 = $num2
+then
+    echo '两个字符串相同!'
+else
+    echo '两个字符串不相同!'
+fi
+$ ./testString
+两个字符串不相同!
+```
+
+判断文件./bin/bash是否存在
+
+```sh
+$ cat testFile
+cd /bin
+if test -e ./bash
+then
+    echo '文件已存在!'
+else
+    echo '文件不存在!'
+fi
+$ ./testFile
+文件已存在!
+```
+
 # <a id="网络通讯">网络通讯</a>
 ## <a id="ping">ping</a>
 ### 描述
@@ -1866,7 +2010,7 @@ Send ICMP ECHO_REQUEST packets to network hosts
 测试主机之间网络的连通性（使用ICMP传输协议，发出要求回应的信息，若远端主机的网络功能没有问题，就会回应该信息，因而得知该主机运作正常）
 ### 语法
 
-```
+```sh
 ping [-AaCDdfnoQqRrv] [-b boundif] [-c count] [-G sweepmaxsize] [-g sweepminsize] [-h sweepincrsize] [-i wait] [-k trafficclass] [-K netservicetype] [-l preload] [-M mask|time] [-m ttl] [-P policy] [-p pattern] [-S src_addr] [-s packetsize] [-t timeout] [-W waittime] [-z tos] [--apple-connect] [--apple-time] host
 ping [-AaDdfLnoQqRrv] [-b boundif] [-c count] [-I iface] [-i wait] [-k trafficclass] [-K netservicetype] [-l preload] [-M mask|time] [-m ttl] [-P policy] [-p pattern] [-S src_addr] [-s packetsize] [-T ttl] [-t timeout] [-W waittime] [-z tos] [--apple-connect] [--apple-time] mcast-group
 ```
@@ -1914,7 +2058,7 @@ ping [-AaDdfLnoQqRrv] [-b boundif] [-c count] [-I iface] [-i wait] [-k trafficcl
 ### 示例
 检测是否与主机连通，并指定多个参数
 
-```
+```sh
 /*
 -c 3 接收包的次数3次
 -i 5 发送周期为5秒  
@@ -1941,7 +2085,7 @@ Walk a file hierarchy
 在指定目录下查找文件
 ### 语法
 
-```
+```sh
 find [-H|-L|-P] [-EXdsx] [-f fpath] path ... [expression]
 find [-H|-L|-P] [-EXdsx] -f fpath [path ...] [expression]
 ```
@@ -2062,68 +2206,68 @@ find [-H|-L|-P] [-EXdsx] -f fpath [path ...] [expression]
 ### 示例
 在当前目录及子目录下查找所有以.txt和.pdf结尾的文件
 
-```
+```sh
 //等价于 find . -name "*.txt" -o -name "*.pdf"
 $ find . \( -name "*.txt" -o -name "*.pdf" \)
 ```
 
 找出/home下不是以.txt结尾的文件
 
-```
+```sh
 $ find /home ! -name "*.txt"
 ```
 
 找出当前目录下文件类型为符号链接的文件
 
-```
+```sh
 $ find . -type l
 ```
 
 搜索出深度距离当前目录至少2个子目录的所有文件
 
-```
+```sh
 $ find . -mindepth 2 -type f
 ```
 
 搜索恰好在七天前被访问过的所有文件
 
-```
+```sh
 $ find . -type f -atime 7
 ```
 
 搜索大于10KB的文件
 
-```
+```sh
 $ find . -type f -size +10k
 ```
 
 删除当前目录下所有.txt文件
 
-```
+```sh
 $ find . -type f -name "*.txt" -delete
 ```
 
 找出当前目录下权限不是644的php文件
 
-```
+```sh
 $ find . -type f -name "*.php" ! -perm 644
 ```
 
 找出当前目录下所有root的文件，并把所有权更改为用户TestUser
 
-```
+```sh
 $ find .-type f -user root -exec chown TestUser {} \;
 ```
 
 查找当前目录或者子目录下所有.txt文件，但是跳过子目录sk
 
-```
+```sh
 $ find . -path "./sk" -prune -o -name "*.txt" -print
 ```
 
 列出所有长度为零的文件
 
-```
+```sh
 $ find . -empty
 ```
 
@@ -2134,7 +2278,7 @@ File pattern searcher
 在一个或多个文件搜索指定的模式，并输出匹配的行（多个文件时，文件名会出现在输出行的每行之前）
 ### 语法
 
-```
+```sh
 grep [-abcdDEFGHhIiJLlmnOopqRSsUVvwxZ] [-A num] [-B num] [-C[num]] [-e pattern] [-f file] [--binary-files=value] [--color[=when]] [--context[=num]] [--label] [--line-buffered] [--null] [pattern] [file ...]
 ```
 
@@ -2194,7 +2338,7 @@ grep [-abcdDEFGHhIiJLlmnOopqRSsUVvwxZ] [-A num] [-B num] [-C[num]] [-e pattern] 
 ### 示例
 在当前目录中，查找前缀有test字样的文件中包含test字符串的文件，并打印出该字符串的行
 
-```
+```sh
 $ grep test test*
 test.txt:This a shell test
 test1.txt:This is a shell test
@@ -2203,7 +2347,7 @@ test2.txt:test
 
 以递归的方式查找当前目录及其子目录（如果存在子目录的话）下所有文件中包含字符串"test"的文件，并打印出该字符串所在行的内容
 
-```
+```sh
 $ grep -r test1 . 
 ./test/test.txt:This a shell test
 ./test/test1.txt:This is a shell test
@@ -2212,7 +2356,7 @@ $ grep -r test1 .
 
 查找文件名中包含test的文件中不包含test的行
 
-```
+```sh
 $ grep -v test *test*
 test1.txt:ABCDEFG
 test1.txt:HIJKLMN
@@ -2231,7 +2375,7 @@ Locate programs
 定位指令的二进制程序、源代码文件和man手册页等相关文件的路径
 ### 语法
 
-```
+```sh
 whereis [program ...]
 ```
 
@@ -2241,7 +2385,7 @@ whereis [program ...]
 ### 示例
 查看指令"bash"的位置
 
-```
+```sh
 $ whereis bash 
 /bin/bash
 ```
@@ -2253,7 +2397,7 @@ Locate a program file in the user's path
 在环境变量PATH设置的目录里查找符合条件的程序
 ### 语法
 
-```
+```sh
 which [-as] program ...
 ```
 
@@ -2265,7 +2409,7 @@ which [-as] program ...
 ### 示例
 查找显示命令pwd的路径
 
-```
+```sh
 $ which pwd 
 /bin/pwd
 ```
@@ -2278,7 +2422,7 @@ An arbitrary precision calculator language
 进行任意精度的计算
 ### 语法
 
-```
+```sh
 bc [-hilwsqv] [long-options] [file ...]
 ```
 
@@ -2317,21 +2461,21 @@ bc [-hilwsqv] [long-options] [file ...]
 ### 示例
 执行浮点运算
 
-```
+```sh
 $ echo "1.212*3" | bc
 3.636
 ```
 
 设定小数精度
 
-```
+```sh
 $ echo "scale=2;3/8" | bc
 0.37
 ```
 
 进制转换
 
-```
+```sh
 $ abc=192
 $ echo "obase=2;$abc" | bc
 11000000
@@ -2341,7 +2485,7 @@ $ echo "obase=10;ibase=2;$abc" | bc
 
 计算平方和平方根
 
-```
+```sh
 $ echo "10^10" | bc
 10000000000
 $ echo "sqrt(100)" | bc
@@ -2354,7 +2498,7 @@ Clear the terminal screen
 清除当前屏幕终端上的任何信息
 ### 语法
 
-```
+```sh
 clear
 ```
 
@@ -2362,7 +2506,7 @@ clear
 无
 ### 示例
 清屏
-```
+```sh
 $ clear
 ```
 
@@ -2373,7 +2517,7 @@ Display or set date and time
 显示或设置系统时间与日期
 ### 语法
 
-```
+```sh
 date [-jRu] [-r seconds|filename] [-v [+|-]val[ymwdHMS]] ... [+output_fmt]
 date [-jnu] [[[mm]dd]HH]MM[[cc]yy][.ss]
 date [-jnRu] -f input_fmt new_date [+output_fmt]
@@ -2450,7 +2594,7 @@ date [-d dst] [-t minutes_west]
 
 ### 示例
 显示当前时间
-```
+```sh
 $ date
 三 5月 12 14:08:12 CST 2010
 
@@ -2476,7 +2620,7 @@ $ date '+%X'
 
 按自己的格式输出
 
-```
+```sh
 $ date '+usr_time: $1:%M %P -hey'
 usr_time: $1:16 下午 -hey
 ```
@@ -2488,7 +2632,7 @@ Format and display the on-line manual pages
 查看命令、配置文件和编程等帮助信息
 ### 语法
 
-```
+```sh
 man [-acdfFhkKtwW] [-m system] [-p string] [-C config_file] [-M pathlist] [-P pager] [-B browser] [-H htmlpager] [-S section_list] [section] name ...
 ```
 
@@ -2518,7 +2662,7 @@ man [-acdfFhkKtwW] [-m system] [-p string] [-C config_file] [-M pathlist] [-P pa
 ### 示例
 显示cd命令的帮助手册
 
-```
+```sh
 $ man cd
 ```
 
@@ -2529,7 +2673,7 @@ Print operating system name
 打印当前系统相关信息
 ### 语法
 
-```
+```sh
 uname [-amnprsv]
 ```
 
@@ -2545,7 +2689,7 @@ uname [-amnprsv]
 ### 示例
 显示操作系统的全部信息
 
-```
+```sh
 $ uname
 Darwin mini.local 17.3.0 Darwin Kernel Version 17.3.0: Thu Nov  9 18:09:22 PST 2017; root:xnu-4570.31.3~1/RELEASE_X86_64 x86_64
 ```
@@ -2557,7 +2701,7 @@ Search the whatis database for complete words
 查询命令执行什么功能，并将查询结果打印到终端上
 ### 语法
 
-```
+```sh
 whatis keyword ...
 ```
 
@@ -2567,7 +2711,7 @@ whatis keyword ...
 ### 示例
 查询cp命令的功能
 
-```
+```sh
 $ whatis cp
 gcp(1), cp(1)            - copy files and directories
 cp(1)                    - copy files
