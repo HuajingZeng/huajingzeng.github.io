@@ -1751,6 +1751,17 @@ echo [-n] [string ...]
 - **-n**：不打印换行字符
 - **string**：要输出的字符串
 
+### 特殊的转义字符
+
+- **\b**：退格（Backspace）
+- **\c**：忽略输出中最后的换行符
+- **\f**：换页（Formfeed）
+- **\n**：回车换行（Newline）
+- **\r**：回车（Carriage Return）
+- **\t**：制表符（Tab character）
+- **\\**：反斜线（Backslash character）
+- **\0nnn**：ASCII值为nnn的字符，其中nnn是1~3位的八进制数
+
 ### 示例
 echo命令打印文字“test”
 
@@ -1905,6 +1916,12 @@ Condition evaluation utility
 
 ```sh
 test expression
+```
+
+或(在“[”之后以及“]”之前必须有空格)
+
+```sh
+[ expression ]
 ```
 
 ### 选项参数
