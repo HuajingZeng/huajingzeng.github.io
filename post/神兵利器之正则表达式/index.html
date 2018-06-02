@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>神兵利器之正则表达式 | 曾华经</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="iOS, Web" >
+    <meta name="description" content="曾华经个人博客" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="曾华经" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico" >
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">曾华经</span>
+                    <span class="description">iOS Programmer</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/post/神兵利器之正则表达式/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/post/神兵利器之正则表达式/index.html" class="item ">
+                <a href="/lab/" title="项目" class="icon-lab">&nbsp;项目</a>
+            </li>
+            
+            <li rel="/post/神兵利器之正则表达式/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/post/神兵利器之正则表达式/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/HuajingZeng" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://github.com" target="_blank">Hosted by Github Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://weibo.com/p/1005051288040665/home?from=page_100505&amp;mod=TAB#place" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href="" class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zhj.jpg" alt="avatar" title="曾华经" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:block">
+    <span class="btn-text">文章导航</span>
+    </p>
+    <div id="toc-article" class="toc-article" style="display:none">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础知识"><span class="toc-number">2.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符组"><span class="toc-number">2.1.</span> <span class="toc-text">字符组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#普通字符组"><span class="toc-number">2.1.1.</span> <span class="toc-text">普通字符组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符与转义"><span class="toc-number">2.1.2.</span> <span class="toc-text">元字符与转义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#元字符"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">元字符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排除型字符组"><span class="toc-number">2.1.3.</span> <span class="toc-text">排除型字符组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符组简记法"><span class="toc-number">2.1.4.</span> <span class="toc-text">字符组简记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符组运算"><span class="toc-number">2.1.5.</span> <span class="toc-text">字符组运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#量词"><span class="toc-number">2.2.</span> <span class="toc-text">量词</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般形式"><span class="toc-number">2.2.1.</span> <span class="toc-text">一般形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用量词"><span class="toc-number">2.2.2.</span> <span class="toc-text">常用量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#点号"><span class="toc-number">2.2.3.</span> <span class="toc-text">点号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配优先量词与忽略优先量词"><span class="toc-number">2.2.4.</span> <span class="toc-text">匹配优先量词与忽略优先量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转义"><span class="toc-number">2.2.5.</span> <span class="toc-text">转义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#括号"><span class="toc-number">2.3.</span> <span class="toc-text">括号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分组"><span class="toc-number">2.3.1.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多选结构"><span class="toc-number">2.3.2.</span> <span class="toc-text">多选结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用分组"><span class="toc-number">2.3.3.</span> <span class="toc-text">引用分组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向引用"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">反向引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#各种引用的记法"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">各种引用的记法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命名分组"><span class="toc-number">2.3.3.3.</span> <span class="toc-text">命名分组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非捕获分组"><span class="toc-number">2.3.4.</span> <span class="toc-text">非捕获分组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充"><span class="toc-number">2.3.5.</span> <span class="toc-text">补充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#断言"><span class="toc-number">2.4.</span> <span class="toc-text">断言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匹配模式"><span class="toc-number">2.5.</span> <span class="toc-text">匹配模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">2.6.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原理剖析"><span class="toc-number">3.</span> <span class="toc-text">原理剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编码规则"><span class="toc-number">3.1.</span> <span class="toc-text">编码规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匹配原理"><span class="toc-number">3.2.</span> <span class="toc-text">匹配原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">3.3.</span> <span class="toc-text">常见问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#示例"><span class="toc-number">4.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell"><span class="toc-number">4.1.</span> <span class="toc-text">Shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-number">4.2.</span> <span class="toc-text">Objective-C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Swift"><span class="toc-number">4.3.</span> <span class="toc-text">Swift</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript"><span class="toc-number">4.4.</span> <span class="toc-text">JavaScript</span></a></li></ol></li></ol>
+   </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+     
+<!-- 目录内容结束 -->
+<!-- 文章 -->
+<article class="post article" onclick="showBtn();">
+    <header class="text-center">
+        <h3 class="post-title"><span>神兵利器之正则表达式</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        曾华经&emsp;发表于
+        <time datetime="2018-01-02T05:11:10.000Z">2018-01-02</time>&emsp;修改于
+        <time datetime="2018-06-02T10:06:16.553Z">2018-06-02</time>
+    </p>
+    <div class="post-content">
+        <p>&emsp;&emsp;正则表达式并不“总要用到”。但当你需要经常处理文本和字符串时，用过它之后，你就会知道它的强大和价值所在，并且深深地爱上它。学会使用正则表达式是非常必要的，即便你所处的开发领域与文本处理没什么关系。否则当到了需要的场合用不上，就会有“一分钱难倒英雄汉”的尴尬了。</p>
+<a id="more"></a>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。</p>
+</blockquote>
+<p><strong>正则表达式的主要用途：</strong></p>
+<ul>
+<li>验证字符串是否匹配模式</li>
+<li>替换字符串中匹配模式的子字符串</li>
+<li>从字符串中提取匹配模式的子字符串</li>
+</ul>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="字符组"><a href="#字符组" class="headerlink" title="字符组"></a>字符组</h2><h3 id="普通字符组"><a href="#普通字符组" class="headerlink" title="普通字符组"></a>普通字符组</h3><blockquote>
+<p>(普通)字符组/字符类/字符集（Character Class/Character Set）：一组字符的集合，表示“在同一个位置可能出现的各种字符”，其写法是在一对方括号[和]之间列出所有可能出现的字符。用[x-y]的形式表示x到y整个范围内的字符，省去一一列出的麻烦。</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li>-表示的范围，一般是根据字符对应的ASCII编码来确定的，码值小的字符在前，码值大的字符在后。</li>
+<li>在字符组中可以同时并列多个“-范围表示法”，如[0-9a-fA-F]可以用来验证十六进制字符</li>
+<li>可以用转义序列\xhex来表示一个字符。其中\x是固定前缀，表示转义序列的开头，hex是字符对应的ASCII编码值（是一个两位的十六进制数值），如[\x00-\x7F]可以验证ASCII字符</li>
+</ul>
+<h3 id="元字符与转义"><a href="#元字符与转义" class="headerlink" title="元字符与转义"></a>元字符与转义</h3><blockquote>
+<p>元字符（meta-character）：在匹配中有特殊意义的字符，如：“-”、“[”、“]”、“^”、“$”等。</p>
+</blockquote>
+<h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;&emsp;元字符&emsp;&emsp;<div></div></div></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\</td>
+<td>将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，‘n’匹配字符“n”。‘\n’匹配一个换行符。序列‘\’匹配“\”而“(”则匹配“(”</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td>匹配输入字符串的开始位置。如果设置了RegExp对象的Multiline属性，^也匹配‘\n’或‘\r’之后的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td>匹配输入字符串的结束位置。如果设置了RegExp对象的Multiline属性，$也匹配‘\n’或‘\r’之前的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td>匹配前面的子表达式零次或多次。例如，zo<em>能匹配“z”以及“zoo”。</em>等价于{0,}</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td>匹配前面的子表达式一次或多次。例如，‘zo+’能匹配“zo”以及“zoo”，但不能匹配“z”。+等价于 {1,}</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td>匹配前面的子表达式零次或一次。例如，“do(es)?”可以匹配“do”或“does”。?等价于{0,1}</td>
+</tr>
+<tr>
+<td style="text-align:center">{n}</td>
+<td>n是一个非负整数。匹配确定的n次。例如，‘o{2}’不能匹配”Bob“中的‘o’，但是能匹配”food“中的两个o</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,}</td>
+<td>n是一个非负整数。至少匹配n次。例如，‘o{2,}’不能匹配”Bob“中的‘o’，但能匹配”foooood“中的所有o。‘o{1,}’等价于‘o+’。‘o{0,}’则等价于‘o*’</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,m}</td>
+<td>m和n均为非负整数，其中n&lt;=m。最少匹配n次且最多匹配m次。例如，“o{1,3}”将匹配 “fooooood”中的前三个o。‘o{0,1}’等价于‘o?’。请注意在逗号和两个数之间不能有空格</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td>当该字符紧跟在任何一个其他限制符（*, +, ?, {n}, {n,}, {n,m}）后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串“oooo”，‘o+?’将匹配单个“o”，而‘o+’将匹配所有‘o’</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td>匹配除“\n”之外的任何单个字符。要匹配包括‘\n’在内的任何字符，请使用像“(.&#124;\n)”的模式</td>
+</tr>
+<tr>
+<td style="text-align:center">(pattern)</td>
+<td>匹配pattern并获取这一匹配。所获取的匹配可以从产生的Matches集合得到，在VBScript中使用SubMatches集合，在JScript中则使用$0…$9属性。要匹配圆括号字符，请使用‘(’或‘)’</td>
+</tr>
+<tr>
+<td style="text-align:center">(?:pattern)</td>
+<td>匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用“或”字符(&#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&#124;ies) 就是一个比 ‘industry&#124;industries’ 更简略的表达式。</td>
+</tr>
+<tr>
+<td style="text-align:center">(?=pattern)</td>
+<td>正向肯定预查（look ahead positive assert），在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，“Windows(?=95&#124;98&#124;NT&#124;2000)”能匹配“Windows2000”中的“Windows”，但不能匹配“Windows3.1”中的“Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始</td>
+</tr>
+<tr>
+<td style="text-align:center">(?!pattern)</td>
+<td>正向否定预查(negative assert)，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如“Windows(?!95&#124;98&#124;NT&#124;2000)”能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始</td>
+</tr>
+<tr>
+<td style="text-align:center">(?&lt;=pattern)</td>
+<td>反向(look behind)肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?&lt;=95&#124;98&#124;NT&#124;2000)Windows”能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”</td>
+</tr>
+<tr>
+<td style="text-align:center">(?&lt;!pattern)</td>
+<td>反向否定预查，与正向否定预查类似，只是方向相反。例如“(?&lt;!95&#124;98&#124;NT&#124;2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”</td>
+</tr>
+<tr>
+<td style="text-align:center">x&#124;y</td>
+<td>匹配 x 或 y。例如，‘z&#124;food’能匹配“z”或“food”。‘(z&#124;f)ood’则匹配“zood”或“food”</td>
+</tr>
+<tr>
+<td style="text-align:center">[xyz]</td>
+<td>字符集合。匹配所包含的任意一个字符。例如，‘[abc]’可以匹配“plain”中的‘a’</td>
+</tr>
+<tr>
+<td style="text-align:center">[\^xyz]</td>
+<td>负值字符集合。匹配未包含的任意字符。例如，‘[^abc]’可以匹配“plain”中的‘p’、‘l’、‘i’、‘n’</td>
+</tr>
+<tr>
+<td style="text-align:center">[a-z]</td>
+<td>字符范围。匹配指定范围内的任意字符。例如，‘[a-z]’可以匹配‘a’到‘z’范围内的任意小写字母字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[\^a-z]</td>
+<td>负值字符范围。匹配任何不在指定范围内的任意字符。例如，‘[^a-z]’可以匹配任何不在‘a’到‘z’范围内的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td>匹配一个单词边界，也就是指单词和空格间的位置。例如，‘er\b’可以匹配“never”中的‘er’，但不能匹配“verb”中的‘er’</td>
+</tr>
+<tr>
+<td style="text-align:center">\B</td>
+<td>匹配非单词边界。‘er\B’能匹配“verb”中的‘er’，但不能匹配“never”中的‘er’</td>
+</tr>
+<tr>
+<td style="text-align:center">\cx</td>
+<td>匹配由x指明的控制字符。例如，\cM匹配一个Control-M或回车符。x的值必须为A-Z或a-z之一。否则，将c视为一个原义的‘c’字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td>匹配一个数字字符。等价于[0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center">\D</td>
+<td>匹配一个非数字字符。等价于[^0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td>匹配一个换页符。等价于\x0c和\cL</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td>匹配一个换行符。等价于\x0a和\cJ</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td>匹配一个回车符。等价于\x0d和\cM</td>
+</tr>
+<tr>
+<td style="text-align:center">\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于[ \f\n\r\t\v]</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td>匹配任何非空白字符。等价于[^ \f\n\r\t\v]</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td>匹配一个制表符。等价于\x09和\cI</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td>匹配一个垂直制表符。等价于\x0b和\cK</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td>匹配字母、数字、下划线。等价于‘[A-Za-z0-9_]’</td>
+</tr>
+<tr>
+<td style="text-align:center">\W</td>
+<td>匹配非字母、数字、下划线。等价于‘[^A-Za-z0-9_]’</td>
+</tr>
+<tr>
+<td style="text-align:center">\xn</td>
+<td>匹配n，其中n为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，“\x41”匹配“A”。‘\x041’则等价于‘\x04’&amp;“1”。正则表达式中可以使用ASCII编码</td>
+</tr>
+<tr>
+<td style="text-align:center">\num</td>
+<td>匹配num，其中num是一个正整数。对所获取的匹配的引用。例如，’(.)\1’匹配两个连续的相同字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td>标识一个八进制转义值或一个向后引用。如果\n之前至少n个获取的子表达式，则n为向后引用。否则，如果n为八进制数字（0-7），则n为一个八进制转义值</td>
+</tr>
+<tr>
+<td style="text-align:center">\nm</td>
+<td>标识一个八进制转义值或一个向后引用。如果\nm之前至少有nm个获得子表达式，则nm为向后引用。如果\nm之前至少有n个获取，则n为一个后跟文字m的向后引用。如果前面的条件都不满足，若n和m均为八进制数字（0-7），则\nm将匹配八进制转义值nm</td>
+</tr>
+<tr>
+<td style="text-align:center">\nml</td>
+<td>如果n为八进制数字（0-3），且m和l均为八进制数字（0-7），则匹配八进制转义值nml</td>
+</tr>
+<tr>
+<td style="text-align:center">\un</td>
+<td>匹配n，其中n是一个用四个十六进制数字表示的Unicode字符。例如，\u00A9 匹配版权符号 (?)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong></p>
+<ul>
+<li>字符组中的“-”如果紧邻着字符组中的开方括号[，那么它就是普通字符，其他情况下都是元字符（如果要在字符组内部使用横线“-”，最好的办法是将它排列在字符组的最开头）</li>
+<li>其他元字符，取消特殊含义的做法都是转义，也就是在正则表达式中的元字符之前加上反斜线字符“\”</li>
+<li>-不是合法的转义字符，因此需要先转义成\-，即正则表达式为：[0-9]，但程序里写的却是：[0\-9]（具体来说，在Java、PHP、Python、.NET等语言中，正则表达式都是以字符串的形式给出的，在Ruby和JavaScript中则不是这样）</li>
+<li>Python提供了原生字符串（Raw String）：正则表达式是怎样，原生字符串就是怎样，完全不需要考虑正则表达式之外的转义（只有双引号字符是例外，原生字符串内的双引号字符必须写成\”）</li>
+</ul>
+<h3 id="排除型字符组"><a href="#排除型字符组" class="headerlink" title="排除型字符组"></a>排除型字符组</h3><blockquote>
+<p>排除型字符组（Negated Character Class）：在方括号[之后紧跟一个脱字符^，写作[^…]，表示“在当前位置，匹配一个没有列出的字符”。</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li>排除型字符组必须匹配一个字符</li>
+<li>在排除型字符组中，如果需要表示横线字符-，那么-应该紧跟在^之后</li>
+<li>如果想表示“这个字符组中可以出现^字符”，不要让它紧挨着[即可，否则就要转义</li>
+</ul>
+<h3 id="字符组简记法"><a href="#字符组简记法" class="headerlink" title="字符组简记法"></a>字符组简记法</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">简记法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\d</td>
+<td>等价于[0-9]，其中d即“digit”，表示数字</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td>等价于[0-9a-zA-Z_]，其中的w即“word”(\w能匹配下划线)，表示数字、字母以及下划线</td>
+</tr>
+<tr>
+<td style="text-align:center">\s</td>
+<td>等价于[ \t\r\n\v\f]（第一个字符是空格，\t是制表符，\r是回车符，\n是换行符，以及其他“空白”字符），s即“space”，表示空白字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\D</td>
+<td>等价于[\^0-9]，表示除数字之外的所有字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\W</td>
+<td>等价于[\^0-9a-zA-Z_]，表示除数字、字母以及下划线之外的所有字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td>等价于[\^ \t\r\n\v\f]，表示非空白字符之外的所有字符</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong></p>
+<ul>
+<li>字符组简记法可以单独出现，也可以使用在字符组中</li>
+<li>[\s\S]、[\w\W]、[\d\D]匹配“所有的字符/任意字符”（默认情况下，点号.不能匹配换行符）</li>
+<li>如果字符组中出现了字符组简记法，最好不要出现单独的-，否则可能引起错误</li>
+<li>\d、\w、\s的匹配规则都是针对ASCII编码而言的。目前一些语言中的正则表达式已经支持Unicode字符，那么数字字符、单词字符、空白字符的范围就不仅仅限制于ASCII编码中的字符</li>
+</ul>
+<h3 id="字符组运算"><a href="#字符组运算" class="headerlink" title="字符组运算"></a>字符组运算</h3><p>字符组可以使用“&amp;&amp;”、“||”等逻辑运算符</p>
+<h2 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h2><h3 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h3><blockquote>
+<p>量词（quantifier）：表示确定的长度或不确定的长度</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>量词</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{n}</td>
+<td>之前的元素必须出现n次</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>之前的元素最少出现m次，最多出现n次</td>
+</tr>
+<tr>
+<td>{m,}</td>
+<td>之前的元素最少出现m次，出现次数无上限</td>
+</tr>
+<tr>
+<td>{0,n}</td>
+<td>之前的元素可以不出现，也可以出现，最多出现n次（在某些语言中可以写为{,n}）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong></p>
+<ul>
+<li>量词中的逗号之后绝不能有空格</li>
+<li>如果不确定长度的上限，可以省略，只指定下限{m,}</li>
+<li>如果没有明确下限，则默认为0（Java不支持{,n}的写法，推荐使用{0,n}的记法）</li>
+</ul>
+<h3 id="常用量词"><a href="#常用量词" class="headerlink" title="常用量词"></a>常用量词</h3><table>
+<thead>
+<tr>
+<th>常用量词</th>
+<th>{m,n}等价形式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>{0,}</td>
+<td>可能出现，也可能不出现，出现次数没有上限</td>
+</tr>
+<tr>
+<td>+</td>
+<td>{1,}</td>
+<td>至少出现1次，出现次数没有上限</td>
+</tr>
+<tr>
+<td>?</td>
+<td>{0,1}</td>
+<td>至多出现1次，也可能不出现</td>
+</tr>
+</tbody>
+</table>
+<h3 id="点号"><a href="#点号" class="headerlink" title="点号"></a>点号</h3><p>点号.可以匹配“任意字符”，唯独不能匹配换行符\n</p>
+<p><strong>匹配“任意字符”的方法：</strong></p>
+<ul>
+<li>指定使用单行匹配模式</li>
+<li>使用“自制”通配字符组[\s\S]、[\w\W]、[\d\D]</li>
+</ul>
+<h3 id="匹配优先量词与忽略优先量词"><a href="#匹配优先量词与忽略优先量词" class="headerlink" title="匹配优先量词与忽略优先量词"></a>匹配优先量词与忽略优先量词</h3><blockquote>
+<p>匹配优先量词/贪婪量词（greedy quantifier）：在拿不准是否要匹配的时候，优先尝试匹配，并记下这个状态，以备将来“反悔”（回溯）。</p>
+<p>忽略优先量词/懒惰量词（lazy quantifier/reluctant quantifier）：如果不确定是否要匹配，优先选择不匹配的状态，再尝试表达式中之后的元素，如果尝试失败，再回溯，选择之前保存的“匹配”状态。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>匹配优先量词</th>
+<th>忽略优先量词</th>
+<th>限制次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>*?</td>
+<td>可能不出现，也可能出现，出现次数没有上限</td>
+</tr>
+<tr>
+<td>+</td>
+<td>+?</td>
+<td>至少出现1次，出现次数没有上限</td>
+</tr>
+<tr>
+<td>?</td>
+<td>??</td>
+<td>至多出现1次，也可能不出现</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>{m,n}?</td>
+<td>出现次数最少为m次，最多为n次</td>
+</tr>
+<tr>
+<td>{m,}</td>
+<td>{m,}?</td>
+<td>出现次数最少为m次，没有上限</td>
+</tr>
+<tr>
+<td>{,n}</td>
+<td>{,n}?</td>
+<td>可能不出现，也可能出现，最多出现n词</td>
+</tr>
+</tbody>
+</table>
+<h3 id="转义"><a href="#转义" class="headerlink" title="转义"></a>转义</h3><table>
+<thead>
+<tr>
+<th>量词</th>
+<th>转义形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{n}</td>
+<td>\{n}</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>\{m,n}</td>
+</tr>
+<tr>
+<td>{m,}</td>
+<td>\{m,}</td>
+</tr>
+<tr>
+<td>{,n}</td>
+<td>\{,n}</td>
+</tr>
+<tr>
+<td>*</td>
+<td>\*</td>
+</tr>
+<tr>
+<td>+</td>
+<td>\+</td>
+</tr>
+<tr>
+<td>?</td>
+<td>\?</td>
+</tr>
+<tr>
+<td>*?</td>
+<td>\*\?</td>
+</tr>
+<tr>
+<td>+?</td>
+<td>\+\?</td>
+</tr>
+<tr>
+<td>??</td>
+<td>\?\?</td>
+</tr>
+</tbody>
+</table>
+<h2 id="括号"><a href="#括号" class="headerlink" title="括号"></a>括号</h2><h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><blockquote>
+<p>分组：把概念上相关的部分“归拢”到一起，以免割裂。把表达式用括号包围起来，括号内的表达式就是一个独立的元素，通常被称为“子表达式”。</p>
+</blockquote>
+<h3 id="多选结构"><a href="#多选结构" class="headerlink" title="多选结构"></a>多选结构</h3><blockquote>
+<p>多选结构（alternative）：以(…|…)的形式，在括号内以竖线|分隔开多个子表达式，这些子表达式也叫多选分支。在一个多选结构内，多选分支的数目没有限制。在匹配时，整个多选结构被视为单个元素，只要其中某个子表达式能够匹配，整个多选结构的匹配就成功，如果所有子表达式都不能匹配，则整个多选结构匹配失败。</p>
+</blockquote>
+<h3 id="引用分组"><a href="#引用分组" class="headerlink" title="引用分组"></a>引用分组</h3><blockquote>
+<p>引用分组/捕获分组（capturing group）：使用括号后，正则表达式会保存每个分组真正匹配的文本，等到匹配完成后，通过group(num)之类的方法“引用”分组在匹配时捕获的内容。其中num表示对应括号的编号，括号分组的编号规则是从左向右计数，从1开始。这种括号叫做“捕获型括号”。</p>
+</blockquote>
+<ul>
+<li>编号为0的分组默认对应整个表达式匹配的文本（许多语言中如果调用group()不给出参数num，默认就等于调用group(0)）</li>
+<li>无论括号如何嵌套，分组的编号都是根据开括号出现顺序来计数的</li>
+<li>引用分组时，引用的是分组对应括号内表达式捕获的文本，如:(\d){4}是捕获单个数字，重复四次，因此保留的是最后一次捕获的数字</li>
+<li>引用分组捕获的文本可以使用re.sub(pattern, replacement, string)进行替换，其中pattern是用来匹配被替换文本的表达式，replacement是要替换成的文本（replacement中可以引用分组，形式是\num，其中num是对应分组的编号，replacement中使用\1、\2时也必须指定为原生字符串，如果要引用整个表达式匹配的文本，不能使用\0来引用，\0本身是ASCII字符编码为0的字符，\0开头的转义序列通常表示八进制形式的字符。可以给整个表达式加上一对括号，用\1来引用），string是要进行替换操作的字符串</li>
+</ul>
+<h4 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h4><blockquote>
+<p>反向引用（back-reference）：在正则表达式内部引用之前的捕获分组匹配的文本，其形式也是\num。</p>
+</blockquote>
+<h4 id="各种引用的记法"><a href="#各种引用的记法" class="headerlink" title="各种引用的记法"></a>各种引用的记法</h4><table>
+<thead>
+<tr>
+<th>语言</th>
+<th>表达式中的反向引用</th>
+<th>替换中的反向引用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.NET</td>
+<td>\num</td>
+<td>$num</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>\num</td>
+<td>$num</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>$num</td>
+<td>$num</td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>\num</td>
+<td>\num或$num（PHP 4.0.4以上版本）</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>\num</td>
+<td>\num</td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>\num</td>
+<td>\num</td>
+</tr>
+</tbody>
+</table>
+<p><strong>除Python和PHP之外的语言并不提供如\g<num>和\${num}的引用分组表示法来避免二义性。其他语言采用规定：如果是一位数，则引用对应的捕获分组；如果是两位数且存在对应捕获分组时，引用对应的捕获分组；如果不存在对应的捕获分组，则引用一位数编号的捕获分组</num></strong></p>
+<h4 id="命名分组"><a href="#命名分组" class="headerlink" title="命名分组"></a>命名分组</h4><blockquote>
+<p>命名分组（named grouping）：使用容易记忆和辨别的名字标识分组（在Python中使用(?P<name>…)的形式标记分组，使用\g<name>进行反向引用，使用group(name)的方式来捕获对应分组的文本，其中name是赋予这个分组的名字）。</name></name></p>
+</blockquote>
+<p><strong>在使用命名分组的同时，仍然可以使用数字编号来引用分组</strong></p>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>分组记法</th>
+<th>表达式中的引用记法</th>
+<th>替换时的引用记法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.NET</td>
+<td>(?<name>…)</name></td>
+<td>\k<name></name></td>
+<td>$<name></name></td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>(?P<name>…)</name></td>
+<td>(?P=name)</td>
+<td>不支持，只能使用\${num}</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>(?P<name>…)</name></td>
+<td>(?P=name)</td>
+<td>\g<name></name></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>(?<name>…)</name></td>
+<td>\k<name></name></td>
+<td>\k<name></name></td>
+</tr>
+</tbody>
+</table>
+<h3 id="非捕获分组"><a href="#非捕获分组" class="headerlink" title="非捕获分组"></a>非捕获分组</h3><blockquote>
+<p>非捕获分组（non-capturing group）：类似普通捕获分组，在开括号后紧跟一个问号和冒号(?:…)，这样的括号叫非捕获型括号，它只能限定量词的作用范围，不捕获任何文本。</p>
+</blockquote>
+<p><strong>引用分组时，分组的编号会按照开括号出现的顺序从左到右递增，只是必须以捕获分组为准，非捕获分组会略过</strong></p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>与括号有关的所以三个元字符(、)、|都必须转义</p>
+<p><strong>PS：待补充更新…</strong></p>
+<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><h2 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h1 id="原理剖析"><a href="#原理剖析" class="headerlink" title="原理剖析"></a>原理剖析</h1><h2 id="编码规则"><a href="#编码规则" class="headerlink" title="编码规则"></a>编码规则</h2><h2 id="匹配原理"><a href="#匹配原理" class="headerlink" title="匹配原理"></a>匹配原理</h2><h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><h2 id="Objective-C"><a href="#Objective-C" class="headerlink" title="Objective-C"></a>Objective-C</h2><h2 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h2><h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/编程基础/">编程基础</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/正则表达式/" title="正则表达式">正则表达式</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <!-- <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a> -->
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/post/代码版本管理工具/">
+            
+                代码版本管理工具
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/post/常用Shell命令/">
+            
+                常用Shell命令
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/zhj.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: '神兵利器之正则表达式' || 'post/神兵利器之正则表达式/',
+    owner: 'HuajingZeng',
+    repo: 'huajingzeng.github.io_comments',
+    clientId: '7ae3915c563a60d41451',
+    clientSecret: '2abefe41031e15eabf12a828f30fd380487fb738'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/程序人生/">程序人生</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/">编程基础</a>
+        <span class="badge">(4)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/开发工具/">开发工具</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/随便/" title="随便">随便 (1)</a>
+  
+    <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
+  
+    <a class="tag-item" href="/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/tags/SVN/" title="SVN">SVN (1)</a>
+  
+    <a class="tag-item" href="/tags/CVS/" title="CVS">CVS (1)</a>
+  
+    <a class="tag-item" href="/tags/正则表达式/" title="正则表达式">正则表达式 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://stackoverflow.com/" target="_blank" title="Stack Overflow">Stack Overflow</a>
+        </li>
+    
+        <li>
+            <a href="https://www.heapandstack.com/" target="_blank" title="曾华经个人网站">Heap and Stack</a>
+        </li>
+    
+        <li>
+            <a href="http://nshipster.cn/" target="_blank" title="NSHipster">NSHipster</a>
+        </li>
+    
+        <li>
+            <a href="http://www.sdifen.com/" target="_blank" title="史蒂芬周的博客">史蒂芬周的博客</a>
+        </li>
+    
+        <li>
+            <a href="http://www.orsoon.com/" target="_blank" title="未来软件园">未来软件园</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2018
+    
+
+    <a href="/">曾华经</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>
