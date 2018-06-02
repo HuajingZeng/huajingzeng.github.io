@@ -1,7 +1,7 @@
 ---
 title: 常用Shell命令
 date: 2017-11-30 10:59:23
-update: 2018-1-15 17:22:00
+update: 
 author: 曾华经
 tags: Shell
 categories:
@@ -20,9 +20,9 @@ toc: true
 | --- | --- |
 | <div style="text-align:center;"><a href="#文件管理">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
 | <div style="text-align:center;"><a href="#程序进程">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
-| <div style="text-align:center;"><a href="#系统环境">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
+| <div style="text-align:center;"><a href="#系统环境">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#export">export</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
 | <div style="text-align:center;"><a href="#文档编辑">文档编辑</a></div> | **<a href="#awk">awk</a>**&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
-| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;**<a href="#shift">shift</a>**&emsp;**<a href="#test">test</a>**&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
+| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;**<a href="#read">read</a>**&emsp;**<a href="#shift">shift</a>**&emsp;**<a href="#test">test</a>**&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
 | <div style="text-align:center;"><a href="#网络通讯">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
 | <div style="text-align:center;"><a href="#搜索查找">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
 | <div style="text-align:center;"><a href="#其他">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;**<a href="#bc">bc</a>**&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
@@ -926,6 +926,33 @@ exit
 
 # <a id="系统环境">系统环境</a>
 
+## <a id="export">export</a>
+### 描述
+Export variables as environment variables
+
+### 功能
+设置或显示环境变量
+
+### 语法
+
+```sh
+export [-nf] [name[=value] ...]
+```
+
+```sh
+export -p
+```
+
+### 选项参数
+- **-n**：删除指定的变量。变量实际上并未删除，只是不会输出到后续指令的执行环境中
+- **-f**：代表[变量名称]中为函数名称
+- **name**：变量名
+- **value**：变量值
+- **-p**：列出所有的shell赋予程序的环境变量
+
+### 示例
+
+
 ## <a id="su">su</a>
 ### 描述
 Substitute user identity
@@ -1820,6 +1847,25 @@ printf format [arguments ...]
 - **arguments**：指定要输出的数据
 
 ### 使用说明
+#### 转换规范
+
+一般格式为（除了%和type外的部分叫做修饰符）：
+
+```
+%[flags][width][.precision]type
+```
+
+- **flags**：
+	- -：将输出的数值左对齐
+	- +：使得printf在整数前面加上+或-（默认只有负数才输出符号）
+	- \#：使得printf在八进制数前加上0，在十六进制数前加上0x或0X（分别使用%#x或￥#X来指定）
+	- (space)：使得printf在正数前面加上一个空格，在负数前面加上-，以起到对齐作用
+- **width**：width是一个正数，用来指定输出参数十的最小字段宽度，对应的参数采用右对齐的形式除非使用了-（数字符号以及作为前导字符的0、0x和0X都被计算在参数宽度内）
+- **.precision**：precision是一个正数。对于整数，指定了%d、%u、%o、%x及%X所显示的最小数位个数（在值的左侧，会使用0进行填充）；对于字符串，.precision指定了所要显示出的字符串的最大字符数（如果字符串的长度大于precision，会在右侧被截断）
+- **type**：是转换规范字符。
+
+**如果将width或precision中的数字替换成*，那么待显示的值之前的参数必须是一个数字，该数字分别用作宽度或精度。如果两个位置上用的全都是*，那么待显示的值之前必须有两个整数参数，作为宽度和精度**
+
 #### 格式替代符
 
 |替代符|说明|
@@ -1831,12 +1877,12 @@ printf format [arguments ...]
 |%f, %F|浮点数，以小数形式“-x.xxxxx”表示|
 |%g|%e或%f转换，看哪一个较短，则删除结尾的零|
 |%G|%E或%F转换，看哪一个较短，则删除结尾的零|
-|%o|不带正负号的八进制值|
-|%s|字符串|
-|%u|不带正负号的十进制值|
-|%x|不带正负号的十六进制值，使用a至f表示10至15|
-|%X|不带正负号的十六进制值，使用A至F表示10至15|
-|%%|字面意义的%|
+|%o|无符号的八进制值|
+|%s|字符串字面量|
+|%u|无符号的十进制值|
+|%x|无符号的十六进制值，使用a至f表示10至15|
+|%X|无符号的十六进制值，使用A至F表示10至15|
+|%%|百分号，字面意义的%|
 
 #### 转义序列
 
@@ -1868,6 +1914,69 @@ B>
 $ printf "String AB \a"
 String AB $
 ```
+
+## <a id="read">read</a>
+### 描述
+Read data from standard input or file
+### 功能
+从标准输入读取单行数据。这个命令可以用来读取键盘输入，当使用重定向的时候，可以读取文件中的一行数据。
+
+### 语法
+
+```sh
+read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars] [-d delim] [name ...]
+```
+
+### 选项参数
+- **-e**：在输入的时候可以时候命令补全功能
+- **-r**：屏蔽\，如果没有该选项，则\作为一个转义字符，有的话\就是个正常的字符了
+- **-s**：安静模式，在输入字符时不再屏幕上显示，例如login时输入密码
+- **-u**：后面跟fd，从文件描述符中读入，该文件描述符可以是exec新开启的
+- **-t**：后面跟秒数，定义输入字符的等待时间
+- **-p**：后面跟提示信息，即在输入前打印提示信息
+- **-a**：后跟一个变量，该变量会被认为是个数组，然后给其赋值，默认是以空格为分割符
+- **-n**：后跟一个数字，定义输入文本的长度
+- **-d**：后面跟一个标志符，其实只有其后的第一个字符有用，作为结束的标志
+- **name**：用于存储的变量名（如果没有指定变量名，读取的数据将被自动赋值给特定的变量REPLY）
+
+### 示例
+从标准输入读取输入并赋值给变量1987name
+
+```sh
+$ read 1987name
+HelloWorld
+$ echo $1987name
+HelloWorld
+```
+
+等待一组输入，每个单词之间使用空格隔开，直到回车结束，并分别将单词依次赋值给这三个读入变量
+
+```sh
+$ read one two three
+1 2 3
+$ echo "one = $one, two = $two, three = $three"
+one = 1, two = 2, three = 3
+```
+
+输出文本提示，同时等待输入，并将结果赋值给REPLY
+
+```sh
+$ read -p "Enter your name: "
+Enter you name: stephen
+$ echo $REPLY
+stephen
+```
+
+等待控制台输入，并将输入信息视为数组，赋值给数组变量friends，输入信息用空格隔开数组的每个元素
+
+```sh
+$ read -a friends
+Tim Tom Helen
+
+$ echo "They are ${friends[0]}, ${friends[1]} and ${friends[2]}."
+They are Tim, Tom and Helen.
+```
+
 
 ## <a id="shift">shift</a>
 ### 描述
