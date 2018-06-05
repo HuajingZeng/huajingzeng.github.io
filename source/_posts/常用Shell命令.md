@@ -19,10 +19,10 @@ toc: true
 |<div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;分类&emsp;<div>| 命令 |
 | --- | --- |
 | <div style="text-align:center;"><a href="#文件管理">文件管理</a></div> | **<a href="#cat">cat</a>**&emsp;**<a href="#cd">cd</a>**&emsp;**<a href="#chgrp">chgrp</a>**&emsp;**<a href="#chmod">chmod</a>**&emsp;**<a href="#chown">chown</a>**&emsp;**<a href="#cksum">cksum</a>**&emsp;**<a href="#cmp">cmp</a>**&emsp;**<a href="#cp">cp</a>**&emsp;**<a href="#du">du</a>**&emsp;**<a href="#df">df</a>**&emsp;**<a href="#fsck">fsck</a>**&emsp;**<a href="#fuser">fuser</a>**&emsp;**<a href="#ln">ln</a>**&emsp;**<a href="#ls">ls</a>**&emsp;<a href="#lsof">lsof</a>&emsp;**<a href="#mkdir">mkdir</a>**&emsp;<a href="#mount">mount</a>&emsp;**<a href="#mv">mv</a>**&emsp;**<a href="#pwd">pwd</a>**&emsp;**<a href="#rm">rm</a>**&emsp;**<a href="#rmdir">rmdir</a>**&emsp;**<a href="#split">split</a>**&emsp;**<a href="#touch">touch</a>**&emsp;**<a href="#umask">umask</a>** |
-| <div style="text-align:center;"><a href="#程序进程">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;<a href="#ps">ps</a>&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;<a href="#wait">wait</a> |
-| <div style="text-align:center;"><a href="#系统环境">系统环境</a></div> | <a href="#env">env</a>&emsp;<a href="#export">export</a>&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
+| <div style="text-align:center;"><a href="#程序进程">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;**<a href="#ps">ps</a>**&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;**<a href="#wait">wait</a>** |
+| <div style="text-align:center;"><a href="#系统环境">系统环境</a></div> | <a href="#env">env</a>&emsp;**<a href="#export">export</a>**&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
 | <div style="text-align:center;"><a href="#文档编辑">文档编辑</a></div> | **<a href="#awk">awk</a>**&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
-| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#printf">printf</a>**&emsp;**<a href="#read">read</a>**&emsp;**<a href="#shift">shift</a>**&emsp;**<a href="#test">test</a>**&emsp;<a href="#true">true</a>&emsp;<a href="#unset">unset</a> |
+| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#eval">eval</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#od">od</a>**&emsp;**<a href="#printf">printf</a>**&emsp;**<a href="#read">read</a>**&emsp;**<a href="#readonly">readonly</a>**&emsp;**<a href="#set">set</a>**&emsp;**<a href="#shift">shift</a>**&emsp;**<a href="#test">test</a>**&emsp;**<a href="#trap">trap</a>**&emsp;&emsp;<a href="#true">true</a>&emsp;**<a href="#unset">unset</a>** |
 | <div style="text-align:center;"><a href="#网络通讯">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
 | <div style="text-align:center;"><a href="#搜索查找">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
 | <div style="text-align:center;"><a href="#其他">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;**<a href="#bc">bc</a>**&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
@@ -924,6 +924,85 @@ exit [n]
 exit
 ```
 
+## <a id="ps">ps</a>
+### 描述
+Process status
+### 功能
+告当前系统的进程状态
+### 语法
+
+```sh
+ps [-AaCcEefhjlMmrSTvwXx] [-O fmt | -o fmt] [-G gid[,gid...]] [-g grp[,grp...]] [-u uid[,uid...]] [-p pid[,pid...]] [-t tty[,tty...]] [-U user[,user...]]
+ps [-L]
+```
+
+### 选项参数
+- **-A**：显示关于其他用户进程的信息，包括那些没有控制终端的信息
+- **-a**：显示有关其他用户的进程以及您自己的信息。这将跳过任何没有控制终端的进程，除非还指定了-x选项
+- **-C**：改变CPU百分比的计算方式
+- **-c**：显示每个程序真正的指令名称，而不包含路径，选项或常驻服务的标示
+- **-E**：显示每个程序所使用的环境变量
+- **-e**：同-A
+- **-f**：显示UID、PPIP、C和STIME栏位
+- **-h**：显示树状结构，表示程序间的相互关系
+- **-j**：采用工作控制的格式显示程序状况
+- **-l**：采用详细的格式来显示程序状况
+- **-M**：打印与每个任务对应的线程
+- **-m**：按内存使用排序，而不是控制终端和进程ID的组合
+- **-r**：按当前CPU使用情况排序，而不是控制终端和进程ID的组合
+- **-S**：通过将所有退出的孩子与他们的父进程相加来改变计算过程时间的方式
+- **-T**：显示附加到与标准输入关联的设备的进程的信息
+- **-v**：显示与下列关键字相关的信息：PID、状态、时间...等
+- **-w**：使用132列显示信息，而不是默认的窗口大小
+- **-X**：当显示由其他选项匹配的进程时，跳过没有控制终端的任何进程。
+- **-x**：当显示由其他选项匹配的进程时，包括不具有控制终端的进程
+- **-O fmt**：在默认信息显示中添加与在进程ID之后指定的空格或逗号分隔的关键字列表相关的信息
+- **-o fmt**：显示与指定的关键字的空间或逗号分隔列表相关联的信息
+- **-G gid**：列出属于该群组的程序的状况，也可使用群组名称来指定
+- **-g grp**：同-G，当亦能使用阶段作业领导者的名称来指定
+- **-u uid**：同-U
+- **-p pid**：指定程序识别码，并列出该程序的状况：
+- **-t tty**：指定终端机编号，并列出属于该终端机的程序的状况
+- **-U user**：列出属于该用户的程序的状况，也可使用用户名称来指定
+- **-L**：列出栏位的相关信息
+
+### 示例
+打印输出进程ID为1的状态
+
+```sh
+$ ps -p 1
+  PID TTY           TIME CMD
+    1 ??         1:18.86 /sbin/launchd
+$ 
+```
+
+## <a id="wait">wait</a>
+### 描述
+Wait for the specified process and report its termination status
+### 功能
+等待后台进程执行完毕后继续执行后面的任务（即在进程执行完之前，当前Shell会被挂起）
+### 语法
+
+```sh
+wait [n]
+```
+
+### 选项参数
+- **n**：进程号或者作业号（如果未指定该参数，Shell会等待所有的子进程执行完毕。）
+
+### 示例
+等待作业号为1的作业完成后再返回
+
+```sh
+wait %1
+```
+
+等待进程号未23的进程执行完后再返回
+
+```sh
+wait 23
+```
+
 # <a id="系统环境">系统环境</a>
 
 ## <a id="export">export</a>
@@ -1796,6 +1875,30 @@ echo命令打印文字“test”
 echo "test"
 ```
 
+## <a id="eval">eval</a>
+### 描述
+Read ARGs as input to the shell and execute the resulting command
+### 功能
+读取一连串的参数，然后再依参数本身的特性来执行（即扫描命令行进行所有的替换，然后再执行命令）
+### 语法
+
+```sh
+eval [arg ...]
+```
+
+### 选项参数
+- **arg**：命令行参数
+
+### 示例
+先进行参数替换再执行
+
+```sh
+$ pipe="|"
+$ eval ls $pipe wc -l
+	16
+$
+```
+
 ## <a id="expr">expr</a>
 ### 描述
 Evaluate expression
@@ -1829,6 +1932,100 @@ expr expression
 ```sh
 $ result=`expr 2 + 3`
 $ result=$(expr $result + 5)
+```
+
+## <a id="od">od</a>
+### 描述
+Octal, Decimal, Hex, ASCII dump
+
+### 功能
+输出文件的八进制、十六进制或其它格式编码的字节，通常用于显示或查看文件中不能直接显示在终端的字符
+
+### 语法
+
+```sh
+od [-aBbcDdeFfHhIiLlOosvXx] [-A base] [-j skip] [-N length] [-t type] [file ...]
+```
+
+### 选项参数
+- **-a**：输出字符的名字，等价于-t a
+- **-B**：输出短八进制，等价于-t o2
+- **-b**：输出八进制字节，等价于-t o1
+- **-c**：输出C样式的转义字符，等价于-t c
+- **-D**：输出无符号十进制整数，等价于-t u4
+- **-d**：输出十进制整数
+- **-e**：输出双精度浮点数，等价于-t fD
+- **-F**：同-e
+- **-f**：输出单精度浮点数，等价于-t fF
+- **-H**：输出十六进制整数，等价于-t x4
+- **-h**：输出短十六进制整数，等价于-t x2
+- **-I**：输出带符号长整型整数，等价于-t dL
+- **-i**：输出带符号整数，等价于-t dI
+- **-L**：同-I
+- **-l**：同-I
+- **-O**：输出八进制整数，等价于-t 04
+- **-o**：同-B
+- **-s**：输出带符号短整型整数，等价于-t d2
+- **-v**：输出时不省略重复的数据
+- **-X**：同-H
+- **-x**：同-h
+- **-A base**：以base作为基数计算字码，base可以是d、o、x或n，分别表示十进制、八进制、十六进制或无
+- **-j skip**：略过设置的字符数目，skip后可以跟字符单位如b（blocks：512bytes）、k（kilobytes）、m（megabytes）
+- **-N length**：到设置的字符树目为止，即输出的字符长度不超过length
+- **-t type**：设置输出格式
+	- **a**：ASCII字符名（控制字符)
+	- **c**：默认字符集中的字符，非打印字符将以3位八进制码显示，以下字符将以C样式的转义字符显示
+		- **NUL**：\0
+		- **alert**：\a
+		- **backspace**：\b
+		- **newline**：\n
+		- **carriage-return**：\r
+		- **tab**：\t
+		- **vertical tab**：\v
+	- **[d|o|u|x][C|S|I|L|n]**：整数的进制及大小
+		- **d**：十进制（decimal)
+		- **o**：八进制（octal）
+		- **u**：无符号十进制（unsigned decimal）
+		- **x**：十六进制（hexadecimal）
+		- **C**：字符（char）
+		- **S**：短整型（short）
+		- **I**：整型（int）
+		- **L**：长整型（long）
+		- **n**：十进制位数
+	- **f[F|D|L]**：浮点数的精度
+		- **F**：单精度（float）
+		- **D**：双精度（）
+		- **L**：长双精度（）
+- **file**：要输出的文件
+
+### 示例
+用八进制显示tmp文件内容
+
+```sh
+$ cat tmp
+abcdef g
+$ od -b tmp
+0000000 141 142 143 144 145 146 040 147 012
+0000011
+$
+```
+
+使用ASCII码进行输出
+
+```sh
+$ od -t d1 tmp
+0000000   97   98   99  100  101  102   32  103   10
+0000011
+$
+```
+
+使用单字节十进制进行输出
+
+```sh
+$od -A d -c tmp
+0000000   a   b   c   d   e   f       g  \n
+0000009
+$
 ```
 
 ## <a id="printf">printf</a>
@@ -1977,6 +2174,132 @@ $ echo "They are ${friends[0]}, ${friends[1]} and ${friends[2]}."
 They are Tim, Tom and Helen.
 ```
 
+## <a id="readonly">readonly</a>
+### 描述
+Defining read-only variables or functions.
+
+### 功能
+定义或显示只读变量和函数
+
+### 语法
+
+```sh
+readonly [-af] [name=[value] ...]
+readonly -p
+```
+
+### 选项参数
+- **-a**：只读数组变量
+- **-f**：只读函数
+- **-p**：显示系统中全部只读变量列表
+- **name**：变量名
+- **value**：变量值
+
+### 示例
+设置只读变量
+
+```sh
+$ readonly cmd=wc
+$ cmd=ls
+-bash: cmd: readonly variable
+$ 
+```
+
+显示所有只读变量
+```sh
+$ readonly -p
+declare -r cmd="wc"
+$
+```
+
+## <a id="set">set</a>
+### 描述
+Setting the Shell option
+### 功能
+设置Shell选项以及重新为位置参数赋值
+### 语法
+
+```sh
+set [+/--abefhkmnptuvxBCHP] [arg ...]
+```
+
+### 选项参数
+- **+<选项名>**：关闭某个曾启动的选项
+- **-<选项名>**：开启某个选项
+- **--**：对于后续出现的连接符或参数形式的单词，均不视其为选项
+- **-a**：标示已修改的变量，以供输出至环境变量
+- **-b**：使被中止的后台程序立刻回报执行状态
+- **-e**：若指令传回值不等于0，则立即退出shell
+- **-f**：取消使用通配符
+- **-h**：自动记录函数的所在位置
+- **-k**：指令所给的参数都会被视为此指令的环境变量
+- **-m**：使用监视模式
+- **-n**：只读取指令，而不实际执行
+- **-p**：启动优先顺序模式
+- **-t**：执行完随后的指令，即退出shell
+- **-u**：当执行时使用到未定义过的变量，则显示错误信息
+- **-v**：显示shell所读取的输入值
+- **-x**：执行指令后，会先显示该指令及所下的参数（跟踪模式，该选项不会沿用到子Shell中）
+- **-B**：
+- **-C**：转向所产生的文件无法覆盖已存在的文件
+- **-H**：可利用"!"加<指令编号>的方式来执行history中记录的指令
+- **-P**：执行指令时，会以实际的文件或目录来取代符号连接
+- **arg**：将arg等参数赋给对应的位置参数&#36;1、&#36;2...，位置参数之前的值也被覆盖了
+
+**注意：set不加任何参数，会输出一个按照字母顺序排列的变量列表，这些变量都是存在于当前环境中的局部变量或导出变量**
+### 示例
+开启和关闭跟踪模式
+
+```sh
+$ set -x
+$ cmd=wc
++ cmd=wc
+$ ls | $cmd -l
++ ls
++ wc -l
+		5
+$ set +x
++ set +x
+$ ls | wc -l
+		5
+$
+```
+
+导出当前环境变量
+
+```sh
+$ set
+BASH=/bin/bash
+HOME=/Users/Kevin
+HOSTNAME=mini.local
+LANG=zh_CN.UTF-8
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+PWD=/Users/Kevin
+TERM=xterm-256color
+UID=501
+USER=Kevin
+$
+```
+
+为位置参数赋值
+
+```sh
+$ set one two three
+$ echo $1 $2 $3
+one two three
+$
+```
+
+从标准输入中读取参数，忽略line变量中的以-起始的行、空白字符或者空行
+
+```sh
+$ read line
+-x b c 
+$ set -- $line
+$ echo $#
+3
+$
+```
 
 ## <a id="shift">shift</a>
 ### 描述
@@ -2126,6 +2449,66 @@ else
 fi
 $ ./testFile
 文件已存在!
+```
+
+## <a id="trap">trap</a>
+### 描述
+Execute when the shell receives signal
+### 功能
+指定在接收到信号后将要采取的动作，常见的用途是在脚本程序被中断时完成清理工作
+### 语法
+
+```sh
+trap [-lp] [arg signal_spec ...]
+```
+
+### 选项参数
+- **-l**：打印一个命令名称和其相对应的编号的列表
+- **-p**：如果有-p选项而没有提供arg参数则会打印所有与sigspec指定信号相关联的的命令；如果没有提供任何参数或者仅有-p选项，将会打印与每一个信号有关联的命令的列表
+- **arg**：如果arg参数缺省或者为“-”，每个接收到的sigspec信号都将会被重置为它们进入Shell时的值；如果arg是空字符串每一个由sigspec指定的信号都会被shell和它所调用的命令忽略（arg中如果不止一个命令，则必须将其全部放入引号中；Shell在执行trap命令时执行扫描，在接收到信号时还会再扫描一次）
+- **signal_spec**：指定的信号
+
+### 常见信号
+
+|信号|助记名|产生原因|
+|:--:|:--:|:--|
+|0|EXIT|退出Shell|
+|1|HUP|挂起|
+|2|INT|中断（如按下了DELETE键或Ctrl+C）|
+|3|QUIT|退出|
+|6|ABRT|中止|
+|9|KILL|“销毁”进程|
+|14|ALRM|超时|
+|15|TERM|软件终止信号（默认由kill命令发送）|
+
+### 示例
+如果有人试图从终端中止程序，则删除一些文件后再退出
+
+```sh
+$ trap "rm -f $WORKDIR/work1$$ $WORKDIR/dataout$$; exit" 2
+```
+
+## <a id="unset">unset</a>
+### 描述
+Deletes the defined shell variables (including environment variables) and shell functions.
+### 功能
+删除已定义的变量或函数（不能对只读变量和IFS、MAILCHECK、PATH、PS1和PS2等使用unset）
+### 语法
+
+```sh
+unset [-f] [-v] [name ...]
+```
+
+### 选项参数
+- **-f**：仅删除函数
+- **-v**：仅删除变量
+- **name**：要删除的变量名或函数名
+
+### 示例
+删除变量cmd
+
+```sh
+$ unset -v cmd
 ```
 
 # <a id="网络通讯">网络通讯</a>
