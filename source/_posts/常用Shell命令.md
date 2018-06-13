@@ -22,10 +22,10 @@ toc: true
 | <div style="text-align:center;"><a href="#程序进程">程序进程</a></div> | <a href="#at">at</a>&emsp;<a href="#bg">bg</a>&emsp;<a href="#chroot">chroot</a>&emsp;<a href="#cron">cron</a>&emsp;**<a href="#exit">exit</a>**&emsp;<a href="#fg">fg</a>&emsp;<a href="#jobs">jobs</a>&emsp;<a href="#kill">kill</a>&emsp;<a href="#killall">killall</a>&emsp;<a href="#nice">nice</a>&emsp;<a href="#pgrep">pgrep</a>&emsp;<a href="#pidof">pidof</a>&emsp;<a href="#pkill">pkill</a>&emsp;**<a href="#ps">ps</a>**&emsp;<a href="#pstree">pstree</a>&emsp;<a href="#sleep">sleep</a>&emsp;<a href="#time">time</a>&emsp;<a href="#top">top</a>&emsp;**<a href="#wait">wait</a>** |
 | <div style="text-align:center;"><a href="#系统环境">系统环境</a></div> | <a href="#env">env</a>&emsp;**<a href="#export">export</a>**&emsp;<a href="#finger">finger</a>&emsp;<a href="#id">id</a>&emsp;<a href="#logname">logname</a>&emsp;<a href="#mesg">mesg</a>&emsp;<a href="#passwd">passwd</a>&emsp;**<a href="#su">su</a>**&emsp;**<a href="#sudo">sudo</a>**&emsp;<a href="#uptime">uptime</a>&emsp;<a href="#w">w</a>&emsp;<a href="#wall">wall</a>&emsp;**<a href="#who">who</a>**&emsp;**<a href="#whoami">whoami</a>**&emsp;<a href="#write">write</a> |
 | <div style="text-align:center;"><a href="#文档编辑">文档编辑</a></div> | **<a href="#awk">awk</a>**&emsp;<a href="#comm">comm</a>&emsp;**<a href="#cut">cut</a>**&emsp;**<a href="#ed">ed</a>**&emsp;<a href="#ex">ex</a>&emsp;<a href="#fmt">fmt</a>&emsp;<a href="#head">head</a>&emsp;<a href="#iconv">iconv</a>&emsp;<a href="#join">join</a>&emsp;<a href="#less">less</a>&emsp;<a href="#more">more</a>&emsp;**<a href="#paste">paste</a>**&emsp;**<a href="#sed">sed</a>**&emsp;**<a href="#sort">sort</a>**&emsp;<a href="#strings">strings</a>&emsp;<a href="#talk">talk</a>&emsp;<a href="#tac">tac</a>&emsp;<a href="#tail">tail</a>&emsp;**<a href="#tr">tr</a>**&emsp;**<a href="#uniq">uniq</a>**&emsp;**<a href="#vi">vi</a>**&emsp;**<a href="#wc">wc</a>**&emsp;<a href="#xargs">xargs</a> |
-| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | <a href="#alias">alias</a>&emsp;<a href="#basename">basename</a>&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#eval">eval</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#od">od</a>**&emsp;**<a href="#printf">printf</a>**&emsp;**<a href="#read">read</a>**&emsp;**<a href="#readonly">readonly</a>**&emsp;**<a href="#set">set</a>**&emsp;**<a href="#shift">shift</a>**&emsp;**<a href="#test">test</a>**&emsp;**<a href="#trap">trap</a>**&emsp;&emsp;<a href="#true">true</a>&emsp;**<a href="#unset">unset</a>** |
+| <div style="text-align:center;"><a href="#5">脚本编程</a></div> | **<a href="#alias">alias</a>**&emsp;<a href="#basename">basename</a>&emsp;**<a href="#declare">declare</a>**&emsp;<a href="#dirname">dirname</a>&emsp;**<a href="#echo">echo</a>**&emsp;**<a href="#eval">eval</a>**&emsp;**<a href="#exec">exec</a>**&emsp;**<a href="#expr">expr</a>**&emsp;<a href="#false">false</a>&emsp;**<a href="#od">od</a>**&emsp;**<a href="#printf">printf</a>**&emsp;**<a href="#read">read</a>**&emsp;**<a href="#readonly">readonly</a>**&emsp;**<a href="#set">set</a>**&emsp;**<a href="#shift">shift</a>**&emsp;**<a href="#test">test</a>**&emsp;**<a href="#trap">trap</a>**&emsp;<a href="#true">true</a>&emsp;**<a href="#unalias">unalias</a>**&emsp;**<a href="#unset">unset</a>** |
 | <div style="text-align:center;"><a href="#网络通讯">网络通讯</a></div> | <a href="#inetd">inetd</a>&emsp;<a href="#netstat">netstat</a>&emsp;**<a href="#ping">ping</a>**&emsp;<a href="#rlogin">rlogin</a>&emsp;<a href="#netcat">netcat</a>&emsp;<a href="#traceroute">traceroute</a> |
 | <div style="text-align:center;"><a href="#搜索查找">搜索查找</a></div> | **<a href="#find">find</a>**&emsp;**<a href="#grep">grep</a>**&emsp;<a href="#locate">locate</a>&emsp;**<a href="#whereis">whereis</a>**&emsp;**<a href="#which">which</a>** |
-| <div style="text-align:center;"><a href="#其他">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;**<a href="#bc">bc</a>**&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;<a href="#info">info</a>&emsp;<a href="#size">size</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#history">history</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;<a href="#type">type</a>&emsp;<a href="#yes">yes</a>&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>** |
+| <div style="text-align:center;"><a href="#其他">其他</a></div> | <a href="#apropos">apropos</a>&emsp;<a href="#banner">banner</a>&emsp;**<a href="#bc">bc</a>**&emsp;<a href="#cal">cal</a>&emsp;**<a href="#clear">clear</a>**&emsp;**<a href="#date">date</a>**&emsp;<a href="#dd">dd</a>&emsp;**<a href="#fc">fc</a>**&emsp;<a href="#file">file</a>&emsp;<a href="#help">help</a>&emsp;**<a href="#history">history</a>**&emsp;<a href="#info">info</a>&emsp;<a href="#lp">lp</a>&emsp;**<a href="#man">man</a>**&emsp;<a href="#size">size</a>&emsp;<a href="#tee">tee</a>&emsp;<a href="#tput">tput</a>&emsp;**<a href="#type">type</a>**&emsp;**<a href="#uname">uname</a>**&emsp;**<a href="#whatis">whatis</a>**&emsp;<a href="#yes">yes</a> |
 
 # <a id="文件管理">文件管理</a>
 
@@ -1842,6 +1842,61 @@ $ wc test
 ```
 
 # <a id="Shell脚本">Shell脚本</a>
+## <a id="alias">alias</a>
+### 描述
+Defined alias for commands
+### 功能
+设置指令的别名
+### 语法
+
+```sh
+alias [-p] [name[=value] ... ]
+```
+
+### 选项参数
+- **-p**：打印已经设置的命令别名
+- **name**：命令别名
+- **value**：实际命令
+
+**注意：使用alias时，用户必须使用单引号''将原来的命令引起来，防止特殊字符导致错误**
+
+### 示例
+查看系统已经设置的别名
+
+```
+$ alias -p
+```
+
+## <a id="declare">declare</a>
+### 描述
+Declare variables and/or give them attributes
+### 功能
+声明和显示已存在的Shell变量
+### 语法
+
+```sh
+declare [-afFirtx] [-p] [name[=value] ...]
+```
+
+### 选项参数
+- **-a**：将变量设置为数组（如果支持的话）
+- **-f**：仅显示函数
+- **-F**：在没有定义的情况下显示函数名称（以及调试时的行号和源文件名）
+- **-i**：变量可以是数值，字符串或运算式
+- **-r**：将变量设置为只读
+- **-t**：使变量具有trace属性
+- **-x**：指定的变量会成为环境变量，可供Shell以外的程序来使用
+- **-p**：打印所有变量
+- **name**：变量名
+- **value**：变量的值
+
+### 示例
+使用declare命令定义shell变量test
+
+```sh
+$ declare test="hello"
+```
+
 ## <a id="echo">echo</a>
 ### 描述
 Write arguments to the standard output
@@ -1896,6 +1951,32 @@ eval [arg ...]
 $ pipe="|"
 $ eval ls $pipe wc -l
 	16
+$
+```
+
+## <a id="exec">exec</a>
+### 描述
+Exec command or program
+### 功能
+用于调用并执行指定的命令
+### 语法
+
+```sh
+exec [-c] [-a name] file [redirection ...]
+```
+
+### 选项参数
+- **-c**：在空环境中执行指定的命令
+- **-a name**：将程序执行后的argv[0]赋值给name
+- **file**：指定要执行的命令文件
+- **redirection**：对执行的命令进行I/O重定向
+
+### 示例
+使用exec命令调用echo命令输出信息
+
+```sh
+$ exec -c echo Unix Shell
+Unix Shell
 $
 ```
 
@@ -2220,7 +2301,7 @@ Setting the Shell option
 ### 语法
 
 ```sh
-set [+/--abefhkmnptuvxBCHP] [arg ...]
+set [+/--abefhkmnptuvxBCHP] [-o option] [arg ...]
 ```
 
 ### 选项参数
@@ -2229,21 +2310,49 @@ set [+/--abefhkmnptuvxBCHP] [arg ...]
 - **--**：对于后续出现的连接符或参数形式的单词，均不视其为选项
 - **-a**：标示已修改的变量，以供输出至环境变量
 - **-b**：使被中止的后台程序立刻回报执行状态
-- **-e**：若指令传回值不等于0，则立即退出shell
+- **-e**：若指令传回值不等于0，则立即退出Shell
 - **-f**：取消使用通配符
 - **-h**：自动记录函数的所在位置
 - **-k**：指令所给的参数都会被视为此指令的环境变量
 - **-m**：使用监视模式
 - **-n**：只读取指令，而不实际执行
 - **-p**：启动优先顺序模式
-- **-t**：执行完随后的指令，即退出shell
+- **-t**：执行完随后的指令，即退出Shell
 - **-u**：当执行时使用到未定义过的变量，则显示错误信息
-- **-v**：显示shell所读取的输入值
+- **-v**：显示Shell所读取的输入值
 - **-x**：执行指令后，会先显示该指令及所下的参数（跟踪模式，该选项不会沿用到子Shell中）
-- **-B**：
+- **-B**：Shell将执行大括号扩展
 - **-C**：转向所产生的文件无法覆盖已存在的文件
 - **-H**：可利用"!"加<指令编号>的方式来执行history中记录的指令
 - **-P**：执行指令时，会以实际的文件或目录来取代符号连接
+- **-o option**：设置与option选项名称对应的变量，option选项如下：
+	- **allexport**：同-a
+	- **braceexpand**：同-B
+	- **emacs**：使用emacs行编辑模式
+	- **errexit**：同-e
+	- **errtrace**：同-E
+	- **functrace**：同-T
+	- **hashall**：同-h
+	- **histexpand**：同-H
+	- **history**：启用命令行历史
+	- **ignoreeof**：碰到EOF时Shell不会退出
+	- **interactive-comments**：允许评论出现在交互命令中
+	- **keyword**：同-k
+	- **monitor**：同-m
+	- **noclobber**：同-C
+	- **noexec**：同-n
+	- **noglob**：同-f
+	- **nolog**：接受但被忽略
+	- **notify**：同-b
+	- **nounset**：同-u
+	- **onecmd**：同-t
+	- **physical**：同-P
+	- **pipefail**：管道的返回值是最后一个命令退出时的非零状态，如果没有以非零状态退出的命令，则为零
+	- **posix**：更改默认操作，使其符合1003.2标准
+	- **privileged**：同-p
+	- **verbose**：同-v
+	- **vi**：使用vi行编辑模式
+	- **xtrace**：同-x
 - **arg**：将arg等参数赋给对应的位置参数&#36;1、&#36;2...，位置参数之前的值也被覆盖了
 
 **注意：set不加任何参数，会输出一个按照字母顺序排列的变量列表，这些变量都是存在于当前环境中的局部变量或导出变量**
@@ -2466,26 +2575,48 @@ trap [-lp] [arg signal_spec ...]
 - **-l**：打印一个命令名称和其相对应的编号的列表
 - **-p**：如果有-p选项而没有提供arg参数则会打印所有与sigspec指定信号相关联的的命令；如果没有提供任何参数或者仅有-p选项，将会打印与每一个信号有关联的命令的列表
 - **arg**：如果arg参数缺省或者为“-”，每个接收到的sigspec信号都将会被重置为它们进入Shell时的值；如果arg是空字符串每一个由sigspec指定的信号都会被shell和它所调用的命令忽略（arg中如果不止一个命令，则必须将其全部放入引号中；Shell在执行trap命令时执行扫描，在接收到信号时还会再扫描一次）
-- **signal_spec**：指定的信号
+- **signal_spec**：指定的信号（可以使用信号编号、信号简称或信号全称中的任意一种）
 
 ### 常见信号
 
-|信号|助记名|产生原因|
-|:--:|:--:|:--|
-|0|EXIT|退出Shell|
-|1|HUP|挂起|
-|2|INT|中断（如按下了DELETE键或Ctrl+C）|
-|3|QUIT|退出|
-|6|ABRT|中止|
-|9|KILL|“销毁”进程|
-|14|ALRM|超时|
-|15|TERM|软件终止信号（默认由kill命令发送）|
+|信号编号|信号简称|信号全称|产生原因|
+|:--:|:--:|:--:|:--|
+|0|EXIT|SIGEXIT|退出Shell|
+|1|HUP|SIGHUP|挂起|
+|2|INT|SIGINT|中断（如按下了DELETE键或Ctrl+C）|
+|3|QUIT|SIGQUIT|退出|
+|6|ABRT|SIGABRT|中止|
+|9|KILL|SIGKILL|“销毁”进程|
+|14|ALRM|SIGALRM|超时|
+|15|TERM|SIGTERM|软件终止信号（默认由kill命令发送）|
 
 ### 示例
 如果有人试图从终端中止程序，则删除一些文件后再退出
 
 ```sh
 $ trap "rm -f $WORKDIR/work1$$ $WORKDIR/dataout$$; exit" 2
+```
+
+## <a id="unalias">unalias</a>
+### 描述
+Remove names from the list of defined aliases.
+### 功能
+取消命令别名
+### 语法
+
+```sh
+unalias [-a] name ...
+```
+
+### 选项参数
+- **-a**：取消所有命令别名
+- **name**：指定要取消的命令别名
+
+### 示例
+使用unalias命令将已经设置的命令别名cc取消
+
+```sh
+$ unalias cc
 ```
 
 ## <a id="unset">unset</a>
@@ -3134,6 +3265,66 @@ $ date '+usr_time: $1:%M %P -hey'
 usr_time: $1:16 下午 -hey
 ```
 
+## <a id="fc">fc</a>
+### 描述
+List or edit and re-execute commands from the history list
+### 功能
+调用vi编辑器修改已有历史命令。
+### 语法
+
+```sh
+fc [-e ename] [-nlr] [first] [last]
+```
+
+### 选项参数
+- **-e name**：选择name指定的编辑器。默认是FCEDIT，然后是EDITOR，然后是vi
+- **-n**：显示历史命令时，不显示编号
+- **-l**：显示历史命令
+- **-r**：反序显示历史命令
+- **first**：指定要编辑的起始指令编号
+- **last**：指定要编辑的结尾指令编号
+
+### 示例
+显示最近使用的10条历史命令
+
+```sh
+$ fc -l -10
+```
+
+## <a id="history">history</a>
+### 描述
+Display the history list with line numbers
+### 功能
+显示指定数目的指令命令，读取历史命令文件中的目录到历史命令缓冲区和将历史命令缓冲区中的目录写入命令文件。
+### 语法
+
+```sh
+history [-c] [-d offset] [n]
+history [-awrn] [filename]
+history [-ps] arg ...
+```
+
+### 选项参数
+- **-c**：清空当前历史命令
+- **-d offset**：删除偏移offset位置处的历史记录
+- **n**：打印最近的n条历史命令
+- **-a**：将历史命令缓冲区中命令写入历史命令文件中
+- **-w**：将当前历史命令缓冲区命令写入历史命令文件中
+- **-r**：将历史命令文件中的命令读入当前历史命令缓冲区
+- **-n**：读取所有未从历史文件读取的历史行并将它们附加到历史列表中
+- **filename**：使用filename指定的文件作为历史记录文件，如果没有指定，则如果HISTFILE变量有值，那么使用它，否则使用~/.bash_history
+- **-p**：每个arg上执行历史扩展并显示结果，而不在历史列表中存储任何内容
+- **-s**：arg将作为单个条目附加到历史列表中
+- **arg**：命令参数
+
+### 示例
+使用history命令显示最近使用的10条历史命令
+
+```sh
+$ history 10
+```
+
+
 ## <a id="man">man</a>
 ### 描述
 Format and display the on-line manual pages
@@ -3173,6 +3364,47 @@ man [-acdfFhkKtwW] [-m system] [-p string] [-C config_file] [-M pathlist] [-P pa
 
 ```sh
 $ man cd
+```
+
+## <a id="type">type</a>
+### 描述
+Indicate how it would be interpreted if used as a command name
+### 功能
+显示指定命令的类型，判断给出的指令是内部指令还是外部指令
+### 语法
+
+```sh
+type [-afptP] name ...
+```
+
+### 选项参数
+- **-a**：在环境变量PATH指定的路径中，显示给定指令的信息，包括命令别名
+- **-f**：不查找函数
+- **-p**：如果给出的指令为外部指令，则显示其绝对路径
+- **-t**：仅输出命令类型的简称
+- **-P**：强制对每个命令进行路径搜索，并返回要执行的磁盘文件的名称
+- **name**：要显示类型的指令
+
+### 命令类型
+
+|类型|说明|
+|:--:|:--|
+|alias|别名|
+|keyword|关键字，Shell保留字|
+|function|Shell函数|
+|buildin|Shell内建命令|
+|file|磁盘文件，外部命令|
+|unfound|没有找到|
+
+### 示例
+显示命令的类型
+
+```sh
+$ type pwd
+pwd is a shell builtin
+$ type ls
+ls is /bin/ls
+$
 ```
 
 ## <a id="uname">uname</a>
