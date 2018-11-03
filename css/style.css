@@ -91,8 +91,7 @@
 .post .post-content dl,
 .comment .box .com-text .main .text-area-preview dl,
 .comment .list-wrap .list .user-comment .user-comment-body dl {
-  margin: 0 20px;
-  padding: 0;
+  padding: auto;
   line-height: line-height;
 }
 .post .post-content ul ul,
@@ -1138,7 +1137,7 @@ pre .javascript .function {
 }
 .widget ul {
   margin: 0;
-  padding: 0;
+  padding: auto;
 }
 .widget .widget-hd {
   margin: 0;
@@ -1804,6 +1803,9 @@ table tr th {
 }
 th {
   text-align: center;
+}
+ol {
+  padding-left: auto;
 }
 #container .show-toc-btn,
 #container .toc-article {
