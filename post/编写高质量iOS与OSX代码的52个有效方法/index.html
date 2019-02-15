@@ -150,63 +150,87 @@
     <p class="post-meta text-center">
         曾华经&emsp;发表于
         <time datetime="2019-01-17T01:28:30.000Z">2019-01-17</time>&emsp;修改于
-        <time datetime="2019-01-17T07:50:16.050Z">2019-01-17</time>
+        <time datetime="2019-02-15T09:23:17.622Z">2019-02-15</time>
     </p>
     <div class="post-content">
         <p>&emsp;&emsp;”Effective Software Development Series”系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。<br>&emsp;&emsp;从语法、接口与API设计、内存管理、框架等方面总结和探讨了Objective-C编程中52个鲜为人知和容易被忽视的特性与陷阱。包含大量实用范例代码，为编写易于理解、便于维护、易于扩展和高效的Objective-C应用提供了解决方案。</p>
 <a id="more"></a>
-<h1 id="熟悉Objective-C"><a href="#熟悉Objective-C" class="headerlink" title="熟悉Objective-C"></a>熟悉Objective-C</h1><p>【1】了解Objective-C语言的起源</p>
-<p>【2】在类的头文件中尽量少引入其他头文件</p>
-<p>【3】多用字面量语法，少用与之等价的方法</p>
-<p>【4】多用类型常量，少用#define预处理指令</p>
-<p>【5】用枚举表示状态、选项、状态码</p>
-<h1 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h1><p>【6】理解“属性”这一概念</p>
-<p>【7】在对象内部尽量直接访问实例变量</p>
-<p>【8】理解“对象等同性”这一概念</p>
-<p>【9】以“类簇模式”隐藏实现细节</p>
-<p>【10】在既有类中使用关联对象存放自定义数据</p>
-<p>【11】理解objc_msgSend的作用</p>
-<p>【12】理解消息转发机制</p>
-<p>【13】用“方法调配技术”调试“黑盒方法”</p>
-<p>【14】理解“类对象”的用意</p>
-<h1 id="接口与API设计"><a href="#接口与API设计" class="headerlink" title="接口与API设计"></a>接口与API设计</h1><p>【15】用前缀避免命名空间冲突</p>
-<p>【16】提供“全能初始化方法”</p>
-<p>【17】实现description方法</p>
-<p>【18】尽量使用不可变对象</p>
-<p>【19】使用清晰而协调的命名方式</p>
-<p>【20】为私有方法名加前缀</p>
-<p>【21】理解Objective-C错误模型</p>
-<p>【22】理解NSCopying协议</p>
-<h1 id="协议与分类"><a href="#协议与分类" class="headerlink" title="协议与分类"></a>协议与分类</h1><p>【23】通过委托与数据源协议进行对象间通信</p>
-<p>【24】将类的实现代码分散到便于管理的数个分类之中</p>
-<p>【25】总是为第三方类的分类名称加前缀</p>
-<p>【26】勿在分类中声明属性</p>
-<p>【27】使用“class-continuation分类”隐藏实现细节</p>
-<p>【28】通过协议提供匿名对象</p>
-<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p>【29】理解引用计数</p>
-<p>【30】以ARC简化引用计数</p>
-<p>【31】在dealloc方法中只释放引用并解除监听</p>
-<p>【32】编写“异常安全代码”时留意内存管理问题</p>
-<p>【33】以弱引用避免保留环</p>
-<p>【34】以“自动释放池块”降低内存峰值</p>
-<p>【35】用“僵尸对象”调试内存管理问题</p>
-<p>【36】不要使用retainCount</p>
-<h1 id="块与大中枢派发"><a href="#块与大中枢派发" class="headerlink" title="块与大中枢派发"></a>块与大中枢派发</h1><p>【37】理解“块”这一个概念</p>
-<p>【38】为常用的块类型创建typedef</p>
-<p>【39】用handler块降低代码分散程度</p>
-<p>【40】用块引用其所属对象时不要出现保留环</p>
-<p>【41】多用派发队列，少用同步锁</p>
-<p>【42】多用GCD，少用performSelector系列方法</p>
-<p>【43】掌握GCD及操作对列的使用时机</p>
-<p>【44】通过Dispatch Group机制，根据系统资源状况来执行任务</p>
-<p>【45】使用dispatch_once来执行只需运行一次的线程安全代码</p>
-<p>【46】不要使用dispatch_get_current_queue</p>
-<h1 id="系统框架"><a href="#系统框架" class="headerlink" title="系统框架"></a>系统框架</h1><p>【47】熟悉系统框架</p>
-<p>【48】多用块枚举，少用for循环</p>
-<p>【49】对自定义其内存管理语义的collection使用无缝桥接</p>
-<p>【50】构建缓存时选用NSCache而非NSDictionary</p>
-<p>【51】精简initialize与load的实现代码</p>
-<p>【52】别忘了NSTimer会保留其目标对象</p>
+<h1 id="熟悉Objective-C"><a href="#熟悉Objective-C" class="headerlink" title="熟悉Objective-C"></a>熟悉Objective-C</h1><p><strong>【1】了解Objective-C语言的起源</strong></p>
+<ul>
+<li>Objective-C为C语言添加了面向对象特性，是其超集。Objective-C使用动态绑定的消息结构，也就是说，在运行时才会检查对象类型。接收一条消息后，究竟应执行何种代码，由运行期环境而非编译器来决定。</li>
+<li>理解C语言的核心概念有助于写好Objective-C程序。尤其要掌握内存模型与指针。</li>
+</ul>
+<p><strong>【2】在类的头文件中尽量少引入其他头文件</strong></p>
+<ul>
+<li>除非确有必要，否则不要引入头文件。一般来说，应在某个类的头文件中使用向前声明来提及别的类，并实现文件中引入那些类的头文件。这样做可以尽量降低类之间的耦合（Coupling）。</li>
+<li>有时无法使用向前声明，比如要声明某个类遵循一项协议。这种情况下，尽量把“该类遵循某协议”的这条声明移至“class-continuation分类”中。如果不行的话，就把协议单独放在一个头文件中然后将其引入。</li>
+</ul>
+<p><strong>【3】多用字面量语法，少用与之等价的方法</strong></p>
+<ul>
+<li>应该使用字面量语法来创建字符串、数值、数组、字典。与创建此类对象的常规方法相比，这么做更加简明扼要。</li>
+<li>应该通过取小标操作来访问数组下标或字典中的键所对应的元素。</li>
+<li>用字面量语法创建数组或字典时，若值中有nil，则会抛出异常。因此，务必确保值里不含nil。</li>
+</ul>
+<p><strong>【4】多用类型常量，少用#define预处理指令</strong></p>
+<ul>
+<li>不要用预处理指令定义常量。这样定义出来的常量不含类型信息，编译器只是会在编译前据此执行查找与替换操作。即使有人重新定义了常量值，编译器也不会产生警告信息，这将导致应用程序中的常量值不一致。</li>
+<li>在实现文件中使用static const来定义“只在编译单元内可见的常量”（translation-unit-specific constant）。由于此类常量不在全局符号表中，所以无须为其名称加前缀。</li>
+<li>在头文件中使用extern来声明全局常量，并在相关实现文件中定义其值。这种常量要出现在全局符号表中，所以其名称应加以区隔，通常用与之相关的类名做前缀。</li>
+</ul>
+<p><strong>【5】用枚举表示状态、选项、状态码</strong></p>
+<ul>
+<li>应该用枚举来表示状态机的状态、传递给方法的选项以及状态码等值，给这些值起个易懂的名字。</li>
+<li>如果把传递给某个方法的选项表示为枚举类型，而多个选项又可以同时使用，那么就将各选项值定义为2的幂，以便通过按位或操作将其组合起来。</li>
+<li>用NS_ENUM与NS_OPTIONS宏来定义枚举类型，并指明底层数据类型。这样做可以确保枚举是用开发者所选的底层数据类型实现的，而不会采用编译器所选的类型。</li>
+<li>在处理枚举类型的switch语句中不要实现default分支。这样的话，加入新枚举之后，编译器就会提示开发者：switch语句并未处理所有的枚举。</li>
+</ul>
+<h1 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h1><p><strong>【6】理解“属性”这一概念</strong></p>
+<p><strong>【7】在对象内部尽量直接访问实例变量</strong></p>
+<p><strong>【8】理解“对象等同性”这一概念</strong></p>
+<p><strong>【9】以“类簇模式”隐藏实现细节</strong></p>
+<p><strong>【10】在既有类中使用关联对象存放自定义数据</strong></p>
+<p><strong>【11】理解objc_msgSend的作用</strong></p>
+<p><strong>【12】理解消息转发机制</strong></p>
+<p><strong>【13】用“方法调配技术”调试“黑盒方法”</strong></p>
+<p><strong>【14】理解“类对象”的用意</strong></p>
+<h1 id="接口与API设计"><a href="#接口与API设计" class="headerlink" title="接口与API设计"></a>接口与API设计</h1><p><strong>【15】用前缀避免命名空间冲突</strong></p>
+<p><strong>【16】提供“全能初始化方法”</strong></p>
+<p><strong>【17】实现description方法</strong></p>
+<p><strong>【18】尽量使用不可变对象</strong></p>
+<p><strong>【19】使用清晰而协调的命名方式</strong></p>
+<p><strong>【20】为私有方法名加前缀</strong></p>
+<p><strong>【21】理解Objective-C错误模型</strong></p>
+<p><strong>【22】理解NSCopying协议</strong></p>
+<h1 id="协议与分类"><a href="#协议与分类" class="headerlink" title="协议与分类"></a>协议与分类</h1><p><strong>【23】通过委托与数据源协议进行对象间通信</strong></p>
+<p><strong>【24】将类的实现代码分散到便于管理的数个分类之中</strong></p>
+<p><strong>【25】总是为第三方类的分类名称加前缀</strong></p>
+<p><strong>【26】勿在分类中声明属性</strong></p>
+<p><strong>【27】使用“class-continuation分类”隐藏实现细节</strong></p>
+<p><strong>【28】通过协议提供匿名对象</strong></p>
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p><strong>【29】理解引用计数</strong></p>
+<p><strong>【30】以ARC简化引用计数</strong></p>
+<p><strong>【31】在dealloc方法中只释放引用并解除监听</strong></p>
+<p><strong>【32】编写“异常安全代码”时留意内存管理问题</strong></p>
+<p><strong>【33】以弱引用避免保留环</strong></p>
+<p><strong>【34】以“自动释放池块”降低内存峰值</strong></p>
+<p><strong>【35】用“僵尸对象”调试内存管理问题</strong></p>
+<p><strong>【36】不要使用retainCount</strong></p>
+<h1 id="块与大中枢派发"><a href="#块与大中枢派发" class="headerlink" title="块与大中枢派发"></a>块与大中枢派发</h1><p><strong>【37】理解“块”这一个概念</strong></p>
+<p><strong>【38】为常用的块类型创建typedef</strong></p>
+<p><strong>【39】用handler块降低代码分散程度</strong></p>
+<p><strong>【40】用块引用其所属对象时不要出现保留环</strong></p>
+<p><strong>【41】多用派发队列，少用同步锁</strong></p>
+<p><strong>【42】多用GCD，少用performSelector系列方法</strong></p>
+<p><strong>【43】掌握GCD及操作对列的使用时机</strong></p>
+<p><strong>【44】通过Dispatch Group机制，根据系统资源状况来执行任务</strong></p>
+<p><strong>【45】使用dispatch_once来执行只需运行一次的线程安全代码</strong></p>
+<p><strong>【46】不要使用dispatch_get_current_queue</strong></p>
+<h1 id="系统框架"><a href="#系统框架" class="headerlink" title="系统框架"></a>系统框架</h1><p><strong>【47】熟悉系统框架</strong></p>
+<p><strong>【48】多用块枚举，少用for循环</strong></p>
+<p><strong>【49】对自定义其内存管理语义的collection使用无缝桥接</strong></p>
+<p><strong>【50】构建缓存时选用NSCache而非NSDictionary</strong></p>
+<p><strong>【51】精简initialize与load的实现代码</strong></p>
+<p><strong>【52】别忘了NSTimer会保留其目标对象</strong></p>
 <p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
 
     </div>
