@@ -150,7 +150,7 @@
     <p class="post-meta text-center">
         曾华经&emsp;发表于
         <time datetime="2019-01-17T01:28:30.000Z">2019-01-17</time>&emsp;修改于
-        <time datetime="2019-02-26T09:28:57.209Z">2019-02-26</time>
+        <time datetime="2019-03-01T09:24:48.081Z">2019-03-01</time>
     </p>
     <div class="post-content">
         <p>&emsp;&emsp;”Effective Software Development Series”系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。<br>&emsp;&emsp;从语法、接口与API设计、内存管理、框架等方面总结和探讨了Objective-C编程中52个鲜为人知和容易被忽视的特性与陷阱。包含大量实用范例代码，为编写易于理解、便于维护、易于扩展和高效的Objective-C应用提供了解决方案。</p>
@@ -217,6 +217,10 @@
 <li>只有在其他做法不可行时才应选用关联对象，因为这种做法通常会引入难于查找的bug。</li>
 </ul>
 <p><strong>【11】理解objc_msgSend的作用</strong></p>
+<ul>
+<li>消息由接收者、选择子及参数构成。给某对象“发送消息”（invoke a message）也就相当于在该对象上“调用方法”（call a method）。</li>
+<li>发给某对象的全部消息都要由“动态消息派发系统”（dynamic message dispatch system）来处理，该系统会查出对应的方法，并执行其代码。</li>
+</ul>
 <p><strong>【12】理解消息转发机制</strong></p>
 <p><strong>【13】用“方法调配技术”调试“黑盒方法”</strong></p>
 <p><strong>【14】理解“类对象”的用意</strong></p>
