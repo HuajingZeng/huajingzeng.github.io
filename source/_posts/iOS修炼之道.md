@@ -53,21 +53,30 @@ toc: true
 - [路径布局-基于数学函数的视图布局方法](https://www.jianshu.com/p/4ac229057396)
 - [UIButton实现各种图文结合的效果以及原理](https://www.jianshu.com/p/0fd782d67efb)
 - [理解UIButton的imageEdgeInsets和titleEdgeInsets](http://blog.intmaxdev.com/2016/04/10/uibutton-edgeinsets/)
+- [iOS多设备适配简史以及相应的API支撑实现](https://www.jianshu.com/p/b43b22fa40e3)
 
 ## 底层原理
 - [深入iOS系统底层之汇编语言](https://www.jianshu.com/p/ff8ed52bdd67)
 - [深入iOS系统底层之指令集介绍](https://www.jianshu.com/p/54884ce976ca)
 - [深入iOS系统底层之XCODE对汇编的支持介绍](https://www.jianshu.com/p/365ed6c385e5)
 - [深入iOS系统底层之CPU寄存器介绍](https://www.jianshu.com/p/6d7a57794122)
+- [深入iOS系统底层之程序中的汇编代码](https://www.jianshu.com/p/3b83193ff851)
+- [深入iOS系统底层之映像文件操作API介绍](https://www.jianshu.com/p/3b83193ff851)
+- [深入iOS系统底层之静态库介绍](https://www.jianshu.com/p/ef3415255808)
+- [深入iOS系统底层之crash解决方法介绍](https://www.jianshu.com/p/cf0945f9c1f8)
 - [深入解构iOS的block闭包实现原理](https://www.jianshu.com/p/595a1776ba3a)
 - [深入解构iOS系统下的全局对象和初始化函数](https://www.jianshu.com/p/e6300594c966)
 - [深入解构objc_msgSend函数的实现](https://www.jianshu.com/p/df6629ec9a25)
+- [趣探 Mach-O：文件格式分析](https://www.jianshu.com/p/54d842db3f69)
+- [趣探 Mach-O：加载过程](https://www.jianshu.com/p/8498cec10a41)
+- [趣探 Mach-O：FishHook 解析](https://www.jianshu.com/p/9e1f4d771e35)
 
 ## 其他
 - [手把手教你查看和分析iOS的crash崩溃异常](https://www.jianshu.com/p/cf0945f9c1f8)
 - [analyze](https://github.com/Draveness/analyze)（关于iOS开源框架源代码解析的文章）
 - [iOS-Tech-Weekly](https://github.com/BaiduHiDeviOS/iOS-Tech-Weekly)（iOS技术周报）
 - [awesome-ios](https://github.com/vsouza/awesome-ios)（iOS的集合贴）
+- [深入解构iOS的block闭包实现原理](https://www.jianshu.com/p/595a1776ba3a)
 
 # 书籍
 
