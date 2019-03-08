@@ -150,7 +150,7 @@
     <p class="post-meta text-center">
         曾华经&emsp;发表于
         <time datetime="2019-01-17T01:28:30.000Z">2019-01-17</time>&emsp;修改于
-        <time datetime="2019-03-07T09:16:33.259Z">2019-03-07</time>
+        <time datetime="2019-03-08T09:10:06.347Z">2019-03-08</time>
     </p>
     <div class="post-content">
         <p>&emsp;&emsp;”Effective Software Development Series”系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。<br>&emsp;&emsp;从语法、接口与API设计、内存管理、框架等方面总结和探讨了Objective-C编程中52个鲜为人知和容易被忽视的特性与陷阱。包含大量实用范例代码，为编写易于理解、便于维护、易于扩展和高效的Objective-C应用提供了解决方案。</p>
@@ -252,7 +252,16 @@
 <li>如果超类的初始化方法不适用于子类，那么应该覆写这个超类方法，并在其中抛出异常。</li>
 </ul>
 <p><strong>【17】实现description方法</strong></p>
+<ul>
+<li>实现description方法返回一个有意义的字符串，用以描述该实例。</li>
+<li>若想在调试时打印出更详尽的对象描述信息，则应实现debugDescription方法。</li>
+</ul>
 <p><strong>【18】尽量使用不可变对象</strong></p>
+<ul>
+<li>尽量创建不可变对象。</li>
+<li>若某属性仅可于对象内部修改，则在“class-continuation分类”中将其由readonly属性扩展为readwrite属性。</li>
+<li>不要把可变的collection作为属性公开，而应提供相关方法，以此修改对象中的可变collection。</li>
+</ul>
 <p><strong>【19】使用清晰而协调的命名方式</strong></p>
 <p><strong>【20】为私有方法名加前缀</strong></p>
 <p><strong>【21】理解Objective-C错误模型</strong></p>
