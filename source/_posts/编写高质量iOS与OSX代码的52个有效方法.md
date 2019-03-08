@@ -122,7 +122,14 @@ toc: true
 
 **【17】实现description方法**
 
+- 实现description方法返回一个有意义的字符串，用以描述该实例。
+- 若想在调试时打印出更详尽的对象描述信息，则应实现debugDescription方法。
+
 **【18】尽量使用不可变对象**
+
+- 尽量创建不可变对象。
+- 若某属性仅可于对象内部修改，则在“class-continuation分类”中将其由readonly属性扩展为readwrite属性。
+- 不要把可变的collection作为属性公开，而应提供相关方法，以此修改对象中的可变collection。
 
 **【19】使用清晰而协调的命名方式**
 
