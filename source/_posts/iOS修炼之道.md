@@ -20,7 +20,8 @@ toc: true
 # 学习路线图
 
 ![最新iOS学习路线图](http://githubblog-1252104787.cosgz.myqcloud.com/%E6%9C%80%E6%96%B0iOS%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E5%9B%BE.jpg)
-
+![iOS学习路线](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/iOS%20%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png)
+![iOS技能要求](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/iOS%E6%8A%80%E8%83%BD%E8%A6%81%E6%B1%82.png)
 # 网站
 
 - [ObjC 中国](https://objccn.io/)
