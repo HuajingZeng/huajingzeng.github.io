@@ -150,12 +150,12 @@
     <p class="post-meta text-center">
         曾华经&emsp;发表于
         <time datetime="2019-01-17T01:28:30.000Z">2019-01-17</time>&emsp;修改于
-        <time datetime="2019-03-11T09:11:38.924Z">2019-03-11</time>
+        <time datetime="2019-03-12T09:12:17.289Z">2019-03-12</time>
     </p>
     <div class="post-content">
         <p>&emsp;&emsp;”Effective Software Development Series”系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。<br>&emsp;&emsp;从语法、接口与API设计、内存管理、框架等方面总结和探讨了Objective-C编程中52个鲜为人知和容易被忽视的特性与陷阱。包含大量实用范例代码，为编写易于理解、便于维护、易于扩展和高效的Objective-C应用提供了解决方案。</p>
 <a id="more"></a>
-<h1 id="熟悉Objective-C"><a href="#熟悉Objective-C" class="headerlink" title="熟悉Objective-C"></a>熟悉Objective-C</h1><p><strong>【1】了解Objective-C语言的起源</strong></p>
+<h1 id="熟悉Objective-C"><a href="#熟悉Objective-C" class="headerlink" title="熟悉Objective-C"></a>熟悉Objective-C</h1><p><strong>【1】了解Objective-C语言的起源</strong>  </p>
 <ul>
 <li>Objective-C为C语言添加了面向对象特性，是其超集。Objective-C使用动态绑定的消息结构，也就是说，在运行时才会检查对象类型。接收一条消息后，究竟应执行何种代码，由运行期环境而非编译器来决定。</li>
 <li>理解C语言的核心概念有助于写好Objective-C程序。尤其要掌握内存模型与指针。</li>
@@ -301,11 +301,40 @@
 <li>如果你所写的对象需要深拷贝，那么可考虑新增一个专门执行深拷贝的方法。</li>
 </ul>
 <h1 id="协议与分类"><a href="#协议与分类" class="headerlink" title="协议与分类"></a>协议与分类</h1><p><strong>【23】通过委托与数据源协议进行对象间通信</strong></p>
+<ul>
+<li>委托模式为对象提供了一套接口，使其可由此将相关事件告知其他对象。</li>
+<li>将委托对象应该支持的接口定义成协议，在协议中把可能需要处理的事件定义成方法。</li>
+<li>当某对象需要从另外一个对象中获取数据时，可以使用委托模式。这种情况下，该模式亦称“数据源协议”（data source protocol）。</li>
+<li>若有必要，可实现含有位段的结构体，将委托对象是否能响应相关协议方法这一信息缓存至其中。</li>
+</ul>
 <p><strong>【24】将类的实现代码分散到便于管理的数个分类之中</strong></p>
+<ul>
+<li>使用分类机制把类的实现代码划分成易于管理的小块。</li>
+<li>将应该视为“私有”的方法归入名叫Private的分类中，以隐藏实现细节。</li>
+</ul>
 <p><strong>【25】总是为第三方类的分类名称加前缀</strong></p>
+<ul>
+<li>向第三方类中添加分类时，总应给其名称加上你专用的前缀。</li>
+<li>向第三方类中添加分类时，总应给其中的方法名加上你专用的前缀。</li>
+</ul>
 <p><strong>【26】勿在分类中声明属性</strong></p>
+<ul>
+<li>把封装数据所用的全部属性都定义在主接口里。</li>
+<li>在“class-continuation分类”之外的其他分类中，可以定义存取方法，但尽量不要定义属性。</li>
+</ul>
 <p><strong>【27】使用“class-continuation分类”隐藏实现细节</strong></p>
+<ul>
+<li>通过“class-continuation分类”向类中新增实例变量。</li>
+<li>如果某属性在主接口中声明为“只读”，而类的内部又要用设置方法修改此属性，那么就在“class-continuation分类”中将其扩展为“可读写”。</li>
+<li>把私有方法的原型声明在“class-continuation分类”里面。</li>
+<li>若想使类所遵从的协议不为人所知，则可于“class-continuation分类”中声明。</li>
+</ul>
 <p><strong>【28】通过协议提供匿名对象</strong></p>
+<ul>
+<li>协议可在某种程度上提供匿名类型。具体的对象类型可以淡化成遵从某协议的id类型，协议里规定了对象所应实现的方法。</li>
+<li>使用匿名对象来隐藏类型名称（或类名）。</li>
+<li>如果具体类型不重要，重要的是对象能够响应（定义在协议里的）特定方法，那么可使用匿名对象来表示。</li>
+</ul>
 <h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p><strong>【29】理解引用计数</strong></p>
 <p><strong>【30】以ARC简化引用计数</strong></p>
 <p><strong>【31】在dealloc方法中只释放引用并解除监听</strong></p>
@@ -320,7 +349,7 @@
 <p><strong>【40】用块引用其所属对象时不要出现保留环</strong></p>
 <p><strong>【41】多用派发队列，少用同步锁</strong></p>
 <p><strong>【42】多用GCD，少用performSelector系列方法</strong></p>
-<p><strong>【43】掌握GCD及操作对列的使用时机</strong></p>
+<p><strong>【43】掌握GCD及操作队列的使用时机</strong></p>
 <p><strong>【44】通过Dispatch Group机制，根据系统资源状况来执行任务</strong></p>
 <p><strong>【45】使用dispatch_once来执行只需运行一次的线程安全代码</strong></p>
 <p><strong>【46】不要使用dispatch_get_current_queue</strong></p>
