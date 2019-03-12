@@ -48,6 +48,11 @@ toc: true
 
 每一个类应该专注于做一件事情。
 
+## 【开闭原则】
+**Open Close Principle**
+
+面向扩展开放，面向修改关闭。
+
 ## 【里氏替换原则】
 **Liskov Substitution Principle**
 
@@ -67,16 +72,6 @@ toc: true
 **Law Of Demeter**
 
 一个软件实体应当尽可能少的与其他实体发生相互作用。
-
-## 【开闭原则】
-**Open Close Principle**
-
-面向扩展开放，面向修改关闭。
-
-## 【组合/聚合复用原则】
-**Composite/Aggregate Reuse Principle**
-
-尽量使用合成/聚合达到复用，尽量少用继承。
 
 # 设计模式
 
