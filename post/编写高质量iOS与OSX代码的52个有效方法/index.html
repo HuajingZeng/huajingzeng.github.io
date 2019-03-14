@@ -150,7 +150,7 @@
     <p class="post-meta text-center">
         曾华经&emsp;发表于
         <time datetime="2019-01-17T01:28:30.000Z">2019-01-17</time>&emsp;修改于
-        <time datetime="2019-03-13T09:06:20.993Z">2019-03-13</time>
+        <time datetime="2019-03-14T09:16:06.911Z">2019-03-14</time>
     </p>
     <div class="post-content">
         <p>&emsp;&emsp;”Effective Software Development Series”系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。<br>&emsp;&emsp;从语法、接口与API设计、内存管理、框架等方面总结和探讨了Objective-C编程中52个鲜为人知和容易被忽视的特性与陷阱。包含大量实用范例代码，为编写易于理解、便于维护、易于扩展和高效的Objective-C应用提供了解决方案。</p>
@@ -380,7 +380,17 @@
 <li>引入ARC之后，retainCount方法就正式废止了，在ARC下调用该方法会导致编译器报错。</li>
 </ul>
 <h1 id="块与大中枢派发"><a href="#块与大中枢派发" class="headerlink" title="块与大中枢派发"></a>块与大中枢派发</h1><p><strong>【37】理解“块”这一个概念</strong></p>
+<ul>
+<li>块是C、C++、Objective-C中的词法闭包。</li>
+<li>块可接受参数，也可返回值。</li>
+<li>块可以分配在栈上或堆上，也可以是全局的。分配在栈上的块可拷贝到堆里，这样的话，就和标准的Objective-C对象一样，具备引用计数了。</li>
+</ul>
 <p><strong>【38】为常用的块类型创建typedef</strong></p>
+<ul>
+<li>以typedef重新定义块类型，可令块变量用起来更加简单。</li>
+<li>定义新类型时应遵从现有的命名习惯，勿使用名称与别的类型相冲突。</li>
+<li>不妨为同一个签名定义多个类型别名。如果要重构的代码使用了块类型的某个别名，那么只需修改相应typedef中的块签名即可，无须改动其他typedef。</li>
+</ul>
 <p><strong>【39】用handler块降低代码分散程度</strong></p>
 <p><strong>【40】用块引用其所属对象时不要出现保留环</strong></p>
 <p><strong>【41】多用派发队列，少用同步锁</strong></p>
