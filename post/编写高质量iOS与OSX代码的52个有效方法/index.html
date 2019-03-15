@@ -150,7 +150,7 @@
     <p class="post-meta text-center">
         曾华经&emsp;发表于
         <time datetime="2019-01-17T01:28:30.000Z">2019-01-17</time>&emsp;修改于
-        <time datetime="2019-03-14T09:16:06.911Z">2019-03-14</time>
+        <time datetime="2019-03-15T09:22:39.284Z">2019-03-15</time>
     </p>
     <div class="post-content">
         <p>&emsp;&emsp;”Effective Software Development Series”系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。<br>&emsp;&emsp;从语法、接口与API设计、内存管理、框架等方面总结和探讨了Objective-C编程中52个鲜为人知和容易被忽视的特性与陷阱。包含大量实用范例代码，为编写易于理解、便于维护、易于扩展和高效的Objective-C应用提供了解决方案。</p>
@@ -392,7 +392,16 @@
 <li>不妨为同一个签名定义多个类型别名。如果要重构的代码使用了块类型的某个别名，那么只需修改相应typedef中的块签名即可，无须改动其他typedef。</li>
 </ul>
 <p><strong>【39】用handler块降低代码分散程度</strong></p>
+<ul>
+<li>在创建对象时，可以使用内联的handler块将相关业务逻辑一并声明。</li>
+<li>在有多个实例需要监控时，如果采用委托模式，那么经常需要根据传入的对象来切换，而若改用handler块来实现，则可直接将块与相关对象放在一起。</li>
+<li>设计API时如果用到了handler块，那么可以增加一个参数，使调用者可通过此参数来决定应该把块安排在哪个队列上执行。</li>
+</ul>
 <p><strong>【40】用块引用其所属对象时不要出现保留环</strong></p>
+<ul>
+<li>如果块所捕获的对象直接或间接地保留了块本身，那么就得当心保留环问题。</li>
+<li>一定要找个合适的时机解除保留环，而不能把责任推给API的调用者。</li>
+</ul>
 <p><strong>【41】多用派发队列，少用同步锁</strong></p>
 <p><strong>【42】多用GCD，少用performSelector系列方法</strong></p>
 <p><strong>【43】掌握GCD及操作队列的使用时机</strong></p>
