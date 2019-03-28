@@ -91,10 +91,18 @@ friends:
       title: NSHipster
       link: http://nshipster.cn/
     3:
-      name: 史蒂芬周的博客
-      title: 史蒂芬周的博客
-      link: http://www.sdifen.com/
+      name: raywenderlich
+      title: raywenderlich
+      link: https://www.raywenderlich.com/
     4:
+      name: Cocoa China
+      title: Cocoa China
+      link: http://www.cocoachina.com/
+    5:
+      name: ObjC 中国
+      title: ObjC 中国
+      link: https://objccn.io/
+    6:
       name: 未来软件园
       title: 未来软件园
       link: http://www.orsoon.com/
