@@ -9,7 +9,7 @@ tags:
 	- 设计模式
 categories:
 	- 编程基础
-thumbnail: /img/thumbnail/9.jpg
+thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1.jpeg
 blogexcerpt:
 toc: true
 ---

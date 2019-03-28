@@ -7,7 +7,7 @@ tags: Shell
 categories:
 	- 编程基础
 	- 开发工具
-thumbnail: /img/thumbnail/2.jpg
+thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Shell.jpeg
 blogexcerpt: 
 toc: true
 ---

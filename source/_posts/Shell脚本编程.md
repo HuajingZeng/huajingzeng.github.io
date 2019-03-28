@@ -8,7 +8,7 @@ tags:
 categories: 
 	- 编程基础
 	- 开发工具
-thumbnail: /img/thumbnail/1.jpg
+thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/I%20%E2%9D%A4%EF%B8%8F%20%23!%3Abin%3Abash.jpg
 blogexcerpt:
 toc: true
 ---

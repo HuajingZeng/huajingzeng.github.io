@@ -6,7 +6,7 @@ author: 曾华经
 tags: 随笔
 categories:
     - 程序人生
-thumbnail: /img/thumbnail/0.jpg
+thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/HEXO.jpg
 blogexcerpt: 
 toc:
 ---

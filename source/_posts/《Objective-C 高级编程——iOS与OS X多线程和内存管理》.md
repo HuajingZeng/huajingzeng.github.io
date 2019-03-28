@@ -1,5 +1,5 @@
 ---
-title: Objective-C高级编程
+title: 《Objective-C 高级编程——iOS与OS X多线程和内存管理》
 date: 2019-03-27 13:58:18
 update:
 author: 曾华经
@@ -9,7 +9,7 @@ tags:
 	- Objective-C
 categories:
 	- 编程基础
-thumbnail: /img/thumbnail/11.jpg
+thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E3%80%8AObjective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B.jpeg
 blogexcerpt:
 toc: true
 ---
@@ -45,14 +45,24 @@ iOS与OS X中的ARC、Blocks和Grand Central Dispatch（GCD），是面向iOS、
 
 #### alloc
 
-```objc
+```
 +alloc
 +allocWithZone:
 class_createInstance
 calloc
 ```
 
-如下为class_createInstance源代码，摘自[objc-runtime-new.mm](https://opensource.apple.com/source/objc4/objc4-750.1/runtime/objc-runtime-new.mm.auto.html)
+以下为class_createInstance的源代码，摘自[objc-runtime-new.mm](https://opensource.apple.com/source/objc4/objc4-750.1/runtime/objc-runtime-new.mm.auto.html)
+
+```
+id 
+class_createInstance(Class cls, size_t extraBytes)
+{
+    return _class_createInstanceFromZone(cls, extraBytes, nil);
+}
+```
+
+以下为_class_createInstanceFromZone的源代码，摘自[objc-runtime-new.mm](https://opensource.apple.com/source/objc4/objc4-750.1/runtime/objc-runtime-new.mm.auto.html)
 
 ```
 static __attribute__((always_inline)) 
@@ -98,12 +108,6 @@ _class_createInstanceFromZone(Class cls, size_t extraBytes, void *zone,
 
     return obj;
 }
-
-id 
-class_createInstance(Class cls, size_t extraBytes)
-{
-    return _class_createInstanceFromZone(cls, extraBytes, nil);
-}
 ```
 
 #### retainCount/retain/release
@@ -126,7 +130,7 @@ __CFDoExternRefOperation
 CFBasicHashRemoveValue	//CFBasicHashRemoveValue返回0时，-release调用dealloc
 ```
 
-如下为__CFDoExternRefOperation源代码，摘自[CFRuntime.c](https://opensource.apple.com/source/CF/CF-855.17/CFRuntime.c.auto.html)
+以下为__CFDoExternRefOperation的源代码，摘自[CFRuntime.c](https://opensource.apple.com/source/CF/CF-855.17/CFRuntime.c.auto.html)
 
 ```
 #define DISGUISE(O) (~(uintptr_t)(O))
@@ -186,7 +190,7 @@ autorelease会像C语言的自动变量那样来对待对象实例。当超出�
 - 调用已分配对象的autorelease实例方法
 - 废弃NSAutoreleasePool对象
 
-如下是AutoreleasePoolPage源代码，摘自[objc-arr.mm](https://opensource.apple.com/source/objc4/objc4-493.9/runtime/objc-arr.mm.auto.html)
+以下是AutoreleasePoolPage的源代码，摘自[objc-arr.mm](https://opensource.apple.com/source/objc4/objc4-493.9/runtime/objc-arr.mm.auto.html)
 
 ```
 class AutoreleasePoolPage 
@@ -293,6 +297,57 @@ objc_autorelease(id obj)
 	return objc_msgSend_hack(obj, @selector(autorelease));
 }
 ```
+
+## ARC规则
+
+ARC式的内存管理是编译器的工作。
+
+### 所有权修饰符
+
+- \_\_strong 修饰符
+- \_\_weak 修饰符
+- \_\_unsafe\_unretained 修饰符
+- \_\_autoreleasing 修饰符
+
+**PS：**\_\_strong、\_\_weak和\_\_autoreleasing可以保证将附有这些修饰符的自动变量初始化为nil。
+
+#### \_\_strong 修饰符
+
+\_\_strong 修饰符表示对对象的“强引用”，其修饰的变量在赋值时持有对象实例（retained）。强引用变量在超出其作用域时被废弃，随着强引用的失效（release），引用的对象会随之释放（dealloc）。
+
+**PS：**ARC有效时，\_\_strong 修饰符是id类型和对象类型默认（非显示）的所有权修饰符。
+
+#### \_\_weak 修饰符
+
+\_\_weak 修饰符表示对对象的“弱引用”，其修饰的变量在赋值时不持有对象实例。弱引用变量在对象被废弃（dealloc）时，此变量将自动失效处于nil被赋值的状态（空弱引用）。使用\_\_weak 修饰符可避免循环引用。
+
+#### \_\_unsafe\_unretained 修饰符
+
+\_\_unsafe\_unretained 修饰符是不安全的所有权修饰符，其修饰的变量在赋值时不持有对象实例。赋值给附有\_\_unsafe\_unretained 修饰符变量的对象在通过该变量使用时，如果没有确保其确实存在，那么应用程序就会崩溃。
+
+**PS：**附有\_\_unsafe\_unretained 修饰符的变量不属于编译器的内存管理对象。
+
+#### \_\_autoreleasing 修饰符
+
+\_\_autoreleasing 修饰符表示对象的“自动释放”，其修饰的变量在赋值时将添加到自动释放池（autorelease）。
+
+显式地附加\_\_autoreleasing 修饰符很罕见，这是因为：
+
+- 在ARC有效时，编译器会检查方法名是否以alloc/new/copy/mutableCopy开始，如果不是则自动将返回值的对象注册到autoreleasepool。
+- 在访问弱引用对象的过程中，该对象有可能被废弃，所以编译器会自动生成用\_\_autoreleasing 修饰符修饰的中间变量，先把要访问的对象注册到autoreleasepool中再使用，确保其在@autoreleasepool块结束之前都存在。
+- id的指针或对象的指针在没有显式指定时编译器会自动附加上\_\_autoreleasing 修饰符（甚至在需要的时候生成用\_\_autoreleasing 修饰符修饰的中间变量）。
+
+**PS：**在显示地指定\_\_autoreleasing 修饰符时，必须注意对象变量要为自动变量（包括局部变量、函数以及方法参数）。
+
+### @autoreleasepool
+
+- @autoreleasepool块可以嵌套使用。
+- NSRunLoop无论ARC是否有效，均能够随时释放注册到autoreleasepool中的对象。
+- 无论ARC是否有效，调试用的非公开函数_objc_autoreleasePoolPrint()都可以使用，利用它可有效地帮助我们调试注册到autoreleasepool上的对象。
+
+### 规则
+
+
 
 # Blocks
 

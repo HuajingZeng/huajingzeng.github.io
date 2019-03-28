@@ -1,5 +1,5 @@
 ---
-title: 编写高质量iOS与OSX代码的52个有效方法
+title: 《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》
 date: 2019-01-17 09:28:30
 update:
 author: 曾华经
@@ -8,7 +8,7 @@ tags:
 	- OS X
 categories:
 	- 编程基础
-thumbnail: /img/thumbnail/10.jpg
+thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E3%80%8AEffective%20Objective-C%202.0%E3%80%8B.jpeg
 blogexcerpt:
 toc: true
 ---

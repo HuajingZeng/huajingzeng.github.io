@@ -7,7 +7,7 @@ tags:
 	- iOS 
 categories: 
 	- 编程基础 
-thumbnail: /img/thumbnail/6.jpg 
+thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/iOS%E5%BC%80%E5%8F%91.jpeg 
 blogexcerpt: 
 toc: true 
 ---
