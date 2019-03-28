@@ -347,7 +347,20 @@ ARC式的内存管理是编译器的工作。
 
 ### 规则
 
-
+- 不能使用retain/release/retainCount/autorelease
+- 不能使用NSAllocateObject/NSDeallocateObject
+- 须遵守内存管理的方法命名规则
+	- 以alloc/new/copy/mutableCopy开头的方法在返回对象时，必须返回给调用方所应当持有的对象
+	- 以init开始的方法必须是实例方法，并且要返回对象。返回的对象应为id类型或该方法声明的对象类型，抑或是该类的超类型或子类型。该返回对象并不注册到autoreleasepool上，基本上只是对alloc方法返回值的对象进行初始化处理并返回对象 
+- 不要显示调用dealloc
+- 使用@autoreleasepool块替代NSAutoreleasePool
+- 不能使用区域（NSZone）
+- 对象型变量不能作为C语言结构体（struct/union）的成员
+	- 要把对象型变量加入到结构体成员中使，可强制转换为void *或是附加/_/_unsafe/_unretained 修饰符
+- 显示转换“id”和“void *”
+	- id型或对象型变量赋值给void *或者逆向赋值时都要进行特定的转换，如果只想单纯地赋值，则可以使用“__bridge 转换”（转换为void *的/_/_bridge 转换，其安全性与赋值给/_/_unsafe/_unretained 修饰符相近，如果管理时不注意赋值对象的所有者，就会因垂悬指针而导致程序崩溃）
+	- /_/_bridge/_retained 转换可使要转换的变量也持有所赋值的对象
+	- /_/_bridge/_transfer 转换时被转换的变量所持有的对象在该变量被赋值给变换目标变量后随之释放 
 
 # Blocks
 
