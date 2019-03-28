@@ -447,7 +447,7 @@ th {
  */
 ::selection {
   color: #fff;
-  background-color: #f99;
+  background-color: #7dcefa;
   opacity: 0.8;
 }
 ::-webkit-scrollbar {
@@ -1265,7 +1265,7 @@ pre .javascript .function {
   margin: 0 auto;
   padding-left: 10px;
   text-align: left;
-  border-left: 3px solid rgba(255,153,153,0.8);
+  border-left: 3px solid rgba(50,150,250,0.8);
 }
 .article-share .share-area .share-txt {
   float: left;

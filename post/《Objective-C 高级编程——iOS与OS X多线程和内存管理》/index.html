@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>《Objective-C 高级编程——iOS与OS X多线程和内存管理》 | 曾华经</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="iOS, Web" >
+    <meta name="description" content="曾华经个人博客" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="曾华经" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico" >
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">曾华经</span>
+                    <span class="description">iOS Programmer</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/index.html" class="item ">
+                <a href="/lab/" title="项目" class="icon-lab">&nbsp;项目</a>
+            </li>
+            
+            <li rel="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/HuajingZeng" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://github.com" target="_blank">Hosted by Github Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://weibo.com/p/1005051288040665/home?from=page_100505&amp;mod=TAB#place" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href="" class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zhj.jpg" alt="avatar" title="曾华经" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:block">
+    <span class="btn-text">文章导航</span>
+    </p>
+    <div id="toc-article" class="toc-article" style="display:none">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自动引用计数"><span class="toc-number">1.</span> <span class="toc-text">自动引用计数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是自动引用计数"><span class="toc-number">1.1.</span> <span class="toc-text">什么是自动引用计数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存管理-引用计数"><span class="toc-number">1.2.</span> <span class="toc-text">内存管理/引用计数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理的思考方式"><span class="toc-number">1.2.1.</span> <span class="toc-text">内存管理的思考方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理的具体实现"><span class="toc-number">1.2.2.</span> <span class="toc-text">内存管理的具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#alloc"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">alloc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#retainCount-retain-release"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">retainCount/retain/release</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#autolease"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">autolease</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARC规则"><span class="toc-number">1.3.</span> <span class="toc-text">ARC规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#所有权修饰符"><span class="toc-number">1.3.1.</span> <span class="toc-text">所有权修饰符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#strong-修饰符"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">__strong 修饰符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#weak-修饰符"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">__weak 修饰符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unsafe-unretained-修饰符"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">__unsafe_unretained 修饰符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#autoreleasing-修饰符"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">__autoreleasing 修饰符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#autoreleasepool"><span class="toc-number">1.3.2.</span> <span class="toc-text">@autoreleasepool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规则"><span class="toc-number">1.3.3.</span> <span class="toc-text">规则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Blocks"><span class="toc-number">2.</span> <span class="toc-text">Blocks</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grand-Central-Dispatch"><span class="toc-number">3.</span> <span class="toc-text">Grand Central Dispatch</span></a></li></ol>
+   </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+     
+<!-- 目录内容结束 -->
+<!-- 文章 -->
+<article class="post article" onclick="showBtn();">
+    <header class="text-center">
+        <h3 class="post-title"><span>《Objective-C 高级编程——iOS与OS X多线程和内存管理》</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        曾华经&emsp;发表于
+        <time datetime="2019-03-27T05:58:18.000Z">2019-03-27</time>&emsp;修改于
+        <time datetime="2019-03-28T09:20:41.250Z">2019-03-28</time>
+    </p>
+    <div class="post-content">
+        <p>iOS与OS X中的ARC、Blocks和Grand Central Dispatch（GCD），是面向iOS、OS X应用开发时不可或缺。它们看似简单，但若无深入了解，就会变成技术开发的陷阱。要想掌握这些技术，除了阅读苹果公司的参考文档之外，还要进一步学习苹果公司公开的源代码，在此基础上深入剖析才能融汇贯通。</p>
+<a id="more"></a>
+<h1 id="自动引用计数"><a href="#自动引用计数" class="headerlink" title="自动引用计数"></a>自动引用计数</h1><h2 id="什么是自动引用计数"><a href="#什么是自动引用计数" class="headerlink" title="什么是自动引用计数"></a>什么是自动引用计数</h2><blockquote>
+<p>自动引用计数（ARC，Automatic Reference Counting）是指内存管理中对引用采用自动计数的技术。</p>
+</blockquote>
+<h2 id="内存管理-引用计数"><a href="#内存管理-引用计数" class="headerlink" title="内存管理/引用计数"></a>内存管理/引用计数</h2><h3 id="内存管理的思考方式"><a href="#内存管理的思考方式" class="headerlink" title="内存管理的思考方式"></a>内存管理的思考方式</h3><ul>
+<li>自己生成的对象，自己持有</li>
+<li>非自己生成的对象，自己也能持有</li>
+<li>不需要自己持有的对象时释放</li>
+<li>非自己持有的对象无法释放</li>
+</ul>
+<h3 id="内存管理的具体实现"><a href="#内存管理的具体实现" class="headerlink" title="内存管理的具体实现"></a>内存管理的具体实现</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">对象操作</th>
+<th style="text-align:center">Objective-C方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">生成并持有对象</td>
+<td style="text-align:center">alloc/new/copy/mutableCopy等方法</td>
+</tr>
+<tr>
+<td style="text-align:center">持有对象</td>
+<td style="text-align:center">retain方法</td>
+</tr>
+<tr>
+<td style="text-align:center">释放对象</td>
+<td style="text-align:center">release方法</td>
+</tr>
+<tr>
+<td style="text-align:center">自动释放对象（加入自动释放池）</td>
+<td style="text-align:center">autorelease方法</td>
+</tr>
+<tr>
+<td style="text-align:center">废弃对象</td>
+<td style="text-align:center">dealloc方法</td>
+</tr>
+</tbody>
+</table>
+<h4 id="alloc"><a href="#alloc" class="headerlink" title="alloc"></a>alloc</h4><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="addition">+alloc</span></span><br><span class="line"><span class="addition">+allocWithZone:</span></span><br><span class="line">class_createInstance</span><br><span class="line">calloc</span><br></pre></td></tr></table></figure>
+<p>以下为class_createInstance的源代码，摘自<a href="https://opensource.apple.com/source/objc4/objc4-750.1/runtime/objc-runtime-new.mm.auto.html" target="_blank" rel="noopener">objc-runtime-new.mm</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">id </span><br><span class="line">class_createInstance(Class cls, <span class="keyword">size_t</span> extraBytes)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> _class_createInstanceFromZone(cls, extraBytes, nil);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下为_class_createInstanceFromZone的源代码，摘自<a href="https://opensource.apple.com/source/objc4/objc4-750.1/runtime/objc-runtime-new.mm.auto.html" target="_blank" rel="noopener">objc-runtime-new.mm</a></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> __attribute__((always_inline)) </span><br><span class="line"><span class="keyword">id</span></span><br><span class="line">_class_createInstanceFromZone(Class cls, size_t extraBytes, <span class="keyword">void</span> *zone, </span><br><span class="line">                              <span class="keyword">bool</span> cxxConstruct = <span class="literal">true</span>, </span><br><span class="line">                              size_t *outAllocatedSize = <span class="literal">nil</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!cls) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line">    assert(cls-&gt;isRealized());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read class's info bits all at once for performance</span></span><br><span class="line">    <span class="keyword">bool</span> hasCxxCtor = cls-&gt;hasCxxCtor();</span><br><span class="line">    <span class="keyword">bool</span> hasCxxDtor = cls-&gt;hasCxxDtor();</span><br><span class="line">    <span class="keyword">bool</span> fast = cls-&gt;canAllocNonpointer();</span><br><span class="line"></span><br><span class="line">    size_t size = cls-&gt;instanceSize(extraBytes);</span><br><span class="line">    <span class="keyword">if</span> (outAllocatedSize) *outAllocatedSize = size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">id</span> obj;</span><br><span class="line">    <span class="keyword">if</span> (!zone  &amp;&amp;  fast) &#123;</span><br><span class="line">        obj = (<span class="keyword">id</span>)calloc(<span class="number">1</span>, size);</span><br><span class="line">        <span class="keyword">if</span> (!obj) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">        obj-&gt;initInstanceIsa(cls, hasCxxDtor);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (zone) &#123;</span><br><span class="line">            obj = (<span class="keyword">id</span>)malloc_zone_calloc ((malloc_zone_t *)zone, <span class="number">1</span>, size);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            obj = (<span class="keyword">id</span>)calloc(<span class="number">1</span>, size);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!obj) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Use raw pointer isa on the assumption that they might be </span></span><br><span class="line">        <span class="comment">// doing something weird with the zone or RR.</span></span><br><span class="line">        obj-&gt;initIsa(cls);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (cxxConstruct &amp;&amp; hasCxxCtor) &#123;</span><br><span class="line">        obj = _objc_constructOrFree(obj, cls);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="retainCount-retain-release"><a href="#retainCount-retain-release" class="headerlink" title="retainCount/retain/release"></a>retainCount/retain/release</h4><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">retainCount</span></span><br><span class="line"><span class="ruby">__CFDoExternRefOperation</span></span><br><span class="line"><span class="ruby">CFBasicHashGetCountOfKey</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">retain</span></span><br><span class="line"><span class="ruby">__CFDoExternRefOperation</span></span><br><span class="line"><span class="ruby">CFBasicHashAddValue</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="built_in">release</span></span><br><span class="line">__CFDoExternRefOperation</span><br><span class="line">CFBasicHashRemoveValue	<span class="comment">//CFBasicHashRemoveValue返回0时，-release调用dealloc</span></span><br></pre></td></tr></table></figure>
+<p>以下为__CFDoExternRefOperation的源代码，摘自<a href="https://opensource.apple.com/source/CF/CF-855.17/CFRuntime.c.auto.html" target="_blank" rel="noopener">CFRuntime.c</a></p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DISGUISE(O) (~(uintptr_t)(O))</span></span><br><span class="line"></span><br><span class="line">static struct &#123;</span><br><span class="line">    CFSpinLock_t <span class="built_in">lock</span>;</span><br><span class="line">    CFBasicHashRef table;</span><br><span class="line">    uint8_t padding[<span class="number">64</span> - <span class="built_in">sizeof</span>(CFBasicHashRef) - <span class="built_in">sizeof</span>(CFSpinLock_t)];</span><br><span class="line">&#125; <span class="variable">__NSRetainCounters</span>[NUM_EXTERN_TABLES];</span><br><span class="line"></span><br><span class="line">CF_EXPORT uintptr_t <span class="variable">__CFDoExternRefOperation</span>(uintptr_t op, id obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">nil</span> == obj) <span class="built_in">HALT</span>;</span><br><span class="line">    uintptr_t idx = EXTERN_TABLE_IDX(obj);</span><br><span class="line">    uintptr_t disguised = DISGUISE(obj);</span><br><span class="line">    CFSpinLock_t *<span class="built_in">lock</span> = &amp;<span class="variable">__NSRetainCounters</span>[idx].<span class="built_in">lock</span>;</span><br><span class="line">    CFBasicHashRef table = <span class="variable">__NSRetainCounters</span>[idx].table;</span><br><span class="line">    uintptr_t <span class="built_in">count</span>;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">300</span>:   <span class="comment">// increment</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">350</span>:   <span class="comment">// increment, no event</span></span><br><span class="line">        <span class="variable">__CFSpinLock</span>(<span class="built_in">lock</span>);</span><br><span class="line">	CFBasicHashAddValue(table, disguised, disguised);</span><br><span class="line">        <span class="variable">__CFSpinUnlock</span>(<span class="built_in">lock</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">__CFOASafe</span> &amp;&amp; op != <span class="number">350</span>) <span class="variable">__CFRecordAllocationEvent</span>(<span class="variable">__kCFObjectRetainedEvent</span>, obj, <span class="number">0</span>, <span class="number">0</span>, NULL);</span><br><span class="line">        return (uintptr_t)obj;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">400</span>:   <span class="comment">// decrement</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">__CFOASafe</span>) <span class="variable">__CFRecordAllocationEvent</span>(<span class="variable">__kCFObjectReleasedEvent</span>, obj, <span class="number">0</span>, <span class="number">0</span>, NULL);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">450</span>:   <span class="comment">// decrement, no event</span></span><br><span class="line">        <span class="variable">__CFSpinLock</span>(<span class="built_in">lock</span>);</span><br><span class="line">        <span class="built_in">count</span> = (uintptr_t)CFBasicHashRemoveValue(table, disguised);</span><br><span class="line">        <span class="variable">__CFSpinUnlock</span>(<span class="built_in">lock</span>);</span><br><span class="line">        return <span class="number">0</span> == <span class="built_in">count</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">        <span class="variable">__CFSpinLock</span>(<span class="built_in">lock</span>);</span><br><span class="line">        <span class="built_in">count</span> = (uintptr_t)CFBasicHashGetCountOfKey(table, disguised);</span><br><span class="line">        <span class="variable">__CFSpinUnlock</span>(<span class="built_in">lock</span>);</span><br><span class="line">        return <span class="built_in">count</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>GNUstep将引用计数保存在对象占用内存块头部的变量中，而苹果则采用散列表（引用计数表）来管理引用计数。</p>
+<ul>
+<li>通过内存块头部管理引用计数的好处：<ul>
+<li>少量代码即可完成。</li>
+<li>能够统一管理引用计数用内存块与对象用内存块</li>
+</ul>
+</li>
+<li>通过引用计数表管理引用计数的好处：<ul>
+<li>对象用内存块的分配无需考虑内存块头部</li>
+<li>引用计数表各记录中存有内存块地址，可从各个记录追溯到各对象的内存块</li>
+</ul>
+</li>
+</ul>
+<h4 id="autolease"><a href="#autolease" class="headerlink" title="autolease"></a>autolease</h4><p>autorelease会像C语言的自动变量那样来对待对象实例。当超出其作用域（相当于变量作用域）时，对象实例的release实例方法被调用。另外，同C语言的自动变量不同的是，编程人员可以设定变量的作用域。具体使用方法如下：</p>
+<ul>
+<li>生成并持有NSAutoreleasePool对象</li>
+<li>调用已分配对象的autorelease实例方法</li>
+<li>废弃NSAutoreleasePool对象</li>
+</ul>
+<p>以下是AutoreleasePoolPage的源代码，摘自<a href="https://opensource.apple.com/source/objc4/objc4-493.9/runtime/objc-arr.mm.auto.html" target="_blank" rel="noopener">objc-arr.mm</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AutoreleasePoolPage</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function">id *<span class="title">add</span><span class="params">(id obj)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        assert(!full());</span><br><span class="line">        unprotect();</span><br><span class="line">        *next++ = obj;</span><br><span class="line">        protect();</span><br><span class="line">        <span class="keyword">return</span> next<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">releaseAll</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        releaseUntil(begin());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> id <span class="title">autorelease</span><span class="params">(id obj)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        assert(obj);</span><br><span class="line">        assert(!OBJC_IS_TAGGED_PTR(obj));</span><br><span class="line">        id *dest __unused = autoreleaseFast(obj);</span><br><span class="line">        assert(!dest  ||  *dest == obj);</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> *<span class="title">push</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!hotPage()) &#123;</span><br><span class="line">            setHotPage(<span class="keyword">new</span> AutoreleasePoolPage(<span class="literal">NULL</span>));</span><br><span class="line">        &#125; </span><br><span class="line">        id *dest = autoreleaseFast(POOL_SENTINEL);</span><br><span class="line">        assert(*dest == POOL_SENTINEL);</span><br><span class="line">        <span class="keyword">return</span> dest;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">(<span class="keyword">void</span> *token)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        AutoreleasePoolPage *page;</span><br><span class="line">        id *stop;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (token) &#123;</span><br><span class="line">            page = pageForPointer(token);</span><br><span class="line">            stop = (id *)token;</span><br><span class="line">            assert(*stop == POOL_SENTINEL);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// Token 0 is top-level pool</span></span><br><span class="line">            page = coldPage();</span><br><span class="line">            assert(page);</span><br><span class="line">            stop = page-&gt;begin();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (PrintPoolHiwat) printHiwat();</span><br><span class="line"></span><br><span class="line">        page-&gt;releaseUntil(stop);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// memory: delete empty children</span></span><br><span class="line">        <span class="comment">// hysteresis: keep one empty child if this page is more than half full</span></span><br><span class="line">        <span class="comment">// special case: delete everything for pop(0)</span></span><br><span class="line">        <span class="keyword">if</span> (!token) &#123;</span><br><span class="line">            page-&gt;kill();</span><br><span class="line">            setHotPage(<span class="literal">NULL</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (page-&gt;child) &#123;</span><br><span class="line">            <span class="keyword">if</span> (page-&gt;lessThanHalfFull()) &#123;</span><br><span class="line">                page-&gt;child-&gt;kill();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (page-&gt;child-&gt;child) &#123;</span><br><span class="line">                page-&gt;child-&gt;child-&gt;kill();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r __unused = pthread_key_init_np(AutoreleasePoolPage::key, </span><br><span class="line">                                             AutoreleasePoolPage::tls_dealloc);</span><br><span class="line">        assert(r == <span class="number">0</span>);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">objc_autoreleasePoolPush(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (UseGC) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> AutoreleasePoolPage::push();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">objc_autoreleasePoolPop(<span class="keyword">void</span> *ctxt)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (UseGC) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// fixme rdar://9167170</span></span><br><span class="line">    <span class="keyword">if</span> (!ctxt) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    AutoreleasePoolPage::pop(ctxt);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">id</span><br><span class="line">objc_autorelease(id obj)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> objc_msgSend_hack(obj, @selector(autorelease));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ARC规则"><a href="#ARC规则" class="headerlink" title="ARC规则"></a>ARC规则</h2><p>ARC式的内存管理是编译器的工作。</p>
+<h3 id="所有权修饰符"><a href="#所有权修饰符" class="headerlink" title="所有权修饰符"></a>所有权修饰符</h3><ul>
+<li>__strong 修饰符</li>
+<li>__weak 修饰符</li>
+<li>__unsafe_unretained 修饰符</li>
+<li>__autoreleasing 修饰符</li>
+</ul>
+<p><strong>PS：</strong>__strong、__weak和__autoreleasing可以保证将附有这些修饰符的自动变量初始化为nil。</p>
+<h4 id="strong-修饰符"><a href="#strong-修饰符" class="headerlink" title="__strong 修饰符"></a>__strong 修饰符</h4><p>__strong 修饰符表示对对象的“强引用”，其修饰的变量在赋值时持有对象实例（retained）。强引用变量在超出其作用域时被废弃，随着强引用的失效（release），引用的对象会随之释放（dealloc）。</p>
+<p><strong>PS：</strong>ARC有效时，__strong 修饰符是id类型和对象类型默认（非显示）的所有权修饰符。</p>
+<h4 id="weak-修饰符"><a href="#weak-修饰符" class="headerlink" title="__weak 修饰符"></a>__weak 修饰符</h4><p>__weak 修饰符表示对对象的“弱引用”，其修饰的变量在赋值时不持有对象实例。弱引用变量在对象被废弃（dealloc）时，此变量将自动失效处于nil被赋值的状态（空弱引用）。使用__weak 修饰符可避免循环引用。</p>
+<h4 id="unsafe-unretained-修饰符"><a href="#unsafe-unretained-修饰符" class="headerlink" title="__unsafe_unretained 修饰符"></a>__unsafe_unretained 修饰符</h4><p>__unsafe_unretained 修饰符是不安全的所有权修饰符，其修饰的变量在赋值时不持有对象实例。赋值给附有__unsafe_unretained 修饰符变量的对象在通过该变量使用时，如果没有确保其确实存在，那么应用程序就会崩溃。</p>
+<p><strong>PS：</strong>附有__unsafe_unretained 修饰符的变量不属于编译器的内存管理对象。</p>
+<h4 id="autoreleasing-修饰符"><a href="#autoreleasing-修饰符" class="headerlink" title="__autoreleasing 修饰符"></a>__autoreleasing 修饰符</h4><p>__autoreleasing 修饰符表示对象的“自动释放”，其修饰的变量在赋值时将添加到自动释放池（autorelease）。</p>
+<p>显式地附加__autoreleasing 修饰符很罕见，这是因为：</p>
+<ul>
+<li>在ARC有效时，编译器会检查方法名是否以alloc/new/copy/mutableCopy开始，如果不是则自动将返回值的对象注册到autoreleasepool。</li>
+<li>在访问弱引用对象的过程中，该对象有可能被废弃，所以编译器会自动生成用__autoreleasing 修饰符修饰的中间变量，先把要访问的对象注册到autoreleasepool中再使用，确保其在@autoreleasepool块结束之前都存在。</li>
+<li>id的指针或对象的指针在没有显式指定时编译器会自动附加上__autoreleasing 修饰符（甚至在需要的时候生成用__autoreleasing 修饰符修饰的中间变量）。</li>
+</ul>
+<p><strong>PS：</strong>在显示地指定__autoreleasing 修饰符时，必须注意对象变量要为自动变量（包括局部变量、函数以及方法参数）。</p>
+<h3 id="autoreleasepool"><a href="#autoreleasepool" class="headerlink" title="@autoreleasepool"></a>@autoreleasepool</h3><ul>
+<li>@autoreleasepool块可以嵌套使用。</li>
+<li>NSRunLoop无论ARC是否有效，均能够随时释放注册到autoreleasepool中的对象。</li>
+<li>无论ARC是否有效，调试用的非公开函数_objc_autoreleasePoolPrint()都可以使用，利用它可有效地帮助我们调试注册到autoreleasepool上的对象。</li>
+</ul>
+<h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><h1 id="Blocks"><a href="#Blocks" class="headerlink" title="Blocks"></a>Blocks</h1><h1 id="Grand-Central-Dispatch"><a href="#Grand-Central-Dispatch" class="headerlink" title="Grand Central Dispatch"></a>Grand Central Dispatch</h1><p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/编程基础/">编程基础</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/iOS/" title="iOS">iOS</a> / 
+    
+        <a href="/tags/OS-X/" title="OS X">OS X</a> / 
+    
+        <a href="/tags/Objective-C/" title="Objective-C">Objective-C</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <!-- <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a> -->
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="javascript: void(0);">没有上一篇了</a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/">
+            
+                《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/zhj.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: '《Objective-C 高级编程——iOS与OS X多线程和内存管理》' || 'post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/',
+    owner: 'HuajingZeng',
+    repo: 'huajingzeng.github.io_comments',
+    clientId: '7ae3915c563a60d41451',
+    clientSecret: '2abefe41031e15eabf12a828f30fd380487fb738'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/程序人生/">程序人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/">编程基础</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/开发工具/">开发工具</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/随笔/" title="随笔">随笔 (1)</a>
+  
+    <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
+  
+    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (4)</a>
+  
+    <a class="tag-item" href="/tags/面向对象/" title="面向对象">面向对象 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计原则/" title="设计原则">设计原则 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
+  
+    <a class="tag-item" href="/tags/OS-X/" title="OS X">OS X (3)</a>
+  
+    <a class="tag-item" href="/tags/程序员/" title="程序员">程序员 (1)</a>
+  
+    <a class="tag-item" href="/tags/书籍/" title="书籍">书籍 (1)</a>
+  
+    <a class="tag-item" href="/tags/Objective-C/" title="Objective-C">Objective-C (1)</a>
+  
+    <a class="tag-item" href="/tags/正则表达式/" title="正则表达式">正则表达式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/tags/SVN/" title="SVN">SVN (1)</a>
+  
+    <a class="tag-item" href="/tags/CVS/" title="CVS">CVS (1)</a>
+  
+    <a class="tag-item" href="/tags/代码大全/" title="代码大全">代码大全 (1)</a>
+  
+    <a class="tag-item" href="/tags/核对表/" title="核对表">核对表 (1)</a>
+  
+    <a class="tag-item" href="/tags/macOS/" title="macOS">macOS (0)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://stackoverflow.com/" target="_blank" title="Stack Overflow">Stack Overflow</a>
+        </li>
+    
+        <li>
+            <a href="http://nshipster.cn/" target="_blank" title="NSHipster">NSHipster</a>
+        </li>
+    
+        <li>
+            <a href="http://www.sdifen.com/" target="_blank" title="史蒂芬周的博客">史蒂芬周的博客</a>
+        </li>
+    
+        <li>
+            <a href="http://www.orsoon.com/" target="_blank" title="未来软件园">未来软件园</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">曾华经</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

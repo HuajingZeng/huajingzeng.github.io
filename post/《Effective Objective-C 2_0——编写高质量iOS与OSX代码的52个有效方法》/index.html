@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>编写高质量iOS与OSX代码的52个有效方法 | 曾华经</title>
+    <title>《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》 | 曾华经</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="iOS, Web" >
     <meta name="description" content="曾华经个人博客" >
@@ -56,19 +56,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/post/编写高质量iOS与OSX代码的52个有效方法/index.html" class="item ">
+            <li rel="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/post/编写高质量iOS与OSX代码的52个有效方法/index.html" class="item ">
+            <li rel="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/index.html" class="item ">
                 <a href="/lab/" title="项目" class="icon-lab">&nbsp;项目</a>
             </li>
             
-            <li rel="/post/编写高质量iOS与OSX代码的52个有效方法/index.html" class="item ">
+            <li rel="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/post/编写高质量iOS与OSX代码的52个有效方法/index.html" class="item ">
+            <li rel="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -145,12 +145,12 @@
 <!-- 文章 -->
 <article class="post article" onclick="showBtn();">
     <header class="text-center">
-        <h3 class="post-title"><span>编写高质量iOS与OSX代码的52个有效方法</span></h3>
+        <h3 class="post-title"><span>《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》</span></h3>
     </header>
     <p class="post-meta text-center">
         曾华经&emsp;发表于
         <time datetime="2019-01-17T01:28:30.000Z">2019-01-17</time>&emsp;修改于
-        <time datetime="2019-03-18T09:18:42.257Z">2019-03-18</time>
+        <time datetime="2019-03-28T09:20:41.270Z">2019-03-28</time>
     </p>
     <div class="post-content">
         <p>&emsp;&emsp;”Effective Software Development Series”系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。<br>&emsp;&emsp;从语法、接口与API设计、内存管理、框架等方面总结和探讨了Objective-C编程中52个鲜为人知和容易被忽视的特性与陷阱。包含大量实用范例代码，为编写易于理解、便于维护、易于扩展和高效的Objective-C应用提供了解决方案。</p>
@@ -460,11 +460,42 @@
 <li>dispatch_get_current_queue函数用于解决由不可重入的代码所引发的死锁，然而能用此函数解决的问题，通常也能改用“队列特定数据”来解决。</li>
 </ul>
 <h1 id="系统框架"><a href="#系统框架" class="headerlink" title="系统框架"></a>系统框架</h1><p><strong>【47】熟悉系统框架</strong></p>
+<ul>
+<li>许多系统框架都可以直接使用。其中最重要的是Foundation与CoreFoundation，这两个框架提供了构建应用程序所需的许多核心功能。</li>
+<li>很多常见任务都能用框架来做，例如音频与视频处理、网络通讯、数据管理等。</li>
+<li>请记住：用纯C写成的框架与用Objective-C写成的一样重要，若想成为优秀的Objective-C开发者，应该掌握C语言的核心概念。</li>
+</ul>
 <p><strong>【48】多用块枚举，少用for循环</strong></p>
+<ul>
+<li>遍历collection有四种方式。最基本的办法是for循环，其次是NSEnumerator遍历及快速遍历法，最新、最先进的方式则是“块枚举法”。</li>
+<li>“块枚举法”本身就能通过GCD来并发执行遍历操作，无须另行编写代码。而采用其他遍历方式则无法轻易实现这一点。</li>
+<li>若提前知道待遍历的collection含有何种对象，则应修改块签名，指出对象的具体类型。</li>
+</ul>
 <p><strong>【49】对自定义其内存管理语义的collection使用无缝桥接</strong></p>
+<ul>
+<li>通过无缝桥接技术，可以在Foundation框架中的Objective-C对象与CoreFoundation框架中的C语言数据结构之间来回转换。</li>
+<li>在CoreFoundation层面创建collection时，可以指定许多回调函数，这些函数表示此collection应如何处理其元素。然后，可运用无缝桥接技术，将其转换成具备特殊内存管理语义的Objective-C collection。</li>
+</ul>
 <p><strong>【50】构建缓存时选用NSCache而非NSDictionary</strong></p>
+<ul>
+<li>实现缓存时应选用NSCache而非NSDictionary对象。因为NSCache可以提供优雅的自动删减功能，而且是“线程安全的”，此外，它与字典不同，并不会拷贝键。</li>
+<li>可以给NSCache对象设置上限，用以限制缓存中的对象总个数及“总成本”，而这些尺度则定义了缓存删减其中对象的时机。但是绝对不要把这些尺度当成可靠的“硬限制”（hard limit），它们仅对NSCache起指导作用。</li>
+<li>将NSPurgeableData与NSCache搭配使用，可实现自动清除数据的功能，也就是说，当NSPurgeableData对象所占内存为系统所丢弃时，该对象自身也会从缓存中移除。</li>
+<li>如果缓存使用得当，那么应用程序的响应速度就能提高。只有那种“重新计算起来很费事的”数据，才值得放入缓存，比如那些需要从网络获取或从磁盘读取的数据。</li>
+</ul>
 <p><strong>【51】精简initialize与load的实现代码</strong></p>
+<ul>
+<li>在加载阶段，如果类实现了load方法，那么系统就会调用它。分类里也可以定义此方法，类的load方法要比分类中的先调用。与其他方法不同，load方法不参与覆写机制。</li>
+<li>首次使用某个类之前，系统会向其发送initialize消息。由于此方法遵从普通的覆写规则，所以通常应该在里面判断当前要初始化的是哪个类。</li>
+<li>load与initialize方法都应该实现得精简一些，这有助于保持应用程序的响应能力，也能减少引入“依赖环”（interdependency cycle）的几率。</li>
+<li>无法在编译期设定的全局常量，可以放在initialize方法里初始化。</li>
+</ul>
 <p><strong>【52】别忘了NSTimer会保留其目标对象</strong></p>
+<ul>
+<li>NSTimer对象会保留其目标，直到计时器本身失效为止，调用invalidate方法可令计时器失效，另外，一次性的计时器在触发完任务之后也会失效。</li>
+<li>反复执行任务的计时器（repeating timer），很容易引入保留环，如果这种计时器的目标对象又保留了计时器本身，那肯定会导致保留环。这种环状保留关系，可能是直接发生的，也可能是通过对象图里的其他对象间接发生的。</li>
+<li>可以扩充NSTimer的功能，用“块”来打破保留环。不过，除非NSTimer将来的公共接口里提供此功能，否则必须创建分类，将相关实现代码加入其中。</li>
+</ul>
 <p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
 
     </div>
@@ -478,7 +509,7 @@
     
         <a href="/tags/iOS/" title="iOS">iOS</a> / 
     
-        <a href="/tags/OSX/" title="OSX">OSX</a>
+        <a href="/tags/OS-X/" title="OS X">OS X</a>
     
 
         </span>
@@ -504,7 +535,11 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="javascript: void(0);">没有上一篇了</a>
+        <a href="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/">
+            
+                《Objective-C 高级编程——iOS与OS X多线程和内存管理》
+            
+        </a>
     </span>
     
 
@@ -590,7 +625,7 @@
   <script>
   JELON.Comment({
     container: 'comments',
-    label: '编写高质量iOS与OSX代码的52个有效方法' || 'post/编写高质量iOS与OSX代码的52个有效方法/',
+    label: '《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》' || 'post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/',
     owner: 'HuajingZeng',
     repo: 'huajingzeng.github.io_comments',
     clientId: '7ae3915c563a60d41451',
@@ -616,7 +651,7 @@
     
     <li>
         <a href="/categories/编程基础/">编程基础</a>
-        <span class="badge">(8)</span>
+        <span class="badge">(9)</span>
     </li>
     
     <li>
@@ -637,17 +672,23 @@
   
     <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
   
+    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (4)</a>
+  
     <a class="tag-item" href="/tags/面向对象/" title="面向对象">面向对象 (1)</a>
   
     <a class="tag-item" href="/tags/设计原则/" title="设计原则">设计原则 (1)</a>
   
     <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
   
-    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (3)</a>
+    <a class="tag-item" href="/tags/OS-X/" title="OS X">OS X (3)</a>
   
     <a class="tag-item" href="/tags/程序员/" title="程序员">程序员 (1)</a>
   
     <a class="tag-item" href="/tags/书籍/" title="书籍">书籍 (1)</a>
+  
+    <a class="tag-item" href="/tags/Objective-C/" title="Objective-C">Objective-C (1)</a>
+  
+    <a class="tag-item" href="/tags/正则表达式/" title="正则表达式">正则表达式 (1)</a>
   
     <a class="tag-item" href="/tags/Git/" title="Git">Git (1)</a>
   
@@ -659,9 +700,7 @@
   
     <a class="tag-item" href="/tags/核对表/" title="核对表">核对表 (1)</a>
   
-    <a class="tag-item" href="/tags/正则表达式/" title="正则表达式">正则表达式 (1)</a>
-  
-    <a class="tag-item" href="/tags/OSX/" title="OSX">OSX (1)</a>
+    <a class="tag-item" href="/tags/macOS/" title="macOS">macOS (0)</a>
   
 </div>
     </section>
