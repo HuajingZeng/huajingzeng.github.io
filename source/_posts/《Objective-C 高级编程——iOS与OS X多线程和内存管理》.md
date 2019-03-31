@@ -66,7 +66,7 @@ class_createInstance(Class cls, size_t extraBytes)
 
 以下为_class_createInstanceFromZone的源代码，摘自[objc-runtime-new.mm](https://opensource.apple.com/source/objc4/objc4-750.1/runtime/objc-runtime-new.mm.auto.html)
 
-```objectivec
+```cpp
 static __attribute__((always_inline)) 
 id
 _class_createInstanceFromZone(Class cls, size_t extraBytes, void *zone, 
@@ -136,7 +136,7 @@ CFBasicHashRemoveValue	//CFBasicHashRemoveValue返回0时，-release调用deallo
 
 以下为__CFDoExternRefOperation的源代码，摘自[CFRuntime.c](https://opensource.apple.com/source/CF/CF-855.17/CFRuntime.c.auto.html)
 
-```objectivec
+```cpp
 #define DISGUISE(O) (~(uintptr_t)(O))
 
 static struct {
@@ -196,7 +196,7 @@ autorelease会像C语言的自动变量那样来对待对象实例。当超出�
 
 以下是AutoreleasePoolPage的源代码片段，摘自[objc-arr.mm](https://opensource.apple.com/source/objc4/objc4-493.9/runtime/objc-arr.mm.auto.html)
 
-```objectivec
+```cpp
 class AutoreleasePoolPage 
 {
     id *add(id obj)
@@ -455,7 +455,7 @@ free(array);
 
 ## ARC的实现
 
-ARC是由一下工具、库来实现的：
+ARC是由以下工具、库来实现的：
 
 - clang（LLVM编译器）3.0以上
 - objc4 Objective-C 运行时库493.9以上
@@ -598,8 +598,68 @@ uintptr_t _objc_rootRetainCount(id obj);
 
 **注意：**不能够完全信任该函数取得的数值，最好在了解其所具有的问题的基础上来使用。
 
-
 # Blocks
+
+## 什么是Blocks
+
+> Blocks是C语言的扩充功能：带有自动变量（局部变量）的匿名函数。
+
+在C语言中，可以通过函数指针来代替直接调用函数，但必须通过函数名才能取得函数的地址。
+
+```cpp
+int func(int count)
+{
+	return count + 1;
+}
+int (*funcptr)(int) = &func;
+int result = (*funcptr)(10);
+```
+
+Blocks提供了类似由C++和Objective-C类生成实例或对象来保持变量的方法，其代码量与编写C语言函数差不多。
+
+```objectivec
+for (int i = 0; i < BUTTON_MAX; i++) {
+	setButtonCallbackUsingBlock(BUTTON_IDOFFSET + i, ^(int event) {
+		printf("buttonId:%d event=%d\n", i, event);
+	})
+}
+```
+
+在计算机科学中，“带有自动变量值的匿名函数”这一概念也称为闭包（Closure）、lambda计算（λ计算，lambda calculus）等。
+
+|程序语言|Blcok名称|
+|:--|:--|
+|C + Blocks|Block|
+|Smalltalk|Block|
+|Ruby|Block|
+|LISP|Lambda|
+|Python|Lambda|
+|C++11|Lambda|
+|Javascript|Anonymous function|
+
+## Blocks模式
+
+### Block语法
+
+Block表达式语法（Block Literal Syntax），
+
+**完整形式：**表达式中含有return语句时，其类型必须与返回值类型相同。
+
+`^` `返回值类型` `参数列表` `表达式`
+
+**省略返回值类型：**如果表达式中有return语句就使用该返回值的类型，如果表达式没有return语句就使用void类型。
+
+`^` `参数列表` `表达式`
+
+**省略返回值类型和参数列表：**
+
+`^` `表达式`
+
+- 没有函数名，因为是匿名函数
+- 返回值类型前带有“^”（插入记号，caret）记号，便于查找
+
+### Block类型变量
+
 
 
 # Grand Central Dispatch
