@@ -18,6 +18,10 @@ code
   background: $gainsboro
   text-shadow: 0 1px #fff
   padding: 0.2em 0.3em
+  background: #f7f7f7
+  margin: 0 0.1em
+  border: 1px solid #ddd
+  border-radius: 0.2em
 pre
   @extend $code-block
   code
@@ -27,8 +31,7 @@ pre
 .highlight
   @extend $code-block
   pre
-    border: none !important
-    margin: 0
+    margin: 0 15px 0 0
     padding: 1px
   table
     margin: 0 !important
@@ -48,7 +51,8 @@ pre
   .gutter pre
     @extend $line-numbers
     text-align: right
-    padding-right: 20px
+    padding-right: 15px
+    border-right: 1px solid #666
   .line
     height: 20px
 .gist

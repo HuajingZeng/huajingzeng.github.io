@@ -660,6 +660,162 @@ Block表达式语法（Block Literal Syntax），
 
 ### Block类型变量
 
+声明Block类型变量仅仅是将声明函数指针类型变量的“\*”变为“\^”，可像C语言中其他类型变量一样使用Block类型变量。可以使用typedef为Block类型声明自定义别名。
+
+typedef `返回值类型`(^`块类型别名`)(`参数列表`)
+
+### 截获自动变量值
+
+Block表达式截获所使用的自动变量的值，即保存该自动变量的瞬间值（在执行Block语法后，即使改写Block中使用的自动变量的值也不会影响Block执行时自动变量的值）。
+
+### \_\_block说明符
+
+自动变量值截获只能保存执行Block语法瞬间的值，保存后就不能改写该值。使用附有\_\_block修饰符的自动变量可在Block中赋值，该变量称为\_\_block变量。
+
+### 截获的自动变量
+
+- 截获Objective-C对象时，赋值给截获的自动变量的操作会产生编译错误，但使用截获的值（类对象用的结构体实例指针）不会有任何问题。
+- 截获自动变量的方法并没有实现对C语言数组（如`const char text[] = "hello"`）的截获，因此必须改用指针(如`const char *text = "hello"`)解决。
+
+## Blocks的实现
+
+### Block的本质
+
+Block即为Objective-C对象，它实际上是通过支持Block的编译器，将含有Block语法的源代码转换为一般C语言编译器能够处理的源代码，并作为极为普通的C语言源代码进行编译。使用`clang -rewrite-objc 源代码文件名`可将含有Block语法的源代码变换为C++的源代码（使用了struct结构的C语言源代码）
+
+```cpp
+int main () {
+	void (^blk)(void) = ^ { 
+		printf("Block\n");
+	};
+	
+	blk();
+	
+	return 0;
+}
+
+/* clang转换后 */
+
+struct __block_impl {
+	void *isa; // 指向_NSConcreteStackBlock（相当于calss_t结构体实例）的地址 
+	int Flags; 
+	int Reserved;
+	void *FuncPtr; // Block表达式对应的函数指针
+};
+
+struct __main_block_impl_0 {
+	struct __block_impl impl;
+	struct __main_block_desc_0* Desc;
+	
+	__main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, int flags=0) {
+		impl.isa = &_NSConcreteStackBlock;
+		impl.Flags = flags;
+		impl.FuncPtr = fp;
+		Desc = desc;
+	}
+};
+
+/*
+ * 1、Block语法所属的函数名和该Block语法在该函数出现的顺序值来给经clang变换的函数命名
+ * 2、参数__cself即指向Block值的变量，相当于C++的this指针和Objective-C的self变量
+ */
+static void __main_block_func_0(struct __main_block_impl_0 *__cself) {
+	printf("Block\n");
+}
+
+static struct __main_block_desc_0 {
+	unsigned long reserved;
+	unsigned long Block_size;
+} __main_block_desc_0_DATA = {
+	0,
+	sizeof(struct __main_block_impl_0)
+}
+
+int main ()
+{
+	/*
+	 * 将__main_block_impl_0结构体类型的自动变量，
+	 * 即栈上生成的__main_block_impl_0结构体实例的指针，
+	 * 赋值给__mian_block_impl_0结构体指针类型的变量blk
+	 */
+	void (*blk)(void) = (void (*)(void))&__main_block_impl_0((void *)__main_block_func_0, &__main_block_desc_0_DATA);
+	
+	((void (*)(struct __block_impl *))((struct __block_impl *)blk)->FuncPtr)((struct __block_impl *)blk);
+	
+	return 0;
+}
+```
+
+### 截获自动变量值
+
+```cpp
+int main () {
+	int dmy = 256;
+	int val = 10;
+	const char *fmt = "val = %d\n";
+	
+	void (^blk)(void) = ^ {
+		printf(fmt, val);
+	} ;
+	
+	blk();
+	
+	return 0;
+}
+
+/* clang转换后 */
+
+/* 
+ * Block语法表达式中使用的自动变量被作为成员变量追加到了__main_block_impl_0结构体中
+ * Block语法表达式中没有使用的自动变量不会被追加
+ */
+struct __main_block_impl_0 {
+	struct __block_impl impl;
+	struct __main_block_desc_0 *Desc;
+	const char *fmt;
+	int val;
+	
+	__main_block_impl_0 (void *fp, struct __main_block_desc_0 *desc, const char *fmt, int val, int flags = 0) : fmt(_fmt), val(_val) {
+		impl.isa = &_NSConcreteStackBlock;
+		impl.Flags = flags;
+		impl.FuncPtr = fp;
+		Desc = desc;
+	}
+}
+
+static void __main_block_func_0 (strcut __main_block_impl_0 *__cself) {
+	/*
+     * 通过__main_block_impl_0结构体实例的成员变量，重新声明定义截获到的自动变量 
+	 */
+	const char *fmt = __cself->fmt;
+	int val = __cself->val;
+	
+	printf(fmt, val);
+}
+
+static struct __main_block_desc_0 {
+	unsigned long reserved;
+	unsigned long Block_size;
+} __main_block_desc_0_DATA = {
+	0,
+	sizeof(struct __main_block_impl_0)
+};
+
+int main () {
+	int dmy = 256;
+	int val = 10;
+	const char *fmt = "val = %d\n";
+	
+	void (*blk)(void) = &__main_block_impl_0(__main_block_func_0, &__main_block_desc_0_DATA, fmt, val);
+	
+	((void (*)(struct __block_impl *))((struct __block_impl *)blk)->FuncPtr)((struct __block_impl *)blk);
+	
+	return 0;
+}
+```
+
+### \_\_block说明符
+
 
 
 # Grand Central Dispatch
