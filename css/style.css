@@ -954,7 +954,15 @@ code {
   word-break: break-all;
   background: #eee;
   text-shadow: 0 1px #fff;
-  padding: 0 0.3em;
+  padding: 0.2em 0.3em;
+  background: #f7f7f7;
+  margin: 0 0.1em;
+  border: 1px solid #ddd;
+  -ms-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  -webkit-border-radius: 0.2em;
+  -o-border-radius: 0.2em;
+  border-radius: 0.2em;
 }
 pre code {
   background: none;
@@ -962,8 +970,7 @@ pre code {
   padding: 0;
 }
 .highlight pre {
-  border: none !important;
-  margin: 0;
+  margin: 0 15px 0 0;
   padding: 1px;
 }
 .highlight table {
@@ -988,7 +995,8 @@ pre code {
 }
 .highlight .gutter pre {
   text-align: right;
-  padding-right: 20px;
+  padding-right: 15px;
+  border-right: 1px solid #666;
 }
 .highlight .line {
   height: 20px;
