@@ -834,7 +834,7 @@ int main() {
 /*
  * __Block_byref_val_0结构体独立于__main_block_impl_0结构体之外
  * 是为了在多个Block中使用__block变量（val）
- * /
+ */
 struct __Block_byref_val_0 {
 	void *__isa;
 	__Block_byref_val_0 *__forwarding; // 指向自身
@@ -897,6 +897,72 @@ int main(){
 	return 0;
 }
 ```
+
+### Block存储域
+
+- \_NSConcreteStackBlock：
+	- Block语法的表达式中使用了应截获的自动变量时 
+- \_NSConcreteGlobalBlock：
+ 	- 记述全局变量的地方有Block语法时
+	- Block语法的表达式中不使用应截获的自动变量时
+- \_NSConcreteMallocBlock：
+	- 将配置在栈上的Block复制到堆上时
+
+```cpp
+typedef int (^blk_t)(int);
+
+blk_t func(int rate) {
+	return ^(int count) {
+		return rate * count;
+	};
+}
+
+/* 转换后 */
+
+blk_t func(int rate) {
+
+	/*
+	 * 将通过Block语法生成的Block
+	 * 即分配在栈上的Block用结构体实例
+	 * 赋值给相当于Block类型的变量tmp中
+	 */
+	blk_t tmp = &__func_block_impl_0(__func_block_func_0, &__func_block_desc_0_DATA, rate);
+	
+	/*
+	 * 等价于调用_Block_copy(tmp)
+	 * 将栈上的Block复制到堆上
+	 * 复制后，将堆上的地址作为指针赋值给变量tmp
+	 */
+	tmp = objc_retainBlock(tmp);
+	
+	/*
+	 * 将堆上的Block作为Objective-C对象
+	 * 注册到autoreleasepool中，然后返回该对象
+	 */
+	return objc_autoreleaseReturnValue(tmp);
+}
+```
+
+ARC有效时，编译器会适当地进行判断，自动生成将Block从栈上复制到堆上的代码。向方法或函数的参数中传递Block时，编译器不能进行判断，所以需要手动使用“copy实例方法”将Block从栈上复制到堆上。
+
+**以下方法或函数不用手动复制Block，因为方法和函数中适当地复制了传递过来的参数**
+
+- Cocoa框架的方法且方法名中含有usingBlock等时
+- Grand Central Dispatch的API
+
+|Block的类|副本源的配置存储域|复制效果|
+|:--|:--|:--|
+|\_NSConcreteStackBlock|栈|从栈复制到堆|
+|\_NSConcreteGlobalBlock|程序的数据区域|什么也不做|
+|\_NSConcreteMallocBlock|堆|引用计数增加|
+
+### \_\_block变量存储域
+
+|\_\_block变量的配置存储域|Block从栈复制到堆时的影响|
+|:--|:--|
+|栈|从栈复制到堆并被Block持有|
+|堆|被Block持有|
+
 
 
 # Grand Central Dispatch
