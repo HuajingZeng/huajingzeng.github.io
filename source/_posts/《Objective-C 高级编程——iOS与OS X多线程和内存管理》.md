@@ -963,6 +963,75 @@ ARC有效时，编译器会适当地进行判断，自动生成将Block从栈上
 |栈|从栈复制到堆并被Block持有|
 |堆|被Block持有|
 
+栈上的\_\_block变量用结构体实例在从栈复制到堆上时，会将成员变量\_\_forwarding的值替换为复制目标堆上的\_\_block变量用结构体实例的地址。这样无论是在Block语法中还是Block语法外使用\_\_block变量，都可以顺利地访问同一个\_\_block变量（堆上）。
+
+### 截获对象
+
+```cpp
+blk_t blk;
+{
+	id array = [[NSMUtableArray alloc] init];
+	blk = [^(id obj){
+		[array addObjcet:obj];
+	} copy];
+}
+
+blk([[NSObject alloc] init]);
+blk([[NSObject alloc] init]);
+blk([[NSObject alloc] init]);
+
+/* 转换后 */
+struct __main_block_impl_0 {
+	struct __block_impl impl;
+	struct __main_block_desc_0 *Desc;
+	id __strong array;
+	
+	__main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, id __strong _array, int flags=0) : array(_array) {
+		impl.isa = &_NSConcreteStackBlock;
+		impl.Flags = flags;
+		impl.FuncPtr = fp;
+		Desc = desc;
+	}
+}
+
+static void __main_block_func_0(struct __main_block_impl_0 *__cself, id obj){
+	id __strong array = __cself->array;
+	[array addObject:obj];
+	NSLog(@"array count = %ld", [array count]);
+}
+
+static void __main_block_copy_0(struct __main_block_impl_0 *dst, struct __main_block_impl_0 *src) {
+	_Block_object_assign(&dst->array, src->array, BLOCK_FIELD_IS_OBJECT);
+}
+
+static void __main_block_dispose_0(struct __main_block_impl_0 *src) {
+	_Block_object_dispose(src->array, BLOCK_FIELD_IS_OBJECT);
+}
+
+static scruct __main_block_desc_0 {
+	unsigned long reserved;
+	unsigned long Block_size;
+	void (*copy)(struct __main_block_impl_0 *, struct __main_block_impl_0 *);
+	void (*dispose)(struct __main_block_impl_0 *);
+} __main_block_desc_0_DATA = {
+	0,
+	sizeof(struct __main_block_impl_0),
+	__main_block_copy_0,
+	__main_block_dispose_0,	
+}
+
+blk_t blk;
+{
+	id __strong array = [[NSMutableArray alloc] init];
+	blk = &__main_block_impl_0(__main_block_func_0, &__main_block_desc_0_DATA, array, 0x22000000);
+	blk = [blk copy]
+}
+
+(*blk->impl.FuncPtr)(blk, [[NSObject alloc] init]);
+(*blk->impl.FuncPtr)(blk, [[NSObject alloc] init]);
+(*blk->impl.FuncPtr)(blk, [[NSObject alloc] init]);
+```
+
 
 
 # Grand Central Dispatch
