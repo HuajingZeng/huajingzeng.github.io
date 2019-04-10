@@ -1032,6 +1032,27 @@ blk_t blk;
 (*blk->impl.FuncPtr)(blk, [[NSObject alloc] init]);
 ```
 
+Objective-C的运行时库能够准确把握Block从栈复制到堆以及堆上的Block被废弃的时机，因此Block用结构体中即使含有附有\_\_strong修饰符或\_\_weak修饰符的变量，也可以恰当地进行初始化和废弃。为此需要使用在\_\_main\_block\_desc\_0结构体中增加的成员变量copy和dispose，以及作为指针赋值给该成员变量的\_\_main\_block\_copy\_0函数和\_\_main\_block\_dispose\_0函数。\_Block\_object\_assign函数相当于retain实例方法，而\_Block\_object\_dispose函数相当于release实例方法。
+
+|函数|调用时机|
+|:--|:--|
+|copy函数|栈上的Block复制到堆时|
+|dispose函数|堆上的Block被废弃时|
+
+栈上Block复制到堆上的时机：
+
+- 调用Block的copy实例方法
+- Block作为函数返回值返回时
+- 将Block赋值给附有\_\_strong修饰符id类型或Block类型成员变量时
+- 在方法名中含有usingBlock的Cocoa框架方法或Grand Central Dispatch的API中传递Block时
+
+通过BLOCK\_FIELD\_IS\_OBJECT和BLOCK\_FIELD\_IS\_BYREF参数，区分copy函数和dispose函数的对象类型是对象还是\_\_block变量
+
+### \_\_block变量和对象
+
+\_\_block说明符可以修饰任何类型的自动变量
+
+### Block循环引用
 
 
 # Grand Central Dispatch
