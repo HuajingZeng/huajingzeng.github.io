@@ -30,9 +30,10 @@
         <h3 class="post-title"><span><%= post.title %></span></h3>
     </header>
     <p class="post-meta text-center">
-        <%- post.author || '曾华经' %>&emsp;发表于
-        <%- partial('post/date', { date_format: 'YYYY-MM-DD' }) %>&emsp;修改于
-        <%- partial('post/update', { date_format: 'YYYY-MM-DD' }) || partial('post/updated', { date_format: 'YYYY-MM-DD' }) %>
+        <%- post.author || '曾华经' %>
+		&emsp;发表于：<%- partial('post/date', { date_format: 'YYYY-MM-DD' }) %>
+		&emsp;修改于：<%- partial('post/update', { date_format: 'YYYY-MM-DD' }) || partial('post/updated', { date_format: 'YYYY-MM-DD' }) %>
+		&emsp;总阅读量：<span id="busuanzi_value_page_pv"></span>次
     </p>
     <div class="post-content">
         <%- post.content %>
