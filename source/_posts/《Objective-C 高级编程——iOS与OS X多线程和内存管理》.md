@@ -1054,6 +1054,23 @@ Objective-C的运行时库能够准确把握Block从栈复制到堆以及堆上�
 
 ### Block循环引用
 
+避免循环引用的方法比较
+
+使用\_\_weak修饰符
+
+```objectivec
+- (void)init {
+	self = [super init];
+	id __weak obj = _obj;
+	_blk = ^ {
+		NSLog(@"_obj = %@", obj);
+	};
+	return self;
+} 
+```
+
+使用\_\_block变量
+
 
 # Grand Central Dispatch
 
