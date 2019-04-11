@@ -152,7 +152,7 @@
     <p class="post-meta text-center">
         曾华经
 		&emsp;发表于：<time datetime="2019-03-27T05:58:18.000Z">2019-03-27</time>
-		&emsp;修改于：<time datetime="2019-04-11T07:08:06.658Z">2019-04-11</time>
+		&emsp;修改于：<time datetime="2019-04-11T08:51:09.531Z">2019-04-11</time>
 		&emsp;总阅读量：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span>次
     </p>
     <div class="post-content">
@@ -538,7 +538,11 @@
 </ul>
 <p>通过BLOCK_FIELD_IS_OBJECT和BLOCK_FIELD_IS_BYREF参数，区分copy函数和dispose函数的对象类型是对象还是__block变量</p>
 <h3 id="block变量和对象"><a href="#block变量和对象" class="headerlink" title="__block变量和对象"></a>__block变量和对象</h3><p>__block说明符可以修饰任何类型的自动变量</p>
-<h3 id="Block循环引用"><a href="#Block循环引用" class="headerlink" title="Block循环引用"></a>Block循环引用</h3><h1 id="Grand-Central-Dispatch"><a href="#Grand-Central-Dispatch" class="headerlink" title="Grand Central Dispatch"></a>Grand Central Dispatch</h1><p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
+<h3 id="Block循环引用"><a href="#Block循环引用" class="headerlink" title="Block循环引用"></a>Block循环引用</h3><p>避免循环引用的方法比较</p>
+<p>使用__weak修饰符</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)init &#123;</span><br><span class="line">	<span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">	<span class="keyword">id</span> __<span class="keyword">weak</span> obj = _obj;</span><br><span class="line">	_blk = ^ &#123;</span><br><span class="line">		<span class="built_in">NSLog</span>(<span class="string">@"_obj = %@"</span>, obj);</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用__block变量</p>
+<h1 id="Grand-Central-Dispatch"><a href="#Grand-Central-Dispatch" class="headerlink" title="Grand Central Dispatch"></a>Grand Central Dispatch</h1><p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
 
     </div>
     <p class="post-meta">
