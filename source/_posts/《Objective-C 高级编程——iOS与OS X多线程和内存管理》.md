@@ -1050,13 +1050,15 @@ Objective-C的运行时库能够准确把握Block从栈复制到堆以及堆上�
 
 ### \_\_block变量和对象
 
-\_\_block说明符可以修饰任何类型的自动变量
+\_\_block说明符可以修饰任何类型（包括对象类型）的自动变量
 
 ### Block循环引用
 
 避免循环引用的方法比较
 
-使用\_\_weak修饰符
+- 使用\_\_weak修饰符
+
+可以确认使用附有\_\_weak修饰符的变量时是否为nil，但更有必要使之生存以使用赋值给附有\_\_weak修饰符变量的对象
 
 ```objectivec
 - (void)init {
@@ -1069,8 +1071,62 @@ Objective-C的运行时库能够准确把握Block从栈复制到堆以及堆上�
 } 
 ```
 
-使用\_\_block变量
+- 使用\_\_unsafe\_unretained修饰符
 
+需要注意可能出现悬垂指针的情况，避免在该情况下使用该变量
+
+```objectivec
+- (void)init {
+	self = [super init];
+	id __unsafe_unretained tmp = self;
+	_blk = ^ {
+		NSLog(@"self = %@", tmp);
+	};
+	return self;
+} 
+```
+
+- 使用\_\_block变量
+
+优点
+
+1. 通过\_\_blcok变量可控制对象的持有期间
+2. 在不能使用\_\_weak修饰符的环境中不使用\_\_unsafe\_unretained修饰符即可（不必担心悬垂指针）。在执行Block时可动态地决定是否将nil或其他对象赋值在\_\_block变量中。
+
+缺点
+
+1. 为避免循环引用必须执行Block
+
+
+```objectivec
+- (id)init {
+	self = [super init];
+	
+	__block id tmp = self;
+	
+	_blk = ^{
+		NSLog(@"self = %@", tmp);
+		tmp = nil;
+	};
+	
+	return self;
+}
+
+- (void)execBlock {
+	_blk();
+}
+```
+
+### copy/release
+
+ARC无效时，需要使用copy实例方法将Block从栈复制到堆，用release实例方法来释放Block。**只要有一次复制并配置在堆上，就可以通过retain实例方法持有Block。而对栈上的Block调用retain实例方法不起任何作用，因此推荐使用copy方法。**
+
+在C语言中也可以使用Block语法，此时使用“Block\_copy函数”和“Block\_release函数”代替copy/release实例方法。
+
+ARC无效时，\_\_block说明符被用来避免Block中的循环引用。
+
+- 若Block使用的变量为附有\_\_block说明符的id类型或对象类型的自动变量，不会被retain
+- 若Block使用的变量为没有\_\_block说明符的id类型或对象类型的自动变量，则被retain
 
 # Grand Central Dispatch
 
