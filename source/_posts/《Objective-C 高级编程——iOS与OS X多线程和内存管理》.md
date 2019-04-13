@@ -1130,5 +1130,25 @@ ARC无效时，\_\_block说明符被用来避免Block中的循环引用。
 
 # Grand Central Dispatch
 
+## 什么是GCD
+
+> Grand Central Dispatch（GCD）是异步执行任务的技术之一。
+
+### 多线程编程
+
+> “1个CPU执行的CPU命令序列为一条无分叉路径”即为“线程”，这种无分叉路径存在多条时即为多线程。
+
+使用多线程的程序可以在某个线程和其他线程之间反复多次进行上下文切换，在多个CPU核时能够并列执行多个线程，这种利用多线程编程的技术就被称为多线程编程。
+
+## GCD的API
+
+### Diapatch Queue
+
+开发者要做的只是定义想执行的任务并追加到适当的Dispatch Queue当中。
+
+|Dispatch Queue种类|说明|
+|:--|:--|
+|Serial Dispatch Queue|等待现在执行中处理结束|
+|Concurrent Dispatch Queue|不等待现在执行中处理结束|
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
