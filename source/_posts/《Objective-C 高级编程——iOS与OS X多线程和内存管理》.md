@@ -12,6 +12,7 @@ categories:
 thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E3%80%8AObjective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B.jpeg
 blogexcerpt:
 toc: true
+mathjax: true
 ---
 
 iOS与OS X中的ARC、Blocks和Grand Central Dispatch（GCD），是面向iOS、OS X应用开发时不可或缺。它们看似简单，但若无深入了解，就会变成技术开发的陷阱。要想掌握这些技术，除了阅读苹果公司的参考文档之外，还要进一步学习苹果公司公开的源代码，在此基础上深入剖析才能融汇贯通。
@@ -1150,5 +1151,20 @@ ARC无效时，\_\_block说明符被用来避免Block中的循环引用。
 |:--|:--|
 |Serial Dispatch Queue|等待现在执行中处理结束|
 |Concurrent Dispatch Queue|不等待现在执行中处理结束|
+
+### dispatch\_queue\_create
+
+```cpp
+dispatch_queue_t dispatch_queue_create(const char *_Nullable label, dispatch_queue_attr_t _Nullable attr);
+```
+
+- 第一个参数指定Serial Dispatch Queue的名称，推荐使用应用程序ID这种逆序全程域名（FQDN，fully qualified domain name）。
+- 第二个参数指定为NULL表示生成Serial Dispatch Queue；指定为DISPATCH\_QUEUE\_CONCURRENT表示生成Concurrent Dispatch Queue。
+
+**通过dispatch\_queue\_create生成的Dispatch Queue在使用结束后必须由程序员通过diapatch\_release函数释放**
+
+
+$$f(x)=a_{0}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi x}{L}+b_{n} \sin \frac{n \pi x}{L}\right)$$
+
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**

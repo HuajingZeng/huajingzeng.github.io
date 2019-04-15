@@ -41,3 +41,76 @@ $ git push origin hexo
 $ hexo d -g
 ```
 
+
+# 添加MathJax支持
+
+## 安装插件
+
+首先我们需要安装Mathjax插件
+
+```
+npm install hexo-math –save
+```
+
+更换Hexo的markdown渲染引擎，hexo-renderer-kramed引擎是在默认的渲染引擎hexo-renderer-marked的基础上修改了一些bug，两者比较接近，也比较轻量级。
+
+```
+npm uninstall hexo-renderer-marked –save 
+npm install hexo-renderer-kramed –save
+```
+
+## 解决语义冲突
+
+由于LaTeX与markdown语法有语义冲突，在markdown中，斜体和加粗可以用*或者_表示，在这里我们修改变量，将_用于LaTeX，而使用*表示markdown中的斜体和加粗。 
+在博客根目录下，进入node_modules\kramed\lib\rules\inline.js，把第11行的escape变量的值做相应的修改：
+
+```
+  //escape: /^\\([\\`*{}\[\]()#$+\-.!_>])/,
+  escape: /^\\([`*\[\]()#$+\-.!_>])/,
+```
+
+这一步是在原基础上取消了对,{,}的转义(escape)。 
+同时把第20行的em变量也要做相应的修改:
+
+```
+  //  em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+  em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+```
+
+## 更改配置文件
+
+这里是最重要的一步，我找了好久才在这个网站中找到适用的解决办法。 
+进入到主题目录，找到_config.yml配置问题，把mathjax默认的false修改为true，并更换cdn的url，具体如下：
+
+```
+# MathJax Support
+mathjax:
+  enable: true
+  per_page: true
+```
+
+进入主题目录，找到/Users/Kevin/Git/huajingzeng.github.io/themes/xups/layout/_partial/head.ejs，添加MathJax脚本
+
+
+```
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+```
+
+## 写博客
+
+在每次需要用LaTeX渲染的博文中，在文章的Front-matter里打开mathjax开关，具体如下：
+
+```
+title: index.html
+date: 2018-2-8 21:01:30
+tags:
+mathjax: true
+```
+
+## 测试
+
+输入：
+
+```
+$$lim_{1\to+\infty}P(|\frac{1}{n}\sum_i^nX_i-\mu|<\epsilon)=1, i=1,...,n$$  
+```
