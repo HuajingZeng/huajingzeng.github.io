@@ -1161,10 +1161,134 @@ dispatch_queue_t dispatch_queue_create(const char *_Nullable label, dispatch_que
 - 第一个参数指定Serial Dispatch Queue的名称，推荐使用应用程序ID这种逆序全程域名（FQDN，fully qualified domain name）。
 - 第二个参数指定为NULL表示生成Serial Dispatch Queue；指定为DISPATCH\_QUEUE\_CONCURRENT表示生成Concurrent Dispatch Queue。
 
-**通过dispatch\_queue\_create生成的Dispatch Queue在使用结束后必须由程序员通过diapatch\_release函数释放**
+**在ARC有效时，通过dispatch\_queue\_create生成的Dispatch Queue必须由程序员通过dispatch\_retain函数和diapatch\_release函数手动管理内存。**
+
+### Main Dispatch Queue/Global Dispatch Queue
+
+|名称|种类|说明|
+|:--|:--|:--|
+|Main Dispatch Queue|Serial Dispatch Queue|主线程执行|
+|Global Dispatch Queue（High Priority）|Concurrent Dispatch Queue|执行优先级：高（最高优先）|
+|Global Dispatch Queue（Default Priority）|Concurrent Dispatch Queue|执行优先级：默认|
+|Global Dispatch Queue（Low Priority）|Concurrent Dispatch Queue|执行优先级：低|
+|Global Dispatch Queue（Background Priority）|Concurrent Dispatch Queue|执行优先级：后台|
+
+```cpp
+/*
+ * Main Dispatch Queue的获取方法
+ */
+dispatch_queue_t mainDispatchQueue = dispatch_get_main_queue();
+ 
+/*
+ * Global Dispatch Queue（高优先级）的获取方法
+ */
+ dispatch_queue_t globalDispatchQueueHigh = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+ 
+/*
+ * Global Dispatch Queue（默认优先级）的获取方法
+ */
+ dispatch_queue_t globalDispatchQueueDefault = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+ 
+/*
+ * Global Dispatch Queue（低优先级）的获取方法
+ */
+ dispatch_queue_t globalDispatchQueueLow = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+ 
+/*
+ * Global Dispatch Queue（后台优先级）的获取方法
+ */
+ dispatch_queue_t globalDispatchQueueBackground = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+```
+
+**对Main Dispatch Queue和Global Dispatch Queue执行dispatch\_retain函数和dispatch\_release函数不会引起任何变化，也不会有任何问题**
+
+### diapatch\_set\_target\_queue
+
+dispatch\_queue\_create函数生成的Dispatch Queue都使用与默认优先级Global Dispatch Queue相同执行优先级的线程。
+
+```cpp
+void dispatch_set_target_queue(dispatch_object_t object, dispatch_queue_t _Nullable queue);
+```
+
+- 第一个参数指定要变更执行优先级的Dispatch Queue（不可指定为系统提供的Main Dispatch Queue和Global Dispatch Queue）
+- 第二个参数指定与要使用的执行优先级相同优先级的Global Dispatch Queue
+
+**在多个Serial Dispatch Queue中用dispatch\_set\_target\_queue函数指定目标为某一个Serial Dispatch Queue，那么原先本应并行执行的Serial Dispatch Queue，在目标Serial Dispatch Queue上只能同时执行一个处理。**
+
+### dispatch\_after
+
+dispatch\_after函数是在指定时间追加处理到Dispatch Queue，在有严格时间要求下使用会有偏差。
+
+```cpp
+void dispatch_after(dispatch_time_t when, dispatch_queue_t queue, dispatch_block_t block);
+```
+
+- 第一个参数指定追加到Dispatch Queue的延迟时间，改值使用dispatch\_time函数或dispatch\_walltime函数生成
+- 第二个参数指定要追加处理的Dispatch Queue
+- 第三个参数指定记述要执行处理Block
+
+dispatch\_time函数用于计算相对时间，能够获取从第一个参数dispatch\_time\_t类型值中指定时间开始，到第二个参数指定的毫微秒单位时间后的时间。
+
+```cpp
+dispatch_time_t dispatch_time(dispatch_time_t when, int64_t delta);
+```
+
+- 第一个参数经常使用的值是DISPATCH\_TIME\_NOW，即表示现在的时间
+- 第二个参数使用数值和NSEC\_PER\_SEC的乘机得到的单位为毫秒的数值。ull是C语言的数值字面量，是显式表面类型时使用的字符串（表示“unsigned long long”），如果使用NSEC\_PER\_MSEC则可以以毫秒未单位计算
+
+dispatch\_walltime函数用于计算绝对时间，可以作为粗略的闹钟功能使用。
+
+```cpp
+dispatch_time_t dispatch_walltime(const struct timespec *_Nullable when, int64_t delta);
+```
+
+- 第一个参数struct timespec类型的时间，可以通过NSDate类对象生成
+- 第二个参数表示相对第一个参数的时间差值
+
+### Dispatch Group
+
+Dispatch Group可以监视追加到Dispatch Queue中的处理，一旦检测到所有处理执行结束，就可将结束的处理追加到Dispatch Queue中。**通过dispatch\_group\_async函数追加到Dispatch queue的Block属于Dispatch Group，Block通过dispatch\_retain持有Dispatch Group。一旦Block执行结束，就通过dispatch\_release释放持有的Dispatch Group。**
+
+```cpp
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+dispatch_group_t group = dispatch_group_create();
+
+dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
+dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
+dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
+
+dispatch_group_notify(group, dispatch_get_main_queue(), ^{NSLog(@"done");};
+dispatch_release(group);
+```
 
 
-$$f(x)=a_{0}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi x}{L}+b_{n} \sin \frac{n \pi x}{L}\right)$$
 
+```cpp
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+dispatch_group_t group = dispatch_group_create();
+
+dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
+dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
+dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
+
+dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+dispatch_release(group);
+```
+
+```cpp
+dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1null * NSEC_PER_SEC);
+
+long result = dispatch_group_wait(group, time);
+
+if (result == 0) {
+	/*
+	 * 属于Dispatch Group的全部处理执行结束
+	 */
+}else {
+	/*
+	 * 属于Dispatch Group的某一个处理还在执行中
+	 */
+}
+```
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
