@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="UTF-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
     <meta name="baidu-site-verification" content="dIcXMeY8Ya">
     
@@ -34,10 +34,11 @@
 
 	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 </html>
 <body class="home">
-    <!--[if lt IE 9]>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
     <div class="browsehappy">
         当前网页 <strong>不支持</strong>
         你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
@@ -152,7 +153,7 @@
     <p class="post-meta text-center">
         曾华经
 		&emsp;发表于：<time datetime="2018-01-02T05:11:10.000Z">2018-01-02</time>
-		&emsp;修改于：<time datetime="2019-04-13T07:24:18.589Z">2019-04-13</time>
+		&emsp;修改于：<time datetime="2019-04-16T00:20:17.252Z">2019-04-16</time>
 		&emsp;总阅读量：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span>次
     </p>
     <div class="post-content">
@@ -169,6 +170,7 @@
 <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="普通字符"><a href="#普通字符" class="headerlink" title="普通字符"></a>普通字符</h2><p>普通字符包括没有显式指定为元字符的所有可打印和不可打印字符。这包括所有大写和小写字母、所有数字、所有标点符号和一些其他符号。</p>
 <h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><p>所谓特殊字符，就是一些有特殊含义的字符。若要匹配这些特殊字符，必须进行转义（将反斜杠字符&#92;放在它们前面）</p>
 <h3 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h3><p>限定符用来指定正则表达式的一个给定子表达式必须要出现多少次才能满足匹配。正则表达式的限定符有：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -203,8 +205,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>注意：&#42;、&#43;限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或最小匹配</strong></p>
 <h3 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h3><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。定位符用来描述字符串或单词的边界，&#94;和&#36;分别指字符串的开始与结束，&#92;b描述单词的前或后边界，&#92;B表示非单词边界。正则表达式的定位符有：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -231,7 +235,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h3><p>下表列出了表示非打印字符的转义序列：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -274,7 +280,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="其他元字符及其上下文行为"><a href="#其他元字符及其上下文行为" class="headerlink" title="其他元字符及其上下文行为"></a>其他元字符及其上下文行为</h3><table>
+</div>
+<h3 id="其他元字符及其上下文行为"><a href="#其他元字符及其上下文行为" class="headerlink" title="其他元字符及其上下文行为"></a>其他元字符及其上下文行为</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center"><div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;&emsp;字符&emsp;&emsp;</div></th>
@@ -372,7 +380,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h1 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h1><p>相同优先级的从左到右进行运算，不同优先级的运算先高后低。下表从最高到最低说明了各种正则表达式运算符的优先级顺序：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -403,6 +413,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
 
     </div>
@@ -550,13 +561,13 @@
 <ul class="widget-bd">
     
     <li>
-        <a href="/categories/编程基础/">编程基础</a>
-        <span class="badge">(9)</span>
+        <a href="/categories/程序人生/">程序人生</a>
+        <span class="badge">(2)</span>
     </li>
     
     <li>
-        <a href="/categories/程序人生/">程序人生</a>
-        <span class="badge">(2)</span>
+        <a href="/categories/编程基础/">编程基础</a>
+        <span class="badge">(9)</span>
     </li>
     
     <li>
@@ -573,31 +584,31 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
+    <a class="tag-item" href="/tags/随笔/" title="随笔">随笔 (1)</a>
+  
+    <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
+  
+    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (4)</a>
+  
+    <a class="tag-item" href="/tags/OS-X/" title="OS X">OS X (3)</a>
+  
+    <a class="tag-item" href="/tags/Objective-C/" title="Objective-C">Objective-C (1)</a>
+  
     <a class="tag-item" href="/tags/面向对象/" title="面向对象">面向对象 (1)</a>
   
     <a class="tag-item" href="/tags/设计原则/" title="设计原则">设计原则 (1)</a>
   
     <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
   
-    <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
-  
-    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (4)</a>
-  
-    <a class="tag-item" href="/tags/随笔/" title="随笔">随笔 (1)</a>
-  
-    <a class="tag-item" href="/tags/OS-X/" title="OS X">OS X (3)</a>
-  
-    <a class="tag-item" href="/tags/Objective-C/" title="Objective-C">Objective-C (1)</a>
-  
-    <a class="tag-item" href="/tags/代码大全/" title="代码大全">代码大全 (1)</a>
-  
-    <a class="tag-item" href="/tags/核对表/" title="核对表">核对表 (1)</a>
-  
     <a class="tag-item" href="/tags/Git/" title="Git">Git (1)</a>
   
     <a class="tag-item" href="/tags/SVN/" title="SVN">SVN (1)</a>
   
     <a class="tag-item" href="/tags/CVS/" title="CVS">CVS (1)</a>
+  
+    <a class="tag-item" href="/tags/代码大全/" title="代码大全">代码大全 (1)</a>
+  
+    <a class="tag-item" href="/tags/核对表/" title="核对表">核对表 (1)</a>
   
     <a class="tag-item" href="/tags/程序员/" title="程序员">程序员 (1)</a>
   
@@ -666,6 +677,6 @@
 
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
-<script src="/js/main.js"></script>
+<script src="/js/main.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
