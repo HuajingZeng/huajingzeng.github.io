@@ -49,14 +49,14 @@ $ hexo d -g
 首先我们需要安装Mathjax插件
 
 ```
-npm install hexo-math –save
+npm install hexo-math --save
 ```
 
 更换Hexo的markdown渲染引擎，hexo-renderer-kramed引擎是在默认的渲染引擎hexo-renderer-marked的基础上修改了一些bug，两者比较接近，也比较轻量级。
 
 ```
-npm uninstall hexo-renderer-marked –save 
-npm install hexo-renderer-kramed –save
+npm uninstall hexo-renderer-marked --save 
+npm install hexo-renderer-kramed --save
 ```
 
 ## 解决语义冲突
@@ -83,7 +83,9 @@ npm install hexo-renderer-kramed –save
 进入到主题目录，找到_config.yml配置问题，把mathjax默认的false修改为true，并更换cdn的url，具体如下：
 
 ```
-# MathJax Support
+#----------------------------
+# 是否开启MathJax支持
+#----------------------------
 mathjax:
   enable: true
   per_page: true
