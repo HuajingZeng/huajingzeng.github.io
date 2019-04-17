@@ -1247,7 +1247,7 @@ dispatch_time_t dispatch_walltime(const struct timespec *_Nullable when, int64_t
 
 ### Dispatch Group
 
-Dispatch Group可以监视追加到Dispatch Queue中的处理，一旦检测到所有处理执行结束，就可将结束的处理追加到Dispatch Queue中。**通过dispatch\_group\_async函数追加到Dispatch queue的Block属于Dispatch Group，Block通过dispatch\_retain持有Dispatch Group。一旦Block执行结束，就通过dispatch\_release释放持有的Dispatch Group。**
+Dispatch Group可以监视追加到Dispatch Queue中的处理，一旦检测到所有处理执行结束，就可将结束的处理追加到Dispatch Queue中。
 
 ```cpp
 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -1261,7 +1261,8 @@ dispatch_group_notify(group, dispatch_get_main_queue(), ^{NSLog(@"done");};
 dispatch_release(group);
 ```
 
-
+- 通过dispatch\_group\_async函数追加到Dispatch queue的Block属于Dispatch Group，Block通过dispatch\_retain持有Dispatch Group。一旦Block执行结束，就通过dispatch\_release释放持有的Dispatch Group。
+- dispatch\_group\_notify函数会将执行的Block追加到Dispatch Queue中，将第一个参数指定为要监视的Dispatch Group，在追加到该Dispatch Group的全部处理执行结束时，将第三个参数的Block追加到第二个参数的Dispatch Queue中。
 
 ```cpp
 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -1270,13 +1271,6 @@ dispatch_group_t group = dispatch_group_create();
 dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
 dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
 dispatch_group_async(group, queue, ^{NSLog(@"blk0");});
-
-dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
-dispatch_release(group);
-```
-
-```cpp
-dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1null * NSEC_PER_SEC);
 
 long result = dispatch_group_wait(group, time);
 
@@ -1289,6 +1283,43 @@ if (result == 0) {
 	 * 属于Dispatch Group的某一个处理还在执行中
 	 */
 }
+
+dispatch_release(group);
 ```
+
+- dispatch\_group\_wait函数的第二个参数指定为等待的时间（超时）。即调用dispatch\_group\_wait函数会停止当前线程，直到dispatch\_group\_wait函数返回。
+	- 使用DISPATCH\_TIME\_FOREVER，意味着永久等待，中途不能取消。dispatch\_group\_wait的返回值恒为0
+	- 指定DISPATC\_TIME\_NOW，则不用等待即可判定属于Dispatch Group的处理是否执行结束
+	- 指定等待时间为其他值，需等待一定时间后才能进行判定
+
+**在主线程RunLoop的每次循环中，可检查执行是否结束，从而不耗费多余的等待时间。但一般情况下推荐使用dispatch\_group\_wait函数以简化源代码**
+
+### dispatch\_barrier\_async
+
+dispatch\_barrier\_async函数会等待追加到Concurrent Dispatch Queue上的并行执行的处理全部结束之后，再将指定的处理追加到该Concurrent Dispatch Queue中。然后由dispatch\_barrier\_async函数追加的处理执行完毕后，Concurrent Dispatch Queue才恢复为一般的动作，追加到Concurrent Dispatch Queue的处理又开始并行执行。
+
+```cpp
+dispatch_queue_t queue = dispatch_queue_create("com.example.gcd.ForBarrier", DISPATCH_QUEUE_CONCURRENT);
+
+dispatch_async(queue, blk1_for_reading);
+dispatch_async(queue, blk2_for_reading);
+dispatch_async(queue, blk3_for_reading);
+
+dispatch_barrier_async(queue, blk_for_writing);// 写入处理 
+
+dispatch_async(queue, blk3_for_reading);
+dispatch_async(queue, blk4_for_reading);
+dispatch_async(queue, blk5_for_reading);
+```
+
+### dispatch\_sync
+
+dispatch\_sync函数的“sync”意味着“同步”（synchronous），也就是将指定的Block“同步”追加到指定的Dispatch Queue中。在追加的Block结束之前，dispatch\_sync函数会一直等待，即当前线程停止。**使用该函数要注意死锁问题（在当前线程的队列中同步追加任务）**
+
+### dispatch\_apply
+
+dispatch\_apply函数是dispatch\_sync函数和Dispatch Group的关联API。该函数按指定的次数将指定的Block追加到指定的Dispatch Queue中，并等待全部处理执行结束。
+
+
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
