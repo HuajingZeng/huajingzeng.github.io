@@ -1312,13 +1312,85 @@ dispatch_async(queue, blk4_for_reading);
 dispatch_async(queue, blk5_for_reading);
 ```
 
-### dispatch\_sync
+### dispatch\_async / dispatch\_sync
+
+dispatch\_async函数的“async”意味着“非同步”（asynchronous），就是将指定的Block“非同步”地追加到指定的Dispatch Queue中。
 
 dispatch\_sync函数的“sync”意味着“同步”（synchronous），也就是将指定的Block“同步”追加到指定的Dispatch Queue中。在追加的Block结束之前，dispatch\_sync函数会一直等待，即当前线程停止。**使用该函数要注意死锁问题（在当前线程的队列中同步追加任务）**
+
+||并行队列<br>（Concurrent Queue）|串行队列<br>（Serial Queue）|主队列<br>（Main Queue）|
+|:--|:--:|:--:|:--:|
+|异步执行<br>（async）|开启多个线程<br>任务同时执行|开启一个新线程<br>任务按顺序执行|不开启新线程<br>任务按顺序执行|
+|同步执行<br>（sync）|不开启新的线程<br>任务按顺序执行|不开启新的线程<br>任务按顺序执行|死锁|
 
 ### dispatch\_apply
 
 dispatch\_apply函数是dispatch\_sync函数和Dispatch Group的关联API。该函数按指定的次数将指定的Block追加到指定的Dispatch Queue中，并等待全部处理执行结束。
+
+```cpp
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+dispatch_apply(10, queue, ^(size_t index){
+	NSLog(@"%zu", index);
+});
+NSLog(@"Done");
+```
+
+- 第一个参数为重复次数
+- 第二个参数为追加对象的Dispatch Queue
+- 第三个参数为追加的处理
+
+**推荐在dispatch\_async函数中非同步地执行dispatch\_apply函数：**
+
+```cpp
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+/*
+ * 在Global Dispatch Queue中非同步执行
+ */
+
+dispatch_async(queue, ^{
+	/*
+	 * Global Dispatch Queue
+	 * 等待dispatch_apply函数中的处理执行结束
+	 */
+	 
+	 dispatch_apply([array count], queue, ^(size_t index){
+	 	/*
+	 	 * 并列处理包含在NSArray对象的全部对象
+	 	 */
+	 	 
+	 	 NSLog(@"%zu：%@", index, [array objectAtIndex:index]);
+	 });
+	 
+	 /*
+	  * dispatch_apply函数中的处理全部执行结束
+	  */
+	  
+	 /*
+	  * 在Main Dispatch Queue中非同步执行
+	  */
+	  
+	 dispatch_async(dispatch_get_main_queue, ^{
+	 	/*
+	 	 * 在Main Dispatch Queue中执行处理
+	 	 * 用户界面更新等
+	 	 */
+	 	NSLog(@"done");
+	 });
+});
+```
+
+### dispatch\_suspend / dispatch\_resume
+
+dispatch\_suspend函数挂起指定的Dispatch Queue，dispatch\_resume函数恢复指定的Dispatch Queue。
+
+### Dispatch Semaphone
+
+Dispatch Semaphone是持有计数的信号，该计数是多线程编程中的计数类型信号。计数为0时等待，计数为1或大于1时，减去1而不等待。
+
+```
+dispatch_semaphone_t semaphone = dispatch_semaphone_create(1);
+```
 
 
 
