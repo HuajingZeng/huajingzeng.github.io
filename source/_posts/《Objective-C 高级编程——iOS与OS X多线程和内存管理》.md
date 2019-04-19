@@ -1352,14 +1352,12 @@ dispatch_async(queue, ^{
 	/*
 	 * Global Dispatch Queue
 	 * 等待dispatch_apply函数中的处理执行结束
-	 */
-	 
+	 */	 
 	 dispatch_apply([array count], queue, ^(size_t index){
 	 	/*
 	 	 * 并列处理包含在NSArray对象的全部对象
-	 	 */
-	 	 
-	 	 NSLog(@"%zu：%@", index, [array objectAtIndex:index]);
+	 	 */	 	 
+	 	NSLog(@"%zu：%@", index, [array objectAtIndex:index]);
 	 });
 	 
 	 /*
@@ -1368,8 +1366,7 @@ dispatch_async(queue, ^{
 	  
 	 /*
 	  * 在Main Dispatch Queue中非同步执行
-	  */
-	  
+	  */	  
 	 dispatch_async(dispatch_get_main_queue, ^{
 	 	/*
 	 	 * 在Main Dispatch Queue中执行处理
@@ -1384,14 +1381,186 @@ dispatch_async(queue, ^{
 
 dispatch\_suspend函数挂起指定的Dispatch Queue，dispatch\_resume函数恢复指定的Dispatch Queue。
 
-### Dispatch Semaphone
+### Dispatch Semaphore
 
-Dispatch Semaphone是持有计数的信号，该计数是多线程编程中的计数类型信号。计数为0时等待，计数为1或大于1时，减去1而不等待。
+Dispatch Semaphore是持有计数的信号，该计数是多线程编程中的计数类型信号。dispatch\_semaphore\_create函数生成的dispatch\_semaphore必须通过dispatch\_release函数释放，当然也可以通过dispatch\_retain函数持有。
 
+```cpp
+dispatch_semaphore_t dispatch_semaphore_create(long value);
 ```
-dispatch_semaphone_t semaphone = dispatch_semaphone_create(1);
+
+- 参数表示计数的初始值，如果小于0则会返回NULL
+
+dispatch\_semaphore\_wait函数等待Dispatch Semaphore的计数值达到大于或等于1。当计数值大于等于1，或者在待机中计数值大于等于1时，对该计数进行减法并从dispatch\_semaphore\_wati函数返回。可通过其返回值进行分支处理。
+
+```cpp
+long dispatch_semaphore_wait(dispatch_semaphore_t dsema, dispatch_time_t timeout);
 ```
 
+- 第一个参数指定等待的Dispatch Semaphore
+- 第二个参数指定等待时间
 
+具体使用示例如下（假设有多个任务抢占竞争2个可利用资源）：
+
+```cpp
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+// 生成Dispatch Semaphore，计数初始值设定为2，即可访问的资源只能有2个
+dispatch_semaphore_t semaphore = dispatch_semaphore_create(2);
+
+for (int i= 0; i < 10000; i++) {
+	// 异步执行任务
+	dispatch_async(queue, ^{
+		/*
+		 * 一直等待，直到Dispatch Semaphore的计数值达到大于等于1
+		 * 函数返回并使Dispatch Semaphore的计数值-1
+		 */
+		dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+		
+		// 执行任务
+		NSLog(@"run task %u", i);
+		
+		// 每个任务设定不同的执行时间（延时时间）
+		int time = arc4random()%10
+		long result = dispatch_walltime(DISPATCH_TIME_NOW, time);		NSLog(@"complete task %u", i);
+	 	
+	 	/*
+	 	 * 任务结束后，使Dispatch Semaphore的计数值+1
+		 */
+		dispatch_semaphore_signal(semaphore);
+	});
+}
+
+/* 输出
+run task 0
+complete task 0
+run task 2
+complete task 2
+run task 4
+complete task 4
+run task 1
+complete task 1
+run task 5
+complete task 5
+run task 3
+complete task 3
+run task 6
+complete task 6
+run task 7
+complete task 7
+...
+*/
+```
+
+### dispatch\_once
+
+dispatch\_once函数是保证在应用程序执行中只执行一次指定处理的API。dispatch\_once在多线程安全的。dispatch\_once多用在单例模式。
+
+```objectivec
+static ObjcetType *_obj;
++ (instancetype)sharedInstance;
+	static dispatch_once_t onceToken;
+	dispatch_once(onceToken, ^{
+		/*
+	 	 * 单例初始化
+	 	 */
+	 	_obj = [ObjcetType new];
+	});
+	return _obj;
+}	
+```
+
+### Dispatch I/O
+
+使用Dispatch I/O和Dispatch Data，可以将大文件分成合适大小并使用Global Dispatch Queue并列读取。
+
+```cpp
+pipe_q = dispatch_queue_create("PipeQ", NULL);
+pepe_channel = dispatch_io_create(DISPATCH_IO_STREAM, fd, pipe_q, ^(int err){
+	close(fd);
+});
+
+*out_fd = fdpair[1];
+
+dispatch_io_set_low_water(pipe_channel, SIZE_MAX);
+
+dispatch_io_read(pipe_channel, 0, SIZE_MAX, pipe_q, ^(bool done, dispatch_data_t pipedata, int err){
+	if (err == 0) {
+		size_t len = dispatch_data_get_size(pipedata);
+		if (len >0) {
+			const char *bytes = NULL;
+			char *encoded;
+			
+			dispatch_data_t md = dispatch_data_create_map(pipedata, (const void **)&bytes, &len);
+			encoded = asl_core_encode_buffer(bytes, len);
+			als_set((aslmsg)merged_msg, ASL_KEY_AUX_DATA, encoded);
+			free(encoded);
+			_asl_send_message(NULL, merged_msg, -1, NULL);
+			asl_msg_release(merged_msg);
+			dispatch_release(md);
+		}
+	}
+	
+	if (done) {
+		dispatch_semaphore_signal(sem);
+		dispatch_release(pipe_channel);
+		dispatch_release(pipe_q);
+	}
+});
+```
+
+1. dispatch\_io\_create函数生成Dispatch I/O，并指定发生错误时用来执行处理的Block，以及执行该Block的Dispatch Queue
+2. dispatch\_io\_set\_low\_water函数设定一次读取的大小（分割大小）
+3. dispatch\_io\_read函数使用Global Dispatch Queue开始并列读取
+4. 每当各个分割的文件块读取结束时，将含有文件块数据的Dispatch Data传递给dispatch\_io\_read函数指定的读取结束时回调用的Block
+5. 回调用的Block分析传递过来的Dispatch Data并进行结合处理
+
+## GCD实现
+
+### Dispatch Queue
+
+Dispatch Queue通过结构体和链表，被实现为FIFO队列。通过dispatch\_async函数追加的Block，先加入Dispatch Continuation这一dispatch\_continuation\_t类型结构体中，然后在加入FIFO队列。该Dispatch Continuation用于记忆Block所属的Dispatch Group和其他一些信息，相当于一般常说的执行上下文。
+
+Dispatch Queue通过dispatch\_set\_target\_queue函数设定，可设定执行该Dispatch Queue处理的Dispatch Queue为目标。该目标像串珠子一样，设定多个连接在一起的Dispatch Queue。但是连接串的最后必须设定为Main Dispatch Queue，或各种优先级的Global Dispatch Queue，或是准备用于Serial Dispatch Queue的各种优先级Global Dispatch QUeue。
+
+当在Global Dispatch Queue中执行Block时，libdispatch从Global Dispatch Queue自身的FIFO队列中取出Dispatch Continuation，调用pthread\_workqueue\_additem\_np函数。将该Global Dispatch Queue自身、符合其优先级的workqueue信息以及为执行Dispatch Continuation的回调函数等传递给参数。
+
+pthread\_workqueue\_additem\_np函数使用workq\_kernreturn系统调用。通知workqueue增加应当执行的项目。根据该通知，XNU内核基于系统状态判断是否要生成线程。如果是Overcommit优先级的Global Dispatch Queue，workqueue则始终生成线程。
+
+workqueue的线程执行pthread\_workqueue函数，该函数调用libdispatch的回调函数。在该回调函数中执行加入到Dispatch Continuation的Block。
+
+Block执行结束后，进行通知Dispatch Group结束、释放Dispatch Continuation等处理，开始准备执行加入到Global Dispatch Queue中的下一个Block。
+
+|Global Dispatch Queue|Libc pthread\_workqueue|XNU workqueue|
+|:--|:--|:--|
+|High Priority|pthread\_workqueue|WORKQUEUE\_HIGH\_PRIOQUEUE|
+|Default Priority|pthread\_workqueue| WORKQUEUE\_DEFAULT\_PRIOQUEUE |
+|Low Priority|pthread\_workqueue| WORKQUEUE\_LOW\_PRIOQUEUE |
+|Background Priority|pthread\_workqueue| WORKQUEUE\_BG\_PRIOQUEUE |
+|High Overcommit Priority|pthread\_workqueue| WORKQUEUE\_HIGH\_PRIOQUEUE |
+|Default Overcommit Priority|pthread\_workqueue| WORKQUEUE\_DEFAULT\_PRIOQUEUE |
+|Low Overcommit Priority|pthread\_workqueue| WORKQUEUE\_LOW\_PRIOQUEUE |
+|Background Overcommit Priority|pthread\_workqueue| WORKQUEUE\_BG\_PRIOQUEUE |
+
+### Dispatch Source
+
+Dispatch Source是BSD系统内核惯有功能kqueue（kqueue是在XNU内核中发生各种事件时，在应用程序编程方执行处理的技术，其CPU负荷非常小，尽量不占用资源）的包装。使用Dispatch Source可以在指定事件发生时，在指定的Dispatch Queue中执行事件的处理。
+
+Dispatch Source可以处理以下事件：
+
+|名称|内容|
+|:--|:--|
+|DISPATCH\_SOURCE\_TYPE\_DATA\_ADD|变量增加|
+|DISPATCH\_SOURCE\_TYPE\_DATA\_OR|变量OR|
+|DISPATCH\_SOURCE\_TYPE\_MACH\_SEND|MACH端口发送|
+|DISPATCH\_SOURCE\_TYPE\_MACH\_RECV|MACH端口接收|
+|DISPATCH\_SOURCE\_TYPE\_PROC|检测到与进程相关的事件|
+|DISPATCH\_SOURCE\_TYPE\_READ|可读取文件映像|
+|DISPATCH\_SOURCE\_TYPE\_SIGNAL|接收信号|
+|DISPATCH\_SOURCE\_TYPE\_TIMER|定时器|
+|DISPATCH\_SOURCE\_TYPE\_VNODE|文件系统有变更|
+|DISPATCH\_SOURCE\_TYPE\_WRITE|可写入文件映像|
+
+**Dispatch Source与Dispatch Queue不同，是可以取消的。而且取消时必须执行的处理可指定为回调Block的形式。**
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
