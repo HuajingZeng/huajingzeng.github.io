@@ -49,6 +49,9 @@ highlight:
   auto_detect: false
   length: 150
   tab_replace:
+encrypt:
+    enable: true
+
 
 # 首页设置
 # path: Root path for your blogs index page. (default = '')
