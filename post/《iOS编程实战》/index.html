@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
     <meta name="baidu-site-verification" content="dIcXMeY8Ya">
     
-    <title>文章归档: 2018/1 | 曾华经</title>
+    <title>《iOS编程实战》 | 曾华经</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="keywords" content="iOS, Web">
     <meta name="description" content="曾华经个人博客">
@@ -59,19 +59,19 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/archives/2018/01/index.html" class="item ">
+            <li rel="/post/《iOS编程实战》/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/archives/2018/01/index.html" class="item ">
+            <li rel="/post/《iOS编程实战》/index.html" class="item ">
                 <a href="/lab/" title="项目" class="icon-lab">&nbsp;项目</a>
             </li>
             
-            <li rel="/archives/2018/01/index.html" class="item ">
+            <li rel="/post/《iOS编程实战》/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/archives/2018/01/index.html" class="item ">
+            <li rel="/post/《iOS编程实战》/index.html" class="item ">
                 <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
             </li>
             
@@ -118,132 +118,177 @@
     <div class="container body clearfix">
         <section class="content">
             <div class="content-main widget">
-                <!-- 文章归档 -->
+                <!-- 文章页 -->
+<!-- 目录内容 -->
 
-    <h3 class="widget-hd">
-        <strong>
-            
-                文章归档
-            
-        </strong>
-    </h3>
-    
-        <!-- 文章 -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:block">
+    <span class="btn-text">文章导航</span>
+    </p>
+    <div id="toc-article" class="toc-article" style="display:none">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
         
-        <a class="cat-link" href="/categories/编程基础/">编程基础</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="/post/代码版本管理工具">
-    		代码版本管理工具
-    	</a>
-    </h3>
-
+   </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+ 
+<!-- 目录内容结束 -->
+<!-- 文章 -->
+<article class="post article" onclick="showBtn();">
+    <header class="text-center">
+        <h3 class="post-title"><span>《iOS编程实战》</span></h3>
     </header>
+    <p class="post-meta text-center">
+        曾华经
+		&emsp;发表于：<time datetime="2019-05-06T07:03:30.000Z">2019-05-06</time>
+		&emsp;修改于：<time datetime="2019-05-06T09:40:06.828Z">2019-05-06</time>
+		&emsp;总阅读量：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span>次
+    </p>
+    <div class="post-content">
+        <p>如题</p>
+<a id="more"></a>
+<p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
+
+    </div>
     <p class="post-meta">
-        曾华经 发表于
-        <time datetime="2018-01-13T01:08:39.000Z">2018-01-13</time>
-        &nbsp;&nbsp;
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/编程基础/">编程基础</a>
+        </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/Git/" title="Git">Git</a> / 
-    
-        <a href="/tags/SVN/" title="SVN">SVN</a> / 
-    
-        <a href="/tags/CVS/" title="CVS">CVS</a>
+        <a href="/tags/iOS/" title="iOS">iOS</a>
     
 
         </span>
     </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>&emsp;&emsp;Git是一个开源的分布式版本控制系统。<br>&emsp;&emsp;SVN（Subversion）是一个开源的集中式版本控制系统。<br>&emsp;&emsp;CVS（Concurrent Versions System）是一个开源的版本控制系统，已逐渐被SVN取代。</p>
-            
-            <p class="more">
-                <a href="/post/代码版本管理工具">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img>
-            <a href="/post/代码版本管理工具" title="代码版本管理工具">
-                
-                    <!--
-                    <img src="https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6.jpg" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="/img/default.png" data-echo="https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6.jpg" alt="代码版本管理工具">
-                
-            </a>
-        </div>
-    </div>
 </article>
+<!-- 分享按钮 -->
 
-    
-        <!-- 文章 -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="/categories/编程基础/">编程基础</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="/post/神兵利器之正则表达式">
-    		神兵利器之正则表达式
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        曾华经 发表于
-        <time datetime="2018-01-02T05:11:10.000Z">2018-01-02</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="/tags/正则表达式/" title="正则表达式">正则表达式</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>&emsp;&emsp;正则表达式并不“总要用到”。但当你需要经常处理文本和字符串时，用过它之后，你就会知道它的强大和价值所在，并且深深地爱上它。学会使用正则表达式是非常必要的，即便你所处的开发领域与文本处理没什么关系。否则当到了需要的场合用不上，就会有“一分钱难倒英雄汉”的尴尬了。</p>
-            
-            <p class="more">
-                <a href="/post/神兵利器之正则表达式">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img>
-            <a href="/post/神兵利器之正则表达式" title="神兵利器之正则表达式">
-                
-                    <!--
-                    <img src="https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RegEx.jpeg" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="/img/default.png" data-echo="https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RegEx.jpeg" alt="神兵利器之正则表达式">
-                
-            </a>
-        </div>
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <!-- <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a> -->
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
     </div>
-</article>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="javascript: void(0);">没有上一篇了</a>
+    </span>
+    
 
     
+    <span class="next fr">
+        下一篇<br>
+        <a href="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/">
+            
+                《Objective-C 高级编程——iOS与OS X多线程和内存管理》
+            
+        </a>
+    </span>
+    
+</div>
 
-    
-    <nav class="page-navigator">
-        <span class="page-number current">1</span>
-    </nav>
-    
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/zhj.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: '《iOS编程实战》' || 'post/《iOS编程实战》/',
+    owner: 'HuajingZeng',
+    repo: 'huajingzeng.github.io_comments',
+    clientId: '7ae3915c563a60d41451',
+    clientSecret: '2abefe41031e15eabf12a828f30fd380487fb738'
+  });
+  </script>
 
 
             </div>
