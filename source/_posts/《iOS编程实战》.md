@@ -20,9 +20,9 @@ toc: true
 
 ## 命名
 
-### 自动变量
+### 变量
 
-- 变量的名字应该跟变量的类型相匹配
+- 变量的名字应该跟变量的类型相匹配，不要为了简略而造成歧义
 
 ### 方法
 
@@ -51,11 +51,9 @@ toc: true
 - 为避免碰撞，分类方法前面应该加上前缀，后面跟上下划线。
 - 把多个实用方法放在一个分类中比较方便，但是要避免造成代码膨胀，因为Objective-C无法像C或C++那样高效地做无用代码删除
 
-当分类第一次附着到类上时会运行`+load`方法。每个分类都可以实现`+load`方法，而且每个实现都会运行，运行顺序没有保证，也不应该手动调用。
-
 ### +load和+initialize的对比
 
-对于`load`和`initialize`方法，都不应该手动调用
+当分类第一次附着到类上时会运行`+load`方法。每个分类都可以实现`+load`方法，而且每个实现都会运行，运行顺序没有保证，也不应该手动调用。对于`load`和`initialize`方法，都不应该手动调用
 
 **+load**
 
@@ -77,16 +75,94 @@ toc: true
 
 ## 关联引用
 
+```cpp
+typedef OBJC_ENUM(uintptr_t, objc_AssociationPolicy) {
+    OBJC_ASSOCIATION_ASSIGN = 0,
+    OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,
+    OBJC_ASSOCIATION_COPY_NONATOMIC = 3,
+    OBJC_ASSOCIATION_RETAIN = 01401,
+    OBJC_ASSOCIATION_COPY = 01403
+};
+
+void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy);
+
+id objc_getAssociatedObject(id object, const void *key);
+```
+
 - 关联引用基于键的内存地址，而不是值的。`key`中存着什么并不重要，只要`&key`是唯一不变的地址就行。所以一般用未赋值的`static char`变量作为键
 - 关联引用有良好的内存管理，当相关对象被销毁时关联引用会被释放。可以用关联引用来追踪另一个对象何时被销毁
 - 关联引用无法集成`encodeWithCoder:`，所以很难通过分类序列化对象
 
 ## 弱引用容器
 
-指针容器类，可以配置为持有弱引用、非对象的指针或者其他罕见情形
+指针容器类，可以配置为持有弱引用、非对象的指针或者其他罕见情形，在初始化时使用NSPointerFunctions类进行配置。详见：[NSHash​Table & NSMap​Table](https://nshipster.cn/nshashtable-and-nsmaptable/)
 
 - NSPointerArray：类似NSArray，可以存储NULL值
 - NSHashTable：类似NSSet
 - NSMapTable：类似NSDictionary
+
+## NSCache
+
+NSCache是多线程安全的。它可以设计为能与`<NSDiscardableContent>`协议的对象（常见类型是NSPurgeableData）整合，通过`beginContentAccess`和`endContentAccess`，可以控制何时丢弃对象时安全的。
+
+## NSURLComponents
+
+NSURLComponents可以很方便地把URL分成几个部分，它定义在NSURL.h文件中，NSURL.h添加了一些有用的分类来处理URL。
+
+## CFStringTransform
+
+CFStringTransform可以把字符串变得容易标准化、索引、和搜索。
+
+```cpp
+CFMutableStringRef string = CFStringCreateMutableCopy(NULL, 0, CFSTR("你好"));
+
+CFStringTransform(string, NULL, kCFStringTransformToLatin, false);
+// string => 'nǐ hǎo'
+
+CFStringTransform(string, NULL, kCFStringTransformStripCombiningMarks, false); 
+// string => 'ni hao'
+
+CFRelease(string);
+```
+
+|转换方式|输入|输出|说明|
+|:--|:--|:--|:--|
+|kCFStringTransformLatinArabic|mrḥbạ|مرحبا|阿拉伯语拉丁字母|
+|kCFStringTransformLatinCyrillic|privet|привет|西里尔拉丁字母|
+|kCFStringTransformLatinGreek|geiá sou|γειά σου|希腊拉丁字母|
+|kCFStringTransformLatinHangul|annyeonghaseyo|안녕하세요|韩文的拉丁字母|
+|kCFStringTransformLatinHebrew|şlwm|שלום|希伯来语拉丁字母|
+|kCFStringTransformLatinHiragana|hiragana|ひらがな|平假名拉丁字母|
+|kCFStringTransformLatinKatakana|katakana|カタカナ|片假名拉丁字母|
+|kCFStringTransformLatinThai|s̄wạs̄dī|สวัสดี|泰国拉丁字母|
+|kCFStringTransformHiraganaKatakana|にほんご|ニホンゴ|平假名片假名|
+|kCFStringTransformMandarinLatin|中文|zhōng wén|普通话拉丁字母|
+|kCFStringTransformToLatin|你の名字|nǐno míng zì|非英文文本转为拉丁字母|
+|kCFStringTransformStripCombiningMarks|zhōng wén|zhong wen|删除重音符号|
+|kCFStringTransformStripDiacritics|nǐ hǎo|ni hao|去掉变音符号|
+|kCFStringTransformFullwidthHalfwidth|ａｂｃｄｅｆｇ，|abcdefg,|全角转半角|
+|kCFStringTransformToUnicodeName|😀|\N{GRINNING FACE}|转换为Unicode名称|
+|kCFStringTransformToXMLHex|你好|\&\#x4F60;\&\#x597D;|转换为XML十六进制字符|
+
+**PS：**CFStringTransform无法处理日文中的汉字，如果需要音译复杂的日文文本，可以参考00StevenG的[NSString-Japanese](https://github.com/00StevenG/NSString-Japanese)，它基于CFStringTokenizer
+
+## instancetype
+
+instancetype表示“当前类”。为保持一致性，init方法和快捷构造方法的返回类型最好都用instancetype。
+
+## Base64和百分号编码
+
+Base64是很多Web协议标准，可以使用`initWithBase64EncodedString:Options:`和`base64EncodedStringWithOptions:`在Base64和NSData之间相互转换。
+
+百分号编码对Web协议也很重要，尤其是URL。可以使用NSString类的`stringByRemovingPercentEncoding`来解码百分号编码的字符串，可以使用`stringByAddingPercentEncodingWithAllowedCharacters:`来百分号编码字符串并控制需要百分号编码的字符。
+
+## - [NSArray firstObject]
+
+如果数组为空，使用`firstObject`返回nil，而不会像`objectAtIndex:0`那样崩溃。
+
+# 故事板及自定义切换效果
+
+
+
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
