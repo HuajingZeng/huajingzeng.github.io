@@ -162,7 +162,81 @@ Base64是很多Web协议标准，可以使用`initWithBase64EncodedString:Option
 
 # 故事板及自定义切换效果
 
+## 初识故事板
 
+### 实例化故事板
+
+```
++ storyboardWithName:bundle:
+```
+
+### 加载故事板中的视图控制器
+
+```
+- instantiateInitialViewController
+- instantiateViewControllerWithIdentifier:
+```
+
+### 联线
+
+联线（segue）是故事板文件中定义的切换效果。
+
+|模式|版本|说明|
+|:--|:--|:--|
+|Push|iOS8.0以下|相当于`pushViewController:animated:completion:`|
+|Modal|iOS8.0以下|相当于`presentViewController:animated:completion:`|
+|Show|iOS8.0以后|根据当前屏幕中的内容，在master area或者detail area中展示内容。等同“Push”模式|
+|Show Detail|iOS8.0以后|在detail area中展现内容|
+|Present Modally|iOS8.0以后|使用模态展示内容。等同“Modal”模式|
+|Present as Popover|iOS8.0以后|在当前的view上出现一个小窗口来展示内容|
+|Custom|iOS8.0以后|自定义跳转方式，可自定义跳转动画|
+
+- 传递数据
+	- 覆盖`prepareForSegue:sender:`方法来填充数据。此方法可以拿到指向目标视图控制器的指针，并在其中设置初始值。
+- 返回数据
+	- 目标视图控制器的数据可以通过委托或块返回给父视图控制器，只有在`prepareForSegue:sender:`方法中设置好`Delegate`=`self`和`Block`。
+- 实例化其他视图控制器
+	- UIViewController有一个`storyboard`属性，保留一个指向故事板对象的指针。可以通过它实例化任何其他视图控制器（包括故事板中保留的没有通过联线跟任何视图控制器连接的视图控制器）。
+- 手动进行联线
+	- 调用`performSugueWithIdentifier:sender:`方法进行联线，在发送者参数中传递调用者和上下文对象，稍后发送者参数会发送给`prepareForSegue:sender:`方法
+- 展开联线
+	- A视图ModalB视图，在A视图控制器的实现文件中添加`IBAction`方法（接收`UIStoryboardSegue`对象作为参数，方法名可随意），在故事板A视图控制器上的Exit对象右键选择`unwindSegue:`方法连接到B视图控制器上Dismiss按钮的`action`动作上
+
+```
+- (IBAction)unwindSegue:(UIStoryboardSegue *)sender {
+
+}
+```
+
+### 使用故事板来实现表视图
+
+- 静态表：适用于创建设置页面（或不包含来自Core Data模型、Web服务或任何类似数据源内容的页面）。**只能为`UITableViewController`生成的表视图创建静态单元格，作为`UIViewController`视图的子视图添加的表视图无法创建**
+- 原型单元格：跟自定义表视图单元格类似。**应该使用自定义的标识符来标识所有的原型单元格，这样能够确保表视图单元格的各种排列方式正常**
+
+## 自定义切换效果
+
+创建一个`UIStoryboardSegue`子类并覆盖`perform`方法。在`perform`方法中，拿到指向源视图控制器的主视图图层的指针，然后实现自定义切换动画（使用Core Animation）。一旦动画完成，就可以推送到目标视图控制器（可以从联线对象中获得一个指向该控制器的指针）。
+
+### 优点
+
+容易理解应用的工作流（不用逐个查看诸多的nib文件并交叉引用实例化代码）。
+
+### 白璧微瑕——合并冲突
+
+故事板内部采用自动生成的XML，合并冲突很难解决。解决办法是从一开始就避免冲突，建议将故事板拆分成多个文件，每个文件仅针对某个用例。如：Login.Storyboard、Settings.Storyboard、Profile.Storyboard等。
+
+# 掌握集合视图
+
+## 集合视图
+
+- UICollectionViewController：负责管理集合视图、存储所需的数据，并且能处理数据源与委托协议
+- UICollectionView：集合视图
+- UICollectionViewCell：集合视图原型单元
+- UICollectionViewDataSource：数据源协议
+- UICollectionViewDelegate：委托协议，处理选中或高亮事件
+- UICollectionViewDelegateFlowLayout：布局协议，可实现高级布局定制
+
+## 用集合视图自定义布局实现高级定制
 
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
