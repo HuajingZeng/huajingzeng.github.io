@@ -3,32 +3,39 @@
 .comment .box .com-text .main .text-area-preview h1,
 .comment .list-wrap .list .user-comment .user-comment-body h1 {
   font-size: 2em;
+  padding-left: 0px;
+  border-left: 0px solid #3296fa;
 }
 .post .post-content h2,
 .comment .box .com-text .main .text-area-preview h2,
 .comment .list-wrap .list .user-comment .user-comment-body h2 {
   font-size: 1.6em;
+  padding-left: 0px;
+  border-left: 0px solid #3296fa;
 }
 .post .post-content h3,
 .comment .box .com-text .main .text-area-preview h3,
 .comment .list-wrap .list .user-comment .user-comment-body h3 {
   font-size: 1.4em;
+  padding-left: 0px;
+  border-left: 0px solid #3296fa;
 }
 .post .post-content h4,
 .comment .box .com-text .main .text-area-preview h4,
 .comment .list-wrap .list .user-comment .user-comment-body h4 {
   font-size: 1.2em;
+  padding-left: 0px;
+  border-left: 0px solid #3296fa;
 }
 .post .post-content h5,
 .comment .box .com-text .main .text-area-preview h5,
 .comment .list-wrap .list .user-comment .user-comment-body h5 {
-  font-size: 1em;
+  font-size: 1.1em;
 }
 .post .post-content h6,
 .comment .box .com-text .main .text-area-preview h6,
 .comment .list-wrap .list .user-comment .user-comment-body h6 {
   font-size: 1em;
-  color: #999;
 }
 .post .post-content hr,
 .comment .box .com-text .main .text-area-preview hr,
