@@ -20,27 +20,18 @@ toc: true
 
 ## 事件传递机制
 
-【问】UIView和CALayer（区别）
-
-【答】
+### UIView和CALayer
 
 1、UIView负责响应事件，CALayer负责绘制UI
 
 - `UIView`继承自`UIResponder`，而`UIResponder`是响应者对象，实现了如下API，所以继承自`UIResponder`的都具有响应事件的能力
 
 ```objc
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event;
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event;
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event;
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event;
-- (void)touchesEstimatedPropertiesUpdated:(NSSet<UITouch *> *)touches NS_AVAILABLE_IOS(9_1);
-```
-
-并且UIView提供了以下两个方法，来进行iOS中事件的响应及传递（响应者链）
-
-```objc
-- (nullable UIView *)hitTest:(CGPoint)point withEvent:(nullable UIEvent *)event;
-- (BOOL)pointInside:(CGPoint)point withEvent:(nullable UIEvent *)event;
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+- (void)touchesEstimatedPropertiesUpdated:(NSSet<UITouch *> *)touches;
 ```
 
 - `CALayer`继承自`NSObject`，所以`CALayer`不具备响应处理事件的能力。`CALayer`是`QuartzCore`中的类，是一个比较底层的用来绘制内容的类。
@@ -54,8 +45,22 @@ toc: true
 //绘制相关
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx;
 //动画相关
-- (nullable id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event;
+- (id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event;
 ```
+
+### 事件传递
+
+UIView提供了以下两个方法，来进行iOS中事件的响应及传递（响应者链）
+
+```objc
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event;
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event;
+```
+
+![iOS事件响应](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/iOS%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94.png)
+
+![iOS事件响应2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/iOS%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%942.png)
+
 
 ## UI绘制原理
 
