@@ -64,6 +64,38 @@ UIView提供了以下两个方法，来进行iOS中事件的响应及传递（�
 
 ## UI绘制原理
 
+### 图像显示原理
+
+![图像显示原理](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86.png)
+
+![图像显示原理2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%862.png)
+
+### CPU工作
+
+![CPU工作](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/CPU%E5%B7%A5%E4%BD%9C.png)
+
+### GPU渲染管线
+
+![GPU渲染管线](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/GPU%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF.png)
+
+### UI卡顿、掉帧的原因
+
+![UI卡顿掉帧的原因](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/UI%E5%8D%A1%E9%A1%BF%E6%8E%89%E5%B8%A7.png)
+
+### 滑动优化方案
+
+- CPU
+	- 对象创建、**调整**、**销毁**
+	- 预排版（布局计算，文本计算）
+	- **预渲染（文本异步绘制，图片编解码等）**
+- GPU
+	- **纹理渲染**
+	- **视图混合**
+
+### UIView绘制原理
+
+![UIView绘制原理](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/UIView%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86.png)
+
 ## 异步绘制原理
 
 ## 流氏页面的性能优化
