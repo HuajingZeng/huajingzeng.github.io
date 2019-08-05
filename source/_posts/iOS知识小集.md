@@ -96,22 +96,73 @@ UIView提供了以下两个方法，来进行iOS中事件的响应及传递（�
 
 ![UIView绘制原理](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/UIView%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86.png)
 
+![UIView绘制原理2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/UIView%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%862.png)
+
 ## 异步绘制原理
 
-## 流氏页面的性能优化
+- [layer.delegate displayLayer:]
+	- 代理负责生成对应的bitmap
+	- 设置该bitmap作为layer.contents属性的值
+	
+![异步绘制](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%BC%82%E6%AD%A5%E7%BB%98%E5%88%B6.png)
 
 ## 离屏渲染
 
+- On-Screen Rendering：意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行
+	
+- Off-Screen Rendering：意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作
+	- 圆角（当和maskToBounds一起使用时）
+	- 图层蒙版
+	- 阴影
+	- 光栅化
+
+为何要避免？
+
+- 创建新的渲染缓存区
+- 上下文切换
 
 # OC语言
+
+## 分类（Category）
+
+### 特点
+
+- 运行时决议
+- 可以为系统类添加分类
+
+### 可以添加的内容
+
+- 实例方法
+- 类方法
+- 协议
+- 属性
+
+### 加载调用栈
+
+![分类加载调用栈](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%88%86%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%B0%83%E7%94%A8%E6%A0%88.png)
+
+- 分类添加的方法可以“覆盖”原类方法
+- 同名分类方法谁生效取决于编译顺序
+- 名字相同的分类会引起编译报错
+
+## 关联对象
+
+```objc
+objc_getAssociatedObject(id object, const void *key);
+
+objc_setAssociatedObject(id object, const void *key,
+                         id value, objc_AssociationPolicy policy);
+
+objc_removeAssociatedObjects(id object);
+```
+
+### 关联对象的本质
+
+关联对象由`AssociationManager`管理并在`AssociationHashMap`存储。所有对象的关联内容都在**同一个全局容器**中。
 
 ## KVO
 
 ## KVC
-
-## 分类
-
-## 关联对象
 
 
 # Runtime
@@ -210,7 +261,7 @@ UIView提供了以下两个方法，来进行iOS中事件的响应及传递（�
 
 ## 有序数组归并
 
-## 无需数组中找中位数
+## 无序数组中找中位数
 
 
 # 第三方
