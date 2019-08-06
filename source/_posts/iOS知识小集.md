@@ -347,6 +347,8 @@ Type Encodings
 
 ## 对象、类对象、元类对象
 
+![对象类对象元类对象](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%AF%B9%E8%B1%A1%E5%85%83%E7%B1%BB%E5%AF%B9%E8%B1%A1.png)
+
 ## 消息传递机制
 
 ## 消息转发机制
