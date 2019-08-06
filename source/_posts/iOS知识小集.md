@@ -160,12 +160,190 @@ objc_removeAssociatedObjects(id object);
 
 关联对象由`AssociationManager`管理并在`AssociationHashMap`存储。所有对象的关联内容都在**同一个全局容器**中。
 
+![关联对象的本质](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9C%AC%E8%B4%A8.png)
+
+```json
+{
+	"0x4927298742":{
+		"@selector(text)":{
+			"value":"Hello",
+			"policy":"retain"
+		},
+		"@selector(title)":{
+			"value":"a object",
+			"policy":"copy"
+		}
+	},
+	"0x3428163871":{
+		"@selector(backgroundColor)":{
+			"value":"0xff8205",
+			"policy":"retain"
+		}
+	}
+}
+```
+
+## 扩展
+
+### 特点
+
+- 编译时决议
+- 只以声明的形式存在，多数情况下寄生于宿主类的.m中
+- 不能为系统类添加扩展
+
+## 代理
+
+- 准确的说是一种软件设计模式
+- iOS当中以**@protocol**形式提现
+- 传递方式为**一对一**
+
+![代理](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E4%BB%A3%E7%90%86.png)
+
+- 一般声明为**weak**以规避循环引用
+
+![代理2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E4%BB%A3%E7%90%862.png)
+
+## 通知
+
+- 使用**观察者模式**来实现的用于跨层传递消息的机制
+- 传递方式为**一对对**
+
+![通知](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%80%9A%E7%9F%A5.png)
+
+![通知机制](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%80%9A%E7%9F%A5%E6%9C%BA%E5%88%B6.png)
+
 ## KVO
+
+- KVO是Key-value observing的缩写
+- KVO是Objective-C对**观察者模式**的又一实现
+- Apple 使用了isa混写（**isa-swizzling**）来实现KVO
+
+![KVO](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/KVO.png)
+
+### 触发条件
+
+- 使用setter方法改变值KVO才会生效
+- 使用`setValue:forKey:`改变值KVO才会生效
+- 成员变量直接修改需**手动添加**KVO才会生效
 
 ## KVC
 
+KVC是Key-value coding的缩写
+
+```objc
+- (id)valueForKey:(NSString *)key;
+
+- (void)setValue:(id)value forKey:(NSString *)key;
+```
+
+![KVC](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/KVC.png)
+
+![KVC2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/KVC2.png)
+
+### Accessor Method
+
+- &#60;getKey&#62;
+- &#60;key&#62;
+- &#60;isKey&#62;
+
+### Instance var
+
+- _key
+- _isKey
+- key
+- isKey
+
+## 属性关键字
+
+- 读写权限
+	- readonly
+	- **rewrite**
+- 原子性
+	- **atomic**
+	- nonatomic
+- 引用计数
+	- retain/**strong**
+	- **assign**/unsafe_unretained
+	- weak
+	- copy
+
+### assign
+
+- 修饰基本数据类型，如int、BOOL等
+- 修饰对象类型时，不改变其引用计数
+- 会产生悬垂指针
+
+### weak
+
+- 不改变被修饰对象的引用计数
+- 所指对象在被释放之后会自动置为nil
+
+### copy
+
+- 浅拷贝：对内存地址的复制，让目标对象指针和源对象指向**同一片**内存空间
+- 深拷贝：深拷贝让目标对象指针和源对象指针指向**两片**内容相同的内存空间
+
+深拷贝VS浅拷贝
+
+- 是否开辟了新的内存空间
+- 是否影响了引用计数
+
+![copy关键字](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/copy%E5%85%B3%E9%94%AE%E5%AD%97.png)
 
 # Runtime
+
+## 数据结构
+
+### objc_object
+
+![objc_object](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/objc_object.png)
+
+### objc_class
+
+![objc_class](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/objc_class.png)
+
+### isa指针
+
+共用体`isa_t`
+
+![isa](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/isa.png)
+
+`isa`指向
+
+- 关于**对象**，其指向**类对象**
+- 关于**类对象**，其指向**元类对象**
+
+### cache_t
+
+- 用于**快速**查找方法执行函数
+- 是可**增量扩展**的**哈希表**结构
+- 是**局部性原理**的最佳应用
+
+![cache_t](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/cache_t.png)
+
+### class\_data\_bits\_t
+
+- `class_data_bits_t`主要是对`class_rw_t`的封装
+- `class_rw_t`代表了类相关的**读写**信息、对`class_ro_t`的封装
+- `class_ro_t`代表了类相关的**只读**信息
+
+![class_rw_t](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/class_rw_t.png)
+
+![class_ro_t](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/class_ro_t.png)
+
+### method_t
+
+![method_t](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/method_t.png)
+
+Type Encodings
+
+- const char *types
+
+![Type Encodings](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Type%20Encodings.png)
+
+### Objective-C对象数据结构
+
+![OC对象数据结构](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/OC%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png)
 
 ## 对象、类对象、元类对象
 
@@ -174,7 +352,6 @@ objc_removeAssociatedObjects(id object);
 ## 消息转发机制
 
 ## Method-Swizzling
-
 
 # 内存
 
