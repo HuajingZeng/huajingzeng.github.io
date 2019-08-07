@@ -351,11 +351,41 @@ Type Encodings
 
 ## 消息传递机制
 
+![消息传递](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92.png)
+
+### 缓存查找
+
+给定值是`SEL`，目标值是对应`bucket_t`中的`IMP`。
+
+![缓存查找](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E7%BC%93%E5%AD%98%E6%9F%A5%E6%89%BE.png)
+
+### 当前类中查找
+
+- 对于**已排序好**的列表，采用二分查找算法查找方法对应执行函数。
+- 对于**没有排序**的列表，采用一般遍历查找方法对应执行函数。
+
+### 父类逐级查找
+
+![父类逐级查找](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E7%88%B6%E7%B1%BB%E9%80%90%E7%BA%A7%E6%9F%A5%E6%89%BE.png)
+
 ## 消息转发机制
+
+![消息转发流程](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%B5%81%E7%A8%8B.png)
 
 ## Method-Swizzling
 
+![MethodSwizzling](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/MethodSwizzling.png)
+
+## 动态方法解析
+
+@dynamic
+
+- 动态运行时语言将函数决议推迟到运行时。
+- 编译时语言在编译期进行函数决议。
+
 # 内存
+
+![内存分配](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png)
 
 ## 引用技术表
 
