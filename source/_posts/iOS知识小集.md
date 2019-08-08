@@ -387,13 +387,110 @@ Type Encodings
 
 ![内存分配](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png)
 
+## 内存管理方案
+
+- TaggedPointer：有些对象如果支持使用TaggedPointer（对象指针最后一位为1），苹果会直接将其指针值作为引用计数返回
+- NONPOINTER_ISA：如果当前设备是64位环境并且使用Objective-C 2.0，那么“一些”对象会使用其isa指针的一部分空间来存储它的引用计数（isa指针最后一位为1）
+- 散列表：包含自旋锁、引用计数表、弱引用表等
+
+### arm64架构
+
+![arm64架构](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/arm64%E6%9E%B6%E6%9E%84.png)
+
+### 散列表方式
+
+![SideTables](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/SideTables.png)
+
+![SideTable](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/SideTable.png)
+
+### Hash查找
+
+给定值是对象内存地址，目标值是数组下标索引。
+
+![Hash查找](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Hash%E6%9F%A5%E6%89%BE.png)
+
+## 自旋锁
+
+- `Spinlock_t`是“忙等”的锁。
+- 适用于轻量访问。
+
 ## 引用技术表
+
+### RefcountMap
+
+![RefcountMap](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RefcountMap.png)
+
+### size_t
+
+![size_t](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/size_t.png)
 
 ## 弱引用表
 
+### weak_table_t
+
+![weak_table_t](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/weak_table_t.png)
+
 ## ARC、MRC
 
-## 循环引用
+### MRC
+
+手动引用计数
+
+![MRC](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/MRC.png)
+
+### ARC
+
+自动引用计数
+
+- ARC是**LLVM**和**Runtime**协作的结果
+- ARC中禁止手动调用`retain`/`release`/`retainCount`/`dealloc`
+- ARC中新增`weak`、`strong`属性关键字
+
+## 引用计数管理
+
+### alloc实现
+
+- 经过一系列调用，最终调用了C函数calloc。
+- 此时并没有设置引用计数为1。
+
+### retain实现
+
+```objc
+SideTable& table = SideTables()[this];
+
+size_t& refcntStorage = table.refcnts[this];
+
+refcntStorage += SIDE_TABLE_RC_ONE;
+```
+
+
+### release实现
+
+```objc
+SideTable& table = SideTables()[this];
+
+RefcountMap::iterator it = table.refcnts.find(this);
+
+it->second -= SIDE_TABLE_RC_ONE;
+```
+
+### retainCount实现
+
+```objc
+SideTable& table = SideTables()[this];
+
+size_t refcnt_result = 1;
+
+RefcountMap::iterator it = table.refcnts.find(this);
+
+refcnt_result += it->second >> SIDE_TABLE_RC_SHIFT;
+```
+
+### dealloc实现
+
+![dealloc](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/dealloc.png)
+
+
 
 ## 内存管理
 
