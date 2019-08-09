@@ -490,21 +490,158 @@ refcnt_result += it->second >> SIDE_TABLE_RC_SHIFT;
 
 ![dealloc](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/dealloc.png)
 
+- object_dispose()
 
+![object_dispose](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/object_dispose.png)
 
-## 内存管理
+- objc_destructInstance()
 
+![objc_destructInstance](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/objc_destructInstance.png)
 
-# Block
+- clearDeallocating()
 
-## Block本质
+![clearDeallocating](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/clearDeallocating.png)
 
-## 截获变量特性
+## 弱引用管理
 
-## 内存管理
+![弱引用管理](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%BC%B1%E5%BC%95%E7%94%A8%E7%AE%A1%E7%90%86.png)
+
+- 添加weak变量
+
+![添加weak变量](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%B7%BB%E5%8A%A0weak%E5%8F%98%E9%87%8F.png)
+
+- 清除weak变量，同时设置指向为nil
+
+![清除weak变量](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%B8%85%E9%99%A4weak%E5%8F%98%E9%87%8F.png)
+
+## 自动释放池
+
+![自动释放池](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0.png)
+
+- 是以**栈**为结点通过**双向链表**的形式组合而成
+- 是和**线程**一一对应的
+
+### AutoreleasePoolPage
+
+![AutoreleasePoolPage](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/AutoreleasePoolPage.png)
+
+![AutoreleasePoolPage](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/AutoreleasePoolPage2.png)
+
+### AutoreleasePoolPage::push
+
+![AutoreleasePoolPagePush](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/AutoreleasePoolPagePush.png)
+
+### autorelease
+
+![autorelease](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/autorelease.png)
+
+### AutoreleasePoolPage::pop
+
+- 根据传入的哨兵对象找到对应位置
+- 给上次push操作之后添加的对象依次发送release消息
+- 回退next指针到正确位置
+
+![AutoreleasePoolPagePop](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/AutoreleasePoolPagePop.png)
+
+### @autoreleasepool总结
+
+- 在当前RunLoop将要结束的时候调用AutoreleasePoolPage::pop()
+- 多层嵌套就是多次插入哨兵对象
+- 在for循环中alloc图片数据等内存消耗较大的场景手动插入autoreleasePool
 
 ## 循环引用
 
+### 种类
+
+- 自循环引用
+
+![自循环引用](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E8%87%AA%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png)
+
+- 相互循环引用
+
+![相互循环引用](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E7%9B%B8%E4%BA%92%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png)
+
+- 多循环引用
+
+![多循环引用](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%A4%9A%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png)
+
+### 来源
+
+- 代理
+- Block
+- NSTimer
+- 大环引用
+
+### 破解
+
+- **避免产生循环引用**
+- **在合适的时机手动断环**
+
+具体解决方案：
+
+- **__weak**
+- **__block**
+	- **MRC**下，__block修饰对象不会增加其引用计数，**避免**了循环引用
+	- **ARC**下，__block修饰对象会被强引用，**无法避免**循环引用，**需手动解环**
+- **__unsafe\_unretained**
+	- 修饰对象不会增加其引用计数，**避免**了循环引用
+	- 如果被修饰对象在某一时机被释放，会产生**悬垂指针**
+
+### 示例
+
+![NSTimer循环引用](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/NSTimer%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png)
+
+# Block
+
+- Block是将**函数**及其**执行上下文**封装起来的**对象**
+- Block调用即是**函数的调用**
+
+## 截获变量
+
+- 局部变量
+	- 基本数据类型：截获其**值**
+	- 对象类型：**连同所有权修饰符**一起截获
+- 静态局部变量：以**指针形式**截获
+- 全局变量：**不截获**
+- 静态全局变量：**不截获**
+
+## __block修饰符
+
+- **一般情况下**，对被截获变量进行**赋值**操作需要添加__block修饰符
+
+![__block修饰符](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/__block%E4%BF%AE%E9%A5%B0%E7%AC%A6.png)
+
+![__block修饰符2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/__block%E4%BF%AE%E9%A5%B0%E7%AC%A62.png)
+
+![__block修饰符3](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/__block%E4%BF%AE%E9%A5%B0%E7%AC%A63.png)
+
+- __block修饰的变量变成了对象
+
+![__block修饰符4](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/__block%E4%BF%AE%E9%A5%B0%E7%AC%A64.png)
+
+![__block修饰符5](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/__block%E4%BF%AE%E9%A5%B0%E7%AC%A65.png)
+
+## Block的内存管理
+ 
+![Block内存管理](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Block%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.png)
+
+![Block内存管理2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Block%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%862.png)
+
+![Block内存管理3](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Block%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%863.png)
+
+![Block内存管理4](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Block%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%864.png)
+
+![Block内存管理5](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Block%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%865.png)
+
+## Block的循环引用
+
+![Block循环引用](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Block%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png)
+
+![Block循环引用2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Block%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A82.png)
+
+### ARC下的循环引用
+
+![Block循环引用3](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Block%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A83.png)
 
 # 多线程
 
