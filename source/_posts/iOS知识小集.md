@@ -645,14 +645,100 @@ refcnt_result += it->second >> SIDE_TABLE_RC_SHIFT;
 
 # 多线程
 
-## GCD、NSOperation
+## GCD
 
-## 资源共享
+### 同步/异步和串行/并发
 
-## 线程同步
+- 同步串行：**dispatch\_sync**(serial\_queue, \^{ // 任务})
 
-## SpinLock等
+![同步串行](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%90%8C%E6%AD%A5%E4%B8%B2%E8%A1%8C.png)
 
+**死锁原因**
+
+![死锁原因](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%AD%BB%E9%94%81%E5%8E%9F%E5%9B%A0.png)
+
+- 异步串行：dispatch\_async(serial\_queue, \^{ // 任务})
+- 同步并发：**dispatch\_sync**(concurrent\_queue, \^{ // 任务})
+- 异步并发：dispatch\_async(concurrent\_queue, \^{ // 任务})
+
+### dispatch\_barrier\_async
+
+使用场景：多读单写
+
+![多读单写](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%A4%9A%E8%AF%BB%E5%8D%95%E5%86%99.png)
+
+![多读单写2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%A4%9A%E8%AF%BB%E5%8D%95%E5%86%992.png)
+
+```objc
+- (id)objectForKey:(NSString *)key {
+	__block id obj;
+	// 同步读取指定数据
+	dispatch_sync(concurrent_queue, ^{
+		obj = [userCenterDic objectForKey:key];
+	});
+	
+	return obj;
+} 
+
+- (void)setObject:(id)obj forKey:(NSString *)key {
+	// 异步栅栏调用设置数据
+	dispatch_barrier_async(concurrent_queue, ^{
+		[userCenterDic setObject:obj forKey:key];
+	});
+} 
+```
+
+### dispatch\_group\_async
+
+使用场景：A、B、C三个任务并发，完成后执行任务D
+
+![dispatch_group_async](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/dispatch_group_async.png)
+
+```objc
+// 创建一个group
+dispatch_group_t group = dispatch_group_create();
+    
+// for循环遍历各个元素执行操作
+for (NSURL *url in arrayURLs) {
+	// 异步组分派到并发队列当中
+	dispatch_group_async(group, concurrent_queue, ^{
+		// 根据url去下载图片
+            
+	});
+}
+    
+dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+	// 当添加到组中的所有任务执行完成之后会调用该Block
+        
+});
+```
+
+## NSOperation
+
+需要和NSOperationQueue配合使用来实现多线程方案
+
+- 添加任务依赖
+- **任务执行状态控制**：
+	- isReady
+	- isExecuting
+	- isFinished
+	- isCancelled
+
+如果只重写了**main**方法，底层控制变更任务执行完成状态，以及任务退出
+
+如果重写了**start**方法，自行控制任务状态
+
+- 最大并发量
+
+## NSThread
+
+![NSThread](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/NSThread.png)
+
+## 锁
+
+- NSRecursiveLock
+- NSLock
+- dispatch_samaphore_t
 
 # RunLoop
 
@@ -664,7 +750,7 @@ refcnt_result += it->second >> SIDE_TABLE_RC_SHIFT;
 
 ## 常驻线程
 
-
+<!--
 # 网络
 
 ## HTTPS
@@ -712,5 +798,7 @@ refcnt_result += it->second >> SIDE_TABLE_RC_SHIFT;
 ## AFNetworking
 
 ## ReactCocoa响应式编程库
+
+-->
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
