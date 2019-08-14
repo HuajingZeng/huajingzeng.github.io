@@ -593,8 +593,7 @@ refcnt_result += it->second >> SIDE_TABLE_RC_SHIFT;
 
 # Block
 
-- Block是将**函数**及其**执行上下文**封装起来的**对象**
-- Block调用即是**函数的调用**
+> Block是将**函数**及其**执行上下文**封装起来的**对象**。Block调用即是**函数的调用**
 
 ## 截获变量
 
@@ -736,19 +735,163 @@ dispatch_group_notify(group, dispatch_get_main_queue(), ^{
 
 ## 锁
 
-- NSRecursiveLock
-- NSLock
-- dispatch_samaphore_t
+### @synchronized
+
+一般在创建单例对象的时候使用
+
+### automic
+
+修饰属性的关键字，对被修饰对象进行原子操作（不负责使用）
+
+### OSSpinLock
+
+自旋锁
+- **循环等待**询问，不释放当前资源
+- 用于轻量级访问，简单的int值+1/-1操作
+
+### NSLock
+
+![NSLock死锁](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/NSLock%E6%AD%BB%E9%94%81.png)
+
+### NSRecursiveLock
+
+递归锁，可以重入
+
+![NSRecursiveLock](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/NSRecursiveLock.png)
+
+### dispatch\_semaphore\_t
+
+信号量
+
+- **dispatch\_semaphore\_create**(1)
+
+```objc
+struct semaphore {
+	int value;
+	List<Thread>;
+}
+```
+
+- **dispatch\_semaphore\_wait**(semaphore, DISPATCH\_TIME\_FOREVER)
+
+```objc
+dispatch_semaphore_wait () {
+	S.value = S.value - 1;
+	if S.value < 0 then Block(S.List);// 阻塞是一个主动行为
+}
+```
+
+- **dispatch\_semaphore\_signal**(semaphore);
+
+```objc
+dispatch_semaphore_signal () {
+	S.value = S.value + 1;
+	if S.value <= 0 then wakeup(S.List);// 唤醒是一个被动行为
+}
+```
 
 # RunLoop
 
-## 事件循环
+> Runloop是通过内部维护的**事件循环**来对**事件/消息进行管理**的一个对象
 
-## 用户态
+- 没有消息需要处理时，休眠以避免资源占用
 
-## 核心态
+![RunLoop-1](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RunLoop-1.png)
 
-## 常驻线程
+- 有消息需要处理时，立刻被唤醒
+
+![RunLoop-2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RunLoop-2.png)
+
+![RunLoop2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RunLoop2.png)
+
+## 数据结构
+
+NSRunLoop是CFRunLoop的封装，提供了面向对象的API
+
+### CFRunLoop
+
+![CFRunLoop](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/CFRunLoop.png)
+
+### CFRunLoopMode
+
+![CFRunLoopMode](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/CFRunLoopMode.png)
+
+### CFRunLoopSource
+
+- source0：需要手动唤醒线程
+- source1：**具备唤醒线程能力**
+
+### CFRunLoopSource
+
+和NSTimer是toll-free bridge的
+
+### CFRunLoopObserver
+
+观测时间点：
+
+- kCFRunLoopEntry
+- kCFRunLoopBeforeTimers
+- kCFRunLoopBeforeSources
+- kCFRunLoopBeforeWaiting
+- kCFRunLoopAfterWaiting
+- kCFRunLoopExit
+
+### 各个数据结构之间的关系
+
+![RunLoop3](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RunLoop3.png)
+
+![RunLoop4](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RunLoop4.png)
+
+### CommonMode的特性
+
+- CommonMode**不是一个实际存在**的Mode
+- 是同步Source/Timer/Observer到多个Mode中的**一种技术方案**
+
+### 事件循环的实现机制
+
+![事件循环](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png)
+
+### RunLoop的核心
+
+![RunLoop核心](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RunLoop%E6%A0%B8%E5%BF%83.png)
+
+### RunLoop与NSTimer
+
+```objc
+void CFRunLoopAddTimer(runloop, timer, commonMode)
+```
+
+### RunLoop与多线程
+
+线程是和RunLoop一一对应的
+自己创建的线程默认是没有RunLoop的
+
+**怎样实现一个常驻线程？**
+
+- 为当前线程开启一个RunLoop（CFRunLoopGetCurrent函数会在第一次调用时为当前线程创建一个RunLoop）
+- 向RunLoop中添加一个Port/Source等维持RunLoop的事件循环
+- 启动该RunLoop
+
+```objc
+// 创建一个Source
+CFRunLoopSourceContext context = {0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+CFRunLoopSourceRef source = CFRunLoopSourceCreate(kCFAllocatorDefault, 0, &context);
+    
+// 创建RunLoop，同时向RunLoop的DefaultMode下面添加Source
+CFRunLoopAddSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode);
+    
+// 如果可以运行
+while (runAlways) {
+	@autoreleasepool {
+		// 令当前RunLoop运行在DefaultMode下面
+		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0e10, true);
+	}
+}
+    
+// 某一时机 静态变量runAlways = NO时 可以保证跳出RunLoop，线程退出
+CFRunLoopRemoveSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode);
+CFRelease(source);
+```
 
 <!--
 # 网络
