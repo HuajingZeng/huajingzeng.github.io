@@ -893,9 +893,93 @@ CFRunLoopRemoveSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode);
 CFRelease(source);
 ```
 
-<!--
+
 # 网络
 
+## HTTP
+
+> HTTP（HyperText Transfer Protocol），即超文本传输协议。
+
+### 请求报文
+
+![请求报文](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.png)
+
+### 响应报文
+
+![响应报文](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87.png)
+
+### 请求方式
+
+- `GET`
+- `POST`
+- `HEAD`
+- `PUT`
+- `DELETE`
+- `OPTION`
+
+### GET和POST的区别
+
+- `GET`请求参数以?分割拼接到URL后面，`POST`请求参数在Body里面
+- `GET`参数长度限制2048个字符，`POST`一般没有该限制
+- `GET`请求不安全，`POST`请求比较安全
+
+**从语义的角度来回答**
+
+- `GET`：获取资源
+	- 安全的
+	- 幂等的
+	- 可缓存的
+- `POST`：处理资源
+	- 非安全的
+	- 非幂等的
+	- 不可缓存的   
+
+- 安全性：不引起Server端的任何状态变化（`GET`、`HEAD`、`OPTION`）
+- 幂等性：同一个请求方法执行多次和执行一次的效果完全相同（`PUT`、`DELETE`）
+- 可缓存性：请求是否可以被缓存（`GET`、`HEAD`）
+
+### 状态码
+
+- 1xx：信息，服务器收到请求，需要请求者继续执行操作
+- 2xx：成功，操作被成功接收并处理
+	- 200：请求成功。一般用于GET与POST请求
+- 3xx：重定向，需要进一步的操作以完成请求
+	- 301：永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替
+- 4xx：客户端错误，请求包含语法错误或无法完成请求
+	- 401：请求要求用户的身份认证
+	- 404：服务器无法根据客户端的请求找到资源（网页）
+- 5xx：服务器错误，服务器在处理请求的过程中发生了错误
+	- 500：服务器内部错误，无法完成请求
+
+### HTTP连接
+
+![HTTP连接](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/HTTP%E8%BF%9E%E6%8E%A5.png)
+
+### HTTP的特点
+
+- 无连接（HTTP的持久连接）
+- 无状态（Cookie/Session）
+
+### 持久连接
+
+![持久连接](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A5.png)
+
+头部字段
+
+- Connection：keep-alive
+- time：20
+- max：10
+
+怎样判断一个连接是否结束？
+
+- **Content-length**：1024
+- **chunked**，最后会有一个空的chunked
+
+### HTTP抓包
+
+![HTTP抓包](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/HTTP%E6%8A%93%E5%8C%85.png)
+
+<!--
 ## HTTPS
 
 ## 对称加密算法
@@ -905,7 +989,6 @@ CFRelease(source);
 ## DNS解析
 
 ## HTTP、TCP
-
 
 # 设计模式
 
