@@ -979,27 +979,205 @@ CFRelease(source);
 
 ![HTTP抓包](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/HTTP%E6%8A%93%E5%8C%85.png)
 
-<!--
+
 ## HTTPS
 
-## 对称加密算法
+HTTPS = HTTP + SSL/TLS
 
-## 非对称加密
+![HTTPS](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/HTTPS.png)
+
+![HTTPS2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/HTTPS2.png)
+
+### HTTPS与网络安全
+
+会话秘钥 = random S + random C + 预主秘钥
+
+- 连接建立过程使用**非对称加密**，非对称加密很**耗时**的
+
+![非对称加密](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png)
+
+- 后续通信过程使用**对称加密**
+
+![对称加密](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png)
+
+## UDP（用户数据报协议）
+
+### 特点：
+
+- 无连接
+- 尽最大努力交付
+- 面向报文（既不合并，也不拆分）
+
+![面向报文](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%9D%A2%E5%90%91%E6%8A%A5%E6%96%87.png)
+
+### 功能
+
+- 复用、分用
+
+![复用分用](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%A4%8D%E7%94%A8%E5%88%86%E7%94%A8.png)
+
+## TCP（传输控制协议）
+
+### 面向连接
+
+- 数据传输开始之前，需要建立连接（三次握手）
+
+![三次握手](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png)
+
+- 数据传输结束之后，需要释放连接（四次挥手）
+
+![四次挥手](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png)
+
+### 可靠传输
+
+- 无差错
+
+![无差错](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%97%A0%E5%B7%AE%E9%94%99.png)
+
+- 不丢失
+
+![超时重传](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0.png)
+
+![确认丢失](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E7%A1%AE%E8%AE%A4%E4%B8%A2%E5%A4%B1.png)
+
+![确认迟到](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E7%A1%AE%E8%AE%A4%E8%BF%9F%E5%88%B0.png)
+
+- 不重复
+- 按序到达
+
+### 面向字节流
+
+![面向字节流](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%9D%A2%E5%90%91%E5%AD%97%E8%8A%82%E6%B5%81.png)
+
+### 流量控制
+
+滑动窗口协议
+
+![滑动窗口](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.png)
+
+### 拥塞控制
+
+- **慢开始，拥塞避免**
+- 快恢复，快重传
+
+![拥塞控制](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.png)
 
 ## DNS解析
 
-## HTTP、TCP
+域名到IP地址的映射，DNS解析请求采用UDP数据报，且明文
+
+![DNS解析](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/DNS%E8%A7%A3%E6%9E%90.png)
+
+### 递归查询
+
+![DNS解析2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/DNS%E8%A7%A3%E6%9E%902.png)
+
+### 迭代查询
+
+![DNS解析3](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/DNS%E8%A7%A3%E6%9E%903.png)
+
+### DNS劫持
+
+![DNS劫持](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/DNS%E5%8A%AB%E6%8C%81.png)
+
+DNS劫持和HTTP是没有关系的
+
+- DNS解析发生在HTTP建立连接之前
+- DNS解析请求使用UDP数据报，端口号是53
+
+### DNS解析转发
+
+![DNS解析转发](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/DNS%E8%A7%A3%E6%9E%90%E8%BD%AC%E5%8F%91.png)
+
+### httpDNS
+
+使用HTTP协议向DNS服务器的80端口进行请求
+
+![httpDNS](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/httpDNS.png)
+
+### 长连接
+
+![长连接](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%95%BF%E8%BF%9E%E6%8E%A5.png)
+
+## Cookie
+
+Cookie主要用来记录用户状态，区分用户；**状态保存在客户端**
+
+![Cookie](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Cookie.png)
+
+### 删除Cookie
+
+- 新cookie覆盖旧cookie
+- 覆盖规则：name、path、domain等需要与原cookie一致
+- 设置cookie的**expire=过去的一个时间点**，或者**maxAge=0**
+
+### Cookie安全
+
+- 对Cookie进行加密处理
+- 只在https上携带Cookie
+- 设置Cookie的httpOnly，防止跨站脚本攻击
+
+## Session
+
+Session也是用来记录用户状态，区分用户的；**状态存放在服务器**
+
+![Session](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/Session.png)
+
 
 # 设计模式
 
-## 桥接、适配器、命令
-
-## 责任链、单例
-
 ## 六大设计原则
+
+- 单一职责原则
+	- 一个类只负责一件事
+- 开闭原则
+	- 对修改关闭，对扩展开放
+- 接口隔离原则
+	- 使用多个专门的协议，而不是一个庞大臃肿的协议
+	- 协议中的方法应当尽量少
+- 依赖倒置原则
+	- 抽象不应该依赖于具体实现，具体实现可以依赖于抽象
+- 里氏替换原则
+	- 父类可以被子类无缝替换，且原有功能不受任何影响
+- 迪米特法则
+	- 一个对象应当对其他对象有尽可能少的了解
+	- 高内聚，低耦合
+
+## 责任链
+
+![责任链](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E8%B4%A3%E4%BB%BB%E9%93%BE.png)
+
+## 桥接
+
+![桥接](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%A1%A5%E6%8E%A5.png)
+
+## 适配器
+
+一个现有类需要适应变化的问题
+
+- **对象适配器**
+- 类适配器
+
+![适配器](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%80%82%E9%85%8D%E5%99%A8.png)
+
+## 单例
+
+## 命令
+
+- 行为参数化
+- **降低代码重合度**
 
 
 # 架构/框架
+
+- 模块化
+- 分层
+- 解耦
+- 降低代码重合度
+
+## 图片缓存
+
+![图片缓存](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98.png)
 
 ## MVVM、时长统计框架
 
@@ -1007,7 +1185,7 @@ CFRelease(source);
 
 ## PV量级10亿级业务架构
 
-
+<!--
 # 算法
 
 ## 字符串反转
@@ -1018,13 +1196,25 @@ CFRelease(source);
 
 ## 无序数组中找中位数
 
+-->
 
 # 第三方
 
-## AFNetworking
+- AFNetworking
+- SDWebImage
+- GPUImage
+- Masonry
+- YYKit
+- SVProgressHUD
+- AsyncDisplayKit
+- FMDB
+- JSONModel
+- MJRefresh
+- MJExtension
+- CocoaAsyncSocket
+- IQKeyboardManager
+- FDFullscreenPopGesture
+- SDCycleScrollView
 
-## ReactCocoa响应式编程库
-
--->
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
