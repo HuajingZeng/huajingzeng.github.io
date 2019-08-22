@@ -12,9 +12,6 @@ categories:
 thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E3%80%8AObjective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B.jpeg
 blogexcerpt:
 toc: true
-password: 20190327
-abstract: 本文已加密，访问需密码
-message: 本文已加密，请输入密码
 ---
 
 iOS与OS X中的ARC、Blocks和Grand Central Dispatch（GCD），是面向iOS、OS X应用开发时不可或缺。它们看似简单，但若无深入了解，就会变成技术开发的陷阱。要想掌握这些技术，除了阅读苹果公司的参考文档之外，还要进一步学习苹果公司公开的源代码，在此基础上深入剖析才能融汇贯通。

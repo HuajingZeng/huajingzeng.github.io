@@ -9,10 +9,7 @@ categories:
 	- 编程基础 
 thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/iOS%E5%BC%80%E5%8F%91.jpeg 
 blogexcerpt: 
-toc: true
-password: 20190718
-abstract: 本文已加密，访问需密码
-message: 本文已加密，请输入密码
+toc: true 
 ---
 
 &emsp;&emsp;在此汇总整理了一些iOS学习方面的东西，跟大家一起分享下。

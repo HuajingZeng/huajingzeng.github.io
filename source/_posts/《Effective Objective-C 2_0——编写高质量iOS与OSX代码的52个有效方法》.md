@@ -11,9 +11,6 @@ categories:
 thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E3%80%8AEffective%20Objective-C%202.0%E3%80%8B.jpeg
 blogexcerpt:
 toc: true
-password: 20190117
-abstract: 本文已加密，访问需密码
-message: 本文已加密，请输入密码
 ---
 
 &emsp;&emsp;"Effective Software Development Series"系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。

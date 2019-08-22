@@ -10,9 +10,6 @@ categories:
 thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E3%80%8AiOS%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E3%80%8B.jpg
 blogexcerpt:
 toc: true
-password: 20190506
-abstract: 本文已加密，访问需密码
-message: 本文已加密，请输入密码
 ---
 
 如题

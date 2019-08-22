@@ -10,9 +10,6 @@ categories:
 thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/iOS%E5%BC%80%E5%8F%91.jpeg 
 blogexcerpt: 
 toc: true
-password: 20180906
-abstract: 本文已加密，访问需密码
-message: 本文已加密，请输入密码
 ---
 
 &emsp;&emsp;从事移动应用开发已经两年多了，期间也做过微信小程序开发，但归根到底自己依然是一名iOS开发者。我是非科班转职并自学编程的，现在参与过的iOS项目也有三四个了。虽然离成为大神还有漫漫长路，但“修炼之道”莫不是“上下而求索”乎？在此汇总整理了一些iOS学习方面的东西，跟大家一起分享下。
