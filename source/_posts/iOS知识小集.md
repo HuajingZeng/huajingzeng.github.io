@@ -10,6 +10,9 @@ categories:
 thumbnail: https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/iOS%E5%BC%80%E5%8F%91.jpeg 
 blogexcerpt: 
 toc: true
+password: 20190718
+abstract: 本文已加密，访问需密码
+message: 本文已加密，请输入密码
 ---
 
 &emsp;&emsp;在此汇总整理了一些iOS学习方面的东西，跟大家一起分享下。
@@ -1179,42 +1182,475 @@ Session也是用来记录用户状态，区分用户的；**状态存放在服�
 
 ![图片缓存](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98.png)
 
-## MVVM、时长统计框架
+### 内存设计
 
-## 图片缓存框架
+- 以图片URL的单向Hash值作为Key
 
-## PV量级10亿级业务架构
+![图片缓存2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%982.png)
 
-<!--
+- 存储的Size
+
+![图片缓存3](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%983.png)
+
+- 淘汰策略
+	- 以队列先进先出的方式淘汰
+	- LRU算法（如30分钟内是否使用过）
+
+![图片缓存4](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%984.png)
+
+![图片缓存5](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%985.png)
+
+### 磁盘设计
+
+- 存储方式
+- 大小限制（如100MB）
+- 淘汰策略（如某一图片存储时间距今已超过7天）
+
+### 网络设计
+
+- 图片请求最大并发量
+- 请求超时策略
+- 请求优先级
+
+### 图片解码
+
+- 应用策略模式对不同图片格式进行解码
+- 在哪个阶段做图片解码处理
+	- 磁盘读取后
+	- 网络请求返回后 
+
+### 线程处理
+
+![图片缓存6](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%986.png)
+
+## 阅读时长统计
+
+![阅读时长统计](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%98%85%E8%AF%BB%E6%97%B6%E9%95%BF%E7%BB%9F%E8%AE%A1.png)
+
+### 记录器
+
+- 基于不同分类场景提供的关于记录的封装、适配
+
+### 记录的缓存 & 存储
+
+- 定时写磁盘
+- 限定内存缓存条数（如10条），超过该条数，即写磁盘
+
+### 记录上传器
+
+延迟上传场景：
+
+- 前后台切换
+- 从无网到有网的变化
+- 通用轻量接口捎带
+
+上传时机把控
+
+- 立刻上传
+- 延时上传
+- 定时上传
+
+## 复杂页面框架
+
+### MVVM
+
+![MVVM](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/MVVM.png)
+
+### RN数据流思想
+
+![RN](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/RN.png)
+
+### 客户端整体架构
+
+![客户端整体架构](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png)
+
+业务之间的解耦通信方式
+
+- OpenURL
+- **依赖注入**
+
+![依赖注入](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.png)
+
+
 # 算法
 
 ## 字符串反转
 
+![字符串反转](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8D%E8%BD%AC.png)
+
+```objc
+void char_reverse(char* cha)
+{
+    // 指向第一个字符
+    char* begin = cha;
+    // 指向最后一个字符
+    char* end = cha + strlen(cha) - 1;
+    
+    while (begin < end) {
+        // 交换前后两个字符,同时移动指针
+        char temp = *begin;
+        *(begin++) = *end;
+        *(end--) = temp;
+    }
+}
+```
+
 ## 单链表反转
+
+![单链表反转](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC.png)
+
+```objc
+struct Node* reverseList(struct Node *head)
+{
+    // 定义遍历指针，初始化为头结点
+    struct Node *p = head;
+    // 反转后的链表头部
+    struct Node *newH = NULL;
+    
+    // 遍历链表
+    while (p != NULL) {
+        
+        // 记录下一个结点
+        struct Node *temp = p->next;
+        // 当前结点的next指向新链表头部
+        p->next = newH;
+        // 更改新链表头部为当前结点
+        newH = p;
+        // 移动p指针
+        p = temp;
+    }
+    
+    // 返回反转后的链表头结点
+    return newH;
+}
+
+struct Node* constructList(void)
+{
+    // 头结点定义
+    struct Node *head = NULL;
+    // 记录当前尾结点
+    struct Node *cur = NULL;
+    
+    for (int i = 1; i < 5; i++) {
+        struct Node *node = malloc(sizeof(struct Node));
+        node->data = i;
+        
+        // 头结点为空，新结点即为头结点
+        if (head == NULL) {
+            head = node;
+        }
+        // 当前结点的next为新结点
+        else{
+            cur->next = node;
+        }
+        
+        // 设置当前结点为新结点
+        cur = node;
+    }
+    
+    return head;
+}
+
+void printList(struct Node *head)
+{
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("node is %d \n", temp->data);
+        temp = temp->next;
+    }
+}
+```
 
 ## 有序数组归并
 
-## 无序数组中找中位数
+![有序数组归并](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E5%BD%92%E5%B9%B6.png)
 
--->
+```objc
+void mergeList(int a[], int aLen, int b[], int bLen, int result[])
+{
+    int p = 0; // 遍历数组a的指针
+    int q = 0; // 遍历数组b的指针
+    int i = 0; // 记录当前存储位置
+    
+    // 任一数组没有到达边界则进行遍历
+    while (p < aLen && q < bLen) {
+        // 如果a数组对应位置的值小于b数组对应位置的值
+        if (a[p] <= b[q]) {
+            // 存储a数组的值
+            result[i] = a[p];
+            // 移动a数组的遍历指针
+            p++;
+        }
+        else{
+            // 存储b数组的值
+            result[i] = b[q];
+            // 移动b数组的遍历指针
+            q++;
+        }
+        // 指向合并结果的下一个存储位置
+        i++;
+    }
+    
+    // 如果a数组有剩余
+    while (p < aLen) {
+        // 将a数组剩余部分拼接到合并结果的后面
+        result[i] = a[p++];
+        i++;
+    }
+    
+    // 如果b数组有剩余
+    while (q < bLen) {
+        // 将b数组剩余部分拼接到合并结果的后面
+        result[i] = b[q++];
+        i++;
+    }
+}
+```
+
+## 哈希表
+
+**在一个字符串中找到第一个只出现一次的字符**
+
+字符char是一个长度为8的数据类型，因此总共有256中可能。每个字母根据其ASCII码值作为数组的下标对应数组的一个数字。数组中存储的是每个字符出现的次数。
+
+![哈希表](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%93%88%E5%B8%8C%E8%A1%A8.png)
+
+```objc
+char findFirstChar(char* cha)
+{
+    char result = '\0';
+    // 定义一个数组 用来存储各个字母出现次数
+    int array[256];
+    // 对数组进行初始化操作
+    for (int i=0; i<256; i++) {
+        array[i] =0;
+    }
+    // 定义一个指针 指向当前字符串头部
+    char* p = cha;
+    // 遍历每个字符
+    while (*p != '\0') {
+        // 在字母对应存储位置 进行出现次数+1操作
+        array[*(p++)]++;
+    }
+    
+    // 将P指针重新指向字符串头部
+    p = cha;
+    // 遍历每个字母的出现次数
+    while (*p != '\0') {
+        // 遇到第一个出现次数为1的字符，打印结果
+        if (array[*p] == 1)
+        {
+            result = *p;
+            break;
+        }
+        // 反之继续向后遍历
+        p++;
+    }
+    
+    return result;
+}
+```
+
+## 共同父视图
+
+![共同父视图](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%85%B1%E5%90%8C%E7%88%B6%E8%A7%86%E5%9B%BE.png)
+
+```objc
+- (NSArray <UIView *> *)findCommonSuperView:(UIView *)viewOne other:(UIView *)viewOther
+{
+    NSMutableArray *result = [NSMutableArray array];
+    
+    // 查找第一个视图的所有父视图
+    NSArray *arrayOne = [self findSuperViews:viewOne];
+    // 查找第二个视图的所有父视图
+    NSArray *arrayOther = [self findSuperViews:viewOther];
+    
+    int i = 0;
+    // 越界限制条件
+    while (i < MIN((int)arrayOne.count, (int)arrayOther.count)) {
+        // 倒序方式获取各个视图的父视图
+        UIView *superOne = [arrayOne objectAtIndex:arrayOne.count - i - 1];
+        UIView *superOther = [arrayOther objectAtIndex:arrayOther.count - i - 1];
+        
+        // 比较如果相等 则为共同父视图
+        if (superOne == superOther) {
+            [result addObject:superOne];
+            i++;
+        }
+        // 如果不相等，则结束遍历
+        else{
+            break;
+        }
+    }
+    
+    return result;
+}
+
+- (NSArray <UIView *> *)findSuperViews:(UIView *)view
+{
+    // 初始化为第一父视图
+    UIView *temp = view.superview;
+    // 保存结果的数组
+    NSMutableArray *result = [NSMutableArray array];
+    while (temp) {
+        [result addObject:temp];
+        // 顺着superview指针一直向上查找
+        temp = temp.superview;
+    }
+    return result;
+}
+```
+
+## 无效数组职工查找中位数
+
+- 排序算法+中位数
+- **利用快排思想（分治思想）**
+
+### 排序算法
+
+- 冒泡排序
+- 快速排序
+- 堆排序
+- ……
+
+### 中位数
+
+- 当n为奇数时，(n+1)/2
+- 当n为偶数时，(n/2+(n/2+1))/2
+
+### 快排思想
+
+选取关键字，高低交替扫描
+
+- 任意挑一个元素，以该元素为支点，划分集合为两部分。
+- 如果左侧集合长度恰为(n-1)/2，那么支点恰为中位数。
+- 如果左侧长度<(n-1)/2，那么中位点在右侧；反之，中位数在左侧。
+- 进入相应的一侧继续寻找中位点。
+
+![快排思想](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/%E5%BF%AB%E6%8E%92%E6%80%9D%E6%83%B3.png)
+
+```objc
+int findMedian(int a[], int aLen)
+{
+    int low = 0;
+    int high = aLen - 1;
+    
+    int mid = (aLen - 1) / 2;
+    int div = PartSort(a, low, high);
+    
+    while (div != mid)
+    {
+        if (mid < div)
+        {
+            //左半区间找
+            div = PartSort(a, low, div - 1);
+        }
+        else
+        {
+            //右半区间找
+            div = PartSort(a, div + 1, high);
+        }
+    }
+    //找到了
+    return a[mid];
+}
+
+int PartSort(int a[], int start, int end)
+{
+    int low = start;
+    int high = end;
+    
+    //选取关键字
+    int key = a[end];
+    
+    while (low < high)
+    {
+        //左边找比key大的值
+        while (low < high && a[low] <= key)
+        {
+            ++low;
+        }
+        
+        //右边找比key小的值
+        while (low < high && a[high] >= key)
+        {
+            --high;
+        }
+        
+        if (low < high)
+        {
+            //找到之后交换左右的值
+            int temp = a[low];
+            a[low] = a[high];
+            a[high] = temp;
+        }
+    }
+    
+    int temp = a[high];
+    a[high] = a[end];
+    a[end] = temp;
+    
+    return low;
+}
+```
 
 # 第三方
 
-- AFNetworking
-- SDWebImage
-- GPUImage
-- Masonry
-- YYKit
-- SVProgressHUD
-- AsyncDisplayKit
-- FMDB
-- JSONModel
-- MJRefresh
-- MJExtension
-- CocoaAsyncSocket
-- IQKeyboardManager
-- FDFullscreenPopGesture
-- SDCycleScrollView
+## AFNetworking
 
+### 框架图
+
+![AFNetworking](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/AFNetworking.png)
+
+### 类关系图
+
+![AFNetworking2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/AFNetworking2.png)
+
+### AFURLSessionManager
+
+- 创建和管理NSURLSession、NSURLSessionTask
+- 实现NSURLSessionDelegate等协议的代理方法
+- 引入AFSecurityPolicy保证请求安全
+- 引入AFNetworkReachabilityManager监控网络状态
+
+## SDWebImage
+
+### 框架图
+
+![SDWebImage](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/SDWebImage.png)
+
+### 加载图片流程
+
+![SDWebImage2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/SDWebImage2.png)
+
+## ReactiveCocoa
+
+### 类关系图
+
+![ReactiveCocoa](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/ReactiveCocoa.png)
+
+### 信号
+
+![ReactiveCocoa2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/ReactiveCocoa2.png)
+
+信号代表一连串的状态，在状态改变时，RACSubscriber就会收到通知执行相应的命令
+
+![ReactiveCocoa3](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/ReactiveCocoa3.png)
+
+### 订阅
+
+![ReactiveCocoa4](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/ReactiveCocoa4.png)
+
+![ReactiveCocoa5](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/ReactiveCocoa5.png)
+
+## AsyncDisplayKit
+
+![AsyncDisplayKit](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/AsyncDisplayKit.png)
+
+### 基本原理
+
+![AsyncDisplayKit2](https://githubblog-1252104787.cos.ap-guangzhou.myqcloud.com/AsyncDisplayKit2.png)
+
+针对ASNode的修改和提交，会对其进行封装并提交到全局容器当中。ASDK也在RunLoop中注册了一个Observer。当RunLoop进入休眠前，ASDK执行该loop内提交的所有任务。
 
 **欢迎转载，转载请注明出处：[曾华经的博客](http://www.huajingzeng.com)**
