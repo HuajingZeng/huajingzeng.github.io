@@ -50,7 +50,9 @@ highlight:
   length: 150
   tab_replace:
 encrypt:
-    enable: true
+  enable: true
+  abstract: 本文已加密，访问需密码
+  message: 本文已加密，访问需密码
 
 
 # 首页设置
