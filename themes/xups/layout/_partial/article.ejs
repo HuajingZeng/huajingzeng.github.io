@@ -1,22 +1,29 @@
 <!-- 目录内容 -->
 <% if (!index && post.toc){ %>
-    <p id="toc-div" class="show-toc-btn" id="show-toc-btn" onclick="showToc();" <% if (post.encrypt == true) { %>style="display:none" <% } %>>
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:block">
     <span class="btn-text">文章导航</span>
     </p>
-    <div id="toc-article" class="toc-article" style="display:none">
+    <div id="toc-artivle" class="toc-article" style="display:none">
         <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
         <strong class="toc-title">文章目录</strong>
+	<div id="toc-div" <% if (post.encrypt == true) { %>style="display:none" <% } %>>
+    <strong class="toc-title">Index</strong>
+      <% if (post.encrypt == true) { %>
         <%- toc(post.origin, {list_number: true}) %>
+      <% } else { %>
+        <%- toc(post.content, {list_number: true}) %>
+      <% } %>
+  </div>
    </div>
    <script type="text/javascript">
     function showToc(){
-        var toc_article = document.getElementById("toc-article");
+        var toc_article = document.getElementById("toc-artivle");
         var show_toc_btn = document.getElementById("show-toc-btn");
         toc_article.setAttribute("style","display:block");
         show_toc_btn.setAttribute("style","display:none");
         };
     function showBtn(){
-        var toc_article = document.getElementById("toc-article");
+        var toc_article = document.getElementById("toc-artivle");
         var show_toc_btn = document.getElementById("show-toc-btn");
         toc_article.setAttribute("style","display:none");
         show_toc_btn.setAttribute("style","display:block");
