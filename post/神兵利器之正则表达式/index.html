@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>神兵利器之正则表达式 | 曾华经</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="iOS, Web">
+    <meta name="description" content="曾华经个人博客">
+
+    
+    <link rel="alternative" href="/atom.xml" title="曾华经" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+	(function() {
+  		var hm = document.createElement("script");
+  		hm.src = "https://hm.baidu.com/hm.js?8dcd7371cdcc3e343c29794b5e207954";
+  		var s = document.getElementsByTagName("script")[0]; 
+  		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body class="home">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">曾华经</span>
+                    <span class="description">iOS Programmer</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/post/神兵利器之正则表达式/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/post/神兵利器之正则表达式/index.html" class="item ">
+                <a href="/lab/" title="项目" class="icon-lab">&nbsp;项目</a>
+            </li>
+            
+            <li rel="/post/神兵利器之正则表达式/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/post/神兵利器之正则表达式/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/HuajingZeng" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://github.com" target="_blank">Hosted by Github Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://weibo.com/p/1005051288040665/home?from=page_100505&amp;mod=TAB#place" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zhj.jpg" alt="avatar" title="曾华经">
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 目录内容 -->
+
+    <p id="toc-div" class="show-toc-btn" onclick="showToc();">
+    <span class="btn-text">文章导航</span>
+    </p>
+    <div id="toc-article" class="toc-article" style="display:none">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用途"><span class="toc-number">1.2.</span> <span class="toc-text">用途</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#语法"><span class="toc-number">2.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通字符"><span class="toc-number">2.1.</span> <span class="toc-text">普通字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元字符"><span class="toc-number">2.2.</span> <span class="toc-text">元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#限定符"><span class="toc-number">2.2.1.</span> <span class="toc-text">限定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定位符"><span class="toc-number">2.2.2.</span> <span class="toc-text">定位符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非打印字符"><span class="toc-number">2.2.3.</span> <span class="toc-text">非打印字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他元字符及其上下文行为"><span class="toc-number">2.2.4.</span> <span class="toc-text">其他元字符及其上下文行为</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运算符优先级"><span class="toc-number">3.</span> <span class="toc-text">运算符优先级</span></a></li></ol>
+   </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+ 
+<!-- 目录内容结束 -->
+
+<!-- 文章 -->
+<article class="post article" onclick="showBtn();">
+    <header class="text-center">
+        <h3 class="post-title"><span>神兵利器之正则表达式</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        曾华经
+		&emsp;发表于：<time datetime="2018-01-02T05:11:10.000Z">2018-01-02</time>
+		&emsp;修改于：<time datetime="2019-11-16T08:18:26.995Z">2019-11-16</time>
+		&emsp;总阅读量：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span>次
+    </p>
+    <div class="post-content">
+        <p>&emsp;&emsp;正则表达式并不“总要用到”。但当你需要经常处理文本和字符串时，用过它之后，你就会知道它的强大和价值所在，并且深深地爱上它。学会使用正则表达式是非常必要的，即便你所处的开发领域与文本处理没什么关系。否则当到了需要的场合用不上，就会有“一分钱难倒英雄汉”的尴尬了。</p>
+<a id="more"></a>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。</p>
+</blockquote>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul>
+<li>验证字符串是否匹配模式</li>
+<li>替换字符串中匹配模式的子字符串</li>
+<li>从字符串中提取匹配模式的子字符串</li>
+</ul>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="普通字符"><a href="#普通字符" class="headerlink" title="普通字符"></a>普通字符</h2><p>普通字符包括没有显式指定为元字符的所有可打印和不可打印字符。这包括所有大写和小写字母、所有数字、所有标点符号和一些其他符号。</p>
+<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><p>所谓特殊字符，就是一些有特殊含义的字符。若要匹配这些特殊字符，必须进行转义（将反斜杠字符&#92;放在它们前面）</p>
+<h3 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h3><p>限定符用来指定正则表达式的一个给定子表达式必须要出现多少次才能满足匹配。正则表达式的限定符有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;字符&emsp;</div></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&#42;</td>
+<td>匹配前面的子表达式零次或多次。等价于&#123;0,&#125;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#43;</td>
+<td>匹配前面的子表达式一次或多次。等价于&#123;1,&#125;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#63;</td>
+<td>匹配前面的子表达式零次或一次。等价于&#123;0,1&#125;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#123;n&#125;</td>
+<td>n是一个非负整数。匹配确定的n次</td>
+</tr>
+<tr>
+<td style="text-align:center">&#123;n,&#125;</td>
+<td>n是一个非负整数。至少匹配n次</td>
+</tr>
+<tr>
+<td style="text-align:center">&#123;n,m&#125;</td>
+<td>m和n均为非负整数，其中n&lt;=m。最少匹配n次且最多匹配m次（逗号和两个数之间不能有空格）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>注意：&#42;、&#43;限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或最小匹配</strong></p>
+<h3 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h3><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。定位符用来描述字符串或单词的边界，&#94;和&#36;分别指字符串的开始与结束，&#92;b描述单词的前或后边界，&#92;B表示非单词边界。正则表达式的定位符有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;字符&emsp;</div></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&#94;</td>
+<td>匹配输入字符串开始的位置（在方括号表达式中使用时，表示不接受该字符集合）。如果设置了RegExp对象的Multiline属性，&#94;也匹配&#94;n或&#94;r之后的位置。要匹配&#94;字符本身，请使用&#92;&#94;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#36;</td>
+<td>匹配输入字符串的结尾位置。如果设置了RegExp对象的Multiline属性，则&#36;也匹配&#92;n或&#92;r之前的位置。要匹配&#36;字符本身，请使用&#92;&#36;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;b</td>
+<td>匹配一个单词边界，即字与空格间的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;B</td>
+<td>非单词边界匹配</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h3><p>下表列出了表示非打印字符的转义序列：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;字符&emsp;</div></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&#92;cx</td>
+<td>匹配由x指明的控制字符。（x的值必须为A-Z或a-z之一。否则将c视为一个原义的’c’字符）</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;f</td>
+<td>匹配一个换页符。等价于&#92;x0c和&#92;cL</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;n</td>
+<td>匹配一个换行符。等价于&#92;x0a和&#92;cJ</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;r</td>
+<td>匹配一个回车符。等价于&#92;x0d和&#92;cM</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于&#91;&#92;f&#92;n&#92;r&#92;t&#92;v&#93;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;S</td>
+<td>匹配任何非空白字符。等价于&#91;&#94;&#92;f&#92;n&#92;r&#92;t&#92;v&#93;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;t</td>
+<td>匹配一个制表符。等价于&#92;x09和&#92;c</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;v</td>
+<td>匹配一个垂直制表符。等价于&#92;x0b和&#92;cK</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="其他元字符及其上下文行为"><a href="#其他元字符及其上下文行为" class="headerlink" title="其他元字符及其上下文行为"></a>其他元字符及其上下文行为</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;&emsp;字符&emsp;&emsp;</div></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&#46;</td>
+<td>匹配除换行符&#92;n、&#92;r之外的任何单字符。要匹配&#46;字符，请使用&#92;&#46;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#40;pattern&#41;</td>
+<td>&#40;和&#41;标记一个子表达式的开始和结束位置。子表达式可以获取匹配的内容供以后使用。要匹配&#40;和&#41;字符，请使用&#92;&#40;和&#92;&#41;</td>
+</tr>
+<tr>
+<td style="text-align:center">&#40;&#63;&#58;pattern&#41;</td>
+<td>匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用</td>
+</tr>
+<tr>
+<td style="text-align:center">&#40;&#63;&#61;pattern&#41;</td>
+<td>向前肯定预查（look ahead positive assert），在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始</td>
+</tr>
+<tr>
+<td style="text-align:center">&#40;&#63;&#33;pattern&#41;</td>
+<td>正向否定预查(look ahead negative assert)，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始</td>
+</tr>
+<tr>
+<td style="text-align:center">&#40;&#63;&#60;&#61;pattern&#41;</td>
+<td>反向肯定预查(look behind positive assert)，与正向肯定预查类似，只是方向相反</td>
+</tr>
+<tr>
+<td style="text-align:center">&#40;&#63;&#60;&#33;pattern&#41;</td>
+<td>反向否定预查(look behind negative assert)，与正向否定预查类似，只是方向相反</td>
+</tr>
+<tr>
+<td style="text-align:center">x&#124;y</td>
+<td>匹配x或y</td>
+</tr>
+<tr>
+<td style="text-align:center">&#91;xyz&#93;</td>
+<td>字符集合。匹配所包含的任意一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">&#91;&#94;xyz&#93;</td>
+<td>负值字符集合。匹配未包含的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">&#91;a&#45;z&#93;</td>
+<td>字符范围。匹配指定范围内的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">&#91;&#94;a&#45;z&#93;</td>
+<td>负值字符范围。匹配任何不在指定范围内的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;d</td>
+<td>匹配一个数字字符</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;D</td>
+<td>匹配一个非数字字符</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;w</td>
+<td>匹配字母、数字、下划线</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;W</td>
+<td>匹配非字母、数字、下划线</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;xn</td>
+<td>匹配n，其中n为十六进制转义值。十六进制转义值必须为确定的两个数字长</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;num</td>
+<td>匹配num，其中num是一个正整数。对所获取的匹配的引用</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;n</td>
+<td>标识一个八进制转义值或一个向后引用。如果&#92;n之前至少n个获取的子表达式，则n为向后引用。否则，如果n为八进制数字 (0&#45;7)，则n为一个八进制转义值</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;nm</td>
+<td>标识一个八进制转义值或一个向后引用。如果&#92;nm之前至少有nm个获得子表达式，则nm为向后引用。如果&#92;nm之前至少有n个获取，则n为一个后跟文字m的向后引用。如果前面的条件都不满足，若n和m均为八进制数字 (0-7)，则&#92;nm将匹配八进制转义值nm</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;nl</td>
+<td>如果n为八进制数字 (0&#45;3)，且m和l均为八进制数字 (0&#45;7)，则匹配八进制转义值nml</td>
+</tr>
+<tr>
+<td style="text-align:center">&#92;un</td>
+<td>匹配n，其中n是一个用四个十六进制数字表示的Unicode字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h1><p>相同优先级的从左到右进行运算，不同优先级的运算先高后低。下表从最高到最低说明了各种正则表达式运算符的优先级顺序：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;运算符&emsp;</div></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&#92;</td>
+<td>转义符</td>
+</tr>
+<tr>
+<td style="text-align:center">&#40;&#41;，&#40;&#63;&#58;&#41;，&#40;&#63;&#61;&#41;，&#91;&#93;</td>
+<td>圆括号和方括号</td>
+</tr>
+<tr>
+<td style="text-align:center">&#42;，&#43;，&#63;，&#123;n&#125;，&#123;n,&#125;，&#123;n,m&#125;</td>
+<td>限定符</td>
+</tr>
+<tr>
+<td style="text-align:center">&#94;，&#36;，&#92;任何元字符，任何字符</td>
+<td>定位点和序列（即位置和顺序）</td>
+</tr>
+<tr>
+<td style="text-align:center">&#124;</td>
+<td>替换，逻辑“或”操作字符具有高于替换运算符的优先级。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
+
+    </div>
+
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/编程基础/">编程基础</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/正则表达式/" title="正则表达式">正则表达式</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <!-- <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a> -->
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/post/代码版本管理工具/">
+            
+                代码版本管理工具
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/post/常用Shell命令/">
+            
+                常用Shell命令
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/zhj.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: '神兵利器之正则表达式' || 'post/神兵利器之正则表达式/',
+    owner: 'HuajingZeng',
+    repo: 'huajingzeng.github.io_comments',
+    clientId: '7ae3915c563a60d41451',
+    clientSecret: '2abefe41031e15eabf12a828f30fd380487fb738'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/程序人生/">程序人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/">编程基础</a>
+        <span class="badge">(11)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/开发工具/">开发工具</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/随笔/" title="随笔">随笔 (1)</a>
+  
+    <a class="tag-item" href="/tags/面向对象/" title="面向对象">面向对象 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计原则/" title="设计原则">设计原则 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
+  
+    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (6)</a>
+  
+    <a class="tag-item" href="/tags/OS-X/" title="OS X">OS X (3)</a>
+  
+    <a class="tag-item" href="/tags/程序员/" title="程序员">程序员 (1)</a>
+  
+    <a class="tag-item" href="/tags/书籍/" title="书籍">书籍 (1)</a>
+  
+    <a class="tag-item" href="/tags/代码大全/" title="代码大全">代码大全 (1)</a>
+  
+    <a class="tag-item" href="/tags/核对表/" title="核对表">核对表 (1)</a>
+  
+    <a class="tag-item" href="/tags/Objective-C/" title="Objective-C">Objective-C (1)</a>
+  
+    <a class="tag-item" href="/tags/正则表达式/" title="正则表达式">正则表达式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/tags/SVN/" title="SVN">SVN (1)</a>
+  
+    <a class="tag-item" href="/tags/CVS/" title="CVS">CVS (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://stackoverflow.com/" target="_blank" title="Stack Overflow">Stack Overflow</a>
+        </li>
+    
+        <li>
+            <a href="http://nshipster.cn/" target="_blank" title="NSHipster">NSHipster</a>
+        </li>
+    
+        <li>
+            <a href="https://www.raywenderlich.com/" target="_blank" title="raywenderlich">raywenderlich</a>
+        </li>
+    
+        <li>
+            <a href="http://www.cocoachina.com/" target="_blank" title="Cocoa China">Cocoa China</a>
+        </li>
+    
+        <li>
+            <a href="https://objccn.io/" target="_blank" title="ObjC 中国">ObjC 中国</a>
+        </li>
+    
+        <li>
+            <a href="http://mac.orsoon.com/" target="_blank" title="未来软件园">未来软件园</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">曾华经</a>
+	<br>
+	<span id="busuanzi_container_site_pv">本站总访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span>次</span>
+	&emsp;
+    <span id="busuanzi_container_site_uv">本站总访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span>人</span>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

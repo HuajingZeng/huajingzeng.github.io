@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Shell脚本编程 | 曾华经</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="iOS, Web">
+    <meta name="description" content="曾华经个人博客">
+
+    
+    <link rel="alternative" href="/atom.xml" title="曾华经" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+	(function() {
+  		var hm = document.createElement("script");
+  		hm.src = "https://hm.baidu.com/hm.js?8dcd7371cdcc3e343c29794b5e207954";
+  		var s = document.getElementsByTagName("script")[0]; 
+  		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body class="home">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">曾华经</span>
+                    <span class="description">iOS Programmer</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/post/Shell脚本编程/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/post/Shell脚本编程/index.html" class="item ">
+                <a href="/lab/" title="项目" class="icon-lab">&nbsp;项目</a>
+            </li>
+            
+            <li rel="/post/Shell脚本编程/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/post/Shell脚本编程/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/HuajingZeng" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://github.com" target="_blank">Hosted by Github Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://weibo.com/p/1005051288040665/home?from=page_100505&amp;mod=TAB#place" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zhj.jpg" alt="avatar" title="曾华经">
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 目录内容 -->
+
+    <p id="toc-div" class="show-toc-btn" onclick="showToc();">
+    <span class="btn-text">文章导航</span>
+    </p>
+    <div id="toc-article" class="toc-article" style="display:none">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础概念"><span class="toc-number">2.</span> <span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#程序（命令）执行"><span class="toc-number">2.1.</span> <span class="toc-text">程序（命令）执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件名替换"><span class="toc-number">2.2.</span> <span class="toc-text">文件名替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O重定向"><span class="toc-number">2.3.</span> <span class="toc-text">I/O重定向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管道"><span class="toc-number">2.4.</span> <span class="toc-text">管道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准错误"><span class="toc-number">2.5.</span> <span class="toc-text">标准错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令（脚本）文件"><span class="toc-number">2.6.</span> <span class="toc-text">命令（脚本）文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">2.7.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量赋值"><span class="toc-number">2.7.1.</span> <span class="toc-text">变量赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#未定义变量"><span class="toc-number">2.7.2.</span> <span class="toc-text">未定义变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量替换"><span class="toc-number">2.7.3.</span> <span class="toc-text">变量替换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算术扩展"><span class="toc-number">2.8.</span> <span class="toc-text">算术扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">2.9.</span> <span class="toc-text">引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单引号"><span class="toc-number">2.9.1.</span> <span class="toc-text">单引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双引号"><span class="toc-number">2.9.2.</span> <span class="toc-text">双引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反斜线"><span class="toc-number">2.9.3.</span> <span class="toc-text">反斜线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反引号"><span class="toc-number">2.9.4.</span> <span class="toc-text">反引号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数传递"><span class="toc-number">2.10.</span> <span class="toc-text">参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量-36-1-36-n"><span class="toc-number">2.10.1.</span> <span class="toc-text">变量$1~${n}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量-36"><span class="toc-number">2.10.2.</span> <span class="toc-text">变量$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量-36-1"><span class="toc-number">2.10.3.</span> <span class="toc-text">变量$*</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量-36-2"><span class="toc-number">2.10.4.</span> <span class="toc-text">变量$@</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量-36-3"><span class="toc-number">2.10.5.</span> <span class="toc-text">变量$?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量-36-36"><span class="toc-number">2.10.6.</span> <span class="toc-text">变量$$</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件语句"><span class="toc-number">2.11.</span> <span class="toc-text">条件语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if、elif、else语句"><span class="toc-number">2.11.1.</span> <span class="toc-text">if、elif、else语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#case语句"><span class="toc-number">2.11.2.</span> <span class="toc-text">case语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#退出状态"><span class="toc-number">2.11.3.</span> <span class="toc-text">退出状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#test命令"><span class="toc-number">2.11.4.</span> <span class="toc-text">test命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exit命令"><span class="toc-number">2.11.5.</span> <span class="toc-text">exit命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#amp-amp-和"><span class="toc-number">2.11.6.</span> <span class="toc-text">&amp;&amp;和||</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-number">2.12.</span> <span class="toc-text">循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for命令"><span class="toc-number">2.12.1.</span> <span class="toc-text">for命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while命令"><span class="toc-number">2.12.2.</span> <span class="toc-text">while命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#until命令"><span class="toc-number">2.12.3.</span> <span class="toc-text">until命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break命令"><span class="toc-number">2.12.4.</span> <span class="toc-text">break命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#continue命令"><span class="toc-number">2.12.5.</span> <span class="toc-text">continue命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环上的I-O重定向"><span class="toc-number">2.12.6.</span> <span class="toc-text">循环上的I/O重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getopts命令"><span class="toc-number">2.12.7.</span> <span class="toc-text">getopts命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的读取和打印"><span class="toc-number">2.13.</span> <span class="toc-text">数据的读取和打印</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#read命令"><span class="toc-number">2.13.1.</span> <span class="toc-text">read命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#printf命令"><span class="toc-number">2.13.2.</span> <span class="toc-text">printf命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#环境"><span class="toc-number">3.</span> <span class="toc-text">环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#局部变量"><span class="toc-number">3.1.</span> <span class="toc-text">局部变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导出变量"><span class="toc-number">3.2.</span> <span class="toc-text">导出变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PS1和PS2"><span class="toc-number">3.3.</span> <span class="toc-text">PS1和PS2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HOME"><span class="toc-number">3.4.</span> <span class="toc-text">HOME</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PATH"><span class="toc-number">3.5.</span> <span class="toc-text">PATH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#当前目录"><span class="toc-number">3.6.</span> <span class="toc-text">当前目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDPATH"><span class="toc-number">3.7.</span> <span class="toc-text">CDPATH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子Shell"><span class="toc-number">3.8.</span> <span class="toc-text">子Shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">3.8.1.</span> <span class="toc-text">.命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exec命令"><span class="toc-number">3.8.2.</span> <span class="toc-text">exec命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#…-和-…"><span class="toc-number">3.8.3.</span> <span class="toc-text">(…)和{ …; }</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将变量传给子Shell"><span class="toc-number">3.8.4.</span> <span class="toc-text">将变量传给子Shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TERM变量"><span class="toc-number">3.8.5.</span> <span class="toc-text">TERM变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TZ变量"><span class="toc-number">3.8.6.</span> <span class="toc-text">TZ变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参数"><span class="toc-number">4.</span> <span class="toc-text">参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#参数替换"><span class="toc-number">4.1.</span> <span class="toc-text">参数替换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#36-parameter"><span class="toc-number">4.1.1.</span> <span class="toc-text">${parameter}</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#36-parameter-value"><span class="toc-number">4.1.1.1.</span> <span class="toc-text">${parameter:-value}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#36-parameter-value-1"><span class="toc-number">4.1.1.2.</span> <span class="toc-text">${parameter:=value}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#36-parameter-value-2"><span class="toc-number">4.1.1.3.</span> <span class="toc-text">${parameter:?value}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#36-parameter-value-3"><span class="toc-number">4.1.1.4.</span> <span class="toc-text">${parameter:+value}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模式匹配"><span class="toc-number">4.1.1.5.</span> <span class="toc-text">模式匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#36-35-variable"><span class="toc-number">4.1.1.6.</span> <span class="toc-text">${#variable}</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36-0变量"><span class="toc-number">4.1.2.</span> <span class="toc-text">$0变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set命令"><span class="toc-number">4.1.3.</span> <span class="toc-text">set命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IFS变量"><span class="toc-number">4.1.4.</span> <span class="toc-text">IFS变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#readonly命令"><span class="toc-number">4.1.5.</span> <span class="toc-text">readonly命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unset命令"><span class="toc-number">4.1.6.</span> <span class="toc-text">unset命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#拓展"><span class="toc-number">5.</span> <span class="toc-text">拓展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#eval命令"><span class="toc-number">5.1.</span> <span class="toc-text">eval命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wait命令"><span class="toc-number">5.2.</span> <span class="toc-text">wait命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#36-变量"><span class="toc-number">5.3.</span> <span class="toc-text">$!变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#trap命令"><span class="toc-number">5.4.</span> <span class="toc-text">trap命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不使用参数的trap"><span class="toc-number">5.4.1.</span> <span class="toc-text">不使用参数的trap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#忽略信号"><span class="toc-number">5.4.2.</span> <span class="toc-text">忽略信号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重置信号"><span class="toc-number">5.4.3.</span> <span class="toc-text">重置信号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再谈I-O"><span class="toc-number">5.5.</span> <span class="toc-text">再谈I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">5.6.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的使用"><span class="toc-number">5.6.1.</span> <span class="toc-text">函数的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的优势"><span class="toc-number">5.6.2.</span> <span class="toc-text">函数的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除函数"><span class="toc-number">5.6.3.</span> <span class="toc-text">删除函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#return命令"><span class="toc-number">5.6.4.</span> <span class="toc-text">return命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#type命令"><span class="toc-number">5.7.</span> <span class="toc-text">type命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#交互式与非标准Shell"><span class="toc-number">6.</span> <span class="toc-text">交互式与非标准Shell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用正确的Shell"><span class="toc-number">6.1.</span> <span class="toc-text">使用正确的Shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ENV文件"><span class="toc-number">6.2.</span> <span class="toc-text">ENV文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令行编辑"><span class="toc-number">6.3.</span> <span class="toc-text">命令行编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令历史"><span class="toc-number">6.4.</span> <span class="toc-text">命令历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vi行编辑模式"><span class="toc-number">6.5.</span> <span class="toc-text">vi行编辑模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs行编辑模式"><span class="toc-number">6.6.</span> <span class="toc-text">emacs行编辑模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问历史记录的其他方法"><span class="toc-number">6.7.</span> <span class="toc-text">访问历史记录的其他方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#history命令"><span class="toc-number">6.7.1.</span> <span class="toc-text">history命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fc命令"><span class="toc-number">6.7.2.</span> <span class="toc-text">fc命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#r命令"><span class="toc-number">6.7.3.</span> <span class="toc-text">r命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数-1"><span class="toc-number">6.8.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#局部变量-1"><span class="toc-number">6.8.1.</span> <span class="toc-text">局部变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动载入函数"><span class="toc-number">6.8.2.</span> <span class="toc-text">自动载入函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整数算术"><span class="toc-number">6.9.</span> <span class="toc-text">整数算术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#求值算术表达式"><span class="toc-number">6.9.1.</span> <span class="toc-text">求值算术表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不同基数的数字"><span class="toc-number">6.9.2.</span> <span class="toc-text">不同基数的数字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alias命令"><span class="toc-number">6.10.</span> <span class="toc-text">alias命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-number">6.11.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作业控制"><span class="toc-number">6.12.</span> <span class="toc-text">作业控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他特性"><span class="toc-number">6.13.</span> <span class="toc-text">其他特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cd命令的其他特性"><span class="toc-number">6.13.1.</span> <span class="toc-text">cd命令的其他特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#波浪符替换"><span class="toc-number">6.13.2.</span> <span class="toc-text">波浪符替换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索次序"><span class="toc-number">6.13.3.</span> <span class="toc-text">搜索次序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性"><span class="toc-number">6.14.</span> <span class="toc-text">兼容性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number">7.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#系统的“垃圾桶”"><span class="toc-number">7.1.</span> <span class="toc-text">系统的“垃圾桶”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#终端程序"><span class="toc-number">7.2.</span> <span class="toc-text">终端程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试选项-x"><span class="toc-number">7.3.</span> <span class="toc-text">调试选项 -x</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#空命令"><span class="toc-number">7.4.</span> <span class="toc-text">空命令:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#续行符"><span class="toc-number">7.5.</span> <span class="toc-text">续行符\</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后台运行符-amp"><span class="toc-number">7.6.</span> <span class="toc-text">后台运行符&amp;</span></a></li></ol></li></ol>
+   </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+ 
+<!-- 目录内容结束 -->
+
+<!-- 文章 -->
+<article class="post article" onclick="showBtn();">
+    <header class="text-center">
+        <h3 class="post-title"><span>Shell脚本编程</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        曾华经
+		&emsp;发表于：<time datetime="2017-11-25T01:24:43.000Z">2017-11-25</time>
+		&emsp;修改于：<time datetime="2019-11-16T08:18:27.198Z">2019-11-16</time>
+		&emsp;总阅读量：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span>次
+    </p>
+    <div class="post-content">
+        <p>&emsp;&emsp;Shell是类Unix系统下一个实用的工具程序，它有自己内建的编程语言（解释型）。Shell会分析所遇到的每一条语句，然后执行所发现的有效命令。这与C++及Swift这类编程语言（编译型）不同，这些语言的程序语句在执行之前通常都会被编译成可由机器执行的形式。</p>
+<p>&emsp;&emsp;Shell脚本（Shell Script），是一种为Shell编写的脚本程序。我们通常说的“Shell编程”都是指Shell脚本编程，不是指开发Shell自身。<br><a id="more"></a></p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><div style="white-space: nowrap; word-wrap: normal; word-break: normal;">&emsp;&emsp;命令&emsp;&emsp;<div></div></div></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">cat file(s)</td>
+<td>显示一个或多个文件的内容，如果没有提供参数的话，则显示标准输入内容</td>
+</tr>
+<tr>
+<td style="text-align:center">cd dir</td>
+<td>将当前工作目录更改为dir</td>
+</tr>
+<tr>
+<td style="text-align:center">cp file1 file2</td>
+<td>将file1复制到file2</td>
+</tr>
+<tr>
+<td style="text-align:center">cp file(s) dir</td>
+<td>将一个或多个文件复制到dir中</td>
+</tr>
+<tr>
+<td style="text-align:center">date</td>
+<td>显示日期和时间</td>
+</tr>
+<tr>
+<td style="text-align:center">echo args</td>
+<td>显示给出的一个或多个参数</td>
+</tr>
+<tr>
+<td style="text-align:center">ln file1 file2</td>
+<td>将file1链接到file2</td>
+</tr>
+<tr>
+<td style="text-align:center">ln file(s) dir</td>
+<td>将一个或多个文件链接到dir中</td>
+</tr>
+<tr>
+<td style="text-align:center">ls file(s)</td>
+<td>列出一个或多个文件</td>
+</tr>
+<tr>
+<td style="text-align:center">ls dir(s)</td>
+<td>列出一个或多个目录中的文件，如果没有指定目录，则列出当前目录中的文件</td>
+</tr>
+<tr>
+<td style="text-align:center">mkdir dir(s)</td>
+<td>创建一个或多个指定的目录</td>
+</tr>
+<tr>
+<td style="text-align:center">mv file1 file2</td>
+<td>移动file1并将其重命名为file2（如果均处于相同目录下，则仅执行重命名操作）</td>
+</tr>
+<tr>
+<td style="text-align:center">mv file(s) dir</td>
+<td>将一个或多个文件移动到指定目录dir中</td>
+</tr>
+<tr>
+<td style="text-align:center">ps</td>
+<td>列出活动进程的信息</td>
+</tr>
+<tr>
+<td style="text-align:center">pwd</td>
+<td>显示出当前工作目录的路径</td>
+</tr>
+<tr>
+<td style="text-align:center">rm file(s)</td>
+<td>删除一个或多个文件</td>
+</tr>
+<tr>
+<td style="text-align:center">rmdir dir(s)</td>
+<td>删除一个或多个目录</td>
+</tr>
+<tr>
+<td style="text-align:center">sort file(s)</td>
+<td>将一个或多个文件中的行进行排序，如果没有指定文件，则对标准输入内容进行排序</td>
+</tr>
+<tr>
+<td style="text-align:center">wc file(s)</td>
+<td>统计一个或多个文件中的行数、单词数和字符数，如果没有指定文件的话，则统计标准输入中的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">who</td>
+<td>显示出已登录的用户</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>关于这些命令的用法，详见：<a href="/post/常用Shell命令">常用Shell命令</a></p>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h2 id="程序（命令）执行"><a href="#程序（命令）执行" class="headerlink" title="程序（命令）执行"></a>程序（命令）执行</h2><p>Shell会根据输入的内容进行分析，然后决定执行什么操作。Shell是按行进行分析的，每行都遵循以下的基本格式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> [argument1] [argument2] ...</span><br></pre></td></tr></table></figure>
+<p>Shell使用空白字符（whitespace characters，包括空格符、水平制表符和换行符）来确定命令名称和每个参数的起止，连续的多个空白字符会被Shell忽略。</p>
+<p>Shell会扫描命令行，提取行首到第一个空白字符之间的所有内容作为待执行的命令名称command，随后的空白字符（多余的空格）会被忽略，直到下一个空白字符之间的字符作为第一个参数argument1，再到下一个空白字符之间的字符作为第二个参数argument2，如此继续直到该命令行结束。解析完命令行之后，Shell就开始执行命令名称指定的程序，并将命令名称之后的参数传递给该程序</p>
+<h2 id="文件名替换"><a href="#文件名替换" class="headerlink" title="文件名替换"></a>文件名替换</h2><p>Shell在确定要执行的命令及其参数之前，会扫描命令行，查找文件名替换字符*、？或[…]</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">替换字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td>匹配零个或多个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td>仅能匹配单个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[chars]/[char1-char2]</td>
+<td>匹配指定字符集合中的某个字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="I-O重定向"><a href="#I-O重定向" class="headerlink" title="I/O重定向"></a>I/O重定向</h2><p>Shell会扫描每一个命令行，从中找出特殊的重定向字符&lt;、&gt;、2&gt;、&lt;&lt;、&gt;&gt;和2&gt;&gt;。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">重定向字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td>将命令行中的下一个单词作为标准输出重定向所指向的文件名</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td>将命令行中的下一个单词作为标准输入重定向所指向的文件名</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;&gt;</td>
+<td>同&gt;</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&lt;</td>
+<td>同&lt;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>Shell在扫描命令行时，会查找管道字符|。每找到一个，就会将之前命令的标准输出连接到之后命令的标准输入。</p>
+<h2 id="标准错误"><a href="#标准错误" class="headerlink" title="标准错误"></a>标准错误</h2><p>所有运行的Shell命令，都会有默认3个文件描述符:</p>
+<ul>
+<li>标准输入（stdin，即standard input，文件描述符0）：命令的输入，默认指向键盘</li>
+<li>标准输出（stdout，即standard output，文件描述符1）：命令执行结果的输出，默认指向终端（屏幕）</li>
+<li>标准错误（stderr，即standard error，文件描述符2）：命令错误信息的输出，默认指向终端（屏幕）</li>
+</ul>
+<p>标准错误默认是同终端或终端应用程序相关联的。标准错误无法通过输出重定向字符（&gt;或&gt;&gt;）写入文件，必须使用特殊的输出重定向字符（2&gt;或2&gt;&gt;）才能将其写入文件。</p>
+<h2 id="命令（脚本）文件"><a href="#命令（脚本）文件" class="headerlink" title="命令（脚本）文件"></a>命令（脚本）文件</h2><p>Shell命令可以直接在终端命令行中输入。也可以从文件中读取，然后由Shell执行该文件。在命令行中执行脚本之前，必须将文件权限修改为可执行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x file(s)</span><br></pre></td></tr></table></figure>
+<p>然后执行该文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ file</span><br></pre></td></tr></table></figure>
+<p><strong>注意：如果解决了权限问题，仍旧得到错误信息“command not found”，尝试在命令文件前面加上./（如./file），确保Shell除了在常用的系统位置之外，也会在当前目录下查找命令。要想一劳永逸的话，把.添加到PATH环境变量（通常在.profile文件中）内容的末尾</strong></p>
+<p>在Shell命令文件中使用#作为注释符，Shell会忽略#之后的内容</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><p>Shell允许将值赋值给变量。变量名以字母或下划线开头，后面可以跟上零个或多个字母及数字字符或下划线，可以用正则表达式[A-Za-z_][a-zA-Z0-9_]*来匹配变量名。要将值保存在变量中，要先写出变量名，然后紧跟上等号=，接着是要存入变量的值：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variable=value</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ul>
+<li>Shell变量赋值等号的两边不能有空格</li>
+<li>Shell没有数据类型的概念，无论给Shell变量名分配什么样的值，Shell都简单地将其视为字符串</li>
+</ul>
+<h3 id="未定义变量"><a href="#未定义变量" class="headerlink" title="未定义变量"></a>未定义变量</h3><p>没有值的变量叫做未定义变量，未定义变量的值为null。Shell在扫描命令行时，会先执行替换操作，然后会忽略null。如果想将某个变量的值初始化为空值，只需要把等号右侧留空或者使用两个连续的引号就行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ variable1=</span><br><span class="line">$ variable2=<span class="string">""</span></span><br><span class="line">$ variable3=<span class="string">''</span></span><br></pre></td></tr></table></figure>
+<h3 id="变量替换"><a href="#变量替换" class="headerlink" title="变量替换"></a>变量替换</h3><p>只要变量名出现在美元符号&#36;之后，Shell就会将其替换成对应的变量值：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="variable">$variable</span></span><br><span class="line">value</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ul>
+<li>在对变量赋值时，Shell并不执行文件名替换</li>
+<li>Shell扫描命令行时，先执行变量替换，然后是文件名替换，接着是将命令行解析成参数（Shell是在执行命令前进行变量替换的，所以即使是命令名也可以保存在变量中）</li>
+</ul>
+<p>如果需要对替换后的变量值做特殊处理，比如加上字符X，则必须使用&#36;{variable}结构：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ filename=<span class="built_in">test</span></span><br><span class="line">// 将文件<span class="built_in">test</span>重命名为testX</span><br><span class="line">$ mv <span class="variable">$filename</span> <span class="variable">$&#123;filename&#125;</span>X</span><br></pre></td></tr></table></figure>
+<h2 id="算术扩展"><a href="#算术扩展" class="headerlink" title="算术扩展"></a>算术扩展</h2><p>所有POSIX标准Shell提供一种叫做算术扩展（arithmetic expansion）的机制，能够用于执行Shell变量的整数运算。算术扩展的格式为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$((expression))</span><br></pre></td></tr></table></figure>
+<p>其中expression是包含有效的Shell变量（不需要使用美元符号，但必须包含数字值，值的首部和尾部可以有空白字符。如果变量未定义或包含空串，其值被视为0）和操作符（与C语言中的运算符一样）的算术表达式。</p>
+<p>也可以使用数学等式解算器<a href="/post/常用Shell命令/#expr">expr</a>（mathematical equation solver）命令对算术表达式进行运算。使用此命令时操作数和操作符之间必须用空格分隔。</p>
+<p><strong>注意：expr只能够求值整数算术表达式，如果要进行浮点数运算的话，可以使用<a href="/post/常用Shell命令/#awk">awk</a>或<a href="/post/常用Shell命令/#bc">bc</a></strong></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>Shell能够识别4种不同的引用字符：单引号’、双引号”、反斜线\、反引号`（单引号、双引号和反引号必须成对出现）。</p>
+<h3 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h3><p>只要Shell碰到第一个’，在遇到用于封闭的’之前，它不会再解释任何特殊字符（即使是Enter键也会被保留并作为命令参数的一部分）。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'How are you today,</span></span><br><span class="line"><span class="string">&gt; John'</span></span><br><span class="line">How are you today,</span><br><span class="line">John</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p><strong>注意：此处的&gt;叫做辅助提示符（secondary prompt character），Shell会在等待用户完成多行命令的输入时显示该提示符</strong></p>
+<h3 id="双引号"><a href="#双引号" class="headerlink" title="双引号"></a>双引号</h3><p>双引号会忽略美元符号&#36;、反引号`、反斜线\这3个字符之外的特殊字符。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ filelist=*</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$filelist</span></span><br><span class="line">test.txt test1.txt test2.txt</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'$filelist'</span></span><br><span class="line"><span class="variable">$filelist</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"<span class="variable">$filelist</span>"</span></span><br><span class="line">*</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p><strong>双引号还可以用来保留单引号，反之亦然</strong></p>
+<h3 id="反斜线"><a href="#反斜线" class="headerlink" title="反斜线"></a>反斜线</h3><ul>
+<li>反斜线作为前缀使用时在功能上相当于在单个字符周围放置单引号（反斜线可以对紧随其后的字符进行转义）。</li>
+<li>如果反斜线是输入行的最后一个字符，Shell将其视为续航符（它会删除随后的换行符，也不会将该换行符作为参数分隔符，就好像这个字符从没出现过）</li>
+<li>在双引号中使用反斜线可以去除会被Shell解释的那些字符的特殊含义（反斜线、美元符号、反引号、换行符以及其他的双引号）。如果反斜线出现在双引号中其他字符之前，Shell会将该反斜线忽略，继续往后处理</li>
+</ul>
+<h3 id="反引号"><a href="#反引号" class="headerlink" title="反引号"></a>反引号</h3><p>反引号也被称为“反撇号”，它告诉Shell将其中的命令使用命令输出代替（命令输出会被插入到它的当前所在位置）。其格式为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="built_in">command</span>`</span><br></pre></td></tr></table></figure>
+<p>所有现代POSIX兼容的Shell都支持一种新的命令替换写法（括号中可以调用多个命令，命令之间使用分号隔开，可以使用管道）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">command</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h2><h3 id="变量-36-1-36-n"><a href="#变量-36-1-36-n" class="headerlink" title="变量&#36;1~&#36;{n}"></a>变量&#36;1~&#36;{n}</h3><p>执行Shell程序时，Shell会自动将第n个参数保存在特殊的Shell变量（这些特殊变量叫位置参数，因为它们是基于参数在命令行中所处的位置）&#36;{n}中，这些特殊变量是在Shell完成正常的命令行处理之后（I/O重定向、变量替换、文件名替换等）被赋值的。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat ./myScript</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br><span class="line">$ ./myScript param1 param2</span><br><span class="line">param1 param2</span><br></pre></td></tr></table></figure>
+<p><strong>注意：如果给程序提供的参数多余9个，第10个以后的参数（含第10个），必须使用&#36;{n}的变量形式(否则Shell会把&#36;10替换成&#36;1的值并在后面加上一个0）。你也可以理解为标准形式就是&#36;{n}，当n是个位数时可以省略大括号{}。</strong></p>
+<h3 id="变量-36"><a href="#变量-36" class="headerlink" title="变量&#36;"></a>变量&#36;</h3><p>特殊Shell变量&#36;#包含了命令行中输入的参数个数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat ./myScript</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$#</span></span><br><span class="line">$ ./myScript param1 param2</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h3 id="变量-36-1"><a href="#变量-36-1" class="headerlink" title="变量&#36;*"></a>变量&#36;*</h3><p>特殊Shell变量&#36;*引用的是传给程序的所有参数，即&#36;1、&#36;2…</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat ./myScript</span><br><span class="line"><span class="built_in">echo</span> $*</span><br><span class="line">$ ./myScript param1 param2</span><br><span class="line">param1 param2</span><br></pre></td></tr></table></figure>
+<h3 id="变量-36-2"><a href="#变量-36-2" class="headerlink" title="变量&#36;@"></a>变量&#36;@</h3><p>同&#36;*，如果使用变量“&#36;@”，则其传入程序中的值是“&#36;1”、“&#36;2”…如果没有了双引号，该变量的效果与&#36;*无异</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat ./myScript</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$@</span></span><br><span class="line">$ ./myScript param1 param2</span><br><span class="line">param1 param2</span><br></pre></td></tr></table></figure>
+<h3 id="变量-36-3"><a href="#变量-36-3" class="headerlink" title="变量&#36;?"></a>变量&#36;?</h3><p>Shell会将变量&#36;?自动设置为最后一条命令的退出状态（对一些命令来说，其表示“执行失败”的数值在不同的系统版本中并不相同，但表示执行成功的退出状态总是0）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cp nosuch backup</span><br><span class="line">cp: cannot access nosuch</span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h3 id="变量-36-36"><a href="#变量-36-36" class="headerlink" title="变量&#36;&#36;"></a>变量&#36;&#36;</h3><p>Shell会将&#36;&#36;替换成登录Shell的进程ID号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> $$</span><br><span class="line">6337</span><br><span class="line">$ ps</span><br><span class="line">	  PID TTY           TIME CMD</span><br><span class="line">	 6337 ttys001    0:01.69 -bash</span><br></pre></td></tr></table></figure>
+<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><h3 id="if、elif、else语句"><a href="#if、elif、else语句" class="headerlink" title="if、elif、else语句"></a>if、elif、else语句</h3><p>一般格式为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> command1</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">command</span></span><br><span class="line">	...</span><br><span class="line"><span class="keyword">elif</span> command2</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">command</span></span><br><span class="line">	...</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">command</span></span><br><span class="line">	...</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h3 id="case语句"><a href="#case语句" class="headerlink" title="case语句"></a>case语句</h3><p>一般格式为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> value <span class="keyword">in</span></span><br><span class="line">pattern1) <span class="built_in">command</span></span><br><span class="line">			<span class="built_in">command</span></span><br><span class="line">			...</span><br><span class="line">			<span class="built_in">command</span>;;</span><br><span class="line">pattern2) <span class="built_in">command</span></span><br><span class="line">			<span class="built_in">command</span></span><br><span class="line">			...</span><br><span class="line">			<span class="built_in">command</span>;;</span><br><span class="line">...</span><br><span class="line">pattern3) <span class="built_in">command</span></span><br><span class="line">			<span class="built_in">command</span></span><br><span class="line">			...</span><br><span class="line">			<span class="built_in">command</span>;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<h3 id="退出状态"><a href="#退出状态" class="headerlink" title="退出状态"></a>退出状态</h3><p>每一个命令执行完成，就会向Shell返回一个退出状态码。这个退出状态码是一个数值，指明了运行是否成功。为0的退出状态码表示运行成功；非0的退出状态码表示运行失败，不同的值对应不同的失败原因。</p>
+<h3 id="test命令"><a href="#test命令" class="headerlink" title="test命令"></a>test命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span> expression</span><br></pre></td></tr></table></figure>
+<p>另外一种格式为（在“[”之后以及“]”之前必须有空格）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ expression ]</span><br></pre></td></tr></table></figure>
+<h3 id="exit命令"><a href="#exit命令" class="headerlink" title="exit命令"></a>exit命令</h3><p>exit命令可以立即终止Shell程序的执行，其一般格式为</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span> n</span><br></pre></td></tr></table></figure>
+<p>其中，n是返回的退出状态码，如果没有指定，则使用在exit之前最后执行的那条命令的退状态（即exit &#36;?）</p>
+<p><strong>注意：如果直接在终端中执行exit命令，会使你登出系统，因为它相当于终止了你的登录Shell</strong></p>
+<h3 id="amp-amp-和"><a href="#amp-amp-和" class="headerlink" title="&amp;&amp;和||"></a>&amp;&amp;和||</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command1 &amp;&amp; command2</span><br></pre></td></tr></table></figure>
+<p>如果command1命令返回的退出状态码为0（成功），则接着执行command2。如果command1返回的退出状态码不为0（失败），command2会被忽略。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command1 || command2</span><br></pre></td></tr></table></figure>
+<p>command2命令仅在command1命令的退出状态码非0的时候才执行。</p>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="for命令"><a href="#for命令" class="headerlink" title="for命令"></a>for命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var (<span class="keyword">in</span> word1 word2 ... wordn)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">command</span></span><br><span class="line">	...</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>do与done之间的命令叫做循环体，其执行的次数由in后面的列表条目个数而定。在执行循环时，word列表中的值分别赋给变量var，然后执行循环体。</p>
+<p><strong>注意：使用for命令时，若忽略in以及后续的列表，则默认使用in “&#36;@”</strong></p>
+<h3 id="while命令"><a href="#while命令" class="headerlink" title="while命令"></a>while命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> command0</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">command</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>只要command0表达式返回非0，则退出循环。</p>
+<h3 id="until命令"><a href="#until命令" class="headerlink" title="until命令"></a>until命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until command0</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">command</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>只要command0表达式返回0，则退出循环。</p>
+<h3 id="break命令"><a href="#break命令" class="headerlink" title="break命令"></a>break命令</h3><p>在循环体中使用break命令可以立即退出循环语句。使用下面的形式，可以立即退出第n层内循环。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">break</span> n</span><br></pre></td></tr></table></figure>
+<h3 id="continue命令"><a href="#continue命令" class="headerlink" title="continue命令"></a>continue命令</h3><p>类似于break，不同的地方在于它不会退出整个循环，而只是跳过当前迭代中剩下的命令，然后程序立即进入下一次迭代。continue后面也可以加上一个可选的数字，用以跳过最内侧的n个循环中的命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">continue</span> n</span><br></pre></td></tr></table></figure>
+<h3 id="循环上的I-O重定向"><a href="#循环上的I-O重定向" class="headerlink" title="循环上的I/O重定向"></a>循环上的I/O重定向</h3><p>在循环关闭语句done之后，可以使用重定向操作符进行输出重定向。</p>
+<h3 id="getopts命令"><a href="#getopts命令" class="headerlink" title="getopts命令"></a>getopts命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getopts</span> options option</span><br></pre></td></tr></table></figure>
+<p><strong>options</strong>：单字母选项组成的字符串，如果该选项需要参数，则要在后面加上冒号（如ab:c表示-a、-b、-c，-b需要另外指定参数）<br><strong>option</strong>：用来存放每个匹配值的变量名</p>
+<p>在每次循环中，getopts都会检查下一个命令行参数，通过查看该参数是否以减号开头，随后是否是在options中指定的字符来决定选项是否有效。如果没有问题，getopts就会将匹配的选项字母保存在指定的option中，然后返回为0的退出状态码。如果减号后面的字符没有在options中列出，getopts会返回非0的退出状态码。</p>
+<ul>
+<li>如果getopts没有在选项后找到要求的参数，它会将问号保存到变量中并向标准错误中输出错误信息。否则，就将选项字符保存在变量中，把用户指定的参数放在一个叫做OPTARG的特殊变量中。</li>
+<li>特殊变量OPTIND的初始值为1，随后每当getopts返回时都会被更新为下一个要处理的命令行参数的序号。</li>
+</ul>
+<h2 id="数据的读取和打印"><a href="#数据的读取和打印" class="headerlink" title="数据的读取和打印"></a>数据的读取和打印</h2><h3 id="read命令"><a href="#read命令" class="headerlink" title="read命令"></a>read命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> variables</span><br></pre></td></tr></table></figure>
+<p>该命令执行时，Shell会从标准输入中读取一行，然后将单词分配给variables中列出的变量。如果行中的单词多于列表中的变量，则多出的单词全部分配给最后一个变量。</p>
+<p><strong>除非碰到文件结尾，read都返回0的退出状态码。如果是从终端读取数据，意味着用户键入Ctrl+d，如果是从文件读取数据，意味着文件中已经没有数据可读了。</strong></p>
+<h3 id="printf命令"><a href="#printf命令" class="headerlink" title="printf命令"></a>printf命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> <span class="string">"format"</span> arg1 arg2 ...</span><br></pre></td></tr></table></figure>
+<p>format是一个字符串，用于详细描述后续数值的显示格式（因为格式化字符串要作为单个参数，且有可能会包含特殊字符和空格，因此最好将其放入引号中）。</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2><p>当登录Shell执行某个命令或程序时，它会启动一个新的Shell来执行程序。只要新的Shell一启动，就会拥有自己的环境以及一组局部变量。子Shell无法获知或修改登录Shell（父Shell）赋值的那些局部变量。</p>
+<h2 id="导出变量"><a href="#导出变量" class="headerlink" title="导出变量"></a>导出变量</h2><p>可以使用export命令将变量导出，使子Shell获知变量的值。格式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> variables</span><br></pre></td></tr></table></figure>
+<p>其中variables是要导出的变量名列表，已导出变量的值会传到export命令之后的所有字Shell中。</p>
+<p><strong>注意：子Shell既不能改变局部变量的值，也不能改变导出变量的值。实际上，只要导出变量进入到子Shell中，它们就成为了局部变量。</strong></p>
+<ul>
+<li>未被导出的变量都是局部变量，子Shell并不知道这些变量的存在</li>
+<li>导出的变量及其值会被复制到子Shell的环境中，在其中可以访问并修改这些导出变量。但是这些修改不会影响到父Shell中的变量</li>
+<li>导出变量不仅仅保持在直接生成的子Shell中，对于这些子Shell所生成的子Shell也不例外</li>
+<li>变量可以在赋值前后随时导出，但是只取其到处时的值，不再理会之后做出的改变</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> -p</span><br></pre></td></tr></table></figure>
+<h2 id="PS1和PS2"><a href="#PS1和PS2" class="headerlink" title="PS1和PS2"></a>PS1和PS2</h2><ul>
+<li><strong>PS1</strong>：用于保存命令行提示符字符序列的环境变量</li>
+<li><strong>PS2</strong>：用于保存辅助命令行提示符（当命令行上的输入长度多余一行时）字符序列的环境变量</li>
+</ul>
+<p><strong>注意：一旦登出系统，所有对于命令行提示符作出的改变就失效了，除非将PS1或PS2的新值添加到.profile文件</strong></p>
+<h2 id="HOME"><a href="#HOME" class="headerlink" title="HOME"></a>HOME</h2><p>主目录是用户登录系统后所处的位置。特殊的Shell变量HOME会在用户登录时自动设成该目录。</p>
+<p><strong>注意：不要轻易修改HOME变量，这么做有可能影响到依赖于该变量的程序</strong></p>
+<h2 id="PATH"><a href="#PATH" class="headerlink" title="PATH"></a>PATH</h2><p>用来搜索用户命令的目录列表保存在Shell变量PATH中，目录之间以冒号（:）分隔，Shell会从左到右依次在目录中查找指定的命令或程序。</p>
+<p><strong>警告：处于安全考虑，不要讲当前目录放在最先搜索的位置</strong></p>
+<h2 id="当前目录"><a href="#当前目录" class="headerlink" title="当前目录"></a>当前目录</h2><p>当前目录也是Shell环境的一部分。调用cd时，除了会修改当前目录，还会将变量PWD设置为新的当前目录的完整路径，同时还将变量OLDPWD设置为前一个当前目录的完整目录。</p>
+<p><strong>注意：没有办法在子Shell中改变父Shell的当前目录</strong></p>
+<h2 id="CDPATH"><a href="#CDPATH" class="headerlink" title="CDPATH"></a>CDPATH</h2><p>CDPATH指定了一个目录列表，当执行cd命令时，由Shell对其进行搜索（仅在没有给出目录的完整路径且CDPATH不为空的时候才会展开这个搜索）。</p>
+<p><strong>注意：CDPATH并不会在登录时自动设置好，你得明确地将其设置为一系列目录，以便Shell来搜索指定的目录名</strong></p>
+<h2 id="子Shell"><a href="#子Shell" class="headerlink" title="子Shell"></a>子Shell</h2><h3 id="命令"><a href="#命令" class="headerlink" title=".命令"></a>.命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. file</span><br></pre></td></tr></table></figure>
+<p>该命令可以在当前Shell中执行file的内容。也就是说，file中的命令就像是直接输入的一样，由当前Shell执行，而不是在子Shell中。</p>
+<h3 id="exec命令"><a href="#exec命令" class="headerlink" title="exec命令"></a>exec命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exec</span> program</span><br></pre></td></tr></table></figure>
+<p>该命令可以使用新程序替换现有的程序；还可以用来重新分配标准输入或标准输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exec</span> &lt; infile</span><br><span class="line"></span><br><span class="line"><span class="built_in">exec</span> &gt; report</span><br></pre></td></tr></table></figure>
+<p>要将标准输入重新分配回终端，可以使用命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exec</span> &lt; /dev/tty</span><br></pre></td></tr></table></figure>
+<h3 id="…-和-…"><a href="#…-和-…" class="headerlink" title="(…)和{ …; }"></a>(…)和{ …; }</h3><ul>
+<li><strong>(…)</strong>：在子Shell中执行命令</li>
+<li><strong>{ …; }</strong>：在当前Shell中执行命令（如果花括号中的命令全写在同一行上，左花括号后一定要有一个空格，分号必须出现在最后一个命令的末尾）</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">cd</span> bin; ls)</span><br><span class="line"></span><br><span class="line">&#123; <span class="built_in">cd</span> bin; ls; &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>两种括号可以配合管道及I/O重定向使用</strong></p>
+<h3 id="将变量传给子Shell"><a href="#将变量传给子Shell" class="headerlink" title="将变量传给子Shell"></a>将变量传给子Shell</h3><p>如果想将变量的值送入子Shell，可以在命令行上，把一个或多个变量的赋值放到命令的前面。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DBHOME=/kevin/data DBID=321 run</span><br><span class="line"><span class="comment"># 相当于</span></span><br><span class="line">(DBHOME=/kevin/data; DBID=321; <span class="built_in">export</span> DBHOME DBID; run)</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">### .profile文件</span></span><br><span class="line">登录Shell会在系统中查找并读取两个特殊文件：/etc/profile和.profile。相当于执行以下命令：</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">$ . /etc/profile</span><br><span class="line">$ . .profile</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>/etc/profile</strong>：由系统管理员所设置，该文件通常会检查你是否有新的邮件、设置默认的文件创建掩码（umask）、建立默认的PATH以及其他管理员希望登录时完成的工作。</li>
+<li><strong>$HOME/.profile</strong>：系统在创建账户的时候会会设置一个.profile文件，用户可以修改该文件，使其包含在登录时要执行的命令，甚至覆盖/etc/profile中建立好的设置。</li>
+</ul>
+<h3 id="TERM变量"><a href="#TERM变量" class="headerlink" title="TERM变量"></a>TERM变量</h3><p>TERM变量用于保存终端设置及功能的详细信息。Mac OS X系统中TERM的默认值为xterm-256color。</p>
+<h3 id="TZ变量"><a href="#TZ变量" class="headerlink" title="TZ变量"></a>TZ变量</h3><p>TZ变量决定当前时区。最简单TZ的设置是由时区名（长度至少位3个字符）和一个数字（指定了小时数，本地时区在经度0以西为正数，本地时区在经度0以东为负数）组成的，小时数必须和本地时间相加来形成世界协调时（Coordinated Universal Time），又称为格林威治标准时间（Greenwich Mean Time）。数字后可以跟上第二个时区名，如果指定的话，表示应用夏令时（daylight saving time），意味着比标准时间早一个小时。如果夏令时时区后还有另外一个数字，该值用来从世界协调时中计算夏令时。date命令会根据TZ计算出正确的时间并使用时区名作为输出，如果没有设置TZ，则使用系统特定的默认时区，一般是世界协调时。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ TZ=EST5EDT date</span><br><span class="line">2018年 5月30日 星期三 04时04分43秒 EDT</span><br></pre></td></tr></table></figure>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>参数包括传递给程序的参数（位置参数）、特殊的Shell变量（如$#和$?）及普通变量（关键字参数）。位置参数不能直接赋值，但可以通过set命令重新赋值。给变量赋值方式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable=value variable=value ...</span><br></pre></td></tr></table></figure>
+<h2 id="参数替换"><a href="#参数替换" class="headerlink" title="参数替换"></a>参数替换</h2><h3 id="36-parameter"><a href="#36-parameter" class="headerlink" title="&#36;{parameter}"></a>&#36;{parameter}</h3><p>参数替换最简单的形式是在参数前加上美元符号</p>
+<ul>
+<li>如果参数名后的字符可能会造成名字冲突，可以把参数名放进花括号内。</li>
+<li>要访问10以上的位置参数，必须将数字放进花括号中。</li>
+</ul>
+<h4 id="36-parameter-value"><a href="#36-parameter-value" class="headerlink" title="&#36;{parameter:-value}"></a>&#36;{parameter:-value}</h4><p>如果parameter不为空，则使用它的值；否则，就使用value。</p>
+<h4 id="36-parameter-value-1"><a href="#36-parameter-value-1" class="headerlink" title="&#36;{parameter:=value}"></a>&#36;{parameter:=value}</h4><p>如果parameter不为空，则使用它的值；否则，就使用value并将其分配给parameter（parameter不能是位置参数，因为不能给位置参数赋值）。</p>
+<p>执行完替换操作后，Shell会尝试执行替换结果，如果要将其作为单独的命令，需要使用空命令（在Shell程序的条件语句或echo语句中，通常在第一次引用变量的时候会使用:=写法）。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">: <span class="variable">$&#123;parameter:=value&#125;</span>	<span class="comment">#进行替换（求值），但是什么都不执行</span></span><br></pre></td></tr></table></figure>
+<h4 id="36-parameter-value-2"><a href="#36-parameter-value-2" class="headerlink" title="&#36;{parameter:?value}"></a>&#36;{parameter:?value}</h4><p>如果parameter不为空，则使用它的值；否则，就将value写入到标准错误，然后退出（如果是在登录Shell中完成该操作，不会登出系统）。如果没有提供value，Shell会输出默认的错误信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prog: parameter: parameter null or not <span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+<h4 id="36-parameter-value-3"><a href="#36-parameter-value-3" class="headerlink" title="&#36;{parameter:+value}"></a>&#36;{parameter:+value}</h4><p>如果parameter不为空，则替换成value；否则，不进行任何替换。效果和“:-”相反。</p>
+<h4 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h4><p>模式匹配接受两个参数：变量名（或者是参数数量）和模式。Shell会在指定变量的内容中匹配所提供的模式。如果能够匹配，则在命令行中使用该变量的值（不包括模式所匹配的那部分内容）；如果无法匹配，则使用变量的全部内容。在两种情况下，都不会修改变量的内容。</p>
+<ul>
+<li><strong>&#36;{variable&#37;pattern}</strong>：检查variable是否以指定的pattern结束。如果是，则使用variable的内容并从其右侧删除pattern所能匹配到的最短结果</li>
+<li><strong>&#36;{variable&#37;&#37;pattern}</strong>：检查variable是否以指定的pattern结束。如果是，则使用variable的内容并从其右侧删除pattern所能匹配到的最长结果（仅在pattern中使用了*的时候，否则效果与&#36;{variable&#37;pattern}相同）</li>
+<li><strong>&#36;{variable&#35;pattern}</strong>：使用variable的内容并从其左侧删除pattern所能匹配到的最短结果</li>
+<li><strong>&#36;{variable&#35;&#35;pattern}</strong>：使用variable的内容并从其左侧删除pattern所能匹配到的最长结果（仅在pattern中使用了*的时候，否则效果与&#36;{variable&#35;pattern}相同）</li>
+</ul>
+<h4 id="36-35-variable"><a href="#36-35-variable" class="headerlink" title="&#36;{&#35;variable}"></a>&#36;{&#35;variable}</h4><p>返回变量中保存的字符个数</p>
+<h3 id="36-0变量"><a href="#36-0变量" class="headerlink" title="&#36;0变量"></a>&#36;0变量</h3><p>Shell会自动将程序名保存在特殊变量&#36;0中。&#36;0基于的是实际的程序文件名，而非程序中的硬编码。有些UNIX系统会将&#36;0设置成包含目录的完整路径，可以使用&#36;(basename &#36;0)来去除路径</p>
+<h3 id="set命令"><a href="#set命令" class="headerlink" title="set命令"></a>set命令</h3><p>set命令的作用：设置各种Shell选项以及重新为位置参数&#36;1、&#36;2…赋值</p>
+<h3 id="IFS变量"><a href="#IFS变量" class="headerlink" title="IFS变量"></a>IFS变量</h3><p>IFS包含了一组用作空白分隔符的字符，当Shell解析read命令输入、命令替换（反引号机制）输出以及执行变量替换时，会使用该变量作为判断空白字符（也就是作为单词分隔符）的依据</p>
+<p><strong>注意：如果打算在自己的程序中修改IFS，明智的做法是先将旧的IFS值保存在另一个变量（如OIFS），等执行完操作后再恢复</strong></p>
+<h3 id="readonly命令"><a href="#readonly命令" class="headerlink" title="readonly命令"></a>readonly命令</h3><p>用于指定在程序随后的执行过程中，值都不会发生改变的那些变量。如果之后试图给这些变量赋值，Shell就会发出错误信息</p>
+<p><strong>注意：变量的只读属性不会往下传递给子Shell。另外，只要在Shell中将变量设为只读，就无法撤销</strong></p>
+<h3 id="unset命令"><a href="#unset命令" class="headerlink" title="unset命令"></a>unset命令</h3><p>使用unset可以从环境中删除某个变量，但不能对只读变量和IFS、MAILCHECK、PATH、PS1和PS2等使用unset</p>
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="eval命令"><a href="#eval命令" class="headerlink" title="eval命令"></a>eval命令</h2><p>把eval放在命令行之前，Shell会对其进行二次扫描，然后执行。因此eval常用于从变量中构造命令行，也可以用来创建指向变量的“指针”。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="built_in">command</span>-line</span><br></pre></td></tr></table></figure>
+<h2 id="wait命令"><a href="#wait命令" class="headerlink" title="wait命令"></a>wait命令</h2><p>使用wait命令等待后台进程结束后再继续往下执行其他任务。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">wait</span> process-id</span><br></pre></td></tr></table></figure>
+<h2 id="36-变量"><a href="#36-变量" class="headerlink" title="&#36;!变量"></a>&#36;!变量</h2><p>&#36;!表示最近移入后台的进程ID。</p>
+<h2 id="trap命令"><a href="#trap命令" class="headerlink" title="trap命令"></a>trap命令</h2><p>通过trap命令可以监听信号并对其进行处理</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">trap</span> commands signals</span><br></pre></td></tr></table></figure>
+<p>其中commands是接收到由signals指定的信号时要执行的一个或多个命令。</p>
+<h3 id="不使用参数的trap"><a href="#不使用参数的trap" class="headerlink" title="不使用参数的trap"></a>不使用参数的trap</h3><p>执行trap时不带参数，会显示出定义过或修改过的所有trap处理程序</p>
+<h3 id="忽略信号"><a href="#忽略信号" class="headerlink" title="忽略信号"></a>忽略信号</h3><p>如果trap中没有列出命令（trap的第一个参数必须使用引号，引号内无任何内容），那么指定的信号会被忽略（如果忽略了某个信号，所有的子Shell也会忽略这个信号）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">trap</span> <span class="string">""</span> SIGINT</span><br></pre></td></tr></table></figure>
+<p>使用下列命令，当前Shell和子Shell都会忽略中断信号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">trap</span> <span class="string">""</span> 2</span><br></pre></td></tr></table></figure>
+<p>使用下列命令，当前Shell会忽略中断信号，而子Shell在接收到中断信号时会终止（默认处理方式）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">trap</span> : 2</span><br></pre></td></tr></table></figure>
+<h3 id="重置信号"><a href="#重置信号" class="headerlink" title="重置信号"></a>重置信号</h3><p>如果trap忽略第一个参数，就可以将信号的默认处理方式改回原样（系统默认的处理方式）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">trap</span> HUP INT</span><br></pre></td></tr></table></figure>
+<h2 id="再谈I-O"><a href="#再谈I-O" class="headerlink" title="再谈I/O"></a>再谈I/O</h2><blockquote>
+<p>&amp;指明将输出重定向到与指定的文件描述符想关联的文件中，如：</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"Invalid number of arguments"</span> &gt;&amp;2</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>&amp;-关闭标准输出。如果出现在文件描述符之后，则会关闭与之关联的文件，如：</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls &gt;&amp;-</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>&lt;&lt;之后的行作为命令输入，直到碰到指定的字符序列，如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ wc -l &lt;&lt;ENDOFDATA</span><br><span class="line">&gt; line1</span><br><span class="line">&gt; line2</span><br><span class="line">&gt; line3</span><br><span class="line">&gt; ENDOFDATA</span><br><span class="line">	3</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p><strong>注意：Shell会对重定向的输入数据进行参数替换、执行反引号中的命令，还能够识别出现的反斜线字符。出现在&lt;&lt;后面的单词要尽可能独特，使其无意出现在随后的数据行中的概率足够低</strong></p>
+<p>使用&lt;&lt;\\可以保持所有的输入行原封不动（不进行参数替换、不执行反引号中的命令、不进行转义字符的转义等），如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cat &lt;&lt;\END</span><br><span class="line">&gt;\\\\</span><br><span class="line">&gt;`date`</span><br><span class="line">&gt;<span class="variable">$HOME</span></span><br><span class="line">&gt;END</span><br><span class="line">\\\\</span><br><span class="line">`date`</span><br><span class="line"><span class="variable">$HOME</span></span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>使用&lt;&lt;-输入中的前导制表符都会被Shell删除，如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cat &lt;&lt;-END</span><br><span class="line">&gt;		Lines</span><br><span class="line">&gt;		Tabs</span><br><span class="line">&gt;END</span><br><span class="line">Lines</span><br><span class="line">Tabs</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>定义函数的一般格式为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">name</span></span> () &#123; <span class="built_in">command</span>; ... <span class="built_in">command</span>; &#125;</span><br></pre></td></tr></table></figure>
+<p>其中，name是函数名，小括号表示这是一个函数定义，花括号中的命令定义了函数体，这些命令会在函数被调用时执行。</p>
+<h3 id="函数的使用"><a href="#函数的使用" class="headerlink" title="函数的使用"></a>函数的使用</h3><ul>
+<li>如果函数体和花括号都出现在同一行中，{和第一条命令之间必须至少有一个空白字符，最后一条命令和}之间必须有一个分号</li>
+<li>调用函数和执行普通命令一样，命令行上出现在函数名之后的参数会被依次分配给位置参数&#36;1、&#36;2…等</li>
+<li>函数仅存在于定义它的Shell中，无法传给子Shell。对于当前目录或变量的修改在函数执行完毕之后依然会保留</li>
+<li>函数定义可以根据需要占据多行，Shell会通过辅命令行提示符提示继续输入函数体中的命令，直到使用}结束函数定义</li>
+<li>可以将函数的定义放进.profile中，这样无论何时登录，都可以直接使用</li>
+</ul>
+<h3 id="函数的优势"><a href="#函数的优势" class="headerlink" title="函数的优势"></a>函数的优势</h3><ul>
+<li>函数的执行速度比相同功能的Shell程序快（因为Shell不需要搜索磁盘来查找程序、打开文件并将文件内容读入内存）</li>
+<li>能够将相关的Shell程序全都放进单个文件中</li>
+</ul>
+<h3 id="删除函数"><a href="#删除函数" class="headerlink" title="删除函数"></a>删除函数</h3><p>使用带-f选项的unset命令可以从Shell中删除函数</p>
+<h3 id="return命令"><a href="#return命令" class="headerlink" title="return命令"></a>return命令</h3><p>使用return命令可以退出函数而不退出Shell程序</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">return</span> n</span><br></pre></td></tr></table></figure>
+<p>n作为函数的返回状态。如果忽略，则使用函数中最后执行的那条命令的退出状态（适用函数中没有包含return语句的情形）。</p>
+<h2 id="type命令"><a href="#type命令" class="headerlink" title="type命令"></a>type命令</h2><p>type命令接受一个或多个命令名作为参数，输出这些命令的类型</p>
+<h1 id="交互式与非标准Shell"><a href="#交互式与非标准Shell" class="headerlink" title="交互式与非标准Shell"></a>交互式与非标准Shell</h1><h2 id="使用正确的Shell"><a href="#使用正确的Shell" class="headerlink" title="使用正确的Shell"></a>使用正确的Shell</h2><p>如果Shell脚本文件的第一行的前两个字符是#！，那么改行余下的部分就指定了该文件的解释器</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/ksh</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：很多Shell解释器在系统中并没有一个标准位置，为了确保使用Bourne Shell，建议使用#!/bin/sh</strong></p>
+<h2 id="ENV文件"><a href="#ENV文件" class="headerlink" title="ENV文件"></a>ENV文件</h2><p>启动Shell时会查找环境变量ENV。如果找到了该变量且变量不为空，则执行由ENV所指定的文件。ENV指定的文件中包含用于设置Shell环境的命令。如果要自己编写一个ENV文件，应该在.profile中设置并导出ENV变量</p>
+<h2 id="命令行编辑"><a href="#命令行编辑" class="headerlink" title="命令行编辑"></a>命令行编辑</h2><p>使用set命令配合-o mode选项可以启用行编辑模式，其中mode可以是vi或emacs。将下面这行命令放入.profile或ENV文件中，可以使得Shell在启动时自动开启指定的行编辑模式（默认是输入模式，按Esc键可以切换进入命令模式）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -o vi</span><br></pre></td></tr></table></figure>
+<h2 id="命令历史"><a href="#命令历史" class="headerlink" title="命令历史"></a>命令历史</h2><p>在默认情况下，命令的历史记录保存在用户主目录下，文件名为.sh_history（bash下是.bash_history），该文件名必须与变量HISTFILE的内容一样。可以通过HISTSIZE变量控制历史记录文件的大小。HISTFILE和HISTSIZE都可以在.profile文件中设置和导出。</p>
+<h2 id="vi行编辑模式"><a href="#vi行编辑模式" class="headerlink" title="vi行编辑模式"></a>vi行编辑模式</h2><p>基本vi行编辑命令：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">h</td>
+<td style="text-align:left">向左移动一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">l</td>
+<td style="text-align:left">向右移动一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:left">向左移动一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:left">向右移动一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:left">移动到行首</td>
+</tr>
+<tr>
+<td style="text-align:center">&#36;</td>
+<td style="text-align:left">移动到行尾</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:left">删除光标所在的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">dw</td>
+<td style="text-align:left">删除光标所在的单词</td>
+</tr>
+<tr>
+<td style="text-align:center">rc</td>
+<td style="text-align:left">将光标所在的字符修改成c</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:left">进入输入模式并在当前字符之后输入文本</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:left">进入输入模式并在当前字符之前插入文本</td>
+</tr>
+<tr>
+<td style="text-align:center">k</td>
+<td style="text-align:left">获得历史记录中上一条命令</td>
+</tr>
+<tr>
+<td style="text-align:center">l</td>
+<td style="text-align:left">获得历史记录中下一条命令</td>
+</tr>
+<tr>
+<td style="text-align:center">/string</td>
+<td style="text-align:left">搜索历史记录中包含string的最近一条命令；如果没有指定string，则使用之前的搜索内容</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>详见：<a href="/post/常用Shell命令/#vi">vi</a></p>
+<h2 id="emacs行编辑模式"><a href="#emacs行编辑模式" class="headerlink" title="emacs行编辑模式"></a>emacs行编辑模式</h2><p>基本emacs行编辑命令</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Ctrl+b</td>
+<td style="text-align:left">向左移动一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+f</td>
+<td style="text-align:left">向右移动一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">Esc f</td>
+<td style="text-align:left">向前移动一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">Esc b</td>
+<td style="text-align:left">向后移动一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+a</td>
+<td style="text-align:left">移动到行首</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+e</td>
+<td style="text-align:left">移动到行尾</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+d</td>
+<td style="text-align:left">删除光标所在的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">Esc d</td>
+<td style="text-align:left">删除光标所在的单词</td>
+</tr>
+<tr>
+<td style="text-align:center">erase char</td>
+<td style="text-align:left">删除上一个字符（由用户定义的擦除字符，通常是#或Ctrl+h）</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+p</td>
+<td style="text-align:left">从历史记录中获得上一条命令</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+n</td>
+<td style="text-align:left">从历史记录中获得下一条命令</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+r string</td>
+<td style="text-align:left">搜索历史记录，查找包含string的最近一条命令</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="访问历史记录的其他方法"><a href="#访问历史记录的其他方法" class="headerlink" title="访问历史记录的其他方法"></a>访问历史记录的其他方法</h2><h3 id="history命令"><a href="#history命令" class="headerlink" title="history命令"></a>history命令</h3><p>history命令用于读取指定数目的历史记录中的若干条命令</p>
+<h3 id="fc命令"><a href="#fc命令" class="headerlink" title="fc命令"></a>fc命令</h3><p>fc命令可以为历史记录中的若干条命令启动一个编辑器或将历史记录命令列表写入终端</p>
+<h3 id="r命令"><a href="#r命令" class="headerlink" title="r命令"></a>r命令</h3><p>Korn Shell中输入r命令会重新执行刚才的命令；如果给r一个命令参数，会从历史记录中找出最近一条以指定模式开头的命令重新执行；</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r</span><br><span class="line">r string</span><br><span class="line">r string string1=string2</span><br></pre></td></tr></table></figure>
+<p>Bash Shell中!string可以搜索历史记录，!!可以重新执行上一条命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">!!</span><br><span class="line">!string</span><br></pre></td></tr></table></figure>
+<h2 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h2><h3 id="局部变量-1"><a href="#局部变量-1" class="headerlink" title="局部变量"></a>局部变量</h3><p>使用declare(同typeset，typeset已废弃)定义局部变量</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">declare</span> i j</span><br></pre></td></tr></table></figure>
+<h3 id="自动载入函数"><a href="#自动载入函数" class="headerlink" title="自动载入函数"></a>自动载入函数</h3><p>Korn Shell运行设置一个特殊变量FPATH，它类似于PATH。</p>
+<h2 id="整数算术"><a href="#整数算术" class="headerlink" title="整数算术"></a>整数算术</h2><h3 id="求值算术表达式"><a href="#求值算术表达式" class="headerlink" title="求值算术表达式"></a>求值算术表达式</h3><p>Bash和Korn Shell都支持在不使用算术扩展的情况下求值算术表达式</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((...))</span><br></pre></td></tr></table></figure>
+<h3 id="不同基数的数字"><a href="#不同基数的数字" class="headerlink" title="不同基数的数字"></a>不同基数的数字</h3><p>在Korn和Bash Shell中使用不同基数的值形式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base<span class="comment">#number</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在Korn Shell中，赋给整数类型变量的第一个值的基数决定了变量后续使用的默认基数</li>
+<li>在Bash Shell中，对八进制和十六进制可以使用C语言的语法（八进制数前面加上数字0，十六进制数前面加上0x）</li>
+</ul>
+<h2 id="alias命令"><a href="#alias命令" class="headerlink" title="alias命令"></a>alias命令</h2><p>Shell保存了一个别名列表，在命令输入之后，会在执行其他替换操作之前首先搜索该列表，如果命令行的第一个单词是别名，将该别名替换成对应的文本。使用alias命令可以定义别名：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> name=string</span><br></pre></td></tr></table></figure>
+<p>其中name是别名，string是任意字符串。</p>
+<p>注意事项：</p>
+<ul>
+<li>在定义别名时使用单引号而不是双引号，将参数替换推迟到应用别名的时候</li>
+<li>如果别名以空格结束，会对其之后的单词执行别名替换</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> name</span><br></pre></td></tr></table></figure>
+<p>以上命令会列出别名name的值，如果不带参数会列出所有的别名。使用unalias命令可以删除别名</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>Korn和Bash Shell的数组写法</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">写法</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&#36;{array[i]}</td>
+<td style="text-align:left">替换为元素i的值</td>
+</tr>
+<tr>
+<td style="text-align:center">&#36;array</td>
+<td style="text-align:left">替换为数组第一个元素的值（array[0]）</td>
+</tr>
+<tr>
+<td style="text-align:center">&#36;{array[*]}</td>
+<td style="text-align:left">替换为所有数组元素的值</td>
+</tr>
+<tr>
+<td style="text-align:center">&#36;{&#35;array[*]}</td>
+<td style="text-align:left">替换为元素个数</td>
+</tr>
+<tr>
+<td style="text-align:center">array[i]=val</td>
+<td style="text-align:left">将val保存到array[i]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h2><p>当命令在后台启动时（利用&#38;），Shell会在中括号（[]）中打印作业编号及进程ID</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[n]		progressID</span><br></pre></td></tr></table></figure>
+<p>作业结束时，Shell会打印出作业编号n和用于创建作业的命令序列sequence</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[n] + Done sequence</span><br></pre></td></tr></table></figure>
+<p>jobs命令可以打印出尚未完成的作业状态。</p>
+<ul>
+<li><strong>+</strong>：当前作业</li>
+<li><strong>-</strong>：上一个作业</li>
+<li><strong>%</strong>：当前作业</li>
+</ul>
+<p>使用Ctrl+z键可以挂起在前台运行的作业（如果没有使用&amp;），停止的作业即为当前作业。想继续执行该作业可以使用fg或bg命令（fg命令会在前台恢复执行当前作业，bg命令会在后台恢复执行当前作业。可以为fg和bg命令指定作业编号、管道的前几个字符、+、-或%%）。</p>
+<p>如果后台作业试图从终端读取信息，该作业会被停止并显示如下信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[n] - Stopped (SIGTTIN)		sequence</span><br></pre></td></tr></table></figure>
+<p>可以使用fg命令把它带到前台读取所需的数据。得到数据之后，再次停止该作业并将其置入后台。</p>
+<p>使用命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stty tostop</span><br></pre></td></tr></table></figure>
+<p>会停止所有试图向终端写入的后台作业并输出如下信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[n] - Stopped (SIGTTOU) sequence</span><br></pre></td></tr></table></figure>
+<h2 id="其他特性"><a href="#其他特性" class="headerlink" title="其他特性"></a>其他特性</h2><h3 id="cd命令的其他特性"><a href="#cd命令的其他特性" class="headerlink" title="cd命令的其他特性"></a>cd命令的其他特性</h3><p>参数“-”表示“上一个目录”</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> -</span><br></pre></td></tr></table></figure>
+<p>Korn Shell的cd命令会尝试将当前目录中第一次出现的字符串old替换成字符串new</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> old new</span><br></pre></td></tr></table></figure>
+<h3 id="波浪符替换"><a href="#波浪符替换" class="headerlink" title="波浪符替换"></a>波浪符替换</h3><p>如果命令行中有单词是以波浪符~起始：</p>
+<ul>
+<li>如果波浪符是单词中唯一的字符或者紧挨着波浪符的是斜线/，会使用HOME变量的值来替换</li>
+<li>如果从波浪符往后，一直到斜线的剩余单词是/etc/password中的用户登录名，那么波浪符和用户登录名会被该用户的HOME目录所替换</li>
+<li>在Korn和Bash Shell中，如果~后面是+或-，那么会分别使用PWD和OLDPWD的值来替换</li>
+<li>Shell还会检查冒号:之后的波浪符并执行波浪符替换</li>
+</ul>
+<h3 id="搜索次序"><a href="#搜索次序" class="headerlink" title="搜索次序"></a>搜索次序</h3><ol>
+<li>Shell首先检查命令是否为保留字</li>
+<li>如果不是保留字，也没有被引用，Shell接着检查别名列表，如果在其中找到匹配的别名，就执行替换操作。如果别名定义是以空格结尾，Shell还会尝试对下一个单词执行别名替换。针对替换后的最终结果，再次检查保留字列表，如果不是保留字，继续进行第3步</li>
+<li>针对命令名检查函数列表，如果找到的话，执行其中的同名函数</li>
+<li>检查是否为内建命令</li>
+<li>最后搜索PATH来定位命令</li>
+<li>如果还没有找到，输出错误信息command not found</li>
+</ol>
+<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">POSIX Shell</th>
+<th style="text-align:center">Korn Shell</th>
+<th style="text-align:center">Bash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ENV文件</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">□</td>
+</tr>
+<tr>
+<td style="text-align:center">vi行编辑模式</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">emacs行编辑模式</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">fc命令</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">r命令</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">!!</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">!string</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">函数</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">局部变量</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">通过FPATH自动载入</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">使用((…))的整数表达式</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">整数类型</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">不同基数的整数</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">0xhexnumber(十六进制数)<br>0octalnumber(八进制数)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">别名</td>
+<td style="text-align:center">△</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">数组</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">作业控制</td>
+<td style="text-align:center">△</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">cd ~</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">cd old new</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">~username、~/</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">~+、~-</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中√表示支持该特性；△表示可选特性；□表示仅在使用sh或—posix命令行选项调用的时候可用，或者在执行了set -o posix之后。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="系统的“垃圾桶”"><a href="#系统的“垃圾桶”" class="headerlink" title="系统的“垃圾桶”"></a>系统的“垃圾桶”</h2><p>/dev/null是一个特殊的系统文件，任何人都可以读取（立刻会得到一个EOF）或写入。向该文件写入的任何东西都会消失，就像是一个巨大的黑洞一样。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -c &gt; /dev/null</span><br></pre></td></tr></table></figure>
+<h2 id="终端程序"><a href="#终端程序" class="headerlink" title="终端程序"></a>终端程序</h2><p>/dev/tty总是指向终端程序，不管是Mac、Linux还是Unix系统。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -c &gt; /dev/tty</span><br></pre></td></tr></table></figure>
+<h2 id="调试选项-x"><a href="#调试选项-x" class="headerlink" title="调试选项 -x"></a>调试选项 -x</h2><p>想调试Shell程序，或是了解更多的工作原理，可以在程序正常的调用（命令名及参数）之前输入sh -x以跟踪执行过程（命令在执行的同时会被打印在终端中，并在之前加上一个加号）。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -x cp book book2</span><br></pre></td></tr></table></figure>
+<h2 id="空命令"><a href="#空命令" class="headerlink" title="空命令:"></a>空命令:</h2><p>该命令什么都不做，它用来满足必须有命令存在的要求。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> command0</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	:</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">command</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h2 id="续行符"><a href="#续行符" class="headerlink" title="续行符\"></a>续行符\</h2><p>当\用于行尾的时候表示续行。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp book book2 book3 \</span><br><span class="line">book4 dir</span><br></pre></td></tr></table></figure>
+<h2 id="后台运行符-amp"><a href="#后台运行符-amp" class="headerlink" title="后台运行符&amp;"></a>后台运行符&amp;</h2><p>当&amp;用于行尾的时候表示在后台运行该程序或命令（默认情况下，从系统登出时，所有的进程都会自动终止。如果希望某个程序在登出后仍然继续执行，可以使用nohup命令运行该程序，或者使用at/cron来调度执行）</p>
+<p><strong>循环语句也可以在后台执行，只需要在done语句后加上一个&amp;就可以了</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var <span class="keyword">in</span> 1 2 3</span><br><span class="line">	<span class="built_in">echo</span> var</span><br><span class="line"><span class="keyword">done</span> &amp;</span><br></pre></td></tr></table></figure>
+<p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
+
+    </div>
+
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/编程基础/">编程基础</a>|<a class="cat-link" href="/categories/编程基础/开发工具/">开发工具</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Shell/" title="Shell">Shell</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <!-- <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a> -->
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/post/常用Shell命令/">
+            
+                常用Shell命令
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/post/Hello Blog/">
+            
+                Hello Blog
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/zhj.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'Shell脚本编程' || 'post/Shell脚本编程/',
+    owner: 'HuajingZeng',
+    repo: 'huajingzeng.github.io_comments',
+    clientId: '7ae3915c563a60d41451',
+    clientSecret: '2abefe41031e15eabf12a828f30fd380487fb738'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/程序人生/">程序人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/">编程基础</a>
+        <span class="badge">(11)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/开发工具/">开发工具</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/随笔/" title="随笔">随笔 (1)</a>
+  
+    <a class="tag-item" href="/tags/面向对象/" title="面向对象">面向对象 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计原则/" title="设计原则">设计原则 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
+  
+    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (6)</a>
+  
+    <a class="tag-item" href="/tags/OS-X/" title="OS X">OS X (3)</a>
+  
+    <a class="tag-item" href="/tags/程序员/" title="程序员">程序员 (1)</a>
+  
+    <a class="tag-item" href="/tags/书籍/" title="书籍">书籍 (1)</a>
+  
+    <a class="tag-item" href="/tags/代码大全/" title="代码大全">代码大全 (1)</a>
+  
+    <a class="tag-item" href="/tags/核对表/" title="核对表">核对表 (1)</a>
+  
+    <a class="tag-item" href="/tags/Objective-C/" title="Objective-C">Objective-C (1)</a>
+  
+    <a class="tag-item" href="/tags/正则表达式/" title="正则表达式">正则表达式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/tags/SVN/" title="SVN">SVN (1)</a>
+  
+    <a class="tag-item" href="/tags/CVS/" title="CVS">CVS (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://stackoverflow.com/" target="_blank" title="Stack Overflow">Stack Overflow</a>
+        </li>
+    
+        <li>
+            <a href="http://nshipster.cn/" target="_blank" title="NSHipster">NSHipster</a>
+        </li>
+    
+        <li>
+            <a href="https://www.raywenderlich.com/" target="_blank" title="raywenderlich">raywenderlich</a>
+        </li>
+    
+        <li>
+            <a href="http://www.cocoachina.com/" target="_blank" title="Cocoa China">Cocoa China</a>
+        </li>
+    
+        <li>
+            <a href="https://objccn.io/" target="_blank" title="ObjC 中国">ObjC 中国</a>
+        </li>
+    
+        <li>
+            <a href="http://mac.orsoon.com/" target="_blank" title="未来软件园">未来软件园</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">曾华经</a>
+	<br>
+	<span id="busuanzi_container_site_pv">本站总访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span>次</span>
+	&emsp;
+    <span id="busuanzi_container_site_uv">本站总访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span>人</span>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

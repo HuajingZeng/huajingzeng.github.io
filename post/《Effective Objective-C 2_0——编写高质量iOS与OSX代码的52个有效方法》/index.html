@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》 | 曾华经</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="iOS, Web">
+    <meta name="description" content="曾华经个人博客">
+
+    
+    <link rel="alternative" href="/atom.xml" title="曾华经" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+	(function() {
+  		var hm = document.createElement("script");
+  		hm.src = "https://hm.baidu.com/hm.js?8dcd7371cdcc3e343c29794b5e207954";
+  		var s = document.getElementsByTagName("script")[0]; 
+  		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body class="home">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">曾华经</span>
+                    <span class="description">iOS Programmer</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/index.html" class="item ">
+                <a href="/lab/" title="项目" class="icon-lab">&nbsp;项目</a>
+            </li>
+            
+            <li rel="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/HuajingZeng" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://github.com" target="_blank">Hosted by Github Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://weibo.com/p/1005051288040665/home?from=page_100505&amp;mod=TAB#place" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zhj.jpg" alt="avatar" title="曾华经">
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 目录内容 -->
+
+    <p id="toc-div" class="show-toc-btn" onclick="showToc();">
+    <span class="btn-text">文章导航</span>
+    </p>
+    <div id="toc-article" class="toc-article" style="display:none">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#熟悉Objective-C"><span class="toc-number">1.</span> <span class="toc-text">熟悉Objective-C</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象、消息、运行期"><span class="toc-number">2.</span> <span class="toc-text">对象、消息、运行期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接口与API设计"><span class="toc-number">3.</span> <span class="toc-text">接口与API设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#协议与分类"><span class="toc-number">4.</span> <span class="toc-text">协议与分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内存管理"><span class="toc-number">5.</span> <span class="toc-text">内存管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#块与大中枢派发"><span class="toc-number">6.</span> <span class="toc-text">块与大中枢派发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#系统框架"><span class="toc-number">7.</span> <span class="toc-text">系统框架</span></a></li></ol>
+   </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+ 
+<!-- 目录内容结束 -->
+
+<!-- 文章 -->
+<article class="post article" onclick="showBtn();">
+    <header class="text-center">
+        <h3 class="post-title"><span>《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        曾华经
+		&emsp;发表于：<time datetime="2019-01-17T01:28:30.000Z">2019-01-17</time>
+		&emsp;修改于：<time datetime="2019-11-16T08:18:26.842Z">2019-11-16</time>
+		&emsp;总阅读量：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span>次
+    </p>
+    <div class="post-content">
+        <p>&emsp;&emsp;”Effective Software Development Series”系列经典著作，世界级软件开发大师Scott Meyers亲自担当顾问编辑，Amazon全五星评价。<br>&emsp;&emsp;从语法、接口与API设计、内存管理、框架等方面总结和探讨了Objective-C编程中52个鲜为人知和容易被忽视的特性与陷阱。包含大量实用范例代码，为编写易于理解、便于维护、易于扩展和高效的Objective-C应用提供了解决方案。</p>
+<a id="more"></a>
+<h1 id="熟悉Objective-C"><a href="#熟悉Objective-C" class="headerlink" title="熟悉Objective-C"></a>熟悉Objective-C</h1><p><strong>【1】了解Objective-C语言的起源</strong>  </p>
+<ul>
+<li>Objective-C为C语言添加了面向对象特性，是其超集。Objective-C使用动态绑定的消息结构，也就是说，在运行时才会检查对象类型。接收一条消息后，究竟应执行何种代码，由运行期环境而非编译器来决定。</li>
+<li>理解C语言的核心概念有助于写好Objective-C程序。尤其要掌握内存模型与指针。</li>
+</ul>
+<p><strong>【2】在类的头文件中尽量少引入其他头文件</strong></p>
+<ul>
+<li>除非确有必要，否则不要引入头文件。一般来说，应在某个类的头文件中使用向前声明来提及别的类，并实现文件中引入那些类的头文件。这样做可以尽量降低类之间的耦合（Coupling）。</li>
+<li>有时无法使用向前声明，比如要声明某个类遵循一项协议。这种情况下，尽量把“该类遵循某协议”的这条声明移至“class-continuation分类”中。如果不行的话，就把协议单独放在一个头文件中然后将其引入。</li>
+</ul>
+<p><strong>【3】多用字面量语法，少用与之等价的方法</strong></p>
+<ul>
+<li>应该使用字面量语法来创建字符串、数值、数组、字典。与创建此类对象的常规方法相比，这么做更加简明扼要。</li>
+<li>应该通过取小标操作来访问数组下标或字典中的键所对应的元素。</li>
+<li>用字面量语法创建数组或字典时，若值中有nil，则会抛出异常。因此，务必确保值里不含nil。</li>
+</ul>
+<p><strong>【4】多用类型常量，少用#define预处理指令</strong></p>
+<ul>
+<li>不要用预处理指令定义常量。这样定义出来的常量不含类型信息，编译器只是会在编译前据此执行查找与替换操作。即使有人重新定义了常量值，编译器也不会产生警告信息，这将导致应用程序中的常量值不一致。</li>
+<li>在实现文件中使用static const来定义“只在编译单元内可见的常量”（translation-unit-specific constant）。由于此类常量不在全局符号表中，所以无须为其名称加前缀。</li>
+<li>在头文件中使用extern来声明全局常量，并在相关实现文件中定义其值。这种常量要出现在全局符号表中，所以其名称应加以区隔，通常用与之相关的类名做前缀。</li>
+</ul>
+<p><strong>【5】用枚举表示状态、选项、状态码</strong></p>
+<ul>
+<li>应该用枚举来表示状态机的状态、传递给方法的选项以及状态码等值，给这些值起个易懂的名字。</li>
+<li>如果把传递给某个方法的选项表示为枚举类型，而多个选项又可以同时使用，那么就将各选项值定义为2的幂，以便通过按位或操作将其组合起来。</li>
+<li>用NS_ENUM与NS_OPTIONS宏来定义枚举类型，并指明底层数据类型。这样做可以确保枚举是用开发者所选的底层数据类型实现的，而不会采用编译器所选的类型。</li>
+<li>在处理枚举类型的switch语句中不要实现default分支。这样的话，加入新枚举之后，编译器就会提示开发者：switch语句并未处理所有的枚举。</li>
+</ul>
+<h1 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h1><p><strong>【6】理解“属性”这一概念</strong></p>
+<ul>
+<li>可以用@property语法来定义对象中封装的数据。</li>
+<li>通过“特质”来指定存储数据所需的正确语义。</li>
+<li>在设置属性所对应的实例变量时，一定要遵从该属性所声明的语义。</li>
+<li>开发iOS程序时应该使用nonatomic属性，因为atomic属性会严重影响性能。</li>
+</ul>
+<p><strong>【7】在对象内部尽量直接访问实例变量</strong></p>
+<ul>
+<li>在对象内部读取数据时，应该直接通过实例变量来读，而写入数据时，则应通过属性来写。</li>
+<li>在初始化方法及dealloc方法中，总是应该直接通过实例变量来读写数据。</li>
+<li>有时会使用惰性初始化技术配置某份数据，这种情况下，需要通过属性来读取数据。</li>
+</ul>
+<p><strong>【8】理解“对象等同性”这一概念</strong></p>
+<ul>
+<li>若想检测对象的等同性，请提供“isEqual”和“hash”方法。</li>
+<li>相同的对象必须具有相同的哈希码，但是哈希码相同的对象却未必相同。</li>
+<li>不要盲目地逐个检测每条属性，而是应该依照具体需求来制定检测方案。</li>
+<li>编写hash方法时，应该使用计算速度快而且哈希码碰撞几率低的算法。</li>
+</ul>
+<p><strong>【9】以“类簇模式”隐藏实现细节</strong></p>
+<ul>
+<li>类族模式可以把实现细节隐藏在一套简单的公共接口后面。</li>
+<li>系统框架中经常使用类族。</li>
+<li>从类族的公共抽象基类中继承子类时要当心，若有开发文档，则应首先阅读。</li>
+</ul>
+<p><strong>【10】在既有类中使用关联对象存放自定义数据</strong></p>
+<ul>
+<li>可以通过“关联对象”机制来把两个对象连起来。</li>
+<li>定义关联对象时可指定内存管理语义，用以模仿定义属性时所采用的“拥有关系”与“非拥有关系”。</li>
+<li>只有在其他做法不可行时才应选用关联对象，因为这种做法通常会引入难于查找的bug。</li>
+</ul>
+<p><strong>【11】理解objc_msgSend的作用</strong></p>
+<ul>
+<li>消息由接收者、选择子及参数构成。给某对象“发送消息”（invoke a message）也就相当于在该对象上“调用方法”（call a method）。</li>
+<li>发给某对象的全部消息都要由“动态消息派发系统”（dynamic message dispatch system）来处理，该系统会查出对应的方法，并执行其代码。</li>
+</ul>
+<p><strong>【12】理解消息转发机制</strong></p>
+<ul>
+<li>若对象无法响应某个选择子，则进入消息转发流程。</li>
+<li>通过运行期的动态方法解析功能，我们可以在需要用到某个方法时再将其加入类中。</li>
+<li>对象可以把其无法解读的某些选择子转交给其他对象来处理。</li>
+<li>经过上述两步之后，如果还是没办法处理选择子，那就启动完整的消息转发机制。</li>
+</ul>
+<p><strong>【13】用“方法调配技术”调试“黑盒方法”</strong></p>
+<ul>
+<li>在运行期，可以向类中新增或替换选择子所对应的方法实现。</li>
+<li>使用另一份实现来替换原有的方法实现，这道工序叫做“方法调配”，开发者常用此技术向原有实现中添加新功能。</li>
+<li>一般来说，是有调试程序的时候才需要在运行期修改方法实现，这种做法不宜滥用。</li>
+</ul>
+<p><strong>【14】理解“类对象”的用意</strong></p>
+<ul>
+<li>每个实例都有一个指向Class对象的指针，用以表明其类型，而这些Class对象则构成了类的继承体系。</li>
+<li>如果对象类型无法在编译期确定，那么就应该使用类型信息查询方法来探知。</li>
+<li>尽量使用类型信息查询方法来确定对象类型，而不要直接比较类对象，因为某些对象可能实现了消息转发功能。</li>
+</ul>
+<h1 id="接口与API设计"><a href="#接口与API设计" class="headerlink" title="接口与API设计"></a>接口与API设计</h1><p><strong>【15】用前缀避免命名空间冲突</strong></p>
+<ul>
+<li>选择与你的公司、应用程序或者二者皆有关联之名称作为类名的前缀，并在所有代码中均使用这一前缀。</li>
+<li>若自己所开发的程序库中用了第三方库，则应为其中的名称加上前缀。</li>
+</ul>
+<p><strong>【16】提供“全能初始化方法”</strong></p>
+<ul>
+<li>在类中提供一个全能初始化方法，并于文档里指明。其他初始化方法均应调用此方法。</li>
+<li>若全能初始化方法与超类不同，则需覆写超类中的对应方法。</li>
+<li>如果超类的初始化方法不适用于子类，那么应该覆写这个超类方法，并在其中抛出异常。</li>
+</ul>
+<p><strong>【17】实现description方法</strong></p>
+<ul>
+<li>实现description方法返回一个有意义的字符串，用以描述该实例。</li>
+<li>若想在调试时打印出更详尽的对象描述信息，则应实现debugDescription方法。</li>
+</ul>
+<p><strong>【18】尽量使用不可变对象</strong></p>
+<ul>
+<li>尽量创建不可变对象。</li>
+<li>若某属性仅可于对象内部修改，则在“class-continuation分类”中将其由readonly属性扩展为readwrite属性。</li>
+<li>不要把可变的collection作为属性公开，而应提供相关方法，以此修改对象中的可变collection。</li>
+</ul>
+<p><strong>【19】使用清晰而协调的命名方式</strong></p>
+<ul>
+<li>起名时应遵从标准的Objective-C命名规范，这样创建出来的接口更容易为开发者所理解。</li>
+<li>方法名要言简意赅，从左至右读起来要像个日常用语中的句子才好。</li>
+<li>方法名里不要使用缩略后的类型名称。</li>
+<li>给方法起名时的第一要务就是确保其风格与你自己的代码或所要集成的框架相符。</li>
+</ul>
+<ol>
+<li>方法命名  <ul>
+<li>如果方法的返回值是新创建的，那么方法名的首个词应是返回值的类型，除非前面还有修饰语。（属性的存取方法不遵循这种命名方式，因为一般认为这些方法不会创建新对象，即便有时返回内部对象的一份拷贝，我们也认为那相当于原有的对象。这些存取方法应该按照其所对应的属性来命名）<br>应该把表示参数类型的名词放在参数前面。  </li>
+<li>如果方法要在当前对象上执行操作，那么就应该包含动词；若执行操作时还需要参数则应该在动词后面加上一个或多个名词。</li>
+<li>不要使用str这种简称，应该用string这样的全称。</li>
+<li>Boolean属性应加is前缀。如果某方法返回非属性的Boolean值，那么应该根据其功能，选用has或is当前缀。</li>
+<li>将get这个前缀留给那些借由“输出参数”来保存返回值的方法，比如说，把返回值填充到“C语言式数组”（C-style array）里的那种方法就可以使用这个词做前缀。 </li>
+</ul>
+</li>
+<li>类与协议命名<ul>
+<li>应该为类与协议的名称加上前缀，以避免命名空间冲突。而且应该像给方法起名时那样把词语组织好，使其从左至右读起来较为通顺。</li>
+</ul>
+</li>
+</ol>
+<p><strong>【20】为私有方法名加前缀</strong></p>
+<ul>
+<li>给私有方法的名称加上前缀，这样可以很容易地将其同公共方法区分开。</li>
+<li>不要单用一个下划线做私有方法的前缀，因为这种做法是预留给苹果公司用的。</li>
+</ul>
+<p><strong>【21】理解Objective-C错误模型</strong></p>
+<ul>
+<li>只有发生了可使整个程序崩溃的严重错误时，才应使用异常。</li>
+<li>在错误不那么严重的情况下，可以指派“委托方法”（delegate method）来处理错误，也可以把错误信息放在NSError对象里，经由“输出参数”返回给调用这。</li>
+</ul>
+<p><strong>【22】理解NSCopying协议</strong></p>
+<ul>
+<li>若想令自己所写的对象具有拷贝功能，则需要实现NSCopying协议。</li>
+<li>如果自定义的对象分为可变版本与不可变版本，那么就要同时实现NSCopying与NSMutableCopying协议。</li>
+<li>复制对象时需决定采用浅拷贝还是深拷贝，一般情况下应该尽量执行浅拷贝。</li>
+<li>如果你所写的对象需要深拷贝，那么可考虑新增一个专门执行深拷贝的方法。</li>
+</ul>
+<h1 id="协议与分类"><a href="#协议与分类" class="headerlink" title="协议与分类"></a>协议与分类</h1><p><strong>【23】通过委托与数据源协议进行对象间通信</strong></p>
+<ul>
+<li>委托模式为对象提供了一套接口，使其可由此将相关事件告知其他对象。</li>
+<li>将委托对象应该支持的接口定义成协议，在协议中把可能需要处理的事件定义成方法。</li>
+<li>当某对象需要从另外一个对象中获取数据时，可以使用委托模式。这种情况下，该模式亦称“数据源协议”（data source protocol）。</li>
+<li>若有必要，可实现含有位段的结构体，将委托对象是否能响应相关协议方法这一信息缓存至其中。</li>
+</ul>
+<p><strong>【24】将类的实现代码分散到便于管理的数个分类之中</strong></p>
+<ul>
+<li>使用分类机制把类的实现代码划分成易于管理的小块。</li>
+<li>将应该视为“私有”的方法归入名叫Private的分类中，以隐藏实现细节。</li>
+</ul>
+<p><strong>【25】总是为第三方类的分类名称加前缀</strong></p>
+<ul>
+<li>向第三方类中添加分类时，总应给其名称加上你专用的前缀。</li>
+<li>向第三方类中添加分类时，总应给其中的方法名加上你专用的前缀。</li>
+</ul>
+<p><strong>【26】勿在分类中声明属性</strong></p>
+<ul>
+<li>把封装数据所用的全部属性都定义在主接口里。</li>
+<li>在“class-continuation分类”之外的其他分类中，可以定义存取方法，但尽量不要定义属性。</li>
+</ul>
+<p><strong>【27】使用“class-continuation分类”隐藏实现细节</strong></p>
+<ul>
+<li>通过“class-continuation分类”向类中新增实例变量。</li>
+<li>如果某属性在主接口中声明为“只读”，而类的内部又要用设置方法修改此属性，那么就在“class-continuation分类”中将其扩展为“可读写”。</li>
+<li>把私有方法的原型声明在“class-continuation分类”里面。</li>
+<li>若想使类所遵从的协议不为人所知，则可于“class-continuation分类”中声明。</li>
+</ul>
+<p><strong>【28】通过协议提供匿名对象</strong></p>
+<ul>
+<li>协议可在某种程度上提供匿名类型。具体的对象类型可以淡化成遵从某协议的id类型，协议里规定了对象所应实现的方法。</li>
+<li>使用匿名对象来隐藏类型名称（或类名）。</li>
+<li>如果具体类型不重要，重要的是对象能够响应（定义在协议里的）特定方法，那么可使用匿名对象来表示。</li>
+</ul>
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p><strong>【29】理解引用计数</strong></p>
+<ul>
+<li>引用计数机制通过可以递增递减的计数器来管理内存。对象创建好之后，其保留计数至少为1.若保留计数为正，则对象继续存活。当保留计数降为0时，对象就被销毁了。</li>
+<li>在对象生命期中，其余对象通过引用来保留或释放对象。保留与释放操作分别会递增及递减保留计数。</li>
+</ul>
+<p><strong>【30】以ARC简化引用计数</strong></p>
+<ul>
+<li>有ARC之后，程序员就无须担心内存管理问题了。使用ARC来编程，可省去类中的许多“样板代码”。</li>
+<li>ARC管理对象生命周期的办法基本上就是：在合适的地方插入“保留”及“释放”操作。在ARC环境下，变量的内存管理语义可以通过修饰符指明，而原来则需要手工执行“保留”及“释放”操作。</li>
+<li>由方法所返回的对象，其内存管理语义总是通过方法名来体现。ARC将此确定为开发者必须遵守的规则。</li>
+<li>ARC只负责管理Objective-C对象的内存。尤其要注意：CoreFoundation对象不归ARC管理，开发者必须适时调用CFRetain/CFRelease。</li>
+</ul>
+<p><strong>【31】在dealloc方法中只释放引用并解除监听</strong></p>
+<ul>
+<li>在dealloc方法里，应该做的事情就是释放指向其他对象的引用，并取消原来订阅的“键值观测”（KVO）或NSNotificationCenter等通知，不要做其他事情。</li>
+<li>如果对象持有文件描述符等系统资源，那么应该专门编写一个方法来释放此种资源。这样的类要和其他使用者约定：用完资源后必须调用close方法。</li>
+<li>执行异步任务的方法不应在dealloc里调用；只能在正常状态下执行的那些方法也不应在dealloc里调用，因为此时对象已处于正在回收的状态了。</li>
+</ul>
+<p><strong>【32】编写“异常安全代码”时留意内存管理问题</strong></p>
+<ul>
+<li>捕获异常时，一定要注意将try块内所创立的对象清理干净。</li>
+<li>在默认情况下，ARC不生成安全处理异常所需的清理代码。开启编译器标志后，可生成这种代码，不过会导致应用程序变大，而且会降低运行效率。</li>
+</ul>
+<p><strong>【33】以弱引用避免保留环</strong></p>
+<ul>
+<li>将某些引用设为weak，可避免出现“保留环”。</li>
+<li>weak引用可以自动清空，也可以不自动清空。自动清空（autonilling）是随着ARC而引入的新特性，由运行期系统来实现。在具备自动清空功能的弱引用上，可以随意读取其数据，因为这种引用不会指向已经回收过的对象。</li>
+</ul>
+<p><strong>【34】以“自动释放池块”降低内存峰值</strong></p>
+<ul>
+<li>自动释放池排布在栈中，对象收到autorelease消息后，系统将其放入最顶端的池里。</li>
+<li>合理运用自动释放池，可降低应用程序的内存峰值。</li>
+<li>@autoreleasepool这种新式写法能创建出更为轻便的自动释放池。</li>
+</ul>
+<p><strong>【35】用“僵尸对象”调试内存管理问题</strong></p>
+<ul>
+<li>系统在回收对象时，可以不将其真的回收，而是把它转化为僵尸对象。通过环境变量NSZombieEnabled可开启此功能。</li>
+<li>系统会修改对象的isa指针，令其指向特殊的僵尸类，从而使该对象变为僵尸对象。僵尸类能够响应所有的选择子，响应方式为：打印一条包含消息内容及其接受者的消息，然后终止应用程序。</li>
+</ul>
+<p><strong>【36】不要使用retainCount</strong></p>
+<ul>
+<li>对象的保留计数看似有用，实则不然，因为任何给定时间点上的“绝对保留计数”（absolute retain count）都无法反映对象生命周期的全貌。</li>
+<li>引入ARC之后，retainCount方法就正式废止了，在ARC下调用该方法会导致编译器报错。</li>
+</ul>
+<h1 id="块与大中枢派发"><a href="#块与大中枢派发" class="headerlink" title="块与大中枢派发"></a>块与大中枢派发</h1><p><strong>【37】理解“块”这一个概念</strong></p>
+<ul>
+<li>块是C、C++、Objective-C中的词法闭包。</li>
+<li>块可接受参数，也可返回值。</li>
+<li>块可以分配在栈上或堆上，也可以是全局的。分配在栈上的块可拷贝到堆里，这样的话，就和标准的Objective-C对象一样，具备引用计数了。</li>
+</ul>
+<p><strong>【38】为常用的块类型创建typedef</strong></p>
+<ul>
+<li>以typedef重新定义块类型，可令块变量用起来更加简单。</li>
+<li>定义新类型时应遵从现有的命名习惯，勿使用名称与别的类型相冲突。</li>
+<li>不妨为同一个签名定义多个类型别名。如果要重构的代码使用了块类型的某个别名，那么只需修改相应typedef中的块签名即可，无须改动其他typedef。</li>
+</ul>
+<p><strong>【39】用handler块降低代码分散程度</strong></p>
+<ul>
+<li>在创建对象时，可以使用内联的handler块将相关业务逻辑一并声明。</li>
+<li>在有多个实例需要监控时，如果采用委托模式，那么经常需要根据传入的对象来切换，而若改用handler块来实现，则可直接将块与相关对象放在一起。</li>
+<li>设计API时如果用到了handler块，那么可以增加一个参数，使调用者可通过此参数来决定应该把块安排在哪个队列上执行。</li>
+</ul>
+<p><strong>【40】用块引用其所属对象时不要出现保留环</strong></p>
+<ul>
+<li>如果块所捕获的对象直接或间接地保留了块本身，那么就得当心保留环问题。</li>
+<li>一定要找个合适的时机解除保留环，而不能把责任推给API的调用者。</li>
+</ul>
+<p><strong>【41】多用派发队列，少用同步锁</strong></p>
+<ul>
+<li>派发队列可用来表达同步语义（synchronization semantic），这种做法要比使用@synchronized块或NSLock对象更简单。</li>
+<li>将同步与异步派发结合起来，可以实现与普通加锁机制一样的同步行为，而这么做却不会阻塞执行异步派发的线程。</li>
+<li>使用同步队列及栅栏块，可以令同步行为更加高效。</li>
+</ul>
+<p><strong>【42】多用GCD，少用performSelector系列方法</strong></p>
+<ul>
+<li>performSelector系列方法在内存管理方面容易有疏失。它无法确定将要执行的选择子具体是什么，因而ARC编译器也就无法插入适当的内存管理方法。</li>
+<li>performSelector系列方法所能处理的选择子太过局限了，选择子的返回值类型及发送给方法的参数个数都受到限制。</li>
+<li>如果想把任务放在另一个线程上执行，那么最好不要用performSelector系列方法，而是应该把任务封装到块里，然后调用大中枢派发机制的相关方法来实现。</li>
+</ul>
+<p><strong>【43】掌握GCD及操作队列的使用时机</strong></p>
+<ul>
+<li>在解决多线程与任务管理问题时，派发队列并非唯一方案。</li>
+<li>操作队列提供了一套高层的Objective-C API，能实现纯GCD所具备的绝大部分功能，而且还能完成一些更为复杂的操作，那些操作若改用GCD来实现，则需另外编写代码。</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">并发队列（concurrent queue）</th>
+<th style="text-align:center">串行队列（serial queue）</th>
+<th style="text-align:center">主队列（main queue）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">异步执行（async）</td>
+<td style="text-align:center">开启多个新的线程<br>任务同时执行</td>
+<td style="text-align:center">开启一个新的线程<br>任务按顺序执行</td>
+<td style="text-align:center">不开启新的线程<br>任务按顺序执行</td>
+</tr>
+<tr>
+<td style="text-align:center">同步执行（sync）</td>
+<td style="text-align:center">不开启新的线程<br>任务按顺序执行</td>
+<td style="text-align:center">不开启新的线程<br>任务按顺序执行</td>
+<td style="text-align:center">死锁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>【44】通过Dispatch Group机制，根据系统资源状况来执行任务</strong></p>
+<ul>
+<li>一系列任务可归入一个dispatch group之中。开发者可以在这组任务执行完毕时获得通知。</li>
+<li>通过dispatch group，可以在并发式派发队列里同时执行多项任务。此时GCD会根据系统资源状况来调度这些并发执行的任务。开发者若自己来实现此功能，则需编写大量代码。</li>
+</ul>
+<p><strong>【45】使用dispatch_once来执行只需运行一次的线程安全代码</strong></p>
+<ul>
+<li>经常需要编写“只需执行一次的线程安全代码”（thread-safe single-code execution）。通过GCD所提供的dispatch_once函数，很容易就能实现此功能。</li>
+<li>标记应该声明在static或global作用域中，这样的话，在把只需执行一次的块传给dispatch_once函数时，传进去的标记也是相同的。</li>
+</ul>
+<p><strong>【46】不要使用dispatch_get_current_queue</strong></p>
+<ul>
+<li>dispatch_get_current_queue函数的行为常常与开发者所预期的不同。此函数已经废弃，只应做调试之用。</li>
+<li>由于派发队列是按层级来组织的，所以无法单用某个队列对象来描述“当前队列”这一概念。</li>
+<li>dispatch_get_current_queue函数用于解决由不可重入的代码所引发的死锁，然而能用此函数解决的问题，通常也能改用“队列特定数据”来解决。</li>
+</ul>
+<h1 id="系统框架"><a href="#系统框架" class="headerlink" title="系统框架"></a>系统框架</h1><p><strong>【47】熟悉系统框架</strong></p>
+<ul>
+<li>许多系统框架都可以直接使用。其中最重要的是Foundation与CoreFoundation，这两个框架提供了构建应用程序所需的许多核心功能。</li>
+<li>很多常见任务都能用框架来做，例如音频与视频处理、网络通讯、数据管理等。</li>
+<li>请记住：用纯C写成的框架与用Objective-C写成的一样重要，若想成为优秀的Objective-C开发者，应该掌握C语言的核心概念。</li>
+</ul>
+<p><strong>【48】多用块枚举，少用for循环</strong></p>
+<ul>
+<li>遍历collection有四种方式。最基本的办法是for循环，其次是NSEnumerator遍历及快速遍历法，最新、最先进的方式则是“块枚举法”。</li>
+<li>“块枚举法”本身就能通过GCD来并发执行遍历操作，无须另行编写代码。而采用其他遍历方式则无法轻易实现这一点。</li>
+<li>若提前知道待遍历的collection含有何种对象，则应修改块签名，指出对象的具体类型。</li>
+</ul>
+<p><strong>【49】对自定义其内存管理语义的collection使用无缝桥接</strong></p>
+<ul>
+<li>通过无缝桥接技术，可以在Foundation框架中的Objective-C对象与CoreFoundation框架中的C语言数据结构之间来回转换。</li>
+<li>在CoreFoundation层面创建collection时，可以指定许多回调函数，这些函数表示此collection应如何处理其元素。然后，可运用无缝桥接技术，将其转换成具备特殊内存管理语义的Objective-C collection。</li>
+</ul>
+<p><strong>【50】构建缓存时选用NSCache而非NSDictionary</strong></p>
+<ul>
+<li>实现缓存时应选用NSCache而非NSDictionary对象。因为NSCache可以提供优雅的自动删减功能，而且是“线程安全的”，此外，它与字典不同，并不会拷贝键。</li>
+<li>可以给NSCache对象设置上限，用以限制缓存中的对象总个数及“总成本”，而这些尺度则定义了缓存删减其中对象的时机。但是绝对不要把这些尺度当成可靠的“硬限制”（hard limit），它们仅对NSCache起指导作用。</li>
+<li>将NSPurgeableData与NSCache搭配使用，可实现自动清除数据的功能，也就是说，当NSPurgeableData对象所占内存为系统所丢弃时，该对象自身也会从缓存中移除。</li>
+<li>如果缓存使用得当，那么应用程序的响应速度就能提高。只有那种“重新计算起来很费事的”数据，才值得放入缓存，比如那些需要从网络获取或从磁盘读取的数据。</li>
+</ul>
+<p><strong>【51】精简initialize与load的实现代码</strong></p>
+<ul>
+<li>在加载阶段，如果类实现了load方法，那么系统就会调用它。分类里也可以定义此方法，类的load方法要比分类中的先调用。与其他方法不同，load方法不参与覆写机制。</li>
+<li>首次使用某个类之前，系统会向其发送initialize消息。由于此方法遵从普通的覆写规则，所以通常应该在里面判断当前要初始化的是哪个类。</li>
+<li>load与initialize方法都应该实现得精简一些，这有助于保持应用程序的响应能力，也能减少引入“依赖环”（interdependency cycle）的几率。</li>
+<li>无法在编译期设定的全局常量，可以放在initialize方法里初始化。</li>
+</ul>
+<p><strong>【52】别忘了NSTimer会保留其目标对象</strong></p>
+<ul>
+<li>NSTimer对象会保留其目标，直到计时器本身失效为止，调用invalidate方法可令计时器失效，另外，一次性的计时器在触发完任务之后也会失效。</li>
+<li>反复执行任务的计时器（repeating timer），很容易引入保留环，如果这种计时器的目标对象又保留了计时器本身，那肯定会导致保留环。这种环状保留关系，可能是直接发生的，也可能是通过对象图里的其他对象间接发生的。</li>
+<li>可以扩充NSTimer的功能，用“块”来打破保留环。不过，除非NSTimer将来的公共接口里提供此功能，否则必须创建分类，将相关实现代码加入其中。</li>
+</ul>
+<p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
+
+    </div>
+
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/编程基础/">编程基础</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/iOS/" title="iOS">iOS</a> / 
+    
+        <a href="/tags/OS-X/" title="OS X">OS X</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <!-- <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a> -->
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/">
+            
+                《Objective-C 高级编程——iOS与OS X多线程和内存管理》
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/post/OOP概要/">
+            
+                OOP概要
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/zhj.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: '《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》' || 'post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/',
+    owner: 'HuajingZeng',
+    repo: 'huajingzeng.github.io_comments',
+    clientId: '7ae3915c563a60d41451',
+    clientSecret: '2abefe41031e15eabf12a828f30fd380487fb738'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/程序人生/">程序人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/">编程基础</a>
+        <span class="badge">(11)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/开发工具/">开发工具</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/随笔/" title="随笔">随笔 (1)</a>
+  
+    <a class="tag-item" href="/tags/面向对象/" title="面向对象">面向对象 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计原则/" title="设计原则">设计原则 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
+  
+    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (6)</a>
+  
+    <a class="tag-item" href="/tags/OS-X/" title="OS X">OS X (3)</a>
+  
+    <a class="tag-item" href="/tags/程序员/" title="程序员">程序员 (1)</a>
+  
+    <a class="tag-item" href="/tags/书籍/" title="书籍">书籍 (1)</a>
+  
+    <a class="tag-item" href="/tags/代码大全/" title="代码大全">代码大全 (1)</a>
+  
+    <a class="tag-item" href="/tags/核对表/" title="核对表">核对表 (1)</a>
+  
+    <a class="tag-item" href="/tags/Objective-C/" title="Objective-C">Objective-C (1)</a>
+  
+    <a class="tag-item" href="/tags/正则表达式/" title="正则表达式">正则表达式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/tags/SVN/" title="SVN">SVN (1)</a>
+  
+    <a class="tag-item" href="/tags/CVS/" title="CVS">CVS (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://stackoverflow.com/" target="_blank" title="Stack Overflow">Stack Overflow</a>
+        </li>
+    
+        <li>
+            <a href="http://nshipster.cn/" target="_blank" title="NSHipster">NSHipster</a>
+        </li>
+    
+        <li>
+            <a href="https://www.raywenderlich.com/" target="_blank" title="raywenderlich">raywenderlich</a>
+        </li>
+    
+        <li>
+            <a href="http://www.cocoachina.com/" target="_blank" title="Cocoa China">Cocoa China</a>
+        </li>
+    
+        <li>
+            <a href="https://objccn.io/" target="_blank" title="ObjC 中国">ObjC 中国</a>
+        </li>
+    
+        <li>
+            <a href="http://mac.orsoon.com/" target="_blank" title="未来软件园">未来软件园</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">曾华经</a>
+	<br>
+	<span id="busuanzi_container_site_pv">本站总访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span>次</span>
+	&emsp;
+    <span id="busuanzi_container_site_uv">本站总访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span>人</span>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

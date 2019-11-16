@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>《Objective-C 高级编程——iOS与OS X多线程和内存管理》 | 曾华经</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="iOS, Web">
+    <meta name="description" content="曾华经个人博客">
+
+    
+    <link rel="alternative" href="/atom.xml" title="曾华经" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+	(function() {
+  		var hm = document.createElement("script");
+  		hm.src = "https://hm.baidu.com/hm.js?8dcd7371cdcc3e343c29794b5e207954";
+  		var s = document.getElementsByTagName("script")[0]; 
+  		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+	<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body class="home">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">曾华经</span>
+                    <span class="description">iOS Programmer</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/index.html" class="item ">
+                <a href="/lab/" title="项目" class="icon-lab">&nbsp;项目</a>
+            </li>
+            
+            <li rel="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/HuajingZeng" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://github.com" target="_blank">Hosted by Github Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://weibo.com/p/1005051288040665/home?from=page_100505&amp;mod=TAB#place" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zhj.jpg" alt="avatar" title="曾华经">
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 目录内容 -->
+
+    <p id="toc-div" class="show-toc-btn" onclick="showToc();">
+    <span class="btn-text">文章导航</span>
+    </p>
+    <div id="toc-article" class="toc-article" style="display:none">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自动引用计数"><span class="toc-number">1.</span> <span class="toc-text">自动引用计数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是自动引用计数"><span class="toc-number">1.1.</span> <span class="toc-text">什么是自动引用计数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存管理-引用计数"><span class="toc-number">1.2.</span> <span class="toc-text">内存管理/引用计数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理的思考方式"><span class="toc-number">1.2.1.</span> <span class="toc-text">内存管理的思考方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理的具体实现"><span class="toc-number">1.2.2.</span> <span class="toc-text">内存管理的具体实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARC规则"><span class="toc-number">1.3.</span> <span class="toc-text">ARC规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#所有权修饰符"><span class="toc-number">1.3.1.</span> <span class="toc-text">所有权修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#autoreleasepool"><span class="toc-number">1.3.2.</span> <span class="toc-text">@autoreleasepool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规则"><span class="toc-number">1.3.3.</span> <span class="toc-text">规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">1.3.4.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">1.3.5.</span> <span class="toc-text">数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARC的实现"><span class="toc-number">1.4.</span> <span class="toc-text">ARC的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#strong修饰符"><span class="toc-number">1.4.1.</span> <span class="toc-text">__strong修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weak修饰符"><span class="toc-number">1.4.2.</span> <span class="toc-text">__weak修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#autoreleasing修饰符"><span class="toc-number">1.4.3.</span> <span class="toc-text">__autoreleasing修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用计数"><span class="toc-number">1.4.4.</span> <span class="toc-text">引用计数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Blocks"><span class="toc-number">2.</span> <span class="toc-text">Blocks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Blocks"><span class="toc-number">2.1.</span> <span class="toc-text">什么是Blocks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Blocks模式"><span class="toc-number">2.2.</span> <span class="toc-text">Blocks模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Block语法"><span class="toc-number">2.2.1.</span> <span class="toc-text">Block语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block类型变量"><span class="toc-number">2.2.2.</span> <span class="toc-text">Block类型变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#截获自动变量值"><span class="toc-number">2.2.3.</span> <span class="toc-text">截获自动变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block说明符"><span class="toc-number">2.2.4.</span> <span class="toc-text">__block说明符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#截获的自动变量"><span class="toc-number">2.2.5.</span> <span class="toc-text">截获的自动变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Blocks的实现"><span class="toc-number">2.3.</span> <span class="toc-text">Blocks的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Block的本质"><span class="toc-number">2.3.1.</span> <span class="toc-text">Block的本质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#截获自动变量值-1"><span class="toc-number">2.3.2.</span> <span class="toc-text">截获自动变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block说明符-1"><span class="toc-number">2.3.3.</span> <span class="toc-text">__block说明符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block存储域"><span class="toc-number">2.3.4.</span> <span class="toc-text">Block存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block变量存储域"><span class="toc-number">2.3.5.</span> <span class="toc-text">__block变量存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#截获对象"><span class="toc-number">2.3.6.</span> <span class="toc-text">截获对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block变量和对象"><span class="toc-number">2.3.7.</span> <span class="toc-text">__block变量和对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block循环引用"><span class="toc-number">2.3.8.</span> <span class="toc-text">Block循环引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copy-release"><span class="toc-number">2.3.9.</span> <span class="toc-text">copy/release</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grand-Central-Dispatch"><span class="toc-number">3.</span> <span class="toc-text">Grand Central Dispatch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是GCD"><span class="toc-number">3.1.</span> <span class="toc-text">什么是GCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程编程"><span class="toc-number">3.1.1.</span> <span class="toc-text">多线程编程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD的API"><span class="toc-number">3.2.</span> <span class="toc-text">GCD的API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Diapatch-Queue"><span class="toc-number">3.2.1.</span> <span class="toc-text">Diapatch Queue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch-queue-create"><span class="toc-number">3.2.2.</span> <span class="toc-text">dispatch_queue_create</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Main-Dispatch-Queue-Global-Dispatch-Queue"><span class="toc-number">3.2.3.</span> <span class="toc-text">Main Dispatch Queue/Global Dispatch Queue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#diapatch-set-target-queue"><span class="toc-number">3.2.4.</span> <span class="toc-text">diapatch_set_target_queue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch-after"><span class="toc-number">3.2.5.</span> <span class="toc-text">dispatch_after</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dispatch-Group"><span class="toc-number">3.2.6.</span> <span class="toc-text">Dispatch Group</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch-barrier-async"><span class="toc-number">3.2.7.</span> <span class="toc-text">dispatch_barrier_async</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch-async-dispatch-sync"><span class="toc-number">3.2.8.</span> <span class="toc-text">dispatch_async / dispatch_sync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch-apply"><span class="toc-number">3.2.9.</span> <span class="toc-text">dispatch_apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch-suspend-dispatch-resume"><span class="toc-number">3.2.10.</span> <span class="toc-text">dispatch_suspend / dispatch_resume</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dispatch-Semaphore"><span class="toc-number">3.2.11.</span> <span class="toc-text">Dispatch Semaphore</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch-once"><span class="toc-number">3.2.12.</span> <span class="toc-text">dispatch_once</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dispatch-I-O"><span class="toc-number">3.2.13.</span> <span class="toc-text">Dispatch I/O</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD实现"><span class="toc-number">3.3.</span> <span class="toc-text">GCD实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dispatch-Queue"><span class="toc-number">3.3.1.</span> <span class="toc-text">Dispatch Queue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dispatch-Source"><span class="toc-number">3.3.2.</span> <span class="toc-text">Dispatch Source</span></a></li></ol></li></ol></li></ol>
+   </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+ 
+<!-- 目录内容结束 -->
+
+<!-- 文章 -->
+<article class="post article" onclick="showBtn();">
+    <header class="text-center">
+        <h3 class="post-title"><span>《Objective-C 高级编程——iOS与OS X多线程和内存管理》</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        曾华经
+		&emsp;发表于：<time datetime="2019-03-27T05:58:18.000Z">2019-03-27</time>
+		&emsp;修改于：<time datetime="2019-11-16T08:18:26.793Z">2019-11-16</time>
+		&emsp;总阅读量：<span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span>次
+    </p>
+    <div class="post-content">
+        <p>iOS与OS X中的ARC、Blocks和Grand Central Dispatch（GCD），是面向iOS、OS X应用开发时不可或缺。它们看似简单，但若无深入了解，就会变成技术开发的陷阱。要想掌握这些技术，除了阅读苹果公司的参考文档之外，还要进一步学习苹果公司公开的源代码，在此基础上深入剖析才能融汇贯通。</p>
+<a id="more"></a>
+<h1 id="自动引用计数"><a href="#自动引用计数" class="headerlink" title="自动引用计数"></a>自动引用计数</h1><h2 id="什么是自动引用计数"><a href="#什么是自动引用计数" class="headerlink" title="什么是自动引用计数"></a>什么是自动引用计数</h2><blockquote>
+<p>自动引用计数（ARC，Automatic Reference Counting）是指内存管理中对引用采用自动计数的技术。</p>
+</blockquote>
+<h2 id="内存管理-引用计数"><a href="#内存管理-引用计数" class="headerlink" title="内存管理/引用计数"></a>内存管理/引用计数</h2><h3 id="内存管理的思考方式"><a href="#内存管理的思考方式" class="headerlink" title="内存管理的思考方式"></a>内存管理的思考方式</h3><ul>
+<li>自己生成的对象，自己持有</li>
+<li>非自己生成的对象，自己也能持有</li>
+<li>不需要自己持有的对象时释放</li>
+<li>非自己持有的对象无法释放</li>
+</ul>
+<h3 id="内存管理的具体实现"><a href="#内存管理的具体实现" class="headerlink" title="内存管理的具体实现"></a>内存管理的具体实现</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">对象操作</th>
+<th style="text-align:center">Objective-C方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">生成并持有对象</td>
+<td style="text-align:center">alloc/new/copy/mutableCopy等方法</td>
+</tr>
+<tr>
+<td style="text-align:center">持有对象</td>
+<td style="text-align:center">retain方法</td>
+</tr>
+<tr>
+<td style="text-align:center">释放对象</td>
+<td style="text-align:center">release方法</td>
+</tr>
+<tr>
+<td style="text-align:center">自动释放对象（加入自动释放池）</td>
+<td style="text-align:center">autorelease方法</td>
+</tr>
+<tr>
+<td style="text-align:center">废弃对象</td>
+<td style="text-align:center">dealloc方法</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>alloc</strong></p>
+<p>alloc方法的调用栈如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+alloc</span><br><span class="line">+allocWithZone:</span><br><span class="line">class_createInstance</span><br><span class="line">calloc</span><br></pre></td></tr></table></figure>
+<p>以下为class_createInstance的源代码，摘自<a href="https://opensource.apple.com/source/objc4/objc4-750.1/runtime/objc-runtime-new.mm.auto.html" target="_blank" rel="noopener">objc-runtime-new.mm</a></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> </span><br><span class="line">class_createInstance(Class cls, size_t extraBytes)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> _class_createInstanceFromZone(cls, extraBytes, <span class="literal">nil</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下为_class_createInstanceFromZone的源代码，摘自<a href="https://opensource.apple.com/source/objc4/objc4-750.1/runtime/objc-runtime-new.mm.auto.html" target="_blank" rel="noopener">objc-runtime-new.mm</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> __attribute__((always_inline)) </span><br><span class="line">id</span><br><span class="line">_class_createInstanceFromZone(Class cls, <span class="keyword">size_t</span> extraBytes, <span class="keyword">void</span> *zone, </span><br><span class="line">                              <span class="keyword">bool</span> cxxConstruct = <span class="literal">true</span>, </span><br><span class="line">                              <span class="keyword">size_t</span> *outAllocatedSize = nil)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!cls) <span class="keyword">return</span> nil;</span><br><span class="line"></span><br><span class="line">    assert(cls-&gt;isRealized());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read class's info bits all at once for performance</span></span><br><span class="line">    <span class="keyword">bool</span> hasCxxCtor = cls-&gt;hasCxxCtor();</span><br><span class="line">    <span class="keyword">bool</span> hasCxxDtor = cls-&gt;hasCxxDtor();</span><br><span class="line">    <span class="keyword">bool</span> fast = cls-&gt;canAllocNonpointer();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">size_t</span> size = cls-&gt;instanceSize(extraBytes);</span><br><span class="line">    <span class="keyword">if</span> (outAllocatedSize) *outAllocatedSize = size;</span><br><span class="line"></span><br><span class="line">    id obj;</span><br><span class="line">    <span class="keyword">if</span> (!zone  &amp;&amp;  fast) &#123;</span><br><span class="line">        obj = (id)<span class="built_in">calloc</span>(<span class="number">1</span>, size);</span><br><span class="line">        <span class="keyword">if</span> (!obj) <span class="keyword">return</span> nil;</span><br><span class="line">        obj-&gt;initInstanceIsa(cls, hasCxxDtor);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (zone) &#123;</span><br><span class="line">            obj = (id)malloc_zone_calloc ((<span class="keyword">malloc_zone_t</span> *)zone, <span class="number">1</span>, size);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            obj = (id)<span class="built_in">calloc</span>(<span class="number">1</span>, size);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!obj) <span class="keyword">return</span> nil;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Use raw pointer isa on the assumption that they might be </span></span><br><span class="line">        <span class="comment">// doing something weird with the zone or RR.</span></span><br><span class="line">        obj-&gt;initIsa(cls);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (cxxConstruct &amp;&amp; hasCxxCtor) &#123;</span><br><span class="line">        obj = _objc_constructOrFree(obj, cls);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>retainCount/retain/release</strong></p>
+<p>retainCount/retain/release的调用栈如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-retainCount</span><br><span class="line">__CFDoExternRefOperation</span><br><span class="line"><span class="built_in">CFBasicHashGetCountOfKey</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="keyword">retain</span></span><br><span class="line">__CFDoExternRefOperation</span><br><span class="line"><span class="built_in">CFBasicHashAddValue</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-release</span><br><span class="line">__CFDoExternRefOperation</span><br><span class="line"><span class="built_in">CFBasicHashRemoveValue</span>	<span class="comment">//CFBasicHashRemoveValue返回0时，-release调用dealloc</span></span><br></pre></td></tr></table></figure>
+<p>以下为__CFDoExternRefOperation的源代码，摘自<a href="https://opensource.apple.com/source/CF/CF-855.17/CFRuntime.c.auto.html" target="_blank" rel="noopener">CFRuntime.c</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DISGUISE(O) (~(uintptr_t)(O))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    CFSpinLock_t lock;</span><br><span class="line">    CFBasicHashRef table;</span><br><span class="line">    <span class="keyword">uint8_t</span> padding[<span class="number">64</span> - <span class="keyword">sizeof</span>(CFBasicHashRef) - <span class="keyword">sizeof</span>(CFSpinLock_t)];</span><br><span class="line">&#125; __NSRetainCounters[NUM_EXTERN_TABLES];</span><br><span class="line"></span><br><span class="line">CF_EXPORT <span class="keyword">uintptr_t</span> __CFDoExternRefOperation(<span class="keyword">uintptr_t</span> op, id obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nil == obj) HALT;</span><br><span class="line">    <span class="keyword">uintptr_t</span> idx = EXTERN_TABLE_IDX(obj);</span><br><span class="line">    <span class="keyword">uintptr_t</span> disguised = DISGUISE(obj);</span><br><span class="line">    CFSpinLock_t *lock = &amp;__NSRetainCounters[idx].lock;</span><br><span class="line">    CFBasicHashRef table = __NSRetainCounters[idx].table;</span><br><span class="line">    <span class="keyword">uintptr_t</span> count;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">300</span>:   <span class="comment">// increment</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">350</span>:   <span class="comment">// increment, no event</span></span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">	CFBasicHashAddValue(table, disguised, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">if</span> (__CFOASafe &amp;&amp; op != <span class="number">350</span>) __CFRecordAllocationEvent(__kCFObjectRetainedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">uintptr_t</span>)obj;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">400</span>:   <span class="comment">// decrement</span></span><br><span class="line">        <span class="keyword">if</span> (__CFOASafe) __CFRecordAllocationEvent(__kCFObjectReleasedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">450</span>:   <span class="comment">// decrement, no event</span></span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashRemoveValue(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> == count;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashGetCountOfKey(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>GNUstep将引用计数保存在对象占用内存块头部的变量中，而苹果则采用散列表（引用计数表）来管理引用计数。</p>
+<ul>
+<li>通过内存块头部管理引用计数的好处：<ul>
+<li>少量代码即可完成。</li>
+<li>能够统一管理引用计数用内存块与对象用内存块</li>
+</ul>
+</li>
+<li>通过引用计数表管理引用计数的好处：<ul>
+<li>对象用内存块的分配无需考虑内存块头部</li>
+<li>引用计数表各记录中存有内存块地址，可从各个记录追溯到各对象的内存块</li>
+</ul>
+</li>
+</ul>
+<p><strong>autolease</strong></p>
+<p>autorelease会像C语言的自动变量那样来对待对象实例。当超出其作用域（相当于变量作用域）时，对象实例的release实例方法被调用。另外，同C语言的自动变量不同的是，编程人员可以设定变量的作用域。具体使用方法如下：</p>
+<ul>
+<li>生成并持有NSAutoreleasePool对象</li>
+<li>调用已分配对象的autorelease实例方法</li>
+<li>废弃NSAutoreleasePool对象</li>
+</ul>
+<p>以下是AutoreleasePoolPage的源代码片段，摘自<a href="https://opensource.apple.com/source/objc4/objc4-493.9/runtime/objc-arr.mm.auto.html" target="_blank" rel="noopener">objc-arr.mm</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AutoreleasePoolPage</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function">id *<span class="title">add</span><span class="params">(id obj)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        assert(!full());</span><br><span class="line">        unprotect();</span><br><span class="line">        *next++ = obj;</span><br><span class="line">        protect();</span><br><span class="line">        <span class="keyword">return</span> next<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">releaseAll</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        releaseUntil(begin());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> id <span class="title">autorelease</span><span class="params">(id obj)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        assert(obj);</span><br><span class="line">        assert(!OBJC_IS_TAGGED_PTR(obj));</span><br><span class="line">        id *dest __unused = autoreleaseFast(obj);</span><br><span class="line">        assert(!dest  ||  *dest == obj);</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> *<span class="title">push</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!hotPage()) &#123;</span><br><span class="line">            setHotPage(<span class="keyword">new</span> AutoreleasePoolPage(<span class="literal">NULL</span>));</span><br><span class="line">        &#125; </span><br><span class="line">        id *dest = autoreleaseFast(POOL_SENTINEL);</span><br><span class="line">        assert(*dest == POOL_SENTINEL);</span><br><span class="line">        <span class="keyword">return</span> dest;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">(<span class="keyword">void</span> *token)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        AutoreleasePoolPage *page;</span><br><span class="line">        id *stop;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (token) &#123;</span><br><span class="line">            page = pageForPointer(token);</span><br><span class="line">            stop = (id *)token;</span><br><span class="line">            assert(*stop == POOL_SENTINEL);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// Token 0 is top-level pool</span></span><br><span class="line">            page = coldPage();</span><br><span class="line">            assert(page);</span><br><span class="line">            stop = page-&gt;begin();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (PrintPoolHiwat) printHiwat();</span><br><span class="line"></span><br><span class="line">        page-&gt;releaseUntil(stop);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// memory: delete empty children</span></span><br><span class="line">        <span class="comment">// hysteresis: keep one empty child if this page is more than half full</span></span><br><span class="line">        <span class="comment">// special case: delete everything for pop(0)</span></span><br><span class="line">        <span class="keyword">if</span> (!token) &#123;</span><br><span class="line">            page-&gt;kill();</span><br><span class="line">            setHotPage(<span class="literal">NULL</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (page-&gt;child) &#123;</span><br><span class="line">            <span class="keyword">if</span> (page-&gt;lessThanHalfFull()) &#123;</span><br><span class="line">                page-&gt;child-&gt;kill();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (page-&gt;child-&gt;child) &#123;</span><br><span class="line">                page-&gt;child-&gt;child-&gt;kill();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r __unused = pthread_key_init_np(AutoreleasePoolPage::key, </span><br><span class="line">                                             AutoreleasePoolPage::tls_dealloc);</span><br><span class="line">        assert(r == <span class="number">0</span>);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> *</span><br><span class="line">objc_autoreleasePoolPush(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (UseGC) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> AutoreleasePoolPage::push();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">objc_autoreleasePoolPop(<span class="keyword">void</span> *ctxt)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (UseGC) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// fixme rdar://9167170</span></span><br><span class="line">    <span class="keyword">if</span> (!ctxt) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    AutoreleasePoolPage::pop(ctxt);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">id</span><br><span class="line">objc_autorelease(id obj)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> objc_msgSend_hack(obj, @selector(autorelease));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="http://blog.sunnyxx.com/2014/10/15/behind-autorelease/#Autorelease原理" target="_blank" rel="noopener">黑幕背后的Autorelease——Autorelease原理</a></p>
+<h2 id="ARC规则"><a href="#ARC规则" class="headerlink" title="ARC规则"></a>ARC规则</h2><h3 id="所有权修饰符"><a href="#所有权修饰符" class="headerlink" title="所有权修饰符"></a>所有权修饰符</h3><p>__strong、__weak和__autoreleasing可以保证将附有这些修饰符的id型/对象型自动变量初始化为nil，但并不保证将附有这些修饰符的id指针型/对象指针型自动变量初始化为nil。</p>
+<p><strong>__strong修饰符</strong></p>
+<p>__strong修饰符表示对对象的“强引用”，其修饰的变量在赋值时持有对象实例（retained）。强引用变量在超出其作用域时被废弃，随着强引用的失效（release），引用的对象会随之释放（dealloc）。ARC有效时，__strong修饰符是id类型和对象类型默认（非显示）的所有权修饰符。</p>
+<p><strong>__weak修饰符</strong></p>
+<p>__weak修饰符表示对对象的“弱引用”，其修饰的变量在赋值时不持有对象实例。弱引用变量在对象被废弃（dealloc）时，此变量将自动失效处于nil被赋值的状态（空弱引用）。使用__weak修饰符可避免循环引用。</p>
+<p><strong>__unsafe_unretained修饰符</strong></p>
+<p>__unsafe_unretained修饰符是不安全的所有权修饰符，其修饰的变量在赋值时不持有对象实例。赋值给附有__unsafe_unretained修饰符变量的对象在通过该变量使用时，如果没有确保其确实存在，那么应用程序就会崩溃。附有__unsafe_unretained修饰符的变量不属于编译器的内存管理对象。</p>
+<p><strong>__autoreleasing修饰符</strong></p>
+<p>__autoreleasing修饰符表示对象的“自动释放”，其修饰的变量在赋值时将添加到自动释放池（autorelease）。</p>
+<p>显式地附加__autoreleasing修饰符很罕见（在显示地指定__autoreleasing修饰符时，必须注意对象变量要为自动变量，包括局部变量、函数以及方法参数），这是因为：</p>
+<ul>
+<li>在ARC有效时，编译器会检查方法名是否以alloc/new/copy/mutableCopy开始，如果不是则自动将返回值的对象注册到autoreleasepool。</li>
+<li>在访问弱引用对象的过程中，该对象有可能被废弃，所以编译器会自动生成用__autoreleasing修饰符修饰的中间变量，先把要访问的对象注册到autoreleasepool中再使用，确保其在@autoreleasepool块结束之前都存在。</li>
+<li>id的指针或对象的指针在没有显式指定时编译器会自动附加上__autoreleasing修饰符（甚至在需要的时候生成用__autoreleasing修饰符修饰的中间变量）。</li>
+</ul>
+<h3 id="autoreleasepool"><a href="#autoreleasepool" class="headerlink" title="@autoreleasepool"></a>@autoreleasepool</h3><ul>
+<li>@autoreleasepool块可以嵌套使用。</li>
+<li>NSRunLoop无论ARC是否有效，均能够随时释放注册到autoreleasepool中的对象。</li>
+<li>无论ARC是否有效，都可以使用_objc_autoreleasePoolPrint函数调试注册到autoreleasepool上的对象。</li>
+</ul>
+<h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><ul>
+<li>不能使用retain/release/retainCount/autorelease</li>
+<li>不能使用NSAllocateObject/NSDeallocateObject</li>
+<li>须遵守内存管理的方法命名规则<ul>
+<li>以alloc/new/copy/mutableCopy开头的方法在返回对象时，必须返回给调用方所应当持有的对象</li>
+<li>以init开始的方法必须是实例方法，并且要返回对象。返回的对象应为id类型或该方法声明的对象类型，抑或是该类的超类型或子类型。该返回对象并不注册到autoreleasepool上，基本上只是对alloc方法返回值的对象进行初始化处理并返回对象 </li>
+</ul>
+</li>
+<li>不要显示调用dealloc</li>
+<li>使用@autoreleasepool块替代NSAutoreleasePool</li>
+<li>不能使用区域（NSZone）</li>
+<li>对象型变量不能作为C语言结构体（struct/union）的成员<ul>
+<li>要把对象型变量加入到结构体成员中使，可强制转换为void *或是附加__unsafe_unretained修饰符</li>
+</ul>
+</li>
+<li>显示转换“id”和“void *”（ARC无效时，将id变量强制转换void *变量不会出问题）<ul>
+<li>id型或对象型变量赋值给void *或者逆向赋值时都要进行特定的转换，如果只想单纯地赋值，则可以使用“__bridge 转换”</li>
+<li>__bridge_retained 转换可使要转换赋值的变量也持有所赋值的对象</li>
+<li>__bridge_transfer 转换时被转换的变量所持有的对象在该变量被赋值给变换目标变量后随之释放</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 转换为void *的__bridge 转换</span></span><br><span class="line"><span class="comment"> * 其安全性与赋值给__unsafe_unretained修饰符相近</span></span><br><span class="line"><span class="comment"> * 如果管理时不注意赋值对象的所有者</span></span><br><span class="line"><span class="comment"> * 就会因垂悬指针而导致程序崩溃</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line"><span class="keyword">void</span> *p = (__bridge <span class="keyword">void</span> *)obj;</span><br><span class="line"><span class="keyword">id</span> o = (__bridge <span class="keyword">id</span>)p;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * __bridge_retained转换变为了retain</span></span><br><span class="line"><span class="comment"> * 变量obj和变量p同时持有对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line"><span class="keyword">void</span> *p = (__bridge_retained <span class="keyword">void</span> *)obj;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* ARC 无效 */</span></span><br><span class="line"><span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line"><span class="keyword">void</span> *p = obj;</span><br><span class="line">[(<span class="keyword">id</span>)p <span class="keyword">retain</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * __bridge_transfer转换变成了release</span></span><br><span class="line"><span class="comment"> * 变量obj持有对象而变量p随后释放对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">id</span> obj = (__bridge_transfer <span class="keyword">id</span>)p;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* ARC 无效 */</span></span><br><span class="line"><span class="keyword">id</span> obj = (<span class="keyword">id</span>)p;</span><br><span class="line">[obj <span class="keyword">retain</span>];</span><br><span class="line">[(<span class="keyword">id</span>)p release];</span><br></pre></td></tr></table></figure>
+<p><strong>Toll-Free Bridge</strong></p>
+<p>ARC无效时，CoreFoundation框架中的retain和release分别是CFRetain函数和CFRelease函数，使用CFGetRetainCount函数可以获取引用计数值。可以使用CFBridgingRetain函数和CFBridgingRelease函数简化__bridge_retained和__bridge_transfer等桥接转换的书写方式。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CFTypeRef</span> <span class="built_in">CFBridgingRetain</span>(<span class="keyword">id</span> X) &#123;</span><br><span class="line">	<span class="keyword">return</span> (__bridge_retained <span class="built_in">CFTypeRef</span>)X;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> <span class="built_in">CFBridgingRelease</span>(<span class="built_in">CFTypeRef</span> X) &#123;</span><br><span class="line">	<span class="keyword">return</span> (__bridge_transfer <span class="keyword">id</span>)X;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性声明的属性</th>
+<th style="text-align:left">所有权修饰符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">assign</td>
+<td style="text-align:left">__unsafe_unretained修饰符</td>
+</tr>
+<tr>
+<td style="text-align:left">copy</td>
+<td style="text-align:left">__strong修饰符（但是赋值的是被复制的对象）</td>
+</tr>
+<tr>
+<td style="text-align:left">retain</td>
+<td style="text-align:left">__strong修饰符</td>
+</tr>
+<tr>
+<td style="text-align:left">strong</td>
+<td style="text-align:left">__strong修饰符</td>
+</tr>
+<tr>
+<td style="text-align:left">unsafe_unretained</td>
+<td style="text-align:left">__unsafe_unretained修饰符</td>
+</tr>
+<tr>
+<td style="text-align:left">weak</td>
+<td style="text-align:left">__weak修饰符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>以上各种属性赋值给指定的属性中就相当于赋值给附加各属性对应的所有权修饰符的变量中。<strong>在声明类成员变量时，如果同属性声明中的属性不一致则会引起编译错误。</strong></p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> * __<span class="keyword">strong</span> *array = <span class="literal">nil</span>;</span><br><span class="line">array = (<span class="keyword">id</span> __<span class="keyword">strong</span> *)calloc(entries, <span class="keyword">sizeof</span>(<span class="keyword">id</span>));</span><br><span class="line">array[<span class="number">0</span>] = [[<span class="built_in">NSObject</span> alloc] init];</span><br></pre></td></tr></table></figure>
+<p>该源代码分配了entries个所需的内存块。使用__strong修饰符的变量前必须先将其初始化为nil，所以使用使分配区域初始化为0的calloc函数来分配内存。也可用malloc函数分配内存后用memset等函数将内存填充为0。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = <span class="number">0</span>; i &lt; entries; i++) &#123;</span><br><span class="line">	array[i] = <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">free(array);</span><br></pre></td></tr></table></figure>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>将nil代入到malloc函数所分配的数组元素中来初始化是非常危险的。因为由malloc函数分配的内存区域没有初始化为0，因此nil会被赋值给附有__strong修饰符的并被赋值了随机地址的变量中，从而释放一个不存在的对象。在分配内存时推荐使用calloc函数。</li>
+<li>在动态数组中操作附有__strong修饰符的变量时，需要自己释放所有元素。因为在静态数组中，编译器能够根据变量的作用域自动插入释放赋值对象的代码，而在动态数组中，编译器不能确定数组的生成周期，所以无从处理。</li>
+<li>使用memset函数将内存填充为0也不会释放所赋值的对象，只会引起内存泄漏。所以必须用nil赋值给所有数组元素。</li>
+<li>使用memcpy函数拷贝数组元素以及realloc函数重新分配内存块时，由于数组元素所赋值的对象有可能被保留在内存中或是重复被废弃，所以这两个函数也禁止使用。</li>
+<li>可以像使用__strong修饰符那样使用附有__weak修饰符变量的动态数组。在__autorelease修饰符的情况下，因为与设想的使用方法有差异，所以最好不要使用动态数组。__unsafe_unretained修饰符在编译器的内存管理对象之外，所以它与void *类型一样，只能作为C语言的指针类型来使用。</li>
+</ul>
+<h2 id="ARC的实现"><a href="#ARC的实现" class="headerlink" title="ARC的实现"></a>ARC的实现</h2><p>ARC是由以下工具、库来实现的：</p>
+<ul>
+<li>clang（LLVM编译器）3.0以上</li>
+<li>objc4 Objective-C 运行时库493.9以上</li>
+</ul>
+<h3 id="strong修饰符"><a href="#strong修饰符" class="headerlink" title="__strong修饰符"></a>__strong修饰符</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> __<span class="keyword">strong</span> obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 编译器的模拟代码 */</span></span><br><span class="line"><span class="keyword">id</span> obj = objc_msgsend(<span class="built_in">NSObject</span>, <span class="keyword">@selector</span>(alloc));</span><br><span class="line">objc_msgsend(obj, <span class="keyword">@selector</span>(init));</span><br><span class="line">objc_release(obj);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> __<span class="keyword">strong</span> obj = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 编译器的模拟代码 */</span></span><br><span class="line"><span class="keyword">id</span> obj = objc_msgsend(<span class="built_in">NSMutableArray</span>, <span class="keyword">@selector</span>(array));</span><br><span class="line">objc_retainAutoreleaseReturnValue(obj);</span><br><span class="line">objc_release(obj);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">id</span>)array &#123;</span><br><span class="line">	<span class="keyword">return</span> [[<span class="built_in">NSMutableArray</span> alloc] init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 编译器的模拟代码 */</span></span><br><span class="line">+ (<span class="keyword">id</span>)array &#123;</span><br><span class="line">	<span class="keyword">id</span> obj = objc_msgsend(<span class="built_in">NSObject</span>, <span class="keyword">@selector</span>(alloc));</span><br><span class="line">	objc_msgsend(obj, <span class="keyword">@selector</span>(init));</span><br><span class="line">	<span class="keyword">return</span> objc_autoreleaseReturnValue(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>objc_autoreleaseReturnValue函数会检查使用该函数的方法或函数调用方的执行命令列表，如果方法或函数的调用方在调用了方法或函数后紧接着调用objc_retainAutoreleaseReturnValue函数，那么就不将返回的对象注册到autoreleasepool中，而是直接传递到方法或函数的调用方，跳过objc_retainAutoreleaseReturnValue函数执行其后面的代码。参考：<a href="http://blog.sunnyxx.com/2014/10/15/behind-autorelease/#Autorelease返回值的快速释放机制" target="_blank" rel="noopener">黑幕背后的Autorelease——Autorelease返回值的快速释放机制</a></p>
+<h3 id="weak修饰符"><a href="#weak修饰符" class="headerlink" title="__weak修饰符"></a>__weak修饰符</h3><ul>
+<li>若附有__weak修饰符的变量所引用的对象被废弃，则将nil赋值给该变量。</li>
+<li>使用附有__weak修饰符的变量，即是使用注册到autoreleasepool中的对象。</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> __<span class="keyword">weak</span> obj1 = obj;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 编译器的模拟代码 */</span></span><br><span class="line"><span class="keyword">id</span> obj1;</span><br><span class="line">objc_initWeak(&amp;obj1, obj);</span><br><span class="line">objc_destroyWeak(&amp;obj1);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 等价于 */</span></span><br><span class="line"><span class="keyword">id</span> obj1;</span><br><span class="line">obj1 = <span class="number">0</span>;</span><br><span class="line">objc_storeWeak(&amp;obj1, obj);</span><br><span class="line">objc_storeWeak(&amp;obj1, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>objc_storeWeak函数把第二参数的赋值对象的地址作为键值，将第一参数的附有__weak修饰符的变量的地址注册到__weak 表中。如果第二参数为0，则把变量的地址从weak 表中删除。（由于一个对象可同时赋值给多个附有__weak修饰符的变量中，所以对于一个键值，可注册多个变量的地址）</p>
+<p>以下是objc_release函数的调用栈</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">objc_release</span><br><span class="line">dealloc <span class="comment">// 因为引用计数为0所以执行</span></span><br><span class="line">_objc_rootDealloc</span><br><span class="line">object_dispose</span><br><span class="line">objc_destructInstance</span><br><span class="line">objc_clear_deallocating</span><br></pre></td></tr></table></figure>
+<p>objc_clear_deallocating函数的动作如下：</p>
+<ul>
+<li>从weak表中获取废弃对象的地址为键值的记录</li>
+<li>将包含在记录中的所有附有__weak修饰符变量的地址，赋值为nil</li>
+<li>从weak 表中删除该记录</li>
+<li>从引用计数表中删除废弃对象的地址为键值的记录</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> __<span class="keyword">weak</span> obj1 = obj;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, obj1);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 编译器的模拟代码 */</span></span><br><span class="line"><span class="keyword">id</span> obj1;</span><br><span class="line">objc_initWeak(&amp;obj1, obj);</span><br><span class="line"><span class="keyword">id</span> tmp = objc_loadWeakRetained(&amp;obj1);</span><br><span class="line">objc_autorelease(tmp);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, tmp);</span><br><span class="line">objc_destroyWeak(&amp;obj1);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>objc_loadWeakRetained函数取出附有__weak修饰符变量所引用的对象并retain</li>
+<li>objc_autorelease函数将对象注册到autoreleasepool中</li>
+</ul>
+<p><strong>注意：</strong>大量使用附有__weak修饰符的变量，注册到autoreleasepool的对象也会大量地增加，因此在使用附有__weak修饰符的变量时，最好先暂时赋值给附有__strong修饰符的变量后再使用</p>
+<p>不支持使用__weak修饰符的情况：</p>
+<ul>
+<li>iOS4和OS X Leopard系统中</li>
+<li>重写了retain/release并实现该类独立的引用计数机制的类，如：NSMachPort</li>
+<li>类声明中附加了“__attribute__((objc_arc_weak_reference_unavailable))”这一属性，同时定义了NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE</li>
+<li>当allowsWeakReference/retainWeakReference实例方法返回NO的情况（没有写入NSObject接口说明文档中）</li>
+</ul>
+<h3 id="autoreleasing修饰符"><a href="#autoreleasing修饰符" class="headerlink" title="__autoreleasing修饰符"></a>__autoreleasing修饰符</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">	<span class="keyword">id</span> __autoreleasepool obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 编译器的模拟代码 */</span></span><br><span class="line"><span class="keyword">id</span> pool = objc_autoreleasePoolPush();</span><br><span class="line"><span class="keyword">id</span> obj = objc_msgsend(<span class="built_in">NSObject</span>, <span class="keyword">@selector</span>(alloc));</span><br><span class="line">objc_msgsend(obj, <span class="keyword">@selector</span>(init));</span><br><span class="line">objc_autorelease(obj);</span><br><span class="line">objc_autoreleasepoolPop(pool);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">	<span class="keyword">id</span> __autoreleasepool obj = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 编译器的模拟代码 */</span></span><br><span class="line"><span class="keyword">id</span> pool = objc_autoreleasePoolPush();</span><br><span class="line"><span class="keyword">id</span> obj = objc_msgsend(<span class="built_in">NSMutableArray</span>, <span class="keyword">@selector</span>(array));</span><br><span class="line">objc_retainAutoreleaseReturnValue(obj);</span><br><span class="line">objc_autorelease(obj);</span><br><span class="line">objc_autoreleasepoolPop(pool);</span><br></pre></td></tr></table></figure>
+<h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p>获取引用计数数值的函数：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uintptr_t _objc_rootRetainCount(<span class="keyword">id</span> obj);</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>不能够完全信任该函数取得的数值，最好在了解其所具有的问题的基础上来使用。</p>
+<h1 id="Blocks"><a href="#Blocks" class="headerlink" title="Blocks"></a>Blocks</h1><h2 id="什么是Blocks"><a href="#什么是Blocks" class="headerlink" title="什么是Blocks"></a>什么是Blocks</h2><blockquote>
+<p>Blocks是C语言的扩充功能：带有自动变量（局部变量）的匿名函数。</p>
+</blockquote>
+<p>在C语言中，可以通过函数指针来代替直接调用函数，但必须通过函数名才能取得函数的地址。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> count)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> count + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> (*funcptr)(<span class="keyword">int</span>) = &amp;func;</span><br><span class="line"><span class="keyword">int</span> result = (*funcptr)(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>Blocks提供了类似由C++和Objective-C类生成实例或对象来保持变量的方法，其代码量与编写C语言函数差不多。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; BUTTON_MAX; i++) &#123;</span><br><span class="line">	setButtonCallbackUsingBlock(BUTTON_IDOFFSET + i, ^(<span class="keyword">int</span> event) &#123;</span><br><span class="line">		printf(<span class="string">"buttonId:%d event=%d\n"</span>, i, event);</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在计算机科学中，“带有自动变量值的匿名函数”这一概念也称为闭包（Closure）、lambda计算（λ计算，lambda calculus）等。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">程序语言</th>
+<th style="text-align:left">Blcok名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">C + Blocks</td>
+<td style="text-align:left">Block</td>
+</tr>
+<tr>
+<td style="text-align:left">Smalltalk</td>
+<td style="text-align:left">Block</td>
+</tr>
+<tr>
+<td style="text-align:left">Ruby</td>
+<td style="text-align:left">Block</td>
+</tr>
+<tr>
+<td style="text-align:left">LISP</td>
+<td style="text-align:left">Lambda</td>
+</tr>
+<tr>
+<td style="text-align:left">Python</td>
+<td style="text-align:left">Lambda</td>
+</tr>
+<tr>
+<td style="text-align:left">C++11</td>
+<td style="text-align:left">Lambda</td>
+</tr>
+<tr>
+<td style="text-align:left">Javascript</td>
+<td style="text-align:left">Anonymous function</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Blocks模式"><a href="#Blocks模式" class="headerlink" title="Blocks模式"></a>Blocks模式</h2><h3 id="Block语法"><a href="#Block语法" class="headerlink" title="Block语法"></a>Block语法</h3><p>Block表达式语法（Block Literal Syntax），</p>
+<p><strong>完整形式：</strong>表达式中含有return语句时，其类型必须与返回值类型相同。</p>
+<p><code>^</code> <code>返回值类型</code> <code>参数列表</code> <code>表达式</code></p>
+<p><strong>省略返回值类型：</strong>如果表达式中有return语句就使用该返回值的类型，如果表达式没有return语句就使用void类型。</p>
+<p><code>^</code> <code>参数列表</code> <code>表达式</code></p>
+<p><strong>省略返回值类型和参数列表：</strong></p>
+<p><code>^</code> <code>表达式</code></p>
+<ul>
+<li>没有函数名，因为是匿名函数</li>
+<li>返回值类型前带有“^”（插入记号，caret）记号，便于查找</li>
+</ul>
+<h3 id="Block类型变量"><a href="#Block类型变量" class="headerlink" title="Block类型变量"></a>Block类型变量</h3><p>声明Block类型变量仅仅是将声明函数指针类型变量的“*”变为“\^”，可像C语言中其他类型变量一样使用Block类型变量。可以使用typedef为Block类型声明自定义别名。</p>
+<p>typedef <code>返回值类型</code>(^<code>块类型别名</code>)(<code>参数列表</code>)</p>
+<h3 id="截获自动变量值"><a href="#截获自动变量值" class="headerlink" title="截获自动变量值"></a>截获自动变量值</h3><p>Block表达式截获所使用的自动变量的值，即保存该自动变量的瞬间值（在执行Block语法后，即使改写Block中使用的自动变量的值也不会影响Block执行时自动变量的值）。</p>
+<h3 id="block说明符"><a href="#block说明符" class="headerlink" title="__block说明符"></a>__block说明符</h3><p>自动变量值截获只能保存执行Block语法瞬间的值，保存后就不能改写该值。使用附有__block修饰符的自动变量可在Block中赋值，该变量称为__block变量。</p>
+<h3 id="截获的自动变量"><a href="#截获的自动变量" class="headerlink" title="截获的自动变量"></a>截获的自动变量</h3><ul>
+<li>截获Objective-C对象时，赋值给截获的自动变量的操作会产生编译错误，但使用截获的值（类对象用的结构体实例指针）不会有任何问题。</li>
+<li>截获自动变量的方法并没有实现对C语言数组（如<code>const char text[] = &quot;hello&quot;</code>）的截获，因此必须改用指针(如<code>const char *text = &quot;hello&quot;</code>)解决。</li>
+</ul>
+<h2 id="Blocks的实现"><a href="#Blocks的实现" class="headerlink" title="Blocks的实现"></a>Blocks的实现</h2><h3 id="Block的本质"><a href="#Block的本质" class="headerlink" title="Block的本质"></a>Block的本质</h3><p>Block即为Objective-C对象，它实际上是通过支持Block的编译器，将含有Block语法的源代码转换为一般C语言编译器能够处理的源代码，并作为极为普通的C语言源代码进行编译。使用<code>clang -rewrite-objc 源代码文件名</code>可将含有Block语法的源代码变换为C++的源代码（使用了struct结构的C语言源代码）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^ &#123; </span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Block\n"</span>);</span><br><span class="line">	&#125;;</span><br><span class="line">	</span><br><span class="line">	blk();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* clang转换后 */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">block_impl</span> &#123;</span></span><br><span class="line">	<span class="keyword">void</span> *isa; <span class="comment">// 指向_NSConcreteStackBlock（相当于calss_t结构体实例）的地址 </span></span><br><span class="line">	<span class="keyword">int</span> Flags; </span><br><span class="line">	<span class="keyword">int</span> Reserved;</span><br><span class="line">	<span class="keyword">void</span> *FuncPtr; <span class="comment">// Block表达式对应的函数指针</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> __<span class="title">block_impl</span> <span class="title">impl</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span>* <span class="title">Desc</span>;</span></span><br><span class="line">	</span><br><span class="line">	__main_block_impl_0(<span class="keyword">void</span> *fp, struct __main_block_desc_0 *desc, <span class="keyword">int</span> flags=<span class="number">0</span>) &#123;</span><br><span class="line">		impl.isa = &amp;_NSConcreteStackBlock;</span><br><span class="line">		impl.Flags = flags;</span><br><span class="line">		impl.FuncPtr = fp;</span><br><span class="line">		Desc = desc;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1、Block语法所属的函数名和该Block语法在该函数出现的顺序值来给经clang变换的函数命名</span></span><br><span class="line"><span class="comment"> * 2、参数__cself即指向Block值的变量，相当于C++的this指针和Objective-C的self变量</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(struct __main_block_impl_0 *__cself) &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Block\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> &#123;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> reserved;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> Block_size;</span><br><span class="line">&#125; __main_block_desc_0_DATA = &#123;</span><br><span class="line">	<span class="number">0</span>,</span><br><span class="line">	<span class="keyword">sizeof</span>(struct __main_block_impl_0)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main ()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 将__main_block_impl_0结构体类型的自动变量，</span></span><br><span class="line"><span class="comment">	 * 即栈上生成的__main_block_impl_0结构体实例的指针，</span></span><br><span class="line"><span class="comment">	 * 赋值给__mian_block_impl_0结构体指针类型的变量blk</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">void</span> (*blk)(<span class="keyword">void</span>) = (<span class="keyword">void</span> (*)(<span class="keyword">void</span>))&amp;__main_block_impl_0((<span class="keyword">void</span> *)__main_block_func_0, &amp;__main_block_desc_0_DATA);</span><br><span class="line">	</span><br><span class="line">	((<span class="keyword">void</span> (*)(struct __block_impl *))((struct __block_impl *)blk)-&gt;FuncPtr)((struct __block_impl *)blk);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="截获自动变量值-1"><a href="#截获自动变量值-1" class="headerlink" title="截获自动变量值"></a>截获自动变量值</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> dmy = <span class="number">256</span>;</span><br><span class="line">	<span class="keyword">int</span> val = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *fmt = <span class="string">"val = %d\n"</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^ &#123;</span><br><span class="line">		<span class="built_in">printf</span>(fmt, val);</span><br><span class="line">	&#125; ;</span><br><span class="line">	</span><br><span class="line">	blk();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* clang转换后 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * Block语法表达式中使用的自动变量被作为成员变量追加到了__main_block_impl_0结构体中</span></span><br><span class="line"><span class="comment"> * Block语法表达式中没有使用的自动变量不会被追加</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> __<span class="title">block_impl</span> <span class="title">impl</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> *<span class="title">Desc</span>;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *fmt;</span><br><span class="line">	<span class="keyword">int</span> val;</span><br><span class="line">	</span><br><span class="line">	__main_block_impl_0 (<span class="keyword">void</span> *fp, struct __main_block_desc_0 *desc, <span class="keyword">const</span> <span class="keyword">char</span> *fmt, <span class="keyword">int</span> val, <span class="keyword">int</span> flags = <span class="number">0</span>) : fmt(_fmt), val(_val) &#123;</span><br><span class="line">		impl.isa = &amp;_NSConcreteStackBlock;</span><br><span class="line">		impl.Flags = flags;</span><br><span class="line">		impl.FuncPtr = fp;</span><br><span class="line">		Desc = desc;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0 (strcut __main_block_impl_0 *__cself) &#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 通过__main_block_impl_0结构体实例的成员变量，重新声明定义截获到的自动变量 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *fmt = __cself-&gt;fmt;</span><br><span class="line">	<span class="keyword">int</span> val = __cself-&gt;val;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(fmt, val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> &#123;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> reserved;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> Block_size;</span><br><span class="line">&#125; __main_block_desc_0_DATA = &#123;</span><br><span class="line">	<span class="number">0</span>,</span><br><span class="line">	<span class="keyword">sizeof</span>(struct __main_block_impl_0)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> dmy = <span class="number">256</span>;</span><br><span class="line">	<span class="keyword">int</span> val = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *fmt = <span class="string">"val = %d\n"</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">void</span> (*blk)(<span class="keyword">void</span>) = &amp;__main_block_impl_0(__main_block_func_0, &amp;__main_block_desc_0_DATA, fmt, val);</span><br><span class="line">	</span><br><span class="line">	((<span class="keyword">void</span> (*)(struct __block_impl *))((struct __block_impl *)blk)-&gt;FuncPtr)((struct __block_impl *)blk);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="block说明符-1"><a href="#block说明符-1" class="headerlink" title="__block说明符"></a>__block说明符</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	__block <span class="keyword">int</span> val = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">		val = <span class="number">1</span>;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	blk();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 转换后 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * __Block_byref_val_0结构体独立于__main_block_impl_0结构体之外</span></span><br><span class="line"><span class="comment"> * 是为了在多个Block中使用__block变量（val）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">Block_byref_val_0</span> &#123;</span></span><br><span class="line">	<span class="keyword">void</span> *__isa;</span><br><span class="line">	__Block_byref_val_0 *__forwarding; <span class="comment">// 指向自身</span></span><br><span class="line">	<span class="keyword">int</span> __flags;</span><br><span class="line">	<span class="keyword">int</span> __size;</span><br><span class="line">	<span class="keyword">int</span> val; <span class="comment">// 持有自动变量val的值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> __<span class="title">block_impl</span> <span class="title">impl</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> *<span class="title">Desc</span>;</span></span><br><span class="line">	__Block_byref_val_0 *val;</span><br><span class="line">	</span><br><span class="line">	__main_block_impl_0(<span class="keyword">void</span> *fp, struct __main_block_desc_0 *desc, __Block_byref_val_0 *_val, <span class="keyword">int</span> flags=<span class="number">0</span>) : val(_val-&gt;__forwarding) &#123;</span><br><span class="line">		impl.isa = &amp;__NSConcreteStackBlcok;</span><br><span class="line">		impl.Flags = flags;</span><br><span class="line">		impl.FuncPtr = fp;</span><br><span class="line">		Desc = desc;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(struct __main_block_impl_0 *__cself) &#123;</span><br><span class="line">	__Block_byref_val_0 *val = __cself-&gt;val;</span><br><span class="line">	</span><br><span class="line">	(val-&gt;__forwarding-&gt;val) = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_copy_0(struct __main_block_impl_0 *dst, struct __main_block_impl_0 *src) &#123;</span><br><span class="line">	_Block_object_assign(&amp;dst-&gt;val, src-&gt;val, BLOCK_FIELD_IS_BYREF);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_dispose_0(struct __main_block_impl_0 *src) &#123;</span><br><span class="line">	_Block_objcet_dispose(src-&gt;val, BLOCK_FIELD_IS_BYREF);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> &#123;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> reserved;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> Block_size;</span><br><span class="line">	<span class="keyword">void</span> (*copy)(struct __main_block_impl_0 *, struct __main_block_impl_0 *);</span><br><span class="line">	<span class="keyword">void</span> (*dispose)(struct __main_block_impl_0 *);</span><br><span class="line">&#125; __main_block_desc_0_DATA = &#123;</span><br><span class="line">	<span class="number">0</span>,</span><br><span class="line">	<span class="keyword">sizeof</span>(struct __main_block_impl_0),</span><br><span class="line">	__main_block_copy_0,</span><br><span class="line">	__main_block_dispose_0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main()&#123;</span><br><span class="line">	<span class="comment">// 栈上生成的__Block_byref_val_0结构体持有自动变量val的值</span></span><br><span class="line">	__Block_byref_val_0 val = &#123;</span><br><span class="line">		<span class="number">0</span>,</span><br><span class="line">		&amp;val,</span><br><span class="line">		<span class="number">0</span>,</span><br><span class="line">		<span class="keyword">sizeof</span>(__BLock_byref_val_0),</span><br><span class="line">		<span class="number">10</span></span><br><span class="line">	&#125;;</span><br><span class="line">	</span><br><span class="line">	blk = &amp;__main_block_impl_0(__main_block_func_0, &amp;__main_block_desc_0_DATA, &amp;val, <span class="number">0x22000000</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Block存储域"><a href="#Block存储域" class="headerlink" title="Block存储域"></a>Block存储域</h3><ul>
+<li>_NSConcreteStackBlock：<ul>
+<li>Block语法的表达式中使用了应截获的自动变量时 </li>
+</ul>
+</li>
+<li>_NSConcreteGlobalBlock：<ul>
+<li>记述全局变量的地方有Block语法时<ul>
+<li>Block语法的表达式中不使用应截获的自动变量时</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>_NSConcreteMallocBlock：<ul>
+<li>将配置在栈上的Block复制到堆上时</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(^<span class="keyword">blk_t</span>)</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">blk_t</span> func(<span class="keyword">int</span> rate) &#123;</span><br><span class="line">	<span class="keyword">return</span> ^(<span class="keyword">int</span> count) &#123;</span><br><span class="line">		<span class="keyword">return</span> rate * count;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 转换后 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">blk_t</span> func(<span class="keyword">int</span> rate) &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 将通过Block语法生成的Block</span></span><br><span class="line"><span class="comment">	 * 即分配在栈上的Block用结构体实例</span></span><br><span class="line"><span class="comment">	 * 赋值给相当于Block类型的变量tmp中</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">blk_t</span> tmp = &amp;__func_block_impl_0(__func_block_func_0, &amp;__func_block_desc_0_DATA, rate);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 等价于调用_Block_copy(tmp)</span></span><br><span class="line"><span class="comment">	 * 将栈上的Block复制到堆上</span></span><br><span class="line"><span class="comment">	 * 复制后，将堆上的地址作为指针赋值给变量tmp</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	tmp = objc_retainBlock(tmp);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 将堆上的Block作为Objective-C对象</span></span><br><span class="line"><span class="comment">	 * 注册到autoreleasepool中，然后返回该对象</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">return</span> objc_autoreleaseReturnValue(tmp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ARC有效时，编译器会适当地进行判断，自动生成将Block从栈上复制到堆上的代码。向方法或函数的参数中传递Block时，编译器不能进行判断，所以需要手动使用“copy实例方法”将Block从栈上复制到堆上。</p>
+<p><strong>以下方法或函数不用手动复制Block，因为方法和函数中适当地复制了传递过来的参数</strong></p>
+<ul>
+<li>Cocoa框架的方法且方法名中含有usingBlock等时</li>
+<li>Grand Central Dispatch的API</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Block的类</th>
+<th style="text-align:left">副本源的配置存储域</th>
+<th style="text-align:left">复制效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">_NSConcreteStackBlock</td>
+<td style="text-align:left">栈</td>
+<td style="text-align:left">从栈复制到堆</td>
+</tr>
+<tr>
+<td style="text-align:left">_NSConcreteGlobalBlock</td>
+<td style="text-align:left">程序的数据区域</td>
+<td style="text-align:left">什么也不做</td>
+</tr>
+<tr>
+<td style="text-align:left">_NSConcreteMallocBlock</td>
+<td style="text-align:left">堆</td>
+<td style="text-align:left">引用计数增加</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="block变量存储域"><a href="#block变量存储域" class="headerlink" title="__block变量存储域"></a>__block变量存储域</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">__block变量的配置存储域</th>
+<th style="text-align:left">Block从栈复制到堆时的影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">栈</td>
+<td style="text-align:left">从栈复制到堆并被Block持有</td>
+</tr>
+<tr>
+<td style="text-align:left">堆</td>
+<td style="text-align:left">被Block持有</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>栈上的__block变量用结构体实例在从栈复制到堆上时，会将成员变量__forwarding的值替换为复制目标堆上的__block变量用结构体实例的地址。这样无论是在Block语法中还是Block语法外使用__block变量，都可以顺利地访问同一个__block变量（堆上）。</p>
+<h3 id="截获对象"><a href="#截获对象" class="headerlink" title="截获对象"></a>截获对象</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">blk_t</span> blk;</span><br><span class="line">&#123;</span><br><span class="line">	id <span class="built_in">array</span> = [[NSMUtableArray alloc] init];</span><br><span class="line">	blk = [^(id obj)&#123;</span><br><span class="line">		[<span class="built_in">array</span> addObjcet:obj];</span><br><span class="line">	&#125; copy];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">blk([[NSObject alloc] init]);</span><br><span class="line">blk([[NSObject alloc] init]);</span><br><span class="line">blk([[NSObject alloc] init]);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 转换后 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">main_block_impl_0</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> __<span class="title">block_impl</span> <span class="title">impl</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> __<span class="title">main_block_desc_0</span> *<span class="title">Desc</span>;</span></span><br><span class="line">	id __strong <span class="built_in">array</span>;</span><br><span class="line">	</span><br><span class="line">	__main_block_impl_0(<span class="keyword">void</span> *fp, struct __main_block_desc_0 *desc, id __strong _array, <span class="keyword">int</span> flags=<span class="number">0</span>) : <span class="built_in">array</span>(_array) &#123;</span><br><span class="line">		impl.isa = &amp;_NSConcreteStackBlock;</span><br><span class="line">		impl.Flags = flags;</span><br><span class="line">		impl.FuncPtr = fp;</span><br><span class="line">		Desc = desc;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(struct __main_block_impl_0 *__cself, id obj)&#123;</span><br><span class="line">	id __strong <span class="built_in">array</span> = __cself-&gt;<span class="built_in">array</span>;</span><br><span class="line">	[<span class="built_in">array</span> addObject:obj];</span><br><span class="line">	NSLog(@<span class="string">"array count = %ld"</span>, [<span class="built_in">array</span> count]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_copy_0(struct __main_block_impl_0 *dst, struct __main_block_impl_0 *src) &#123;</span><br><span class="line">	_Block_object_assign(&amp;dst-&gt;<span class="built_in">array</span>, src-&gt;<span class="built_in">array</span>, BLOCK_FIELD_IS_OBJECT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __main_block_dispose_0(struct __main_block_impl_0 *src) &#123;</span><br><span class="line">	_Block_object_dispose(src-&gt;<span class="built_in">array</span>, BLOCK_FIELD_IS_OBJECT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> scruct __main_block_desc_0 &#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> reserved;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> Block_size;</span><br><span class="line">	<span class="keyword">void</span> (*copy)(struct __main_block_impl_0 *, struct __main_block_impl_0 *);</span><br><span class="line">	<span class="keyword">void</span> (*dispose)(struct __main_block_impl_0 *);</span><br><span class="line">&#125; __main_block_desc_0_DATA = &#123;</span><br><span class="line">	<span class="number">0</span>,</span><br><span class="line">	<span class="keyword">sizeof</span>(struct __main_block_impl_0),</span><br><span class="line">	__main_block_copy_0,</span><br><span class="line">	__main_block_dispose_0,	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">blk_t</span> blk;</span><br><span class="line">&#123;</span><br><span class="line">	id __strong <span class="built_in">array</span> = [[NSMutableArray alloc] init];</span><br><span class="line">	blk = &amp;__main_block_impl_0(__main_block_func_0, &amp;__main_block_desc_0_DATA, <span class="built_in">array</span>, <span class="number">0x22000000</span>);</span><br><span class="line">	blk = [blk copy]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(*blk-&gt;impl.FuncPtr)(blk, [[NSObject alloc] init]);</span><br><span class="line">(*blk-&gt;impl.FuncPtr)(blk, [[NSObject alloc] init]);</span><br><span class="line">(*blk-&gt;impl.FuncPtr)(blk, [[NSObject alloc] init]);</span><br></pre></td></tr></table></figure>
+<p>Objective-C的运行时库能够准确把握Block从栈复制到堆以及堆上的Block被废弃的时机，因此Block用结构体中即使含有附有__strong修饰符或__weak修饰符的变量，也可以恰当地进行初始化和废弃。为此需要使用在__main_block_desc_0结构体中增加的成员变量copy和dispose，以及作为指针赋值给该成员变量的__main_block_copy_0函数和__main_block_dispose_0函数。_Block_object_assign函数相当于retain实例方法，而_Block_object_dispose函数相当于release实例方法。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">调用时机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">copy函数</td>
+<td style="text-align:left">栈上的Block复制到堆时</td>
+</tr>
+<tr>
+<td style="text-align:left">dispose函数</td>
+<td style="text-align:left">堆上的Block被废弃时</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>栈上Block复制到堆上的时机：</p>
+<ul>
+<li>调用Block的copy实例方法</li>
+<li>Block作为函数返回值返回时</li>
+<li>将Block赋值给附有__strong修饰符id类型或Block类型成员变量时</li>
+<li>在方法名中含有usingBlock的Cocoa框架方法或Grand Central Dispatch的API中传递Block时</li>
+</ul>
+<p>通过BLOCK_FIELD_IS_OBJECT和BLOCK_FIELD_IS_BYREF参数，区分copy函数和dispose函数的对象类型是对象还是__block变量</p>
+<h3 id="block变量和对象"><a href="#block变量和对象" class="headerlink" title="__block变量和对象"></a>__block变量和对象</h3><p>__block说明符可以修饰任何类型（包括对象类型）的自动变量</p>
+<h3 id="Block循环引用"><a href="#Block循环引用" class="headerlink" title="Block循环引用"></a>Block循环引用</h3><p>避免循环引用的方法比较</p>
+<ul>
+<li>使用__weak修饰符</li>
+</ul>
+<p>可以确认使用附有__weak修饰符的变量时是否为nil，但更有必要使之生存以使用赋值给附有__weak修饰符变量的对象</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)init &#123;</span><br><span class="line">	<span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">	<span class="keyword">id</span> __<span class="keyword">weak</span> obj = _obj;</span><br><span class="line">	_blk = ^ &#123;</span><br><span class="line">		<span class="built_in">NSLog</span>(<span class="string">@"_obj = %@"</span>, obj);</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用__unsafe_unretained修饰符</li>
+</ul>
+<p>需要注意可能出现悬垂指针的情况，避免在该情况下使用该变量</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)init &#123;</span><br><span class="line">	<span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">	<span class="keyword">id</span> __<span class="keyword">unsafe_unretained</span> tmp = <span class="keyword">self</span>;</span><br><span class="line">	_blk = ^ &#123;</span><br><span class="line">		<span class="built_in">NSLog</span>(<span class="string">@"self = %@"</span>, tmp);</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用__block变量</li>
+</ul>
+<p>优点</p>
+<ol>
+<li>通过__blcok变量可控制对象的持有期间</li>
+<li>在不能使用__weak修饰符的环境中不使用__unsafe_unretained修饰符即可（不必担心悬垂指针）。在执行Block时可动态地决定是否将nil或其他对象赋值在__block变量中。</li>
+</ol>
+<p>缺点</p>
+<ol>
+<li>为避免循环引用必须执行Block</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)init &#123;</span><br><span class="line">	<span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">	</span><br><span class="line">	__block <span class="keyword">id</span> tmp = <span class="keyword">self</span>;</span><br><span class="line">	</span><br><span class="line">	_blk = ^&#123;</span><br><span class="line">		<span class="built_in">NSLog</span>(<span class="string">@"self = %@"</span>, tmp);</span><br><span class="line">		tmp = <span class="literal">nil</span>;</span><br><span class="line">	&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)execBlock &#123;</span><br><span class="line">	_blk();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="copy-release"><a href="#copy-release" class="headerlink" title="copy/release"></a>copy/release</h3><p>ARC无效时，需要使用copy实例方法将Block从栈复制到堆，用release实例方法来释放Block。<strong>只要有一次复制并配置在堆上，就可以通过retain实例方法持有Block。而对栈上的Block调用retain实例方法不起任何作用，因此推荐使用copy方法。</strong></p>
+<p>在C语言中也可以使用Block语法，此时使用“Block_copy函数”和“Block_release函数”代替copy/release实例方法。</p>
+<p>ARC无效时，__block说明符被用来避免Block中的循环引用。</p>
+<ul>
+<li>若Block使用的变量为附有__block说明符的id类型或对象类型的自动变量，不会被retain</li>
+<li>若Block使用的变量为没有__block说明符的id类型或对象类型的自动变量，则被retain</li>
+</ul>
+<h1 id="Grand-Central-Dispatch"><a href="#Grand-Central-Dispatch" class="headerlink" title="Grand Central Dispatch"></a>Grand Central Dispatch</h1><h2 id="什么是GCD"><a href="#什么是GCD" class="headerlink" title="什么是GCD"></a>什么是GCD</h2><blockquote>
+<p>Grand Central Dispatch（GCD）是异步执行任务的技术之一。</p>
+</blockquote>
+<h3 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h3><blockquote>
+<p>“1个CPU执行的CPU命令序列为一条无分叉路径”即为“线程”，这种无分叉路径存在多条时即为多线程。</p>
+</blockquote>
+<p>使用多线程的程序可以在某个线程和其他线程之间反复多次进行上下文切换，在多个CPU核时能够并列执行多个线程，这种利用多线程编程的技术就被称为多线程编程。</p>
+<h2 id="GCD的API"><a href="#GCD的API" class="headerlink" title="GCD的API"></a>GCD的API</h2><h3 id="Diapatch-Queue"><a href="#Diapatch-Queue" class="headerlink" title="Diapatch Queue"></a>Diapatch Queue</h3><p>开发者要做的只是定义想执行的任务并追加到适当的Dispatch Queue当中。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Dispatch Queue种类</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Serial Dispatch Queue</td>
+<td style="text-align:left">等待现在执行中处理结束</td>
+</tr>
+<tr>
+<td style="text-align:left">Concurrent Dispatch Queue</td>
+<td style="text-align:left">不等待现在执行中处理结束</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="dispatch-queue-create"><a href="#dispatch-queue-create" class="headerlink" title="dispatch_queue_create"></a>dispatch_queue_create</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_queue_t</span> dispatch_queue_create(<span class="keyword">const</span> <span class="keyword">char</span> *_Nullable label, <span class="keyword">dispatch_queue_attr_t</span> _Nullable attr);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数指定Serial Dispatch Queue的名称，推荐使用应用程序ID这种逆序全程域名（FQDN，fully qualified domain name）。</li>
+<li>第二个参数指定为NULL表示生成Serial Dispatch Queue；指定为DISPATCH_QUEUE_CONCURRENT表示生成Concurrent Dispatch Queue。</li>
+</ul>
+<p><strong>在ARC有效时，通过dispatch_queue_create生成的Dispatch Queue必须由程序员通过dispatch_retain函数和diapatch_release函数手动管理内存。</strong></p>
+<h3 id="Main-Dispatch-Queue-Global-Dispatch-Queue"><a href="#Main-Dispatch-Queue-Global-Dispatch-Queue" class="headerlink" title="Main Dispatch Queue/Global Dispatch Queue"></a>Main Dispatch Queue/Global Dispatch Queue</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">种类</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Main Dispatch Queue</td>
+<td style="text-align:left">Serial Dispatch Queue</td>
+<td style="text-align:left">主线程执行</td>
+</tr>
+<tr>
+<td style="text-align:left">Global Dispatch Queue（High Priority）</td>
+<td style="text-align:left">Concurrent Dispatch Queue</td>
+<td style="text-align:left">执行优先级：高（最高优先）</td>
+</tr>
+<tr>
+<td style="text-align:left">Global Dispatch Queue（Default Priority）</td>
+<td style="text-align:left">Concurrent Dispatch Queue</td>
+<td style="text-align:left">执行优先级：默认</td>
+</tr>
+<tr>
+<td style="text-align:left">Global Dispatch Queue（Low Priority）</td>
+<td style="text-align:left">Concurrent Dispatch Queue</td>
+<td style="text-align:left">执行优先级：低</td>
+</tr>
+<tr>
+<td style="text-align:left">Global Dispatch Queue（Background Priority）</td>
+<td style="text-align:left">Concurrent Dispatch Queue</td>
+<td style="text-align:left">执行优先级：后台</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Main Dispatch Queue的获取方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">dispatch_queue_t</span> mainDispatchQueue = dispatch_get_main_queue();</span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Global Dispatch Queue（高优先级）的获取方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">dispatch_queue_t</span> globalDispatchQueueHigh = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Global Dispatch Queue（默认优先级）的获取方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">dispatch_queue_t</span> globalDispatchQueueDefault = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Global Dispatch Queue（低优先级）的获取方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">dispatch_queue_t</span> globalDispatchQueueLow = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Global Dispatch Queue（后台优先级）的获取方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">dispatch_queue_t</span> globalDispatchQueueBackground = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>对Main Dispatch Queue和Global Dispatch Queue执行dispatch_retain函数和dispatch_release函数不会引起任何变化，也不会有任何问题</strong></p>
+<h3 id="diapatch-set-target-queue"><a href="#diapatch-set-target-queue" class="headerlink" title="diapatch_set_target_queue"></a>diapatch_set_target_queue</h3><p>dispatch_queue_create函数生成的Dispatch Queue都使用与默认优先级Global Dispatch Queue相同执行优先级的线程。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_set_target_queue</span><span class="params">(<span class="keyword">dispatch_object_t</span> object, <span class="keyword">dispatch_queue_t</span> _Nullable <span class="built_in">queue</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数指定要变更执行优先级的Dispatch Queue（不可指定为系统提供的Main Dispatch Queue和Global Dispatch Queue）</li>
+<li>第二个参数指定与要使用的执行优先级相同优先级的Global Dispatch Queue</li>
+</ul>
+<p><strong>在多个Serial Dispatch Queue中用dispatch_set_target_queue函数指定目标为某一个Serial Dispatch Queue，那么原先本应并行执行的Serial Dispatch Queue，在目标Serial Dispatch Queue上只能同时执行一个处理。</strong></p>
+<h3 id="dispatch-after"><a href="#dispatch-after" class="headerlink" title="dispatch_after"></a>dispatch_after</h3><p>dispatch_after函数是在指定时间追加处理到Dispatch Queue，在有严格时间要求下使用会有偏差。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_after</span><span class="params">(<span class="keyword">dispatch_time_t</span> when, <span class="keyword">dispatch_queue_t</span> <span class="built_in">queue</span>, <span class="keyword">dispatch_block_t</span> block)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数指定追加到Dispatch Queue的延迟时间，改值使用dispatch_time函数或dispatch_walltime函数生成</li>
+<li>第二个参数指定要追加处理的Dispatch Queue</li>
+<li>第三个参数指定记述要执行处理Block</li>
+</ul>
+<p>dispatch_time函数用于计算相对时间，能够获取从第一个参数dispatch_time_t类型值中指定时间开始，到第二个参数指定的毫微秒单位时间后的时间。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_time_t</span> dispatch_time(<span class="keyword">dispatch_time_t</span> when, <span class="keyword">int64_t</span> delta);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数经常使用的值是DISPATCH_TIME_NOW，即表示现在的时间</li>
+<li>第二个参数使用数值和NSEC_PER_SEC的乘机得到的单位为毫秒的数值。ull是C语言的数值字面量，是显式表面类型时使用的字符串（表示“unsigned long long”），如果使用NSEC_PER_MSEC则可以以毫秒未单位计算</li>
+</ul>
+<p>dispatch_walltime函数用于计算绝对时间，可以作为粗略的闹钟功能使用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_time_t</span> dispatch_walltime(<span class="keyword">const</span> struct timespec *_Nullable when, <span class="keyword">int64_t</span> delta);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数struct timespec类型的时间，可以通过NSDate类对象生成</li>
+<li>第二个参数表示相对第一个参数的时间差值</li>
+</ul>
+<h3 id="Dispatch-Group"><a href="#Dispatch-Group" class="headerlink" title="Dispatch Group"></a>Dispatch Group</h3><p>Dispatch Group可以监视追加到Dispatch Queue中的处理，一旦检测到所有处理执行结束，就可将结束的处理追加到Dispatch Queue中。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_queue_t</span> <span class="built_in">queue</span> = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">dispatch_group_t</span> group = dispatch_group_create();</span><br><span class="line"></span><br><span class="line">dispatch_group_async(group, <span class="built_in">queue</span>, ^&#123;NSLog(@<span class="string">"blk0"</span>);&#125;);</span><br><span class="line">dispatch_group_async(group, <span class="built_in">queue</span>, ^&#123;NSLog(@<span class="string">"blk0"</span>);&#125;);</span><br><span class="line">dispatch_group_async(group, <span class="built_in">queue</span>, ^&#123;NSLog(@<span class="string">"blk0"</span>);&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;NSLog(@<span class="string">"done"</span>);&#125;;</span><br><span class="line">dispatch_release(group);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过dispatch_group_async函数追加到Dispatch queue的Block属于Dispatch Group，Block通过dispatch_retain持有Dispatch Group。一旦Block执行结束，就通过dispatch_release释放持有的Dispatch Group。</li>
+<li>dispatch_group_notify函数会将执行的Block追加到Dispatch Queue中，将第一个参数指定为要监视的Dispatch Group，在追加到该Dispatch Group的全部处理执行结束时，将第三个参数的Block追加到第二个参数的Dispatch Queue中。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_queue_t</span> <span class="built_in">queue</span> = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">dispatch_group_t</span> group = dispatch_group_create();</span><br><span class="line"></span><br><span class="line">dispatch_group_async(group, <span class="built_in">queue</span>, ^&#123;NSLog(@<span class="string">"blk0"</span>);&#125;);</span><br><span class="line">dispatch_group_async(group, <span class="built_in">queue</span>, ^&#123;NSLog(@<span class="string">"blk0"</span>);&#125;);</span><br><span class="line">dispatch_group_async(group, <span class="built_in">queue</span>, ^&#123;NSLog(@<span class="string">"blk0"</span>);&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> result = dispatch_group_wait(group, time);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result == <span class="number">0</span>) &#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 属于Dispatch Group的全部处理执行结束</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 属于Dispatch Group的某一个处理还在执行中</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dispatch_release(group);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>dispatch_group_wait函数的第二个参数指定为等待的时间（超时）。即调用dispatch_group_wait函数会停止当前线程，直到dispatch_group_wait函数返回。<ul>
+<li>使用DISPATCH_TIME_FOREVER，意味着永久等待，中途不能取消。dispatch_group_wait的返回值恒为0</li>
+<li>指定DISPATC_TIME_NOW，则不用等待即可判定属于Dispatch Group的处理是否执行结束</li>
+<li>指定等待时间为其他值，需等待一定时间后才能进行判定</li>
+</ul>
+</li>
+</ul>
+<p><strong>在主线程RunLoop的每次循环中，可检查执行是否结束，从而不耗费多余的等待时间。但一般情况下推荐使用dispatch_group_wait函数以简化源代码</strong></p>
+<h3 id="dispatch-barrier-async"><a href="#dispatch-barrier-async" class="headerlink" title="dispatch_barrier_async"></a>dispatch_barrier_async</h3><p>dispatch_barrier_async函数会等待追加到Concurrent Dispatch Queue上的并行执行的处理全部结束之后，再将指定的处理追加到该Concurrent Dispatch Queue中。然后由dispatch_barrier_async函数追加的处理执行完毕后，Concurrent Dispatch Queue才恢复为一般的动作，追加到Concurrent Dispatch Queue的处理又开始并行执行。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_queue_t</span> <span class="built_in">queue</span> = dispatch_queue_create(<span class="string">"com.example.gcd.ForBarrier"</span>, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line"></span><br><span class="line">dispatch_async(<span class="built_in">queue</span>, blk1_for_reading);</span><br><span class="line">dispatch_async(<span class="built_in">queue</span>, blk2_for_reading);</span><br><span class="line">dispatch_async(<span class="built_in">queue</span>, blk3_for_reading);</span><br><span class="line"></span><br><span class="line">dispatch_barrier_async(<span class="built_in">queue</span>, blk_for_writing);<span class="comment">// 写入处理 </span></span><br><span class="line"></span><br><span class="line">dispatch_async(<span class="built_in">queue</span>, blk3_for_reading);</span><br><span class="line">dispatch_async(<span class="built_in">queue</span>, blk4_for_reading);</span><br><span class="line">dispatch_async(<span class="built_in">queue</span>, blk5_for_reading);</span><br></pre></td></tr></table></figure>
+<h3 id="dispatch-async-dispatch-sync"><a href="#dispatch-async-dispatch-sync" class="headerlink" title="dispatch_async / dispatch_sync"></a>dispatch_async / dispatch_sync</h3><p>dispatch_async函数的“async”意味着“非同步”（asynchronous），就是将指定的Block“非同步”地追加到指定的Dispatch Queue中。</p>
+<p>dispatch_sync函数的“sync”意味着“同步”（synchronous），也就是将指定的Block“同步”追加到指定的Dispatch Queue中。在追加的Block结束之前，dispatch_sync函数会一直等待，即当前线程停止。<strong>使用该函数要注意死锁问题（在当前线程的队列中同步追加任务）</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:center">并行队列<br>（Concurrent Queue）</th>
+<th style="text-align:center">串行队列<br>（Serial Queue）</th>
+<th style="text-align:center">主队列<br>（Main Queue）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">异步执行<br>（async）</td>
+<td style="text-align:center">开启多个线程<br>任务同时执行</td>
+<td style="text-align:center">开启一个新线程<br>任务按顺序执行</td>
+<td style="text-align:center">不开启新线程<br>任务按顺序执行</td>
+</tr>
+<tr>
+<td style="text-align:left">同步执行<br>（sync）</td>
+<td style="text-align:center">不开启新的线程<br>任务按顺序执行</td>
+<td style="text-align:center">不开启新的线程<br>任务按顺序执行</td>
+<td style="text-align:center">死锁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="dispatch-apply"><a href="#dispatch-apply" class="headerlink" title="dispatch_apply"></a>dispatch_apply</h3><p>dispatch_apply函数是dispatch_sync函数和Dispatch Group的关联API。该函数按指定的次数将指定的Block追加到指定的Dispatch Queue中，并等待全部处理执行结束。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_queue_t</span> <span class="built_in">queue</span> = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line">dispatch_apply(<span class="number">10</span>, <span class="built_in">queue</span>, ^(<span class="keyword">size_t</span> index)&#123;</span><br><span class="line">	NSLog(@<span class="string">"%zu"</span>, index);</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@<span class="string">"Done"</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数为重复次数</li>
+<li>第二个参数为追加对象的Dispatch Queue</li>
+<li>第三个参数为追加的处理</li>
+</ul>
+<p><strong>推荐在dispatch_async函数中非同步地执行dispatch_apply函数：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_queue_t</span> <span class="built_in">queue</span> = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 在Global Dispatch Queue中非同步执行</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">dispatch_async(<span class="built_in">queue</span>, ^&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Global Dispatch Queue</span></span><br><span class="line"><span class="comment">	 * 等待dispatch_apply函数中的处理执行结束</span></span><br><span class="line"><span class="comment">	 */</span>	 </span><br><span class="line">	 dispatch_apply([<span class="built_in">array</span> count], <span class="built_in">queue</span>, ^(<span class="keyword">size_t</span> index)&#123;</span><br><span class="line">	 	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 	 * 并列处理包含在NSArray对象的全部对象</span></span><br><span class="line"><span class="comment">	 	 */</span>	 	 </span><br><span class="line">	 	NSLog(@<span class="string">"%zu：%@"</span>, index, [<span class="built_in">array</span> objectAtIndex:index]);</span><br><span class="line">	 &#125;);</span><br><span class="line">	 </span><br><span class="line">	 <span class="comment">/*</span></span><br><span class="line"><span class="comment">	  * dispatch_apply函数中的处理全部执行结束</span></span><br><span class="line"><span class="comment">	  */</span></span><br><span class="line">	  </span><br><span class="line">	 <span class="comment">/*</span></span><br><span class="line"><span class="comment">	  * 在Main Dispatch Queue中非同步执行</span></span><br><span class="line"><span class="comment">	  */</span>	  </span><br><span class="line">	 dispatch_async(dispatch_get_main_queue, ^&#123;</span><br><span class="line">	 	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 	 * 在Main Dispatch Queue中执行处理</span></span><br><span class="line"><span class="comment">	 	 * 用户界面更新等</span></span><br><span class="line"><span class="comment">	 	 */</span></span><br><span class="line">	 	NSLog(@<span class="string">"done"</span>);</span><br><span class="line">	 &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="dispatch-suspend-dispatch-resume"><a href="#dispatch-suspend-dispatch-resume" class="headerlink" title="dispatch_suspend / dispatch_resume"></a>dispatch_suspend / dispatch_resume</h3><p>dispatch_suspend函数挂起指定的Dispatch Queue，dispatch_resume函数恢复指定的Dispatch Queue。</p>
+<h3 id="Dispatch-Semaphore"><a href="#Dispatch-Semaphore" class="headerlink" title="Dispatch Semaphore"></a>Dispatch Semaphore</h3><p>Dispatch Semaphore是持有计数的信号，该计数是多线程编程中的计数类型信号。dispatch_semaphore_create函数生成的dispatch_semaphore必须通过dispatch_release函数释放，当然也可以通过dispatch_retain函数持有。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_semaphore_t</span> dispatch_semaphore_create(<span class="keyword">long</span> value);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>参数表示计数的初始值，如果小于0则会返回NULL</li>
+</ul>
+<p>dispatch_semaphore_wait函数等待Dispatch Semaphore的计数值达到大于或等于1。当计数值大于等于1，或者在待机中计数值大于等于1时，对该计数进行减法并从dispatch_semaphore_wati函数返回。可通过其返回值进行分支处理。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">dispatch_semaphore_wait</span><span class="params">(<span class="keyword">dispatch_semaphore_t</span> dsema, <span class="keyword">dispatch_time_t</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数指定等待的Dispatch Semaphore</li>
+<li>第二个参数指定等待时间</li>
+</ul>
+<p>具体使用示例如下（假设有多个任务抢占竞争2个可利用资源）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dispatch_queue_t</span> <span class="built_in">queue</span> = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成Dispatch Semaphore，计数初始值设定为2，即可访问的资源只能有2个</span></span><br><span class="line"><span class="keyword">dispatch_semaphore_t</span> semaphore = dispatch_semaphore_create(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i= <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">	<span class="comment">// 异步执行任务</span></span><br><span class="line">	dispatch_async(<span class="built_in">queue</span>, ^&#123;</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * 一直等待，直到Dispatch Semaphore的计数值达到大于等于1</span></span><br><span class="line"><span class="comment">		 * 函数返回并使Dispatch Semaphore的计数值-1</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 执行任务</span></span><br><span class="line">		NSLog(@<span class="string">"run task %u"</span>, i);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 每个任务设定不同的执行时间（延时时间）</span></span><br><span class="line">		<span class="keyword">int</span> time = arc4random()%<span class="number">10</span></span><br><span class="line">		<span class="keyword">long</span> result = dispatch_walltime(DISPATCH_TIME_NOW, time);		NSLog(@<span class="string">"complete task %u"</span>, i);</span><br><span class="line">	 	</span><br><span class="line">	 	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 	 * 任务结束后，使Dispatch Semaphore的计数值+1</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		dispatch_semaphore_signal(semaphore);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出</span></span><br><span class="line"><span class="comment">run task 0</span></span><br><span class="line"><span class="comment">complete task 0</span></span><br><span class="line"><span class="comment">run task 2</span></span><br><span class="line"><span class="comment">complete task 2</span></span><br><span class="line"><span class="comment">run task 4</span></span><br><span class="line"><span class="comment">complete task 4</span></span><br><span class="line"><span class="comment">run task 1</span></span><br><span class="line"><span class="comment">complete task 1</span></span><br><span class="line"><span class="comment">run task 5</span></span><br><span class="line"><span class="comment">complete task 5</span></span><br><span class="line"><span class="comment">run task 3</span></span><br><span class="line"><span class="comment">complete task 3</span></span><br><span class="line"><span class="comment">run task 6</span></span><br><span class="line"><span class="comment">complete task 6</span></span><br><span class="line"><span class="comment">run task 7</span></span><br><span class="line"><span class="comment">complete task 7</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="dispatch-once"><a href="#dispatch-once" class="headerlink" title="dispatch_once"></a>dispatch_once</h3><p>dispatch_once函数是保证在应用程序执行中只执行一次指定处理的API。dispatch_once在多线程安全的。dispatch_once多用在单例模式。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> ObjcetType *_obj;</span><br><span class="line">+ (<span class="keyword">instancetype</span>)sharedInstance;</span><br><span class="line">	<span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">	<span class="built_in">dispatch_once</span>(onceToken, ^&#123;</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 	 * 单例初始化</span></span><br><span class="line"><span class="comment">	 	 */</span></span><br><span class="line">	 	_obj = [ObjcetType new];</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">return</span> _obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Dispatch-I-O"><a href="#Dispatch-I-O" class="headerlink" title="Dispatch I/O"></a>Dispatch I/O</h3><p>使用Dispatch I/O和Dispatch Data，可以将大文件分成合适大小并使用Global Dispatch Queue并列读取。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">pipe_q = dispatch_queue_create(<span class="string">"PipeQ"</span>, <span class="literal">NULL</span>);</span><br><span class="line">pepe_channel = dispatch_io_create(DISPATCH_IO_STREAM, fd, pipe_q, ^(<span class="keyword">int</span> err)&#123;</span><br><span class="line">	close(fd);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">*out_fd = fdpair[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">dispatch_io_set_low_water(pipe_channel, SIZE_MAX);</span><br><span class="line"></span><br><span class="line">dispatch_io_read(pipe_channel, <span class="number">0</span>, SIZE_MAX, pipe_q, ^(<span class="keyword">bool</span> done, <span class="keyword">dispatch_data_t</span> pipedata, <span class="keyword">int</span> err)&#123;</span><br><span class="line">	<span class="keyword">if</span> (err == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">size_t</span> len = dispatch_data_get_size(pipedata);</span><br><span class="line">		<span class="keyword">if</span> (len &gt;<span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">const</span> <span class="keyword">char</span> *bytes = <span class="literal">NULL</span>;</span><br><span class="line">			<span class="keyword">char</span> *encoded;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">dispatch_data_t</span> md = dispatch_data_create_map(pipedata, (<span class="keyword">const</span> <span class="keyword">void</span> **)&amp;bytes, &amp;len);</span><br><span class="line">			encoded = asl_core_encode_buffer(bytes, len);</span><br><span class="line">			als_set((aslmsg)merged_msg, ASL_KEY_AUX_DATA, encoded);</span><br><span class="line">			<span class="built_in">free</span>(encoded);</span><br><span class="line">			_asl_send_message(<span class="literal">NULL</span>, merged_msg, <span class="number">-1</span>, <span class="literal">NULL</span>);</span><br><span class="line">			asl_msg_release(merged_msg);</span><br><span class="line">			dispatch_release(md);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (done) &#123;</span><br><span class="line">		dispatch_semaphore_signal(sem);</span><br><span class="line">		dispatch_release(pipe_channel);</span><br><span class="line">		dispatch_release(pipe_q);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>dispatch_io_create函数生成Dispatch I/O，并指定发生错误时用来执行处理的Block，以及执行该Block的Dispatch Queue</li>
+<li>dispatch_io_set_low_water函数设定一次读取的大小（分割大小）</li>
+<li>dispatch_io_read函数使用Global Dispatch Queue开始并列读取</li>
+<li>每当各个分割的文件块读取结束时，将含有文件块数据的Dispatch Data传递给dispatch_io_read函数指定的读取结束时回调用的Block</li>
+<li>回调用的Block分析传递过来的Dispatch Data并进行结合处理</li>
+</ol>
+<h2 id="GCD实现"><a href="#GCD实现" class="headerlink" title="GCD实现"></a>GCD实现</h2><h3 id="Dispatch-Queue"><a href="#Dispatch-Queue" class="headerlink" title="Dispatch Queue"></a>Dispatch Queue</h3><p>Dispatch Queue通过结构体和链表，被实现为FIFO队列。通过dispatch_async函数追加的Block，先加入Dispatch Continuation这一dispatch_continuation_t类型结构体中，然后在加入FIFO队列。该Dispatch Continuation用于记忆Block所属的Dispatch Group和其他一些信息，相当于一般常说的执行上下文。</p>
+<p>Dispatch Queue通过dispatch_set_target_queue函数设定，可设定执行该Dispatch Queue处理的Dispatch Queue为目标。该目标像串珠子一样，设定多个连接在一起的Dispatch Queue。但是连接串的最后必须设定为Main Dispatch Queue，或各种优先级的Global Dispatch Queue，或是准备用于Serial Dispatch Queue的各种优先级Global Dispatch QUeue。</p>
+<p>当在Global Dispatch Queue中执行Block时，libdispatch从Global Dispatch Queue自身的FIFO队列中取出Dispatch Continuation，调用pthread_workqueue_additem_np函数。将该Global Dispatch Queue自身、符合其优先级的workqueue信息以及为执行Dispatch Continuation的回调函数等传递给参数。</p>
+<p>pthread_workqueue_additem_np函数使用workq_kernreturn系统调用。通知workqueue增加应当执行的项目。根据该通知，XNU内核基于系统状态判断是否要生成线程。如果是Overcommit优先级的Global Dispatch Queue，workqueue则始终生成线程。</p>
+<p>workqueue的线程执行pthread_workqueue函数，该函数调用libdispatch的回调函数。在该回调函数中执行加入到Dispatch Continuation的Block。</p>
+<p>Block执行结束后，进行通知Dispatch Group结束、释放Dispatch Continuation等处理，开始准备执行加入到Global Dispatch Queue中的下一个Block。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Global Dispatch Queue</th>
+<th style="text-align:left">Libc pthread_workqueue</th>
+<th style="text-align:left">XNU workqueue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">High Priority</td>
+<td style="text-align:left">pthread_workqueue</td>
+<td style="text-align:left">WORKQUEUE_HIGH_PRIOQUEUE</td>
+</tr>
+<tr>
+<td style="text-align:left">Default Priority</td>
+<td style="text-align:left">pthread_workqueue</td>
+<td style="text-align:left">WORKQUEUE_DEFAULT_PRIOQUEUE</td>
+</tr>
+<tr>
+<td style="text-align:left">Low Priority</td>
+<td style="text-align:left">pthread_workqueue</td>
+<td style="text-align:left">WORKQUEUE_LOW_PRIOQUEUE</td>
+</tr>
+<tr>
+<td style="text-align:left">Background Priority</td>
+<td style="text-align:left">pthread_workqueue</td>
+<td style="text-align:left">WORKQUEUE_BG_PRIOQUEUE</td>
+</tr>
+<tr>
+<td style="text-align:left">High Overcommit Priority</td>
+<td style="text-align:left">pthread_workqueue</td>
+<td style="text-align:left">WORKQUEUE_HIGH_PRIOQUEUE</td>
+</tr>
+<tr>
+<td style="text-align:left">Default Overcommit Priority</td>
+<td style="text-align:left">pthread_workqueue</td>
+<td style="text-align:left">WORKQUEUE_DEFAULT_PRIOQUEUE</td>
+</tr>
+<tr>
+<td style="text-align:left">Low Overcommit Priority</td>
+<td style="text-align:left">pthread_workqueue</td>
+<td style="text-align:left">WORKQUEUE_LOW_PRIOQUEUE</td>
+</tr>
+<tr>
+<td style="text-align:left">Background Overcommit Priority</td>
+<td style="text-align:left">pthread_workqueue</td>
+<td style="text-align:left">WORKQUEUE_BG_PRIOQUEUE</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Dispatch-Source"><a href="#Dispatch-Source" class="headerlink" title="Dispatch Source"></a>Dispatch Source</h3><p>Dispatch Source是BSD系统内核惯有功能kqueue（kqueue是在XNU内核中发生各种事件时，在应用程序编程方执行处理的技术，其CPU负荷非常小，尽量不占用资源）的包装。使用Dispatch Source可以在指定事件发生时，在指定的Dispatch Queue中执行事件的处理。</p>
+<p>Dispatch Source可以处理以下事件：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_DATA_ADD</td>
+<td style="text-align:left">变量增加</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_DATA_OR</td>
+<td style="text-align:left">变量OR</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_MACH_SEND</td>
+<td style="text-align:left">MACH端口发送</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_MACH_RECV</td>
+<td style="text-align:left">MACH端口接收</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_PROC</td>
+<td style="text-align:left">检测到与进程相关的事件</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_READ</td>
+<td style="text-align:left">可读取文件映像</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_SIGNAL</td>
+<td style="text-align:left">接收信号</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_TIMER</td>
+<td style="text-align:left">定时器</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_VNODE</td>
+<td style="text-align:left">文件系统有变更</td>
+</tr>
+<tr>
+<td style="text-align:left">DISPATCH_SOURCE_TYPE_WRITE</td>
+<td style="text-align:left">可写入文件映像</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Dispatch Source与Dispatch Queue不同，是可以取消的。而且取消时必须执行的处理可指定为回调Block的形式。</strong></p>
+<p><strong>欢迎转载，转载请注明出处：<a href="http://www.huajingzeng.com" target="_blank" rel="noopener">曾华经的博客</a></strong></p>
+
+    </div>
+
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/编程基础/">编程基础</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/iOS/" title="iOS">iOS</a> / 
+    
+        <a href="/tags/OS-X/" title="OS X">OS X</a> / 
+    
+        <a href="/tags/Objective-C/" title="Objective-C">Objective-C</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <!-- <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a> -->
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/post/《iOS编程实战》/">
+            
+                《iOS编程实战》
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/post/《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》/">
+            
+                《Effective Objective-C 2_0——编写高质量iOS与OSX代码的52个有效方法》
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/zhj.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/zhj.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: '《Objective-C 高级编程——iOS与OS X多线程和内存管理》' || 'post/《Objective-C 高级编程——iOS与OS X多线程和内存管理》/',
+    owner: 'HuajingZeng',
+    repo: 'huajingzeng.github.io_comments',
+    clientId: '7ae3915c563a60d41451',
+    clientSecret: '2abefe41031e15eabf12a828f30fd380487fb738'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/程序人生/">程序人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/">编程基础</a>
+        <span class="badge">(11)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/编程基础/开发工具/">开发工具</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/随笔/" title="随笔">随笔 (1)</a>
+  
+    <a class="tag-item" href="/tags/面向对象/" title="面向对象">面向对象 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计原则/" title="设计原则">设计原则 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Shell/" title="Shell">Shell (2)</a>
+  
+    <a class="tag-item" href="/tags/iOS/" title="iOS">iOS (6)</a>
+  
+    <a class="tag-item" href="/tags/OS-X/" title="OS X">OS X (3)</a>
+  
+    <a class="tag-item" href="/tags/程序员/" title="程序员">程序员 (1)</a>
+  
+    <a class="tag-item" href="/tags/书籍/" title="书籍">书籍 (1)</a>
+  
+    <a class="tag-item" href="/tags/代码大全/" title="代码大全">代码大全 (1)</a>
+  
+    <a class="tag-item" href="/tags/核对表/" title="核对表">核对表 (1)</a>
+  
+    <a class="tag-item" href="/tags/Objective-C/" title="Objective-C">Objective-C (1)</a>
+  
+    <a class="tag-item" href="/tags/正则表达式/" title="正则表达式">正则表达式 (1)</a>
+  
+    <a class="tag-item" href="/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/tags/SVN/" title="SVN">SVN (1)</a>
+  
+    <a class="tag-item" href="/tags/CVS/" title="CVS">CVS (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://stackoverflow.com/" target="_blank" title="Stack Overflow">Stack Overflow</a>
+        </li>
+    
+        <li>
+            <a href="http://nshipster.cn/" target="_blank" title="NSHipster">NSHipster</a>
+        </li>
+    
+        <li>
+            <a href="https://www.raywenderlich.com/" target="_blank" title="raywenderlich">raywenderlich</a>
+        </li>
+    
+        <li>
+            <a href="http://www.cocoachina.com/" target="_blank" title="Cocoa China">Cocoa China</a>
+        </li>
+    
+        <li>
+            <a href="https://objccn.io/" target="_blank" title="ObjC 中国">ObjC 中国</a>
+        </li>
+    
+        <li>
+            <a href="http://mac.orsoon.com/" target="_blank" title="未来软件园">未来软件园</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">曾华经</a>
+	<br>
+	<span id="busuanzi_container_site_pv">本站总访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span>次</span>
+	&emsp;
+    <span id="busuanzi_container_site_uv">本站总访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span>人</span>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
